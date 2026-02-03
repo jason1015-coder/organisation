@@ -21,24 +21,30 @@ import {
 import { generateBlogSlug } from "@/lib/slugify";
 import type { BlogPost } from "@/types/blog";
 
-// Define website published categories
-const DISCUSSION_CATEGORIES = [
-  { name: "All", emoji: "📰", slug: "all" },
-  { name: "Nanocoder", emoji: "🧑‍💻", slug: "nanocoder" },
-  { name: "Packages", emoji: "📦", slug: "packages" },
-];
+interface CategoryInfo {
+  name: string;
+  emoji: string;
+  slug: string;
+}
 
 interface BlogProps {
   posts: BlogPost[];
+  categories: CategoryInfo[];
 }
 
-export default function Blog({ posts }: BlogProps) {
+export default function Blog({ posts, categories }: BlogProps) {
   const [selectedCategory, setSelectedCategory] = useState("all");
 
   const filteredPosts =
     selectedCategory === "all"
       ? posts
       : posts.filter((post) => post.category.slug === selectedCategory);
+
+  // Build categories list with "All" option at the start
+  const allCategories: CategoryInfo[] = [
+    { name: "All", emoji: "", slug: "all" },
+    ...categories,
+  ];
 
   return (
     <>
@@ -81,12 +87,9 @@ export default function Blog({ posts }: BlogProps) {
                 <SelectValue placeholder="Select category" />
               </SelectTrigger>
               <SelectContent>
-                {DISCUSSION_CATEGORIES.map((category) => (
+                {allCategories.map((category) => (
                   <SelectItem key={category.slug} value={category.slug}>
-                    <span className="flex items-center gap-2">
-                      <span>{category.emoji}</span>
-                      <span>{category.name}</span>
-                    </span>
+                    {category.name}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -197,6 +200,7 @@ export const getStaticProps: GetStaticProps<BlogProps> = async () => {
       return {
         props: {
           posts: [],
+          categories: [],
         },
       };
     }
@@ -236,9 +240,21 @@ export const getStaticProps: GetStaticProps<BlogProps> = async () => {
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
     );
 
+    // Extract unique categories from all posts
+    const categoryMap = new Map<string, CategoryInfo>();
+    for (const post of posts) {
+      if (!categoryMap.has(post.category.slug)) {
+        categoryMap.set(post.category.slug, post.category);
+      }
+    }
+    const categories = Array.from(categoryMap.values()).sort((a, b) =>
+      a.name.localeCompare(b.name),
+    );
+
     return {
       props: {
         posts: sortedPosts,
+        categories,
       },
     };
   } catch (error) {
@@ -246,6 +262,7 @@ export const getStaticProps: GetStaticProps<BlogProps> = async () => {
     return {
       props: {
         posts: [],
+        categories: [],
       },
     };
   }
