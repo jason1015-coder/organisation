@@ -31,37 +31,36 @@ jobs:
           fi
 
       - name: Send Discord notification
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          DISCUSSION_TITLE: ${{ github.event.discussion.title }}
+          DISCUSSION_AUTHOR: ${{ github.event.discussion.user.login }}
+          DISCUSSION_CATEGORY: ${{ github.event.discussion.category.name }}
+          DISCUSSION_URL: ${{ github.event.discussion.html_url }}
+          DISCUSSION_LABELS: ${{ steps.labels.outputs.labels || 'None' }}
         run: |
-          curl -H "Content-Type: application/json" \
-            -d '{
+          TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%S.000Z)
+          jq -n \
+            --arg title "💬 New Discussion: $DISCUSSION_TITLE" \
+            --arg author "$DISCUSSION_AUTHOR" \
+            --arg category "$DISCUSSION_CATEGORY" \
+            --arg labels "$DISCUSSION_LABELS" \
+            --arg url "$DISCUSSION_URL" \
+            --arg timestamp "$TIMESTAMP" \
+            '{
               "embeds": [{
-                "title": "💬 New Discussion: ${{ github.event.discussion.title }}",
+                "title": $title,
                 "color": 3447003,
                 "fields": [
-                  {
-                    "name": "Author",
-                    "value": "${{ github.event.discussion.user.login }}",
-                    "inline": false
-                  },
-                  {
-                    "name": "Category",
-                    "value": "${{ github.event.discussion.category.name }}",
-                    "inline": false
-                  },
-                  {
-                    "name": "Labels",
-                    "value": "${{ steps.labels.outputs.labels || 'None' }}",
-                    "inline": false
-                  }
+                  {"name": "Author", "value": $author, "inline": false},
+                  {"name": "Category", "value": $category, "inline": false},
+                  {"name": "Labels", "value": $labels, "inline": false}
                 ],
-                "footer": {
-                  "text": "GitHub Discussions"
-                },
-                "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%S.000Z)'",
-                "url": "${{ github.event.discussion.html_url }}"
+                "footer": {"text": "GitHub Discussions"},
+                "timestamp": $timestamp,
+                "url": $url
               }]
-            }' \
-            ${{ secrets.DISCORD_WEBHOOK_URL }}
+            }' | curl -H "Content-Type: application/json" -d @- "$DISCORD_WEBHOOK_URL"
 
   build:
     runs-on: ubuntu-latest
