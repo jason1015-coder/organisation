@@ -50,6 +50,7 @@ export default function Home({
     <>
       <Head>
         <title>Nano Collective - Open Source Privacy-First AI Tools</title>
+
         <meta
           name="description"
           content="Creating powerful, privacy-first AI tools, developed by the community for the community. Privacy-first, open source AI that runs on your machine."

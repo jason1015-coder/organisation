@@ -32,10 +32,7 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header
-      className="sticky z-40 w-full border-b border-border/40 bg-background/80 backdrop-blur-md"
-      style={{ top: "env(safe-area-inset-top)" }}
-    >
+    <header className="sticky top-0 z-40 w-full border-b border-border/40 bg-background/80 backdrop-blur-md">
       <div className="container mx-auto flex h-14 items-center justify-between px-4">
         {/* Logo */}
         <Link
