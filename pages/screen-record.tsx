@@ -1,9 +1,14 @@
 import Head from "next/head";
+import type { GetStaticProps } from "next";
 import { useState } from "react";
 import NanocoderTerminal from "@/components/NanocoderTerminal";
 import { type Theme, themes } from "@/types/ui";
 
-export default function ScreenRecord() {
+interface ScreenRecordProps {
+  nanocoderVersion: string;
+}
+
+export default function ScreenRecord({ nanocoderVersion }: ScreenRecordProps) {
   const [currentTheme, setCurrentTheme] = useState<Theme>(
     themes["tokyo-night"],
   );
@@ -35,9 +40,34 @@ export default function ScreenRecord() {
         }}
       >
         <div className="w-full max-w-4xl">
-          <NanocoderTerminal onThemeChange={handleThemeChange} />
+          <NanocoderTerminal
+            version={nanocoderVersion}
+            onThemeChange={handleThemeChange}
+          />
         </div>
       </div>
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps<ScreenRecordProps> = async () => {
+  // Fetch Nanocoder version from npm
+  let nanocoderVersion = "1.0.0";
+  try {
+    const npmRes = await fetch(
+      "https://registry.npmjs.org/@nanocollective/nanocoder/latest",
+    );
+    if (npmRes.ok) {
+      const data = await npmRes.json();
+      nanocoderVersion = data.version || "1.0.0";
+    }
+  } catch (error) {
+    console.error("Error fetching nanocoder version:", error);
+  }
+
+  return {
+    props: {
+      nanocoderVersion,
+    },
+  };
+};

@@ -320,28 +320,32 @@ export default function NanocoderTerminal({
           </div>
 
           {/* Prompt Section */}
-          <div className="space-y-1 text-xs">
-            <div style={{ color: colors.primary, fontWeight: "bold" }}>
-              What would you like me to help with?
-            </div>
+          <div
+            className="mb-2 text-xs"
+            style={{ color: colors.primary, fontWeight: "bold" }}
+          >
+            What would you like me to help with?
+          </div>
+          <div
+            className="space-y-1 text-xs p-3"
+            style={{
+              backgroundColor: colors.base,
+              borderLeft: `2px solid ${colors.primary}`,
+            }}
+          >
             <div style={{ color: colors.text }}>
-              {"> "}
               <span style={{ color: colors.text }}>
                 {displayedText}
                 <span style={{ color: colors.text }}>█</span>
               </span>
             </div>
-            <div className="text-xs mt-2" style={{ color: colors.secondary }}>
-              Type "/" and then press Tab for command suggestions or "!" to
-              execute bash commands. Use ↑/↓ for history.
-            </div>
-            <div
-              className="flex items-center gap-2 mt-4"
-              style={{ color: colors.secondary }}
-            >
-              <span>▶</span> normal mode on{" "}
-              <span className="opacity-60">(Shift+Tab to cycle)</span>
-            </div>
+          </div>
+          <div
+            className="flex items-center gap-2 mt-3 text-xs"
+            style={{ color: colors.secondary }}
+          >
+            <span>▶</span> normal mode on{" "}
+            <span className="opacity-60">(Shift+Tab to cycle)</span>
           </div>
         </div>
       </div>

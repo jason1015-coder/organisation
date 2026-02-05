@@ -1,12 +1,20 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import Navbar from "@/components/Navbar";
+import { useRouter } from "next/router";
 
-export default function App({ Component, pageProps }: AppProps) {
+function AppContent({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+  const isScreenRecordPage = router.pathname === "/screen-record";
+
   return (
     <>
-      <Navbar />
+      {!isScreenRecordPage && <Navbar />}
       <Component {...pageProps} />
     </>
   );
+}
+
+export default function App(props: AppProps) {
+  return <AppContent {...props} />;
 }
