@@ -1,5 +1,5 @@
-import Head from "next/head";
 import type { GetStaticProps } from "next";
+import Head from "next/head";
 import { useState } from "react";
 import NanocoderTerminal from "@/components/NanocoderTerminal";
 import { type Theme, themes } from "@/types/ui";

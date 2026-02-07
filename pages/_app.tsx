@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import Navbar from "@/components/Navbar";
 import { useRouter } from "next/router";
+import Navbar from "@/components/Navbar";
 
 function AppContent({ Component, pageProps }: AppProps) {
   const router = useRouter();
