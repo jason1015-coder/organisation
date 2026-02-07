@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FaDiscord, FaGithub } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
   return (
@@ -32,6 +33,14 @@ export default function Footer() {
                 className="text-muted-foreground hover:text-foreground transition-colors group"
               >
                 <FaGithub className="h-6 w-6 group-hover:rotate-12 transition-transform" />
+              </a>
+              <a
+                href="https://x.com/nano_collective"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors group"
+              >
+                <FaXTwitter className="h-6 w-6 group-hover:rotate-12 transition-transform" />
               </a>
               <a
                 href="https://discord.gg/ktPDV6rekE"

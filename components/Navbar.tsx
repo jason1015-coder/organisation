@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { FaDiscord, FaGithub } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { cn } from "@/lib/utils";
 import ThemeToggle from "./ThemeToggle";
 
@@ -19,6 +20,11 @@ const socialLinks = [
     href: "https://github.com/Nano-Collective",
     label: "GitHub",
     icon: FaGithub,
+  },
+  {
+    href: "https://x.com/nano_collective",
+    label: "X",
+    icon: FaXTwitter,
   },
   {
     href: "https://discord.gg/ktPDV6rekE",
