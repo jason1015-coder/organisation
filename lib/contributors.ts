@@ -90,4 +90,10 @@ export const CONTRIBUTORS: Contributor[] = [
     website: "https://substack.com/@followbenparry",
     bio: "I write about sovereignty, decentralisation, and the revolt against cloud-controlled intelligence.",
   },
+  {
+    name: "cleyesode",
+    photo: "cleyesode.jpg",
+    github: "cleyesode",
+    bio: "Local-first, eyes closed, open development.",
+  },
 ];
