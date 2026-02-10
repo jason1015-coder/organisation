@@ -336,6 +336,12 @@ export const getStaticProps: GetStaticProps<GrowthPageProps> = async () => {
       oldPackage: "@motesoftware/nanocoder",
     },
     {
+      packageName: "@nanocollective/nanotune",
+      displayName: "Nanotune",
+      githubRepo: "Nano-Collective/nanotune",
+      oldPackage: null,
+    },
+    {
       packageName: "@nanocollective/get-md",
       displayName: "get-md",
       githubRepo: "Nano-Collective/get-md",
