@@ -90,6 +90,14 @@ export default function Growth({ packages, lastUpdated }: GrowthPageProps) {
     if (!currentPackageData) return [];
 
     const now = new Date();
+    // Cut off today and yesterday (NPM downloads are incomplete for these days)
+    // Also cut off day before yesterday since data is built at midnight
+    const cutoff = new Date(now);
+    cutoff.setDate(cutoff.getDate() - 2);
+    cutoff.setHours(0, 0, 0, 0);
+
+    const cutoffDate = cutoff;
+
     let startDate: Date;
 
     switch (timePeriod) {
@@ -103,11 +111,13 @@ export default function Growth({ packages, lastUpdated }: GrowthPageProps) {
         startDate = new Date(now.getTime() - 90 * 24 * 60 * 60 * 1000);
         break;
       default:
-        return currentPackageData.downloadData;
+        return currentPackageData.downloadData.filter(
+          (d) => new Date(d.date) < cutoffDate,
+        );
     }
 
     return currentPackageData.downloadData.filter(
-      (d) => new Date(d.date) >= startDate,
+      (d) => new Date(d.date) >= startDate && new Date(d.date) < cutoffDate,
     );
   }, [currentPackageData, timePeriod]);
 
