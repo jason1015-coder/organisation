@@ -1,5 +1,6 @@
 import { GitPullRequest, Star, Terminal, Users } from "lucide-react";
 import { FaDiscord, FaGithub } from "react-icons/fa";
+import { EffectScene } from "@/components/EffectScene";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
@@ -17,23 +18,28 @@ interface HeroSectionProps {
 
 export function HeroSection({ orgStats }: HeroSectionProps) {
   return (
-    <section className="relative overflow-hidden animated-gradient">
+    <section className="relative overflow-hidden min-h-[80vh]">
+      {/* ASCII Video Background - full screen absolute */}
+      <div className="absolute inset-0" style={{ minHeight: "80vh" }}>
+        <EffectScene />
+      </div>
+      <div className="absolute inset-0 pointer-events-none hero-overlay" />
       <div className="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none" />
       <div className="container mx-auto px-4 py-20 sm:py-32 relative z-10">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
+        <div className="max-w-2xl text-center sm:text-left mx-auto sm:mx-0 space-y-8">
           <div className="inline-block animate-on-scroll">
             <Badge variant="secondary" className="mb-4 text-sm px-4 py-1.5">
               Open Source AI
             </Badge>
           </div>
-          <h1 className="text-5xl sm:text-7xl font-bold tracking-tight bg-gradient-to-br from-foreground to-foreground/60 bg-clip-text text-transparent animate-on-scroll animate-delay-100">
+          <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-foreground animate-on-scroll animate-delay-100">
             Nano Collective
           </h1>
-          <p className="text-xl sm:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-on-scroll animate-delay-200">
+          <p className="text-xl sm:text-2xl text-muted-foreground max-w-2xl leading-relaxed animate-on-scroll animate-delay-200">
             Creating powerful, privacy-first AI tools, developed by the
             community for the community
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4 w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center sm:justify-start items-center sm:items-start pt-4 w-full sm:w-auto">
             <Button
               size="lg"
               className="group text-base w-full sm:w-auto"
@@ -66,7 +72,7 @@ export function HeroSection({ orgStats }: HeroSectionProps) {
           </div>
 
           {/* Subtle org stats */}
-          <div className="flex flex-wrap justify-center gap-6 md:gap-8 pt-8 text-sm text-muted-foreground">
+          <div className="flex flex-wrap justify-center sm:justify-start gap-6 md:gap-8 pt-8 text-sm text-muted-foreground">
             {!orgStats.error ? (
               <>
                 <div className="group flex items-center gap-2">
