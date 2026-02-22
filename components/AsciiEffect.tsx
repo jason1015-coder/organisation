@@ -298,8 +298,7 @@ class AsciiEffectImpl extends Effect {
 
     super("AsciiEffect", fragmentShader, {
       blendFunction: BlendFunction.NORMAL,
-      // biome-ignore lint/suspicious/noExplicitAny: uniforms map requires mixed value types
-      uniforms: new Map<string, Uniform<any>>([
+      uniforms: new Map<string, Uniform<unknown>>([
         ["cellSize", new Uniform(cellSize)],
         ["invert", new Uniform(invert)],
         ["colorMode", new Uniform(color)],
@@ -402,6 +401,7 @@ export const AsciiEffect = forwardRef<Effect, AsciiEffectProps>(
     _resolution = resolution;
     _mousePos = mousePos;
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     // biome-ignore lint/correctness/useExhaustiveDependencies: effect is created once; props are synced via module-level vars
     const effect = useMemo(
       () =>
