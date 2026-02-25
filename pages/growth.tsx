@@ -211,7 +211,7 @@ export default function Growth({ packages, lastUpdated }: GrowthPageProps) {
       </Head>
 
       <div className="min-h-screen bg-background">
-        <div className="container mx-auto px-5 lg:px-16 py-16">
+        <div className="container mx-auto px-4 py-16">
           {/* Header */}
           <div className="mb-12">
             <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
