@@ -47,7 +47,9 @@ This website serves as the landing page and showcase for the Nano Collective org
 
 - **[Nanocoder](https://github.com/Nano-Collective/nanocoder)** - A powerful AI coding assistant that runs entirely on your machine
 
-- **[get-md](https://github.com/Nano-Collective/get-md)
+- **[get-md](https://github.com/Nano-Collective/get-md)** - A fast, lightweight HTML to Markdown converter optimized for LLM consumption
+
+- **[json-up](https://github.com/Nano-Collective/json-up)** - A fast, type-safe JSON migration tool with Zod schema validation
 
 ## For Developers
 

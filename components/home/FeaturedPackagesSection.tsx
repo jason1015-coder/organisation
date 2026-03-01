@@ -23,7 +23,7 @@ export function FeaturedPackagesSection() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-1 gap-4">
+          <div className="grid md:grid-cols-2 gap-4">
             <Card className="relative overflow-hidden hover:shadow-lg transition-shadow">
               <CardHeader>
                 <div className="flex items-start gap-4">
@@ -51,6 +51,46 @@ export function FeaturedPackagesSection() {
                       >
                         <a
                           href="https://github.com/Nano-Collective/get-md"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <FaGithub className="mr-2 h-4 w-4 group-hover:rotate-12 transition-transform" />
+                          View on GitHub
+                        </a>
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </CardHeader>
+            </Card>
+
+            <Card className="relative overflow-hidden hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <Package className="h-5 w-5 text-primary" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between gap-2 mb-2">
+                      <CardTitle className="text-lg">json-up</CardTitle>
+                      <Badge variant="secondary" className="text-xs">
+                        TypeScript
+                      </Badge>
+                    </div>
+                    <CardDescription className="text-sm leading-relaxed">
+                      A fast, type-safe JSON migration tool with Zod schema
+                      validation. Fluent builder API with automatic version
+                      tracking and full TypeScript type inference.
+                    </CardDescription>
+                    <div className="mt-4">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="group"
+                        asChild
+                      >
+                        <a
+                          href="https://github.com/Nano-Collective/json-up"
                           target="_blank"
                           rel="noopener noreferrer"
                         >

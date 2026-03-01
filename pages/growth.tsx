@@ -357,6 +357,12 @@ export const getStaticProps: GetStaticProps<GrowthPageProps> = async () => {
       githubRepo: "Nano-Collective/get-md",
       oldPackage: null,
     },
+    {
+      packageName: "@nanocollective/json-up",
+      displayName: "json-up",
+      githubRepo: "Nano-Collective/json-up",
+      oldPackage: null,
+    },
   ];
 
   const packages: PackageData[] = [];
