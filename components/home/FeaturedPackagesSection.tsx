@@ -23,7 +23,7 @@ export function FeaturedPackagesSection() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid gap-4">
             <Card className="relative overflow-hidden hover:shadow-lg transition-shadow">
               <CardHeader>
                 <div className="flex items-start gap-4">

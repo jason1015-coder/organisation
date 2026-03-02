@@ -24,13 +24,13 @@ export function NanotuneSection() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="rounded-lg overflow-hidden border border-border/40 shadow-lg h-full">
+          <div className="grid md:grid-cols-2 gap-6 items-center">
+            <div className="rounded-lg overflow-hidden border border-border/40 shadow-lg flex items-center justify-center">
               {/* biome-ignore lint/performance/noImgElement: GIF animation needs native img */}
               <img
                 src="/nanotune/example.gif"
                 alt="Nanotune CLI demonstration"
-                className="w-full h-full object-cover"
+                className="w-full h-auto object-contain"
               />
             </div>
 
