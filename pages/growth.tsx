@@ -454,7 +454,7 @@ export const getStaticProps: GetStaticProps<GrowthPageProps> = async () => {
 
       const releases: Release[] = githubData
         .map((release) => ({
-          tag: release.tag_name,
+          tag: `${config.displayName} ${release.tag_name}`,
           date: release.published_at.split("T")[0],
           name: release.name || release.tag_name,
         }))
