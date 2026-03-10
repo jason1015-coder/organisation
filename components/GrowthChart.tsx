@@ -234,13 +234,6 @@ export function GrowthChart({
               strokeDasharray="5 5"
               opacity={0.25}
               strokeWidth={1}
-              label={{
-                value: release.tag,
-                position: "top",
-                fontSize: 11,
-                fill: "#ffc658",
-                fontWeight: 600,
-              }}
             />
           ))}
 
