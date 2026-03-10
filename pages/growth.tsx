@@ -456,7 +456,7 @@ export const getStaticProps: GetStaticProps<GrowthPageProps> = async () => {
         .map((release) => ({
           tag: `${config.displayName} ${release.tag_name}`,
           date: release.published_at.split("T")[0],
-          name: release.name || release.tag_name,
+          name: `${config.displayName} ${release.tag_name}`,
         }))
         .reverse(); // Oldest first
 

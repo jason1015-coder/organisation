@@ -4,7 +4,7 @@
         <title>Nano Collective</title>
         <link>https://nanocollective.org</link>
         <description>Updates, discussions, and announcements from the Nano Collective community. Privacy-first open source AI development.</description>
-        <lastBuildDate>Sun, 23 Nov 2025 15:14:31 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 10 Mar 2026 00:28:08 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
@@ -13,148 +13,644 @@
             <url>https://nanocollective.org/logo.png</url>
             <link>https://nanocollective.org</link>
         </image>
-        <copyright>All rights reserved 2025, Nano Collective</copyright>
+        <copyright>All rights reserved 2026, Nano Collective</copyright>
         <item>
-            <title><![CDATA[Next Up: Terminal Bench Integration for Benchmarking]]></title>
-            <link>https://nanocollective.org/blog/next-up-terminal-bench-integration-for-benchmarking-14</link>
-            <guid isPermaLink="false">https://nanocollective.org/blog/next-up-terminal-bench-integration-for-benchmarking-14</guid>
-            <pubDate>Wed, 12 Nov 2025 22:24:18 GMT</pubDate>
-            <description><![CDATA[**Status:** In Development Queue
-**Issue:** [#78](https://github.com/Nano-Collective/nanocoder/issues/78)
-**Priority:** Medium
+            <title><![CDATA[New Package: Type-safe JSON migration tool with Zod validation]]></title>
+            <link>https://nanocollective.org/blog/new-package-type-safe-json-migration-tool-with-zod-validation-34</link>
+            <guid isPermaLink="false">https://nanocollective.org/blog/new-package-type-safe-json-migration-tool-with-zod-validation-34</guid>
+            <pubDate>Sun, 01 Mar 2026 23:24:45 GMT</pubDate>
+            <description><![CDATA[When you store JSON locally, the structure inevitably changes over time. New fields get added, old ones get renamed, formats evolve. Without a proper migration system you end up with scattered `if` statements checking for old formats, or worse, data that silently breaks when the shape changes underneath you.
 
-## Overview
-
-We're integrating with Terminal-Bench, a comprehensive benchmark framework designed to test AI coding agents on complex terminal tasks. This will allow us to systematically measure Nanocoder's performance across different models and track improvements over time.
-
-## What is Terminal-Bench?
-
-Terminal-Bench is a specialized benchmarking tool that ev]]></description>
-            <content:encoded><![CDATA[**Status:** In Development Queue
-**Issue:** [#78](https://github.com/Nano-Collective/nanocoder/issues/78)
-**Priority:** Medium
-
-## Overview
-
-We're integrating with Terminal-Bench, a comprehensive benchmark framework designed to test AI coding agents on complex terminal tasks. This will allow us to systematically measure Nanocoder's performance across different models and track improvements over time.
-
-## What is Terminal-Bench?
-
-Terminal-Bench is a specialized benchmarking tool that evaluates AI agents on real-world terminal and coding tasks. By integrating with it, we'll be able to:
-
-- **Objectively measure performance** across different LLM providers and models
-- **Track improvements** as Nanocoder evolves
-- **Compare results** with other AI coding assistants
-- **Identify strengths and weaknesses** in specific task categories
-- **Validate changes** before releases
-
-## The Integration Approach
-
-We're taking a clean, non-invasive approach by creating a separate Python wrapper repository called `nanocoder-tbench`. This keeps benchmarking logic completely separate from Nanocoder's core codebase.
-
-### Architecture
-
-The integration follows a simple workflow:
-
-```
-Terminal-Bench → Python wrapper → nanocoder CLI → Tmux session
-```
-
-The wrapper implements Terminal-Bench's `BaseAgent` interface and spawns Nanocoder as a subprocess, interacting with it exactly as a real user would through the CLI.
-
-### Key Design Decisions
-
-**Zero modifications to Nanocoder:** The wrapper works with any installed version of Nanocoder without requiring code changes. This means:
-
-- No coupling between benchmarking and core functionality
-- Works with released versions, not just development builds
-- True "as-shipped" testing that reflects real user experience
-
-**Minimal implementation:** The entire wrapper will be approximately 80-100 lines of Python, focusing on:
-
-- Clean subprocess management
-- Proper timeout handling
-- Configuration for testing different models
-- Integration with Terminal-Bench's scoring system
-
-**Separation of concerns:** By keeping this in a separate repository:
-
-- Benchmark code doesn't clutter the main codebase
-- Different release cycles for benchmarking tools
-- Easy for the community to contribute benchmark improvements
-- No Python dependencies added to the TypeScript project
-
-## Implementation Plan
-
-The development follows a straightforward five-phase approach:
-
-1. **Repository Setup** - Create `nanocoder-tbench` with proper structure
-2. **BaseAgent Implementation** - Write the core adapter (80-100 lines)
-3. **Configuration** - Set up benchmark execution and model switching
-4. **Packaging** - Configure `pyproject.toml` for easy installation
-5. **Results Collection** - Leverage Terminal-Bench's built-in scoring
-
-## What Gets Tested?
-
-Terminal-Bench evaluates agents on complex terminal tasks including:
-
-- File manipulation and editing
-- Code refactoring and bug fixes
-- Multi-step workflows
-- Error handling and recovery
-- Tool usage and command execution
-- Project understanding and navigation
-
-This will give us comprehensive insight into Nanocoder's real-world capabilities.
-
-## Benefits for Users
-
-While this is primarily a development tool, users benefit indirectly:
-
-- **Quality assurance** - Systematic testing catches regressions
-- **Model recommendations** - Data-driven guidance on which models work best
-- **Transparency** - Public benchmark results show actual performance
-- **Confidence** - Know that features are validated before release
-
-## Multi-Model Testing
-
-One of the most exciting aspects is testing Nanocoder with different models:
-
-- Compare performance across Ollama, OpenRouter, and OpenAI providers
-- Identify which models excel at specific task types
-- Validate that Nanocoder works well with various LLM backends
-- Help users choose the right model for their needs
-
-## Success Criteria
-
-The integration is considered successful when:
-
-- The wrapper is under 100 lines of Python
-- No complex IPC protocols required
-- Supports benchmarking with multiple models via configuration
-- Proper timeout handling prevents hanging tests
-- Results integrate cleanly with Terminal-Bench's scoring system
-
-## Looking Ahead
-
-This integration lays the groundwork for continuous quality monitoring. As Nanocoder evolves and adds features like LSP support, we'll be able to measure the actual impact on performance and user experience.
-
-Benchmark results will also inform our roadmap, helping prioritize features that deliver the most value to real-world coding tasks.
-
-## Get Involved
-
-Interested in benchmarking AI coding agents? Here's how you can participate:
-
-- Follow progress on the [GitHub issue](https://github.com/Nano-Collective/nanocoder/issues/78)
-- Suggest additional test scenarios to include
-- Share which models you'd like to see benchmarked
-- Contribute to the `nanocoder-tbench` repository once it's created
-
-Stay tuned for benchmark results once integration is complete!
+We've been dealing with this ourselves across a few projects and figured it was time to build something small and focused to handle it properly.
 
 ---
 
-_Nanocoder is a local-first AI coding assistant built with React and Ink.js, supporting multiple LLM providers including Ollama, OpenRouter, and OpenAI-compatible APIs._
+**Now Released**: a type-safe JS]]></description>
+            <content:encoded><![CDATA[When you store JSON locally, the structure inevitably changes over time. New fields get added, old ones get renamed, formats evolve. Without a proper migration system you end up with scattered `if` statements checking for old formats, or worse, data that silently breaks when the shape changes underneath you.
+
+We've been dealing with this ourselves across a few projects and figured it was time to build something small and focused to handle it properly.
+
+---
+
+**Now Released**: a type-safe JSON migration library for TypeScript - [@nanocollective/json-up](https://github.com/Nano-Collective/json-up)
+
+---
+
+## The idea
+
+Define a chain of versioned migrations, each with a Zod schema and a transform function. When you call `migrate()`, it reads the current version from your data, runs every migration after that version in order, and validates the result at each step. You get full TypeScript inference throughout the chain, so if your transform returns the wrong shape, you know at compile time rather than at runtime.
+
+```typescript
+const migrations = createMigrations()
+  .add({
+    version: 1,
+    schema: z.object({ name: z.string() }),
+    up: (data) => ({ name: data.name ?? "Unknown" }),
+  })
+  .add({
+    version: 2,
+    schema: z.object({ firstName: z.string(), lastName: z.string() }),
+    up: (data) => {
+      const [firstName = "", lastName = ""] = data.name.split(" ");
+      return { firstName, lastName };
+    },
+  })
+  .build();
+
+const result = migrate({
+  state: { _version: 1, name: "Jane Doe" },
+  migrations,
+});
+// { _version: 2, firstName: "Jane", lastName: "Doe" }
+```
+
+It handles the common patterns you would expect: renaming fields, adding defaults, restructuring nested objects, transforming arrays, and migrating from unversioned legacy data. There are three distinct error types (`ValidationError`, `MigrationError`, `VersionError`) so you can handle failures precisely rather than catching a generic error and guessing.
+
+## What it looks like in practice
+
+- **Fluent builder API** for chaining migration steps together
+- **Zod validation at every step**, not just the final output
+- **Automatic version tracking** via a configurable version key (defaults to `_version`)
+- **Full TypeScript inference** across the entire migration chain
+- **Zero runtime dependencies** - only Zod as a peer dependency
+- **Works with Zod v3 and v4**
+
+The whole thing installs with:
+
+```bash
+npm install @nanocollective/json-up zod
+```
+
+> [!TIP]
+> If your data already uses a field like `version` or `schemaVersion`, you can pass a custom `key` option to `migrate()` instead of the default `_version`.
+
+## Documentation
+
+We've written up proper docs covering the full API, error handling, and common migration patterns:
+
+- [Getting Started](https://github.com/Nano-Collective/json-up/blob/main/docs/getting-started.md)
+- [API Reference](https://github.com/Nano-Collective/json-up/blob/main/docs/api-reference.md)
+- [Error Handling](https://github.com/Nano-Collective/json-up/blob/main/docs/error-handling.md)
+- [Examples](https://github.com/Nano-Collective/json-up/blob/main/docs/examples.md)
+
+## Community
+
+We're a small community-led team building local and privacy-first AI solutions under the [Nano Collective](https://nanocollective.org/) and would love your help! Whether you're interested in contributing code, documentation, or just being part of our community, there are several ways to get involved.
+
+**If you want to contribute to the code:**
+
+- Read our detailed [CONTRIBUTING.md](https://github.com/Nano-Collective/json-up/blob/main/CONTRIBUTING.md) guide for information on development setup, coding standards, and how to submit your changes.
+
+**If you want to be part of our community or help with other aspects like design or marketing:**
+
+- Join our Discord server to connect with other users, ask questions, share ideas, and get help: [Join our Discord server](https://discord.gg/ktPDV6rekE)
+- Head to our GitHub issues or discussions to open and join current conversations with others in the community.]]></content:encoded>
+            <category>Packages</category>
+        </item>
+        <item>
+            <title><![CDATA[Schedule mode is coming to Nanocoder... Run project background tasks on a cron schedule 🚀]]></title>
+            <link>https://nanocollective.org/blog/schedule-mode-is-coming-to-nanocoder-run-project-background-tasks-on-a-cron-schedule-33</link>
+            <guid isPermaLink="false">https://nanocollective.org/blog/schedule-mode-is-coming-to-nanocoder-run-project-background-tasks-on-a-cron-schedule-33</guid>
+            <pubDate>Wed, 18 Feb 2026 21:52:59 GMT</pubDate>
+            <description><![CDATA[We've been working on a new feature for [Nanocoder](https://github.com/Nano-Collective/nanocoder) which we're quite excited about - a built-in cron scheduler that lets you set up recurring AI tasks.
+
+## The idea
+
+Write a markdown prompt describing a task, attach a cron expression, and let the agent handle the rest on a schedule. Dependency updates every Monday morning. Issue triage every hour. Daily lint runs with auto-fix. Whatever repetitive dev work you keep putting off.
+
+How it'll work]]></description>
+            <content:encoded><![CDATA[We've been working on a new feature for [Nanocoder](https://github.com/Nano-Collective/nanocoder) which we're quite excited about - a built-in cron scheduler that lets you set up recurring AI tasks.
+
+## The idea
+
+Write a markdown prompt describing a task, attach a cron expression, and let the agent handle the rest on a schedule. Dependency updates every Monday morning. Issue triage every hour. Daily lint runs with auto-fix. Whatever repetitive dev work you keep putting off.
+
+How it'll work (at the moment, open to feedback)
+- `/schedule create deps-update` — scaffolds a schedule file and the AI helps you write the prompt
+- `/schedule add "0 9 * * MON" deps-update.md` - registers it with a cron expression
+- `/schedule start` - enters scheduler mode where jobs fire automatically
+
+Jobs run sequentially with a queue, all tool calls (including bash) are auto-accepted, and there's full run history via /schedule logs.
+
+Schedule files are just markdown with optional YAML frontmatter - easy to version control and share across a team.
+
+Anyway, it's coming soon and would love any thoughts :D
+
+## What's next
+
+This runs while Nanocoder is open - it's not a system daemon (yet). We're exploring missed-run detection on startup and potentially a detached background mode.]]></content:encoded>
+            <category>Nanocoder</category>
+        </item>
+        <item>
+            <title><![CDATA[Nanocoder 1.22.0: New UI, Interactive File Explorer, Task Management, and More]]></title>
+            <link>https://nanocollective.org/blog/nanocoder-1220-new-ui-interactive-file-explorer-task-management-and-more-31</link>
+            <guid isPermaLink="false">https://nanocollective.org/blog/nanocoder-1220-new-ui-interactive-file-explorer-task-management-and-more-31</guid>
+            <pubDate>Sat, 07 Feb 2026 22:24:07 GMT</pubDate>
+            <description><![CDATA[We're excited to announce Nanocoder 1.22.0! It's packed with powerful new features that make working with your codebase more intuitive and productive than ever.
+
+## What's New in This Release
+
+### Interactive File Explorer with `/explorer`
+
+Navigating complex codebases just got a lot easier. The new `/explorer` command brings an interactive file browser directly into your terminal with:
+
+- **Tree view navigation** for intuitive directory exploration
+- **File preview** with syntax highli]]></description>
+            <content:encoded><![CDATA[We're excited to announce Nanocoder 1.22.0! It's packed with powerful new features that make working with your codebase more intuitive and productive than ever.
+
+## What's New in This Release
+
+### Interactive File Explorer with `/explorer`
+
+Navigating complex codebases just got a lot easier. The new `/explorer` command brings an interactive file browser directly into your terminal with:
+
+- **Tree view navigation** for intuitive directory exploration
+- **File preview** with syntax highlighting to quickly understand code context
+- **Multi-file selection** to work with multiple files at once
+- **Search mode** for finding exactly what you need
+- **VS Code integration** so selected files can be opened in your editor
+
+Try it out by typing `/explorer` in any chat session - it's perfect for getting oriented in unfamiliar projects or surfacing the right files for your AI assistant to review.
+
+### Task Management for Complex Workflows
+
+We've finally bought a new task management system. The model can automatically create tasks or you can use the `/tasks` command to break down and track progress on multi-step work:
+
+- **Create, list, update, and delete tasks** with dedicated tools
+- **Persistent storage** in `.nanocoder/tasks.json` so tasks survive between sessions
+- **Automatic cleanup** when you restart the CLI or run `/clear`
+- Perfect for feature development, bug fixes, and refactoring projects
+
+Now you can have clear, shared visibility into what needs to be done and what's already complete. It was a long time coming.
+
+### Enhanced Provider Support
+
+We've added several improvements for working with different AI providers:
+
+**Native Gemini & Anthropic Support**: Configure the `sdkProvider` option to use Google's native Gemini integration as well as Anthropic's. This allows more flexibility for provider use.
+
+**Custom Headers**: Need to authenticate through tunnels like Cloudflare? Provider configurations now support custom headers for advanced networking scenarios.
+
+**Kimi Code Provider**: A new provider template has been added to the configuration wizard for easy setup.
+
+### Settings Interface and New Themes
+
+Customization is easier than ever. The `/settings` command opens an interactive menu to configure your UI theme and shape preferences without editing config files manually. We've also added beautiful new themes and updated styling for improved visual clarity and consistency.
+
+### Improved UI
+
+We've given the new version of Nanocoder a fresh look. Assistant/User messages now look cleaner than ever. We've also given token information per message to help you keep track of what context going in and coming out of the model over and above the `/usage` command.
+
+## Under the Hood
+
+This release includes important improvements to developer experience:
+
+- **Git tool refactoring** for better consistency, error handling, and user feedback
+- **Line truncation** in file operations to prevent excessive output on narrow terminals
+- **Enhanced security** with multiple vulnerability fixes
+
+## Bug Fixes
+
+- Fixed `/usage` command crashes when context data is unavailable
+- Improved string replace error handling for edge cases
+- Security audit issues resolved
+
+## Get Started
+
+Update Nanocoder to version 1.22.0 today and experience the improvements - we hope you love it :)
+
+```bash
+npm install -g nanocoder
+# or with your preferred package manager
+```]]></content:encoded>
+            <category>Nanocoder</category>
+        </item>
+        <item>
+            <title><![CDATA[Nanocoder 1.21.0: Enhanced Configuration, Smarter Tool Handling, and Better Reliability]]></title>
+            <link>https://nanocollective.org/blog/nanocoder-1210-enhanced-configuration-smarter-tool-handling-and-better-reliability-27</link>
+            <guid isPermaLink="false">https://nanocollective.org/blog/nanocoder-1210-enhanced-configuration-smarter-tool-handling-and-better-reliability-27</guid>
+            <pubDate>Wed, 21 Jan 2026 22:08:09 GMT</pubDate>
+            <description><![CDATA[We're excited to announce Nanocoder 1.21.0, a release focused on making your local AI coding experience more powerful, flexible, and reliable. This version introduces hierarchical configuration management, intelligent tool support detection, and a collection of quality-of-life improvements that developers have been asking for.
+
+## Hierarchical Configuration Loading
+
+One of the most requested features is now here: **project-level configuration overrides**. Nanocoder 1.21.0 introduces hierarch]]></description>
+            <content:encoded><![CDATA[We're excited to announce Nanocoder 1.21.0, a release focused on making your local AI coding experience more powerful, flexible, and reliable. This version introduces hierarchical configuration management, intelligent tool support detection, and a collection of quality-of-life improvements that developers have been asking for.
+
+## Hierarchical Configuration Loading
+
+One of the most requested features is now here: **project-level configuration overrides**. Nanocoder 1.21.0 introduces hierarchical configuration loading for both provider configs and MCP servers. This means you can now:
+
+- Set up global provider configurations in `~/.config/nanocoder/`
+- Override them with project-specific settings in your local `.nanocoder/` directory
+- Have Claude Code's object-style MCP configuration format automatically recognized and supported
+
+This makes it incredibly easy to manage different configurations for different projects without manually switching settings between tasks.
+
+## Automatic Tool Support Detection
+
+Models vary widely in their capabilities - some don't support function calling at all. We've added **automatic tool support error detection with intelligent retry logic**. When Nanocoder detects that a model doesn't support tool calling, it automatically retries the request without tools, allowing the conversation to continue seamlessly. No more errors or failed requests for models with limited capabilities.
+
+## Message Compression at Scale
+
+Working with large conversations can be challenging. The new `/compact` command lets you compress your conversation context with the `--restore` flag to recover original messages if needed. Combined with auto-compact functionality and consistent token counting, managing lengthy sessions is now more straightforward.
+
+## New Commands & Configuration Options
+
+We've added several useful commands and options:
+
+- **`/quit`** - A new alternative to exit Nanocoder (complementing the existing exit methods)
+- **`/nanocoder-shape`** - Select your preferred branding font styles for custom commands
+- **`--version` and `--help`** - Quick reference CLI options at your fingertips
+- **`alwaysAllow` configuration option** - Mark trusted MCP server tools to skip confirmation prompts
+
+## Under the Hood
+
+Beyond these headline features, we've fixed critical issues:
+
+- **Bash tool now properly cleans up processes** - Previously, background processes could persist after command completion
+- **Improved bash security** - Resolved shell command security scanning alerts from environment values
+- **Better error handling** - Enhanced tool error detection and retry mechanisms
+- **Better UX** - Improved `/mcp` and `/help` command styling with better colors and formatting
+
+## Try It Out
+
+We love getting developer feedback so try it out today!
+
+If you have feedback or encounter any issues, please reach out through our [GitHub issues page](https://github.com/Nano-Collective/nanocoder/issues) or join us on Discord.
+
+Happy coding! 🙌
+]]></content:encoded>
+            <category>Nanocoder</category>
+        </item>
+        <item>
+            <title><![CDATA[Nanocoder 1.20.0: Fresh Year, Fresh Features]]></title>
+            <link>https://nanocollective.org/blog/nanocoder-1200-fresh-year-fresh-features-26</link>
+            <guid isPermaLink="false">https://nanocollective.org/blog/nanocoder-1200-fresh-year-fresh-features-26</guid>
+            <pubDate>Fri, 09 Jan 2026 13:29:28 GMT</pubDate>
+            <description><![CDATA[Happy New Year! 🥳
+
+We're excited to kick off 2026 with Nanocoder 1.20.0, a release packed with powerful features, comprehensive testing, and significant quality improvements. Whether you're using Nanocoder for rapid development, code exploration, or complex multi-file refactoring, this release brings meaningful enhancements across every layer of the platform.
+
+It was a labour of love over the holidays from our contributors!
+
+Before we go into the update though, we all want to thank you fo]]></description>
+            <content:encoded><![CDATA[Happy New Year! 🥳
+
+We're excited to kick off 2026 with Nanocoder 1.20.0, a release packed with powerful features, comprehensive testing, and significant quality improvements. Whether you're using Nanocoder for rapid development, code exploration, or complex multi-file refactoring, this release brings meaningful enhancements across every layer of the platform.
+
+It was a labour of love over the holidays from our contributors!
+
+Before we go into the update though, we all want to thank you for an incredible 2025 - Nanocoder was launched just 5-months ago and its quality, community and vision has only grown.
+
+Heading into 2026 we've crossed 1K stars and get over 4,000 downloads a month. We have an incredible core team now and so many amazing contributors putting in work to make Nanocoder great.
+
+Our mission has alway been to build community-led solutions that focus on privacy and local-first AI. We're only going to continue on that mission this year. Thanks to everyone!
+
+## What's New in 1.20.0
+
+### Visual Enhancements
+
+We've introduced **Catpuccin themes** with full gradient color support, giving you four beautiful options: Latte, Frappe, Macchiato, and Mocha. Whether you prefer light or dark aesthetics, these carefully curated themes make extended coding sessions more personalised to you. Plus, we've added **stylized title boxes** with powerline-style shapes and real-time preview support in custom commands, giving your terminal output a polished, professional appearance. We believe your CLI experience should be yours and made to be beautiful.
+
+### VS Code Plugin Improvements
+
+Right-clicking code in VS Code? Now you can directly ask Nanocoder about it through the **context menu integration**. This tighter editor integration means fewer context switches and faster feedback loops during development.
+
+### Expanded Language Support
+
+Language Server Protocol (LSP) support has been significantly expanded with **automatic project detection** for Deno, GraphQL, Docker, and Markdown language servers. The setup wizard now features **auto-fetch models**, allowing providers to automatically discover available models during configuration. This means less manual setup and better out-of-the-box experiences.
+
+### Git Workflow Tools
+
+We've added comprehensive **git workflow integration**, including:
+- Smart commit message generation
+- PR template creation
+- Branch naming suggestions
+- Enhanced status reporting
+
+These tools leverage AI to streamline your git workflows, reducing friction in your development process.
+
+### Performance & Reliability
+
+- **90%+ code coverage** across components, hooks, tools, and utilities with comprehensive unit and integration tests
+- **File content caching** reduces tool confirmation delays and improves responsiveness
+- **Real-time bash output progress** with live updates during command execution
+- **Inline word-level highlighting** in string_replace diff display for clearer visualization of changes
+
+### Security Improvements
+
+- Path boundary validation prevents directory traversal attacks
+- Granular debug logging with structured Pino logger for better error tracking
+- Enhanced error handling with AI SDK error types
+- Switched to crypto.randomUUID and crypto.randomBytes for secure ID generation
+
+### Infrastructure
+
+- **Devcontainer support** for streamlined development environments
+- **Automated PR checks workflow** with format, type, lint, and test validation
+- Improved tool caller prompts and descriptions for better model interaction
+- Refactored core components for maintainability
+
+## Under the Hood
+
+This release includes significant architectural improvements: the App component has been refactored into focused modules (useAppState, useAppInitialization, useChatHandler, useToolHandler), file operations have been switched to async operations for better performance, and multiple files have been renamed to kebab-case for consistency.
+
+Code exploration tools are now smarter with better prompts and a new `list_directories` tool. Ignored file patterns are now centralized for consistency, and tool formatters provide improved indentation for readability.
+
+## Get Started Today
+
+Nanocoder 1.20.0 is available now and ready for use. Whether you're upgrading for the new themes, git integration, or the comprehensive testing improvements, you'll notice immediate benefits in your workflow.
+
+[Download the latest version](https://github.com/Nano-Collective/nanocoder) and explore what makes Nanocoder the developer's choice for AI-assisted coding.
+
+Thank you to our incredible community of contributors who made this release possible. Your feedback, bug reports, and pull requests drive our continuous improvement. If you have thoughts or run into any issues, reach out via our [GitHub issues](https://github.com/Nano-Collective/nanocoder/issues) or join us on [Discord](https://discord.gg/nanocoder).]]></content:encoded>
+            <category>Nanocoder</category>
+        </item>
+        <item>
+            <title><![CDATA[Nanocoder 1.19.0: Non-Interactive Mode, Conversation Checkpointing, and Enterprise-Grade Logging]]></title>
+            <link>https://nanocollective.org/blog/nanocoder-1190-non-interactive-mode-conversation-checkpointing-and-enterprise-grade-logging-22</link>
+            <guid isPermaLink="false">https://nanocollective.org/blog/nanocoder-1190-non-interactive-mode-conversation-checkpointing-and-enterprise-grade-logging-22</guid>
+            <pubDate>Tue, 16 Dec 2025 19:52:46 GMT</pubDate>
+            <description><![CDATA[Nanocoder 1.19.0 is here, and it's another big one! Packed with powerful new features designed to make your AI-powered coding workflow more flexible, reliable, and production-ready.
+
+## What's New in 1.19.0
+
+### Non-Interactive Mode for CI/CD Pipelines
+
+We've included non-interactive mode. You can now run Nanocoder directly in CI/CD pipelines and automation scripts by passing commands via CLI arguments. Nanocoder executes your request and exits automatically. No interactive prompts, no wai]]></description>
+            <content:encoded><![CDATA[Nanocoder 1.19.0 is here, and it's another big one! Packed with powerful new features designed to make your AI-powered coding workflow more flexible, reliable, and production-ready.
+
+## What's New in 1.19.0
+
+### Non-Interactive Mode for CI/CD Pipelines
+
+We've included non-interactive mode. You can now run Nanocoder directly in CI/CD pipelines and automation scripts by passing commands via CLI arguments. Nanocoder executes your request and exits automatically. No interactive prompts, no waiting for user input.
+
+This opens up exciting possibilities:
+- Integrate Nanocoder into your GitHub Actions, GitLab CI, or Jenkins workflows
+- Automate code reviews, refactoring, and documentation tasks
+- Use Nanocoder as part of your build pipeline for intelligent code generation
+
+```bash
+# Example: Run Nanocoder non-interactively
+nanocoder "Summarise what the README.md file says"
+```
+
+### Conversation Checkpointing System
+
+We've implemented an interactive conversation checkpointing system that lets you save and restore your chat sessions across different workdays and projects. Never lose context again. Your conversations are now persistent, allowing you to:
+
+- Save complex multi-step conversations for later reference
+- Resume work exactly where you left off
+- Maintain project-specific context across sessions
+- Build knowledge bases from your interactions
+
+### Enterprise-Grade Pino Logging
+
+For teams running Nanocoder in production environments, we've integrated a comprehensive structured logging system powered by Pino. This new logging infrastructure provides:
+
+- Structured logging for easier parsing and analysis
+- Request tracking across tool executions
+- Performance monitoring to identify bottlenecks
+- Configurable log levels (debug, info, warn, error)
+- Perfect for debugging issues in containerized environments
+
+### Tooling Improvements
+
+- **Faster Code Quality Tooling**: We've switched from Prettier and ESLint to Biome, delivering faster formatting and linting without sacrificing code quality standards.
+- **New Provider Templates**: Added support for Poe.com and Mistral AI in the configuration wizard, expanding your LLM provider options.
+- **Cleaner Dependencies**: Removed the `ink-titled-box` dependency and replaced it with a custom, lightweight implementation—reducing bloat and bugs while maintaining visual quality.
+
+### Under the Hood
+
+- Updated Ollama model contexts for improved compatibility
+- Added `--force` flag to `/init` command for regenerating AGENTS.md without user prompts
+- Fixed critical security vulnerabilities flagged by pnpm audits
+- Fixed README table of contents anchors for proper GitHub fork navigation
+- Refactored GitHub Actions workflows to reduce duplication and improve maintainability
+
+## Get Started Today
+
+Have questions or feedback? Drop us a line on [Discord](https://discord.gg/nanocoder) or open an issue on [GitHub](https://github.com/Nano-Collective/nanocoder). We'd love to hear how you're using Nanocoder!
+
+Thank you for being part of the Nanocoder community. 🙌
+]]></content:encoded>
+            <category>Nanocoder</category>
+        </item>
+        <item>
+            <title><![CDATA[Nanocoder 1.18.0: Multi-Step Tool Calls, Better Debugging, and a Smarter Model Database]]></title>
+            <link>https://nanocollective.org/blog/nanocoder-1180-multi-step-tool-calls-better-debugging-and-a-smarter-model-database-19</link>
+            <guid isPermaLink="false">https://nanocollective.org/blog/nanocoder-1180-multi-step-tool-calls-better-debugging-and-a-smarter-model-database-19</guid>
+            <pubDate>Mon, 08 Dec 2025 21:40:14 GMT</pubDate>
+            <description><![CDATA[We're excited to announce Nanocoder 1.18.0, a release packed with improvements to how the AI agent handles tool calls, new debugging capabilities, and a completely revamped model discovery experience.
+
+## AI SDK v6 Beta: Multi-Step Tool Calls Are Here
+
+The headline feature of this release is the upgrade to AI SDK v6 beta. This brings significant improvements to model and tool calling performance, but more importantly, it introduces **multi-step tool calls support**.
+
+What does this mean in]]></description>
+            <content:encoded><![CDATA[We're excited to announce Nanocoder 1.18.0, a release packed with improvements to how the AI agent handles tool calls, new debugging capabilities, and a completely revamped model discovery experience.
+
+## AI SDK v6 Beta: Multi-Step Tool Calls Are Here
+
+The headline feature of this release is the upgrade to AI SDK v6 beta. This brings significant improvements to model and tool calling performance, but more importantly, it introduces **multi-step tool calls support**.
+
+What does this mean in practice? Previously, when Nanocoder needed to perform multiple operations, each tool call was handled sequentially with the model reasoning between each step. With multi-step tool calls, the agent can now chain operations more efficiently, leading to faster task completion and more coherent workflows.
+
+This upgrade was contributed by @DenizOkcu, who also fixed locale-related test failures that were affecting some users.
+
+## New `/debugging` Command
+
+Sometimes you need to see exactly what's happening under the hood. The new `/debugging` command toggles detailed tool call information, showing you the raw data being passed between the model and tools. This is invaluable when:
+
+- Troubleshooting unexpected behavior
+- Understanding how the model is interpreting your requests
+- Contributing to Nanocoder development
+
+Thanks again to @DenizOkcu for this addition.
+
+## From `/recommendations`, to `/model-database`
+
+We've replaced the `/recommendations` command with a more powerful `/model-database` command. Instead of static recommendations, you now have access to a searchable database of models with up-to-date information about capabilities, context sizes, and more.
+
+This change makes it significantly easier for us to maintain accurate model information and for you to find the right model for your use case.
+
+## Cleaner Status Display
+
+LSP and MCP server connection status is now displayed directly in the Status component. This provides much cleaner visibility into your connected services without cluttering the main UI with verbose connection messages. Thanks to @Avtrkrb for this improvement.
+
+## GitHub Issue Templates
+
+We've added structured issue templates for bug reports and feature requests. If you encounter problems or have ideas, these templates will help you provide the information we need to act quickly.
+
+## A Note on Streaming
+
+We've temporarily removed streaming output. The AI SDK v6 upgrade introduced some layout and flickering issues that affected the user experience. We're working on bringing streaming back in a future release once these issues are resolved.
+
+## Breaking Changes
+
+None! This is a drop-in upgrade.
+
+## Get It Now
+
+```bash
+# npm
+npm update -g @nanocollective/nanocoder
+
+# homebrew
+brew upgrade nanocoder
+
+# nix
+nix flake update
+```
+
+## Community
+
+Nanocoder is built by a growing community of contributors. Special thanks to @DenizOkcu and @Avtrkrb for their contributions to this release.
+
+Have feedback or found a bug? [Open an issue](https://github.com/nano-collective/nanocoder/issues)
+
+---
+
+_Nanocoder is a local-first AI coding agent that works with any OpenAI-compatible API. It's open source, privacy-respecting, and designed for developers who want AI assistance without vendor lock-in._]]></content:encoded>
+            <category>Nanocoder</category>
+        </item>
+        <item>
+            <title><![CDATA[Nanocoder v1.16.x to v1.17.0]]></title>
+            <link>https://nanocollective.org/blog/nanocoder-v116x-to-v1170-17</link>
+            <guid isPermaLink="false">https://nanocollective.org/blog/nanocoder-v116x-to-v1170-17</guid>
+            <pubDate>Wed, 26 Nov 2025 23:07:22 GMT</pubDate>
+            <description><![CDATA[We're excited to share an overview of the recent Nanocoder releases, from the v1.16.x series through to v1.17.0. These releases represent huge community contributions, bug fixes, and significant new capabilities that make Nanocoder more powerful and user-friendly than ever.
+
+## v1.16.0: The /usage Command and Better Tool Handling
+
+The v1.16.0 release introduced a much-requested feature: the `/usage` command. Thanks to @spinualexandru, users can now visually monitor their model's context usag]]></description>
+            <content:encoded><![CDATA[We're excited to share an overview of the recent Nanocoder releases, from the v1.16.x series through to v1.17.0. These releases represent huge community contributions, bug fixes, and significant new capabilities that make Nanocoder more powerful and user-friendly than ever.
+
+## v1.16.0: The /usage Command and Better Tool Handling
+
+The v1.16.0 release introduced a much-requested feature: the `/usage` command. Thanks to @spinualexandru, users can now visually monitor their model's context usage directly in the CLI. This closes issue #12 and gives developers better insight into how much of their context window is being consumed during sessions.
+
+This release also expanded the model recommendations database with new models and fixed an important issue where models would occasionally request permission to call non-existent tools. The system now properly errors and loops back to allow the model to self-correct.
+
+## v1.16.1: Quick Patch for Installation
+
+A swift patch release addressed installation failures caused by a postinstall hook that referenced a missing scripts directory. The fix moved models.dev data fetching from installation time to first use, making installations smoother across all platforms.
+
+## v1.16.2: Stability and Output Management
+
+This release focused on stability improvements:
+
+- **Empty response handling**: Models returning empty responses after tool execution are now automatically reprompted
+- **False positive prevention**: HTML tags in responses no longer trigger incorrect tool call detection errors
+- **Output limits**: `search_files` results capped at 10 (down from 50) and `execute_bash` output truncated to 2,000 characters to prevent context overflow
+
+## v1.16.3: A Complete Tool System Overhaul
+
+Version 1.16.3 brought substantial changes to how Nanocoder handles file operations and searching:
+
+**Out with the old:**
+
+- Removed `read_many_files` (rarely used over `read_file`)
+- Removed `search_files` (models found it confusing)
+
+**In with the new:**
+
+- **`find_files`**: Pattern-based file and directory discovery
+- **`search_file_contents`**: Content-aware searching with metadata
+- **Revised `read_file`**: Now reveals progressive information, returning metadata first with optional line ranges for specific content
+
+These changes were designed specifically to help smaller models like Qwen 3 Coder 30B perform better by reducing context rot through more purposeful tool calls.
+
+Additional fixes included:
+
+- Update checker rendering (previously appeared perpetually stuck)
+- Proper XDG config path handling (`~/.config/nanocoder/`)
+- Numerous edge-case fixes in the markdown parser
+- Removal of message display limits (the optimised queue can now handle full session history)
+
+## v1.16.4: Platform Improvements and New Theme
+
+A community-driven release with several quality-of-life improvements:
+
+- **Config/data separation**: Clear distinction between configuration and application data directories (thanks @bowmanjd)
+- **Smart update detection**: The update checker now auto-detects your installation method (npm, Homebrew, Nix) and provides appropriate update instructions (thanks @fabriziosalmi)
+- **Dracula theme**: A new dark theme option for Dracula enthusiasts
+- **VSCode Terminal fixes**: Creating new lines and paste detection now work correctly in VSCode's integrated terminal
+- **Better autocomplete**: Command autocomplete now selects the top suggestion rather than waiting for a single remaining option
+
+## v1.16.5: Cleanup and Nix Fixes
+
+The final patch in the 1.16.x series focused on refinement:
+
+- `/init` command no longer generates `agents.config.json` (aligning with new configuration patterns)
+- Code refactoring to reduce duplication (thanks @JimStenstrom)
+- Critical fix for broken Nix installation (thanks @Thomashighbaugh)
+
+---
+
+## v1.17.0: VS Code Extension and MCP Overhaul
+
+The v1.17.0 release marks a significant milestone for Nanocoder with two major features:
+
+### VS Code Extension v1
+
+Nanocoder now ships with an official VS Code extension featuring:
+
+- **Live code diffs**: See changes as they're proposed
+- **Diagnostics integration**: LSP support for language-aware feedback
+- **Seamless workflow**: Work with Nanocoder directly in your editor
+
+This is version 1 of the extension with plenty of room for expansion and improvement based on community feedback.
+
+### MCP Configuration Redesign
+
+Thanks to the extensive work by @Avtrkrb, the MCP (Model Context Protocol) system received a complete overhaul:
+
+- **Tab-based UI**: Redesigned MCP configuration screens using a clean tab layout
+- **Remote MCP support**: Added support for remote MCP servers alongside stdio servers
+- **GitHub Remote MCP**: New template with Auth header configuration
+- **Expanded templates**: Additional MCP server templates for common use cases
+- **Better sequencing**: Configuration wizard now follows a logical stdio -> remote flow
+
+### Additional Improvements
+
+- Global configuration now properly loads when local/project configuration is missing
+- Preflight checks and test improvements
+- Documentation updates for new MCP fields
+
+---
+
+## Thank You to Our Contributors
+
+These releases wouldn't be possible without our amazing community. Special thanks to:
+
+- **@spinualexandru** - /usage command implementation
+- **@bowmanjd** - Config/data directory separation and XDG path fixes
+- **@fabriziosalmi** - Smart update detection
+- **@Avtrkrb** - MCP configuration overhaul
+- **@JimStenstrom** - Code refactoring
+- **@Thomashighbaugh** - Nix installation fixes
+
+## Get Started
+
+Update to the latest version using your preferred method:
+
+```bash
+# npm
+npm update -g @nanocollective/nanocoder
+
+# Homebrew
+brew update && brew upgrade nanocoder
+
+# Nix
+nix profile upgrade nanocoder
+```
+
+If you encounter any problems or have feedback, please drop an issue on [GitHub](https://github.com/Nano-Collective/nanocoder/issues) or message us through Discord.
+
+Thank you for using Nanocoder!
 ]]></content:encoded>
             <category>Nanocoder</category>
         </item>
