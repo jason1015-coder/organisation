@@ -26,10 +26,10 @@ export default function ScreenRecord({ nanocoderVersion }: ScreenRecordProps) {
   return (
     <>
       <Head>
-        <title>Nanocoder Terminal - Screen Recording</title>
+        <title>Nanocoder Terminal - GitHub GIFs</title>
         <meta
           name="description"
-          content="Nanocoder terminal interface for screen recording demonstrations"
+          content="Animated screen recordings of Nanocoder terminal for GitHub profiles and READMEs"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
