@@ -24,6 +24,14 @@ export default function Footer() {
               >
                 Blog
               </Link>
+              <a
+                href="https://docs.nanocollective.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Docs
+              </a>
             </nav>
             <div className="flex gap-6">
               <a

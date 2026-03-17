@@ -200,7 +200,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
 
         // Fetch contributors to track unique contributors
         const contributorsResponse = await fetch(
-          `https://api.github.com/repos/Nano-Collective/${repo.name}/contributors`,
+          `https://api.github.com/repos/Nano-Collective/${repo.name}/contributors?per_page=100`,
           { headers },
         );
 

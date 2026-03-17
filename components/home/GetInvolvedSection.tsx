@@ -1,4 +1,4 @@
-import { Users } from "lucide-react";
+import { BookOpen, Users } from "lucide-react";
 import Link from "next/link";
 import { FaDiscord, FaGithub } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
@@ -43,7 +43,22 @@ export function GetInvolvedSection() {
             <Button
               size="lg"
               variant="outline"
-              className="group w-full sm:col-span-2"
+              className="group w-full"
+              asChild
+            >
+              <a
+                href="https://docs.nanocollective.org"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <BookOpen className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
+                Read the Docs
+              </a>
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="group w-full"
               asChild
             >
               <Link href="/contributors">

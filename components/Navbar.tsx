@@ -12,6 +12,7 @@ import ThemeToggle from "./ThemeToggle";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/blog", label: "Blog" },
+  { href: "https://docs.nanocollective.org", label: "Docs", external: true },
   { href: "/contributors", label: "Contributors" },
 ];
 
@@ -50,20 +51,32 @@ export default function Navbar() {
 
         {/* Navigation Links - Desktop */}
         <nav className="hidden md:flex items-center gap-6">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={cn(
-                "text-sm font-medium transition-colors hover:text-primary",
-                router.pathname === link.href
-                  ? "text-foreground"
-                  : "text-muted-foreground",
-              )}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) =>
+            link.external ? (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                {link.label}
+              </a>
+            ) : (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "text-sm font-medium transition-colors hover:text-primary",
+                  router.pathname === link.href
+                    ? "text-foreground"
+                    : "text-muted-foreground",
+                )}
+              >
+                {link.label}
+              </Link>
+            ),
+          )}
         </nav>
 
         {/* Social Links & Theme Toggle - Desktop */}
@@ -109,21 +122,34 @@ export default function Navbar() {
         )}
       >
         <nav className="container mx-auto px-4 py-4 flex flex-col gap-2">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setMobileMenuOpen(false)}
-              className={cn(
-                "px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-accent",
-                router.pathname === link.href
-                  ? "text-foreground bg-accent/50"
-                  : "text-muted-foreground",
-              )}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) =>
+            link.external ? (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileMenuOpen(false)}
+                className="px-3 py-2 rounded-md text-sm font-medium text-muted-foreground transition-colors hover:bg-accent"
+              >
+                {link.label}
+              </a>
+            ) : (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className={cn(
+                  "px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-accent",
+                  router.pathname === link.href
+                    ? "text-foreground bg-accent/50"
+                    : "text-muted-foreground",
+                )}
+              >
+                {link.label}
+              </Link>
+            ),
+          )}
           <div className="flex items-center gap-2 px-3 py-2 border-t border-border/40 mt-2 pt-4">
             {socialLinks.map((link) => (
               <a
