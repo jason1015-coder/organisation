@@ -62,7 +62,7 @@ export const CONTRIBUTORS: Contributor[] = [
     name: "Caleb Grenko",
     photo: "grenko_caleb.jpg",
     github: "grenkoca", 
-    bio: "MD-PhD trainee/computational biologist with a dream of democratized AI, and a love of exploring the unknown."
+    bio: "MD-PhD trainee/computational biologist with a dream of democratized AI and a love of exploring the unknown."
   },
   {
     name: "Deniz Okcu",
