@@ -53,16 +53,16 @@ export const CONTRIBUTORS: Contributor[] = [
     bio: "Founder of the Nano Collective, building open-source AI tools for everyone.",
   },
   {
+    name: "Ben Parry",
+    photo: "ben-parry.jpeg",
+    website: "https://substack.com/@followbenparry",
+    bio: "I write about sovereignty, decentralisation, and the revolt against cloud-controlled intelligence.",
+  },
+  {
     name: "Alexandru Spînu",
     photo: "alexandru-spinu.jpg",
     website: "https://alexspinu.eu/",
     bio: "Software Engineer, leveraging 12 years of full-stack experience for the web & developer tooling. Passionate about AI/ML",
-  },
-  {
-    name: "Caleb Grenko",
-    photo: "grenko_caleb.jpg",
-    github: "grenkoca",
-    bio: "MD-PhD trainee/computational biologist with a dream of democratized AI and a love of exploring the unknown.",
   },
   {
     name: "Deniz Okcu",
@@ -77,6 +77,12 @@ export const CONTRIBUTORS: Contributor[] = [
     bio: "Co-founder & Technology Head at Kashylitics, passionate about building production-grade AI systems and developer tooling.",
   },
   {
+    name: "Caleb Grenko",
+    photo: "grenko_caleb.jpg",
+    github: "grenkoca",
+    bio: "MD-PhD trainee/computational biologist with a dream of democratized AI and a love of exploring the unknown.",
+  },
+  {
     name: "Nassim Amar",
     photo: "nassim-amar.jpg",
     github: "namar0x0309",
@@ -89,12 +95,6 @@ export const CONTRIBUTORS: Contributor[] = [
     github: "akramcodez",
     website: "https://www.akramcodez.tech/",
     bio: "19 y/o Software Developer ッ",
-  },
-  {
-    name: "Ben Parry",
-    photo: "ben-parry.jpeg",
-    website: "https://substack.com/@followbenparry",
-    bio: "I write about sovereignty, decentralisation, and the revolt against cloud-controlled intelligence.",
   },
   {
     name: "cleyesode",
