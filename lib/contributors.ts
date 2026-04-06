@@ -59,6 +59,12 @@ export const CONTRIBUTORS: Contributor[] = [
     bio: "Software Engineer, leveraging 12 years of full-stack experience for the web & developer tooling. Passionate about AI/ML",
   },
   {
+    name: "Caleb Grenko",
+    photo: "grenko_caleb.jpg",
+    github: "grenkoca", 
+    bio: "MD-PhD trainee/computational biologist with a dream of democratized AI, and a love of exploring the unknown."
+  },
+  {
     name: "Deniz Okcu",
     photo: "deniz.png",
     github: "DenizOkcu",
