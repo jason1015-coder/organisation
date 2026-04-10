@@ -71,6 +71,11 @@ export const CONTRIBUTORS: Contributor[] = [
     bio: "Deniz is working on mobile and browser games. In his free time he enjoys building AI-powered productivity tools.",
   },
   {
+    name: "Lottie Oxford",
+    photo: "lottie-oxford.JPEG",
+    bio: "Helps with the community behind the Nano Collective. Passionate about building in open source and AI.",
+  },
+  {
     name: "Brijesh K R",
     photo: "brijesh-k-r.png",
     github: "Avtrkrb",
