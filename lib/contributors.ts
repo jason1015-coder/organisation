@@ -95,6 +95,12 @@ export const CONTRIBUTORS: Contributor[] = [
     bio: "Founder @PoezInc and @GoAIX, passionate about technically advanced tools that also feel and look good like Nanocoder!",
   },
   {
+    name: "Ragini Pandey",
+    photo: "ragini-pandey.jpg",
+    github: "ragini-pandey",
+    website: "https://ragini-pandey.github.io/",
+  },
+  {
     name: "Sk Akram",
     photo: "sk-akram.jpeg",
     github: "akramcodez",
