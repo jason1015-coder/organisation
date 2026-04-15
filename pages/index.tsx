@@ -36,22 +36,22 @@ export default function Home({
   return (
     <>
       <Head>
-        <title>Nano Collective - Open Source Privacy-First AI Tools</title>
+        <title>Nano Collective - Powerful AI Tools, Open for All</title>
 
         <meta
           name="description"
-          content="Creating powerful, privacy-first AI tools, developed by the community for the community. Privacy-first, open source AI that runs on your machine."
+          content="Building powerful AI tools for the community. Privacy-respecting, local-first and open for all."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {/* OpenGraph */}
         <meta
           property="og:title"
-          content="Nano Collective - Privacy-First AI Tools"
+          content="Nano Collective - Powerful AI Tools, Open for All"
         />
         <meta
           property="og:description"
-          content="Creating powerful, privacy-first AI tools, developed by the community for the community. Privacy-first, open source AI that runs on your machine."
+          content="Building powerful AI tools for the community. Privacy-respecting, local-first and open for all."
         />
         <meta property="og:url" content="https://nanocollective.org" />
         <meta property="og:image" content="/og-image.png" />
@@ -60,11 +60,11 @@ export default function Home({
         {/* Twitter Cards */}
         <meta
           name="twitter:title"
-          content="Nano Collective - Privacy-First AI Tools"
+          content="Nano Collective - Powerful AI Tools, Open for All"
         />
         <meta
           name="twitter:description"
-          content="Creating powerful, privacy-first AI tools, developed by the community for the community. Privacy-first, open source AI that runs on your machine."
+          content="Building powerful AI tools for the community. Privacy-respecting, local-first and open for all."
         />
         <meta name="twitter:image" content="/og-image.png" />
         <meta name="twitter:image:alt" content="Nano Collective Logo" />

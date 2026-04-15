@@ -16,10 +16,10 @@ export function FeaturesSection() {
               <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                 <Lock className="h-6 w-6 text-primary" />
               </div>
-              <CardTitle>Privacy First</CardTitle>
+              <CardTitle>Privacy-Respecting</CardTitle>
               <CardDescription className="text-base">
-                Your data should stay on your machine. We&apos;re building
-                privacy-first architectures to ensure complete control.
+                Your data stays on your machine. We build tools that respect
+                your privacy and keep you in control.
               </CardDescription>
             </CardHeader>
           </Card>
@@ -29,10 +29,10 @@ export function FeaturesSection() {
               <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                 <Users className="h-6 w-6 text-primary" />
               </div>
-              <CardTitle>Community Driven</CardTitle>
+              <CardTitle>Open for All</CardTitle>
               <CardDescription className="text-base">
-                Built by developers, for developers. We&apos;re doing true open
-                source and transparent work from day one.
+                Built by the community, for the community. Open source and
+                transparent from day one.
               </CardDescription>
             </CardHeader>
           </Card>
@@ -42,10 +42,10 @@ export function FeaturesSection() {
               <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                 <Zap className="h-6 w-6 text-primary" />
               </div>
-              <CardTitle>New Capabilities</CardTitle>
+              <CardTitle>Local-First</CardTitle>
               <CardDescription className="text-base">
-                We&apos;re building next generation of AI tools that run locally
-                and offline. Powerful, flexible, and private.
+                Powerful AI tools that run locally and offline. No cloud
+                required, no data leaves your machine.
               </CardDescription>
             </CardHeader>
           </Card>

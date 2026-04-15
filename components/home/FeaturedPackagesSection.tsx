@@ -19,7 +19,7 @@ export function FeaturedPackagesSection() {
               Featured Packages
             </h2>
             <p className="text-base text-muted-foreground">
-              Lightweight utilities built by community
+              Lightweight utilities built by the community
             </p>
           </div>
 

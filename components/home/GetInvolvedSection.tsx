@@ -11,8 +11,8 @@ export function GetInvolvedSection() {
           <h2 className="text-4xl sm:text-5xl font-bold">Get Involved</h2>
           <p className="text-xl text-muted-foreground leading-relaxed">
             We welcome contributions in code, documentation, design, and
-            marketing. Join our community and help shape future of privacy-first
-            AI tools.
+            marketing. Join our community and help build powerful,
+            privacy-respecting AI tools that are open for all.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto pt-4">
             <Button size="lg" className="group w-full" asChild>

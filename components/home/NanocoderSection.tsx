@@ -25,7 +25,7 @@ export function NanocoderSection({ nanocoderVersion }: NanocoderSectionProps) {
             </Badge>
             <h2 className="text-4xl sm:text-5xl font-bold">Nanocoder</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              A beautiful privacy-first coding agent running in your terminal
+              A beautiful, local-first coding agent running in your terminal
             </p>
           </div>
 

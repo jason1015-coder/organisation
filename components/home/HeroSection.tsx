@@ -36,8 +36,8 @@ export function HeroSection({ orgStats }: HeroSectionProps) {
             Nano Collective
           </h1>
           <p className="text-xl sm:text-2xl text-muted-foreground max-w-2xl leading-relaxed animate-on-scroll animate-delay-200">
-            Creating powerful, privacy-first AI tools, developed by the
-            community for the community
+            Building powerful AI tools for the community. Privacy-respecting,
+            local-first and open for all.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center sm:justify-start items-center sm:items-start pt-4 w-full sm:w-auto">
             <Button

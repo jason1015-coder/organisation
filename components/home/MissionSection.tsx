@@ -5,11 +5,10 @@ export function MissionSection() {
         <div className="max-w-3xl mx-auto text-center space-y-6">
           <h2 className="text-3xl sm:text-4xl font-bold">Our Mission</h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            We believe AI is too powerful to be in hands of big corporations
-            alone. Everyone should have access to advanced AI tools that respect
-            privacy, run locally, and are shaped by community. Everything we
-            build is open source, transparent, and designed to empower
-            developers and users alike.
+            We&apos;re building powerful AI tools for the community.
+            Privacy-respecting, local-first and open for all. Everything we
+            create is open source, transparent, and designed to put you in
+            control of your own AI experience.
           </p>
         </div>
       </div>
