@@ -97,9 +97,13 @@ export default function NanocoderTerminal({
     [],
   );
 
-  const themeKeys = (Object.keys(themes) as ThemePreset[]).filter(
-    (key) => themes[key].themeType === "dark",
-  );
+  const themeKeys: ThemePreset[] = [
+    "tokyo-night",
+    "synthwave-84",
+    "forest-night",
+    "sunset-glow",
+    "deep-sea",
+  ];
   const [currentThemeIndex, setCurrentThemeIndex] = useState(0);
   const [currentTheme, setCurrentTheme] = useState(themes[defaultTheme]);
   const [currentCommandIndex, setCurrentCommandIndex] = useState(0);
