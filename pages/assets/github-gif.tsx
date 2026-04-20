@@ -19,9 +19,10 @@ export default function ScreenRecord({ nanocoderVersion }: ScreenRecordProps) {
   };
 
   const colors = currentTheme.colors;
-  const themeGradient = colors.gradientColors
+  const baseGradient = colors.gradientColors
     ? `linear-gradient(to right, ${colors.gradientColors.join(", ")})`
     : `linear-gradient(to right, ${colors.primary}, ${colors.tool})`;
+  const themeGradient = `linear-gradient(rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.82)), ${baseGradient}`;
 
   return (
     <>

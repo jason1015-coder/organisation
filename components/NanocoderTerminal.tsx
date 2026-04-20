@@ -97,7 +97,9 @@ export default function NanocoderTerminal({
     [],
   );
 
-  const themeKeys = Object.keys(themes) as ThemePreset[];
+  const themeKeys = (Object.keys(themes) as ThemePreset[]).filter(
+    (key) => themes[key].themeType === "dark",
+  );
   const [currentThemeIndex, setCurrentThemeIndex] = useState(0);
   const [currentTheme, setCurrentTheme] = useState(themes[defaultTheme]);
   const [currentCommandIndex, setCurrentCommandIndex] = useState(0);
@@ -112,13 +114,13 @@ export default function NanocoderTerminal({
     setCurrentCommandIndex(randomIndex);
   }, [commands.length]);
 
-  // Cycle through themes every 2 seconds (quicker)
+  // Cycle through themes slowly to reduce flashing
   useEffect(() => {
     if (!isMounted) return;
 
     const interval = setInterval(() => {
       setCurrentThemeIndex((prev) => (prev + 1) % themeKeys.length);
-    }, 2000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [isMounted, themeKeys.length]);
