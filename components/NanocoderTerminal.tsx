@@ -8,6 +8,14 @@ interface NanocoderTerminalProps {
   version?: string;
 }
 
+const themeKeys: ThemePreset[] = [
+  "tokyo-night",
+  "synthwave-84",
+  "forest-night",
+  "sunset-glow",
+  "deep-sea",
+];
+
 export default function NanocoderTerminal({
   onThemeChange,
   version = "1.0.0",
@@ -97,13 +105,6 @@ export default function NanocoderTerminal({
     [],
   );
 
-  const themeKeys: ThemePreset[] = [
-    "tokyo-night",
-    "synthwave-84",
-    "forest-night",
-    "sunset-glow",
-    "deep-sea",
-  ];
   const [currentThemeIndex, setCurrentThemeIndex] = useState(0);
   const [currentTheme, setCurrentTheme] = useState(themes[defaultTheme]);
   const [currentCommandIndex, setCurrentCommandIndex] = useState(0);
@@ -127,14 +128,14 @@ export default function NanocoderTerminal({
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [isMounted, themeKeys.length]);
+  }, [isMounted]);
 
   // Update current theme when index changes
   useEffect(() => {
     const newTheme = themes[themeKeys[currentThemeIndex]];
     setCurrentTheme(newTheme);
     onThemeChange?.(newTheme);
-  }, [currentThemeIndex, themeKeys, onThemeChange]);
+  }, [currentThemeIndex, onThemeChange]);
 
   useEffect(() => {
     // Only run typing animation after client-side mount
