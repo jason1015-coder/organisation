@@ -2,7 +2,7 @@
 
 import Head from "next/head";
 import { type CSSProperties, useState } from "react";
-import { FaDiscord, FaGithub } from "react-icons/fa";
+import { FaDiscord, FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { Input } from "@/components/ui/input";
 import {
@@ -237,6 +237,14 @@ export default function CoverImage() {
                     className="text-zinc-400 hover:text-white transition-colors"
                   >
                     <FaXTwitter className="w-14 h-14" />
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/company/nano-collective/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-zinc-400 hover:text-white transition-colors"
+                  >
+                    <FaLinkedin className="w-14 h-14" />
                   </a>
                 </div>
               )}

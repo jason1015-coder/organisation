@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { FaDiscord, FaGithub } from "react-icons/fa";
+import { FaDiscord, FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { cn } from "@/lib/utils";
 import ThemeToggle from "./ThemeToggle";
@@ -31,6 +31,11 @@ const socialLinks = [
     href: "https://discord.gg/ktPDV6rekE",
     label: "Discord",
     icon: FaDiscord,
+  },
+  {
+    href: "https://www.linkedin.com/company/nano-collective/",
+    label: "LinkedIn",
+    icon: FaLinkedin,
   },
 ];
 
