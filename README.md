@@ -1,59 +1,44 @@
 # Nano Collective Website
 
-The official website for the [Nano Collective](https://nanocollective.org) - an open-source AI tools collective building privacy-first, privacy-respecting AI applications.
+The official website for the [Nano Collective](https://nanocollective.org) — a community collective building open-source, privacy-first, local-first AI tooling. Everything we build is open, transparent, and driven by the people who use it.
 
-## Community & Discussions
+## About the Collective
 
-We're building more than software—we're building a community. Join the conversation and help shape the future of privacy-focused AI tools.
+The Nano Collective exists to make powerful AI tools more open, trustworthy, and accessible to everyone. We build software that respects the people using it, keeps them in control of their own workflows, and avoids the lock-in, opacity, and short-term incentives that define too much of the AI ecosystem today.
 
-### Get Involved
-
-- **[Discord Community](https://discord.gg/ktPDV6rekE)** - Chat with other members, ask questions, suggest ideas, and participate in real-time discussions
-- **[GitHub Discussions](https://github.com/Nano-Collective/website/discussions)** - Read project announcements, roadmaps, and direction updates from the core team
-
-### What You'll Find in Discussions
-
-The core team uses GitHub Discussions to share:
-- **Project Updates**: Announcements about new features, releases, and progress
-- **Roadmap & Direction**: Our plans for upcoming work and long-term vision
-- **Architectural Decisions**: Technical choices and their rationale
-- **RFCs (Request for Comments)**: Proposals for major changes where community feedback is welcome
-
-### Ways to Contribute
-
-You don't need to write code to help build the Nano Collective:
-
-**Non-Technical Contributions**
-- Share feedback on project direction and priorities
-- Help write and improve documentation
-- Design UI/UX concepts and wireframes
-- Test early builds and report issues
-- Write blog posts and tutorials
-- Help organize community events
-- Translate content for international audiences
-
-**Technical Contributions**
-- Fix bugs and implement features
-- Improve performance and accessibility
-- Add comprehensive test coverage
-- Review pull requests and provide feedback
-- Open issues with detailed bug reports
-
-## About
-
-This website serves as the landing page and showcase for the Nano Collective organization, highlighting our mission to democratize access to powerful AI tools that run locally, respect user privacy, and are shaped by the community.
+For a fuller introduction, see [Introduction to the Nano Collective](https://doc.nanocollective.org/collective).
 
 ### Featured Projects
 
-- **[Nanocoder](https://github.com/Nano-Collective/nanocoder)** - A powerful AI coding assistant that runs entirely on your machine
+- **[Nanocoder](https://github.com/Nano-Collective/nanocoder)** — A local-first CLI coding agent with multi-provider AI support.
+- **[Nanotune](https://github.com/Nano-Collective/nanotune)** — Tooling focused on fine-tuning and improving small, local models for practical use.
+- **[get-md](https://github.com/Nano-Collective/get-md)** — A fast, lightweight HTML to Markdown converter optimised for LLM consumption.
+- **[json-up](https://github.com/Nano-Collective/json-up)** — A type-safe JSON migration tool with Zod schema validation.
 
-- **[get-md](https://github.com/Nano-Collective/get-md)** - A fast, lightweight HTML to Markdown converter optimized for LLM consumption
+## Documentation
 
-- **[json-up](https://github.com/Nano-Collective/json-up)** - A fast, type-safe JSON migration tool with Zod schema validation
+Operational documentation for the collective — how we work, what conventions every project follows, and how to get involved — lives on the docs site at **[doc.nanocollective.org/collective](https://doc.nanocollective.org/collective)**.
+
+Key pages:
+
+- **[Introduction to the Nano Collective](https://doc.nanocollective.org/collective)** — Who we are, what we stand for, and what we build.
+- **[Creating a New Project](https://doc.nanocollective.org/collective/creating-a-new-project)** — Conventions every Nano Collective project should follow: repo structure, CI, licensing, testing, docs, release.
+- **[Stack Suggestions](https://doc.nanocollective.org/collective/stack-suggestions)** — Recommended tooling per language stack (currently TypeScript / Node).
+- **[Community](https://doc.nanocollective.org/collective/community)** — Where we talk, how to contribute, and how to support the collective.
+
+These docs are primarily operational — a shared reference for how the collective works. They are published openly because transparency is one of our values, but their main audience is contributors and maintainers. The source lives in the [`Nano-Collective/docs`](https://github.com/Nano-Collective/docs) repository; if something is unclear, outdated, or wrong, open an issue or PR there.
+
+## Community
+
+- **[Discord](https://discord.gg/ktPDV6rekE)** — Real-time chat with contributors and maintainers.
+- **[GitHub Discussions](https://github.com/Nano-Collective/website/discussions)** — Announcements, roadmaps, and longer-form discussion from the core team.
+- **GitHub Issues** — Per-project bug reports and feature requests, on each project's own repo.
+
+See the [Community doc](https://doc.nanocollective.org/collective/community) for a fuller breakdown of how to get involved.
 
 ## For Developers
 
-This site is built with Next.js 15, React 19, and TypeScript 5. If you want to contribute to the website itself:
+This site is built with Next.js 15, React 19, and TypeScript 5. To run it locally:
 
 ```bash
 # Install dependencies
@@ -66,16 +51,13 @@ pnpm dev
 pnpm build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the site.
+Open [http://localhost:3000](http://localhost:3000) to view the site. The page auto-reloads as you edit files. Main page content is in `pages/index.tsx`.
 
-The page auto-reloads as you edit files. Main page content is in `pages/index.tsx`.
-
+For contribution details — coding standards, PR process, review expectations — see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
-This project is open source and available under the MIT License with Attribution.
-
-See [LICENSE.md](LICENSE.md) for full details. When using this software, please include attribution to Nano Collective and contributors.
+MIT License with Attribution. See [LICENSE.md](LICENSE.md) for full details. When using this software, please include attribution to Nano Collective and contributors.
 
 ---
 
