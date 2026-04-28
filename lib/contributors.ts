@@ -116,7 +116,7 @@ export const CONTRIBUTORS: Contributor[] = [
   {
     name: "Tionne Smith",
     photo: "tionne-smith.png",
-    github: "https://github.com/electricwolfemarshmallowhypertext/",
+    github: "electricwolfemarshmallowhypertext/",
     website: "https://electricwolfemarshmallowhypertext.xyz",
     bio: "Creative Technologist and Solutions Architect",
   },
