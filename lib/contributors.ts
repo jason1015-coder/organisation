@@ -113,4 +113,17 @@ export const CONTRIBUTORS: Contributor[] = [
     github: "cleyesode",
     bio: "Local-first, eyes closed, open development.",
   },
+  {
+    name: "lordoski",
+    photo: "lordoski.jpg",
+    github: "lordoski",
+    bio: "I write colorful text on dark screens for a living.",
+  },
+  {
+    name: "Tionne Smith",
+    photo: "tionne-smith.png",
+    github: "electricwolfemarshmallowhypertext/",
+    website: "https://electricwolfemarshmallowhypertext.xyz",
+    bio: "Creative Technologist and Solutions Architect",
+  },
 ];
