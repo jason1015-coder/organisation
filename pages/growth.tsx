@@ -1,7 +1,6 @@
 import type { GetStaticProps } from "next";
 import Head from "next/head";
 import { useMemo, useState } from "react";
-import { EngagementAlert } from "@/components/EngagementAlert";
 import { GrowthChart } from "@/components/GrowthChart";
 import { GrowthMetrics } from "@/components/GrowthMetrics";
 import {
@@ -171,17 +170,6 @@ export default function Growth({ packages, lastUpdated }: GrowthPageProps) {
     );
   }, [currentPackageData, filteredData, timePeriod]);
 
-  // Check if engagement is needed (7-day is below 30-day average)
-  const needsEngagement = (() => {
-    if (sevenDayAvg.length < 1 || thirtyDayAvg.length < 1) return false;
-
-    const currentSevenDay = sevenDayAvg[sevenDayAvg.length - 1].average;
-    const currentThirtyDay = thirtyDayAvg[thirtyDayAvg.length - 1].average;
-
-    // Alert if 7-day average is below 30-day average
-    return currentSevenDay < currentThirtyDay;
-  })();
-
   const currentTrend =
     sevenDayAvg.length > 7
       ? sevenDayAvg[sevenDayAvg.length - 1].average >
@@ -300,15 +288,6 @@ export default function Growth({ packages, lastUpdated }: GrowthPageProps) {
               </div>
             </div>
           </div>
-
-          {/* Engagement Alert */}
-          {sevenDayAvg.length > 0 && thirtyDayAvg.length > 0 && (
-            <EngagementAlert
-              sevenDayAvg={sevenDayAvg[sevenDayAvg.length - 1].average}
-              thirtyDayAvg={thirtyDayAvg[thirtyDayAvg.length - 1].average}
-              needsEngagement={needsEngagement}
-            />
-          )}
 
           {/* Key Metrics */}
           <GrowthMetrics
