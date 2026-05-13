@@ -33,6 +33,12 @@ export default function Footer() {
               >
                 Docs
               </a>
+              <Link
+                href="/sponsor"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Sponsor
+              </Link>
             </nav>
             <div className="flex gap-6">
               <a

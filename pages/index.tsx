@@ -9,6 +9,7 @@ import {
   MissionSection,
   NanocoderSection,
   NanotuneSection,
+  SupportedBySection,
 } from "@/components/home";
 import WhatsNextSection from "@/components/WhatsNextSection";
 import type { Discussion } from "@/types/discussion";
@@ -77,6 +78,7 @@ export default function Home({
         <NanotuneSection />
         <FeaturedPackagesSection />
         <WhatsNextSection discussions={discussions} />
+        <SupportedBySection />
         <GetInvolvedSection />
         <Footer />
       </div>

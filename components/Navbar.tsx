@@ -14,6 +14,7 @@ const navLinks = [
   { href: "/blog", label: "Blog" },
   { href: "https://docs.nanocollective.org", label: "Docs", external: true },
   { href: "/contributors", label: "Contributors" },
+  { href: "/sponsor", label: "Sponsor" },
 ];
 
 const socialLinks = [

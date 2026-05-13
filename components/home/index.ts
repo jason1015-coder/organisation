@@ -5,3 +5,4 @@ export { HeroSection } from "./HeroSection";
 export { MissionSection } from "./MissionSection";
 export { NanocoderSection } from "./NanocoderSection";
 export { NanotuneSection } from "./NanotuneSection";
+export { SupportedBySection } from "./SupportedBySection";
