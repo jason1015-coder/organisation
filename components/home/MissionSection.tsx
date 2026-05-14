@@ -2,9 +2,9 @@ export function MissionSection() {
   return (
     <section className="pt-20 pb-10 border-t border-border/40">
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto text-center space-y-6">
+        <div className="text-center space-y-6">
           <h2 className="text-3xl sm:text-4xl font-bold">Our Mission</h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
+          <p className="text-lg text-muted-foreground leading-relaxed max-w-4xl mx-auto">
             Nano Collective exists to make powerful AI tools more open,
             trustworthy, and accessible to everyone. We build privacy-first,
             local-first software that respects the people using it, keeps them
@@ -12,7 +12,7 @@ export function MissionSection() {
             and short-term incentives that define too much of the AI ecosystem
             today.
           </p>
-          <p className="text-lg text-muted-foreground leading-relaxed">
+          <p className="text-lg text-muted-foreground leading-relaxed max-w-4xl mx-auto">
             We believe the future of AI should not belong only to large
             platforms, closed systems, or companies that can change the rules
             overnight. That&apos;s why we build in the open, share our work

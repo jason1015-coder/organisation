@@ -7,9 +7,9 @@ export function GetInvolvedSection() {
   return (
     <section className="py-20 border-t border-border/40">
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
+        <div className="text-center space-y-8">
           <h2 className="text-4xl sm:text-5xl font-bold">Get Involved</h2>
-          <p className="text-xl text-muted-foreground leading-relaxed">
+          <p className="text-xl text-muted-foreground leading-relaxed max-w-4xl mx-auto">
             We welcome contributions in code, documentation, design, and
             marketing. Join our community and help build powerful,
             privacy-respecting AI tools that are open for all.

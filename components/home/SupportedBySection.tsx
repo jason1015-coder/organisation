@@ -5,7 +5,7 @@ export function SupportedBySection() {
   return (
     <section className="py-20 border-t border-border/40">
       <div className="container mx-auto px-4">
-        <div className="max-w-5xl mx-auto text-center space-y-8">
+        <div className="text-center space-y-8">
           <div className="space-y-4">
             <h2 className="text-3xl sm:text-4xl font-bold">Supported by</h2>
             <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">

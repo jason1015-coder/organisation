@@ -13,7 +13,7 @@ export function NanotuneSection() {
   return (
     <section className="py-20 border-t border-border/40">
       <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto">
+        <div>
           <div className="text-center space-y-4 mb-12">
             <Badge variant="outline" className="mb-2">
               Other Tools

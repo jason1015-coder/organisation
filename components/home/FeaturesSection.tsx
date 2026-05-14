@@ -10,7 +10,7 @@ export function FeaturesSection() {
   return (
     <section className="py-20">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6">
           <Card className="relative overflow-hidden card-hover-glow">
             <CardHeader>
               <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
