@@ -65,13 +65,6 @@ export const CONTRIBUTORS: Contributor[] = [
     bio: "Software Engineer, leveraging 12 years of full-stack experience for the web & developer tooling. Passionate about AI/ML",
   },
   {
-    name: "Aravind Induri",
-    photo: "aravind_induri.jpeg",
-    github: "aravindinduri",
-    website: "https://builtbyaravind.vercel.app/",
-    bio: "just a curious developer",
-  },
-  {
     name: "Deniz Okcu",
     photo: "deniz.png",
     github: "DenizOkcu",
@@ -132,5 +125,12 @@ export const CONTRIBUTORS: Contributor[] = [
     github: "electricwolfemarshmallowhypertext/",
     website: "https://electricwolfemarshmallowhypertext.xyz",
     bio: "Creative Technologist and Solutions Architect",
+  },
+  {
+    name: "Aravind Induri",
+    photo: "aravind_induri.jpeg",
+    github: "aravindinduri",
+    website: "https://builtbyaravind.vercel.app/",
+    bio: "just a curious developer",
   },
 ];
