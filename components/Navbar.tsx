@@ -124,7 +124,7 @@ export default function Navbar() {
       <div
         className={cn(
           "md:hidden border-t border-border/40 bg-background/95 backdrop-blur-md overflow-hidden transition-all duration-300 ease-out",
-          mobileMenuOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0",
+          mobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0",
         )}
       >
         <nav className="container mx-auto px-4 py-4 flex flex-col gap-2">
