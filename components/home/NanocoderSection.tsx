@@ -39,51 +39,14 @@ export function NanocoderSection({ nanocoderVersion }: NanocoderSectionProps) {
                 <CardHeader>
                   <div className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <Code2 className="h-5 w-5 text-primary" />
-                    </div>
-                    <div>
-                      <CardTitle className="mb-2">
-                        Multi-Provider Support
-                      </CardTitle>
-                      <CardDescription>
-                        Works with OpenAI-style APIs, local models (Ollama, LM
-                        Studio), and cloud providers (OpenRouter)
-                      </CardDescription>
-                    </div>
-                  </div>
-                </CardHeader>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <Terminal className="h-5 w-5 text-primary" />
-                    </div>
-                    <div>
-                      <CardTitle className="mb-2">
-                        Advanced Tool System
-                      </CardTitle>
-                      <CardDescription>
-                        Built-in file operations and command execution,
-                        extensible via Model Context Protocol (MCP)
-                      </CardDescription>
-                    </div>
-                  </div>
-                </CardHeader>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                       <Sparkles className="h-5 w-5 text-primary" />
                     </div>
                     <div>
-                      <CardTitle className="mb-2">Custom Commands</CardTitle>
+                      <CardTitle className="mb-2">Skills</CardTitle>
                       <CardDescription>
-                        Create markdown-based custom prompts with template
-                        variables and namespace support
+                        One extension model for commands, subagents, tools, and
+                        event triggers. Ship a single file or a bundle that
+                        wires them together.
                       </CardDescription>
                     </div>
                   </div>
@@ -97,10 +60,53 @@ export function NanocoderSection({ nanocoderVersion }: NanocoderSectionProps) {
                       <Zap className="h-5 w-5 text-primary" />
                     </div>
                     <div>
-                      <CardTitle className="mb-2">Enhanced UX</CardTitle>
+                      <CardTitle className="mb-2">
+                        Event-Driven Automation
+                      </CardTitle>
                       <CardDescription>
-                        Smart autocomplete, configurable logging, and
-                        development mode toggles for best experience
+                        A per-project daemon fires skills on file changes and
+                        cron schedules. Wake an agent the moment a manifest
+                        changes; run a weekly digest while you sleep.
+                      </CardDescription>
+                    </div>
+                  </div>
+                </CardHeader>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <Code2 className="h-5 w-5 text-primary" />
+                    </div>
+                    <div>
+                      <CardTitle className="mb-2">
+                        Multi-Provider Support
+                      </CardTitle>
+                      <CardDescription>
+                        Anthropic, Google, OpenAI, ChatGPT/Codex, GitHub
+                        Copilot, OpenRouter, Mistral, Z.ai, MiniMax, Kimi — plus
+                        local runners like Ollama, LM Studio, llama.cpp, and
+                        MLX.
+                      </CardDescription>
+                    </div>
+                  </div>
+                </CardHeader>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <Terminal className="h-5 w-5 text-primary" />
+                    </div>
+                    <div>
+                      <CardTitle className="mb-2">Tools, Your Way</CardTitle>
+                      <CardDescription>
+                        Built-in file operations and command execution,
+                        markdown-defined custom tools, and Model Context
+                        Protocol (MCP) servers — all in one unified registry the
+                        model can call.
                       </CardDescription>
                     </div>
                   </div>

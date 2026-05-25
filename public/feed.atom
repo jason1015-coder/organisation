@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://nanocollective.org</id>
     <title>Nano Collective</title>
-    <updated>2026-03-10T00:28:08.926Z</updated>
+    <updated>2026-05-25T13:28:41.322Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <author>
         <name>Nano Collective</name>
@@ -14,6 +14,287 @@
     <logo>https://nanocollective.org/logo.png</logo>
     <icon>https://nanocollective.org/favicon.ico</icon>
     <rights>All rights reserved 2026, Nano Collective</rights>
+    <entry>
+        <title type="html"><![CDATA[Nanocoder v1.26.0 is out. Here is what changed and why it matters.]]></title>
+        <id>https://nanocollective.org/blog/nanocoder-v1260-is-out-here-is-what-changed-and-why-it-matters-43</id>
+        <link href="https://nanocollective.org/blog/nanocoder-v1260-is-out-here-is-what-changed-and-why-it-matters-43"/>
+        <updated>2026-05-11T22:25:07.000Z</updated>
+        <summary type="html"><![CDATA[## Nano mode: a leaner prompt for low-end hardware
+
+The `/tune` command now offers a third tool profile called **nano mode**. It is strictly more aggressive than minimal: it drops `find_files`, `list_directory`, and `agent` from the tool set; trims `CORE PRINCIPLES` and `CODING PRACTICES` sections; uses 4-line-or-less `TASK APPROACH`, `FILE OPERATIONS`, and `CONSTRAINTS` blocks; and replaces the verbose `SYSTEM INFORMATION` block with a single-line `## SYSTEM` note.
+
+The result is a system p]]></summary>
+        <content type="html"><![CDATA[## Nano mode: a leaner prompt for low-end hardware
+
+The `/tune` command now offers a third tool profile called **nano mode**. It is strictly more aggressive than minimal: it drops `find_files`, `list_directory`, and `agent` from the tool set; trims `CORE PRINCIPLES` and `CODING PRACTICES` sections; uses 4-line-or-less `TASK APPROACH`, `FILE OPERATIONS`, and `CONSTRAINTS` blocks; and replaces the verbose `SYSTEM INFORMATION` block with a single-line `## SYSTEM` note.
+
+The result is a system prompt of roughly 150-250 tokens, compared to 500-700 in minimal mode. That difference matters when you are running a 1B or 3B parameter model on a machine with limited VRAM or RAM.
+
+Nano mode ships with a "Nano (low-end hardware)" preset and an **Include AGENTS.md** toggle so you can opt back in if your setup handles it.
+
+## Reasoning traces, live
+
+Nanocoder now streams reasoning content from models that emit it, such as Codex GPT-5, DeepSeek-R1-style models, Anthropic extended thinking, and similar. It renders as a collapsible **Thought** block above the response, persists across the conversation history, and appears in logs.
+
+Toggle expansion with `Control+R`. Set the default via the new **Display Settings** panel (`/settings` → "Tool Results and Thinking"). Pin it per-session from the tune menu using the `expandedReasoning` option.
+
+`Control+R` also works for reasoning trace follow-ups, and the system ensures reasoning content survives correctly across the full conversation lifecycle.
+
+## Non-interactive `--plain` flag
+
+A new `--plain` flag streams output without Ink rendering, making it safe for CI pipelines, shell scripts, and programmatic pipes. Exit codes are deterministic, stdin and stdout are handled cleanly, and there are no interactive prompts.
+
+## VS Code extension rework
+
+The "Ask Nanocoder" command is gone. Instead, highlighted text and the currently focused file are automatically pulled into Nanocoder as context, a more natural interaction model. The extension protocol and entrypoint have been rewritten, and the development mode indicator and chat input hooks are tighter.
+
+## Other additions
+
+- `/rename` — rename the current chat session. Reflected in the development mode indicator.
+- `defaultMode` — set a starting mode (`normal`, `auto-accept`, `yolo`, `plan`) in `agents.config.json` so you do not always launch in normal mode.
+- Custom system prompt support via `agents.config.json`. Define a project-level prompt that augments or replaces built-in sections.
+- Per-provider and per-model **context window overrides** via `contextWindow` and `contextWindows[model]`. Resolution order: session override (`/context-max`, `--context-max`) → provider model override → provider default → `NANOCODER_CONTEXT_LIMIT` → fallback. `/usage`, status bar, auto-compact, and context reporting all use the active provider config.
+- **Subagent context window overrides** — delegated agents can run with a different context limit than the main session.
+- `disabledTools` — disable specific built-in tools project-wide, honoured by both main agent and subagents.
+- `--trust-directory` — bypass the first-run directory trust prompt for automation. Yolo mode already skips the validator.
+- JSON tool fallback for non-tool-calling open-weights models (Qwen, Kimi, GLM). The tune menu cycles through Native ON / OFF (XML) / OFF (JSON). Includes hallucination recovery so reasoning content does not leak into rendered output.
+- `<function=...>` format support in the tool-call parser.
+- **Display Settings** panel — new toggles for "Show Thinking by default" and "Expand Tool Results by default", persisted to `nanocoder-preferences.json`.
+- 12+ new bundled themes.
+
+## Toolchain and configuration updates
+
+- Node.js 22 + pnpm 11 across CI, devcontainer, and `engines.node`. `packageManager` field pins the pnpm version automatically for contributors and CI.
+- `pnpm-workspace.yaml` replaces `package.json`-based pnpm config. All 16 version overrides were removed — every one was redundant under current dependency resolution.
+
+## Fixes
+
+- Empty model responses now trigger a capped auto-continue instead of looping or crashing.
+- Context-size failures surface explicitly rather than silently retrying empty responses.
+- Compressed messages persist across recursive conversation turns.
+- Stream errors are thrown immediately rather than swallowed.
+- Malformed XML retries are capped to prevent OOM on stuck models.
+- `lastProvider` state is now correct after running the config wizard mid-session.
+- File search, content search, and `@mention` autocomplete work cross-platform on Windows.
+- `MCPTool.inputSchema` typed as `JSONSchema7` with an `isPlainObject` guard at the protocol boundary.
+- `caCertPath` TLS configuration now applies to Anthropic and Google providers.
+- Provider names resolved case-insensitively throughout.
+- Quoted custom command arguments now parse as a single parameter.
+- `git_pr` tool no longer requires approval in yolo mode.
+- Various rendering, scheduling, and test/CI regressions fixed.
+
+## Dependency updates
+
+`ai` 6.0.116 → 6.0.174, `@ai-sdk/openai` 3.0.41 → 3.0.53, `@ai-sdk/google` 3.0.53 → 3.0.64, `@ai-sdk/openai-compatible` 2.0.35 → 2.0.41, `undici` 8.0.2 → 8.2.0, `react` 19.2.4 → 19.2.6, `yaml` 2.8.3 → 2.8.4, `dotenv` 17.3.1 → 17.4.2, `@nanocollective/get-md` 1.3.0 → 1.3.1, plus dev-dependency bumps.
+
+## Breaking change
+
+`nanocoderTools.alwaysAllow` has been removed. It duplicated the top-level `alwaysAllow` with no extra behaviour. Move any entries from `nanocoderTools.alwaysAllow` to the top-level `alwaysAllow` array in `agents.config.json`. The deprecated `agents.config.example.json` has also been removed.
+
+---
+
+Built by the [Nano Collective](https://nanocollective.org) — a community collective building AI tooling not for profit, but for the community.
+
+https://github.com/Nano-Collective/nanocoder
+]]></content>
+        <author>
+            <name>will-lamerton</name>
+        </author>
+        <category label="Nanocoder"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Nanocoder 1.25.0: Introducing Yolo Mode, Subagents, and Smart Tool Orchestration]]></title>
+        <id>https://nanocollective.org/blog/nanocoder-1250-introducing-yolo-mode-subagents-and-smart-tool-orchestration-39</id>
+        <link href="https://nanocollective.org/blog/nanocoder-1250-introducing-yolo-mode-subagents-and-smart-tool-orchestration-39"/>
+        <updated>2026-04-15T15:18:13.000Z</updated>
+        <summary type="html"><![CDATA[We're excited to announce Nanocoder 1.25.0, a major release that adds some amazing new features to how you collaborate with AI in your development workflow. This version introduces powerful new modes, intelligent subagent coordination, and smarter tool management—all designed to keep you in flow and reduce friction.
+
+## Introducing Yolo Mode
+
+Sometimes you know exactly what you need done, and the confirmation dialogs just slow you down. **Yolo mode** is here for those moments. This new devel]]></summary>
+        <content type="html"><![CDATA[We're excited to announce Nanocoder 1.25.0, a major release that adds some amazing new features to how you collaborate with AI in your development workflow. This version introduces powerful new modes, intelligent subagent coordination, and smarter tool management—all designed to keep you in flow and reduce friction.
+
+## Introducing Yolo Mode
+
+Sometimes you know exactly what you need done, and the confirmation dialogs just slow you down. **Yolo mode** is here for those moments. This new development mode auto-accepts *every* tool without exception - previously auto-accept mode (still available) did reduce what needed to be accepted but things like bash execution still required approval.
+
+**Warning though**: this means every tool, no matter what is executed without approval including potentially destructive ones. Nanocoder has basic built in validation but it won't catch everything - proceed with caution.
+
+Toggle between normal → auto-accept → yolo → plan modes with **Shift+Tab**. The status bar turns red when yolo mode is active, so you'll never forget you're operating without guardrails. Perfect for rapid prototyping, experimental refactoring, or when you're happy to walk away and let Nanocoder work with full trust.
+
+## Subagents: Parallel Problem-Solving
+
+Complex tasks often benefit from delegation. With subagents, Nanocoder can now spawn isolated child conversations to handle specific work in parallel. We ship with two built-in agents:
+
+- **Explore**: Read-only codebase investigation perfect for understanding unfamiliar code paths
+- **Reviewer**: Code review with actionable, constructive feedback
+
+Subagents have independent tool sets tailored to their purpose, and their progress renders live in-place as they work. You can also define custom subagents by dropping markdown files with YAML frontmatter in `.nanocoder/agents/`. Manage them all via the `/agents` command.
+
+We built subagents to be flexible with many configuration options and we're excited to build out this part of ecosystem further.
+
+## Smarter Tool Orchestration
+
+We've completely redesigned the system prompt into modular, composable sections. Instead of one monolithic file, the prompt now assembles dynamically based on your mode—normal, auto-accept, plan, and scheduler each get tailored instructions with only the tools prompts relevant to that context.
+
+On top of that, we've built the `/tune` command, giving you fine-grained per-session control: toggle between full and minimal tool profiles, disable native tools to force XML fallback, or enable aggressive compact mode. Everything persists for your session - this helps Nanocoder work well with smaller models, a key mission of ours.
+
+Lastly., **Plan mode is now actually useful**: it enforces read-only tools at the policy level, blocking all mutation tools (write, bash, git commits, task management) while keeping exploration tools available. This forces Nanocoder to thoroughly investigate and then propose a plan before any changes are made.
+
+## Provider and Configuration Improvements
+
+- **ChatGPT Codex**: New provider with OAuth device flow authentication (`/codex-login`), streaming responses, and dedicated credential management
+- **Web search**: Migrated from scraping to the official Brave Search API for reliability and compliance
+- **Provider wizard**: Now auto-detects API compatibility and fetches available models from any endpoint
+- **`/setup-config`**: New command that lists all your config files and opens them in your editor
+
+## Polish and Performance
+
+- Desktop notifications for tool confirmations, question prompts, and generation completions (macOS, Linux, Windows)
+- Startup time reduced through parallelized initialization
+- Tool output truncation now respects terminal width across all tools
+- Live in-place task list updates instead of repeated static lists
+- Improved Ollama timeout handling for slow local models
+
+## Under the Hood
+
+We fixed several important bugs including the `alwaysAllow` config not being respected, a dim color accessibility issue, and a scheduler mode memory leak. We also added comprehensive debug logging to 15 previously silent error catches in git utilities.
+
+Nanocoder 1.25.0 is available now. Head to the GitHub to download and view docs: https://github.com/Nano-Collective/nanocoder
+
+Happy coding! 🚀
+]]></content>
+        <author>
+            <name>will-lamerton</name>
+        </author>
+        <category label="Nanocoder"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Nanocoder 1.24.0: Parallel Tool Execution and Enhanced Configuration]]></title>
+        <id>https://nanocollective.org/blog/nanocoder-1240-parallel-tool-execution-and-enhanced-configuration-36</id>
+        <link href="https://nanocollective.org/blog/nanocoder-1240-parallel-tool-execution-and-enhanced-configuration-36"/>
+        <updated>2026-03-18T18:25:02.000Z</updated>
+        <summary type="html"><![CDATA[We're excited to announce Nanocoder 1.24.0, bringing significant improvements to performance, flexibility, and user experience. This release includes parallel tool execution, enhanced CLI integration, and streamlined configuration management.
+
+## What's New
+
+### Parallel Tool Execution
+The biggest performance improvement in this release is **parallel tool execution**. Previously, tools were executed sequentially, which could slow down complex operations. Now, when your model identifies inde]]></summary>
+        <content type="html"><![CDATA[We're excited to announce Nanocoder 1.24.0, bringing significant improvements to performance, flexibility, and user experience. This release includes parallel tool execution, enhanced CLI integration, and streamlined configuration management.
+
+## What's New
+
+### Parallel Tool Execution
+The biggest performance improvement in this release is **parallel tool execution**. Previously, tools were executed sequentially, which could slow down complex operations. Now, when your model identifies independent tool calls, Nanocoder executes them concurrently. This means faster task completion for workflows that involve reading multiple files, running several bash commands, or searching across different resources.
+
+### Session Resumption with `/resume`
+Lost a productive chat session? No problem. The new `/resume` command lets you restore previous conversations. Sessions are automatically saved and presented in an interactive selector, filtered by your current project directory (with an `--all` flag to view global sessions). This is perfect for long-running tasks or picking up where you left off.
+
+### CI/CD and Automation Support
+Nanocoder is now more scriptable:
+- **`--provider` and `--model` CLI flags** skip the interactive setup wizard, allowing CI/CD pipelines to specify providers and models directly
+- **`NANOCODER_PROVIDERS` environment variable** enables Docker containers and CI environments to configure providers without config files
+
+Example usage:
+```bash
+nanocoder --provider anthropic --model claude-opus-4-6 "analyze this code"
+```
+
+### Enhanced Provider Support
+- **GitHub Copilot** now available as a provider with OAuth device flow authentication and a new `/copilot-login` command
+- **MLX Server** template added for local Apple Silicon inference
+- Support for **VS Code forks** (Cursor, Windsurf, VSCodium) in IDE integration
+
+### Configuration Cleanup
+This release includes breaking changes to modernize configuration:
+- Legacy `~/.agents.config.json` and `~/.nanocoder-preferences.json` paths have been removed
+- MCP server configuration now uses platform-specific directories (`.mcp.json`)
+- These changes ensure cleaner, more maintainable configurations aligned with XDG standards
+
+### UI and UX Improvements
+- **Compact mode toggle** (Ctrl+O) collapses the conversation view for focused editing
+- **Aurora Borealis theme** added to the theme collection
+- **Tool approval redesign** using AI SDK's human-in-the-loop pattern for improved reliability
+- **XML fallback notice** informs users when models fall back to XML tool calls
+
+### Under the Hood
+- Simplified tool processing by consolidating parsers and reducing XML double-parsing
+- Restructured documentation into Nextra-compatible format with better organization
+- Refactored tool system with cleaner code architecture
+- Fixed critical issues with MCP configuration loading and provider timeouts
+
+## Try It Now
+
+Thanks for being a part of the Nano Collective community and for using Nanocoder! Install or update to 1.24.0 today. If you're new to Nanocoder, head to [Releases](https://github.com/Nano-Collective/nanocoder/releases/tag/v1.24.0) to get started.
+
+Have feedback or run into issues? Reach out on Discord or open an issue on GitHub. Happy coding!
+]]></content>
+        <author>
+            <name>LottieOxford</name>
+        </author>
+        <category label="Nanocoder"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Nanocoder 1.23.0: Interactive Prompts, Scheduled Tasks, and Enhanced Stability]]></title>
+        <id>https://nanocollective.org/blog/nanocoder-1230-interactive-prompts-scheduled-tasks-and-enhanced-stability-35</id>
+        <link href="https://nanocollective.org/blog/nanocoder-1230-interactive-prompts-scheduled-tasks-and-enhanced-stability-35"/>
+        <updated>2026-03-10T00:42:39.000Z</updated>
+        <summary type="html"><![CDATA[We're very happy to announce Nanocoder 1.23.0 - a major release bringing powerful new features for automation, interactivity, and reliability. Whether you're running scheduled tasks or building more sophisticated AI workflows, this release delivers significant improvements.
+
+## Interactive User Prompts
+
+The new `ask_user` tool enables your AI agent to pause and ask questions during a conversation. The model can now present selectable options and wait for your response before continuing. This]]></summary>
+        <content type="html"><![CDATA[We're very happy to announce Nanocoder 1.23.0 - a major release bringing powerful new features for automation, interactivity, and reliability. Whether you're running scheduled tasks or building more sophisticated AI workflows, this release delivers significant improvements.
+
+## Interactive User Prompts
+
+The new `ask_user` tool enables your AI agent to pause and ask questions during a conversation. The model can now present selectable options and wait for your response before continuing. This transforms Nanocoder into a true interactive partner - perfect for decision-making workflows where the AI needs human input to proceed intelligently.
+
+```
+Agent: Should I create a new branch for this feature?
+Options:
+  1. Yes, create "feature/new-ui"
+  2. Yes, create "bugfix/improve-performance"
+  3. No, work on main
+
+Your choice: 1
+```
+
+## Scheduled Task Automation
+
+Running the same tasks repeatedly? The new per-project cron scheduler is built for you. Store markdown prompts with YAML frontmatter in `.nanocoder/schedules/`, then manage them with the `/schedule` command:
+
+```bash
+/schedule create "Daily code review"
+/schedule add "0 9 * * MON" "Review pull requests and test coverage"
+/schedule start
+```
+
+Tasks run on a schedule with full run history, sequential job execution, and intelligent deduplication. Perfect for automated testing, report generation, or daily health checks.
+
+## Graceful Shutdown and Reliability
+
+Behind the scenes, we've added a centralized `ShutdownManager` that coordinates cleanup of all services—VS Code integration, MCP servers, LSP managers—preventing orphaned processes and dangling connections. Combined with our V2 type-safe tool system overhaul and three-tiered defense against chaotic LLM outputs, Nanocoder now delivers significantly more stable behavior, especially with local LLMs.
+
+## Additional Improvements
+
+- **New file operations**: `delete_file`, `move_file`, `create_directory`, `copy_file` tools for comprehensive file management
+- **Enhanced text input**: Readline-style keybinds (Ctrl+W, Ctrl+U, Ctrl+K, Ctrl+A/E, Ctrl+B/F) for smoother CLI editing
+- **Context awareness**: `/context-max` command and env variable for manual context length control on unlisted models
+- **Better searches**: `search_file_contents` now supports `include` and `path` parameters for scoped queries
+- **Visual enhancements**: Kanagawa theme, persistent context percentage display in mode indicator
+- **Unified commands**: Refactored skills system into cleaner custom commands with optional metadata
+- **Robust parsing**: XML parser optimizations and comprehensive JSON tool call parsing with self-correction
+
+## What's Under the Hood
+
+This release includes 40+ changes improving stability, security, and developer experience. We've strengthened error handling, optimized bash output streaming for better responsiveness, fixed local Ollama server detection, and updated core dependencies for security and compatibility.
+]]></content>
+        <author>
+            <name>will-lamerton</name>
+        </author>
+        <category label="Nanocoder"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[New Package: Type-safe JSON migration tool with Zod validation]]></title>
         <id>https://nanocollective.org/blog/new-package-type-safe-json-migration-tool-with-zod-validation-34</id>
