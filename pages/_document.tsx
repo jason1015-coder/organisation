@@ -34,6 +34,7 @@ export default function Document() {
         <link
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Lora:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap"
           rel="stylesheet"
+          crossOrigin="anonymous"
         />
 
         {/* Feeds */}
