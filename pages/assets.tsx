@@ -1,4 +1,4 @@
-import { ArrowRight, Github, Image, Palette, Twitter } from "lucide-react";
+import { ArrowRight, Github, Image, Palette, Sparkles } from "lucide-react";
 import Head from "next/head";
 import Link from "next/link";
 import Footer from "@/components/footer";
@@ -20,11 +20,11 @@ const assets = [
     icon: Github,
   },
   {
-    title: "Cover Image",
+    title: "Cover & Post Generator",
     description:
-      "Customizable cover image for X/Twitter or other platforms. Change dimensions and screenshot.",
+      "Generate branded cover banners and release post art. Customise dimensions, text, and a harmonised color theme, then export a PNG.",
     href: "/assets/cover-image",
-    icon: Twitter,
+    icon: Sparkles,
   },
   {
     title: "Brand Assets",
