@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-border/40 py-12">
       <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-center md:text-left">
             <h3 className="font-bold text-xl mb-2">Nano Collective</h3>
             <p className="text-sm text-muted-foreground mb-2 font-semibold">
