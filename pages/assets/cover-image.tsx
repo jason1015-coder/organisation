@@ -25,6 +25,7 @@ import {
 
 type Alignment = "left" | "center" | "right";
 type Mode = "cover" | "post";
+type Pattern = "grid" | "dots" | "diagonal" | "waves" | "none";
 
 type Colors = {
   primary: string;
@@ -170,6 +171,37 @@ function getPositionStyles(
   return styles;
 }
 
+function getPatternStyle(pattern: Pattern, gridColor: string): CSSProperties {
+  if (pattern === "none") return {};
+  const color = hexToRgba(gridColor, 0.4);
+  switch (pattern) {
+    case "grid":
+      return {
+        backgroundImage: `
+          linear-gradient(${color} 1px, transparent 1px),
+          linear-gradient(90deg, ${color} 1px, transparent 1px)
+        `,
+        backgroundSize: "40px 40px",
+      };
+    case "dots":
+      return {
+        backgroundImage: `radial-gradient(${color} 1.5px, transparent 1.5px)`,
+        backgroundSize: "40px 40px",
+      };
+    case "diagonal":
+      return {
+        backgroundImage: `repeating-linear-gradient(45deg, ${color} 0, ${color} 1px, transparent 1px, transparent 40px)`,
+      };
+    case "waves": {
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="20" viewBox="0 0 40 20"><path d="M 0 10 Q 10 2 20 10 T 40 10" fill="none" stroke="${color}" stroke-width="1"/></svg>`;
+      return {
+        backgroundImage: `url("data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}")`,
+        backgroundSize: "40px 20px",
+      };
+    }
+  }
+}
+
 async function svgToImage(
   svgEl: SVGElement,
   color: string,
@@ -198,6 +230,7 @@ type PreviewProps = {
   sidePadding: number;
   contentGap: number;
   verticalCenter: boolean;
+  pattern: Pattern;
   colors: Colors;
   items: ContentItem[];
   iconsContainerRef: React.RefObject<HTMLDivElement | null>;
@@ -211,6 +244,7 @@ function CoverPreview({
   sidePadding,
   contentGap,
   verticalCenter,
+  pattern,
   colors,
   items,
   iconsContainerRef,
@@ -226,16 +260,12 @@ function CoverPreview({
         background: `linear-gradient(to bottom right, #09090b 0%, ${colors.bgMid} 50%, #09090b 100%)`,
       }}
     >
-      <div
-        className="absolute inset-0 opacity-30"
-        style={{
-          backgroundImage: `
-            linear-gradient(${hexToRgba(colors.grid, 0.4)} 1px, transparent 1px),
-            linear-gradient(90deg, ${hexToRgba(colors.grid, 0.4)} 1px, transparent 1px)
-          `,
-          backgroundSize: "40px 40px",
-        }}
-      />
+      {pattern !== "none" && (
+        <div
+          className="absolute inset-0 opacity-30"
+          style={getPatternStyle(pattern, colors.grid)}
+        />
+      )}
       <div
         className="absolute rounded-full opacity-40"
         style={{
@@ -349,7 +379,7 @@ function CoverPreview({
 function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
     <div className="space-y-3">
-      <h3 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">
+      <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
         {title}
       </h3>
       <div className="space-y-3">{children}</div>
@@ -360,7 +390,7 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
 function Field({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div className="flex items-center justify-between gap-3">
-      <span className="text-sm text-zinc-400 shrink-0">{label}</span>
+      <span className="text-sm text-muted-foreground shrink-0">{label}</span>
       <div className="flex-1 min-w-0 flex justify-end">{children}</div>
     </div>
   );
@@ -383,7 +413,7 @@ function Checkbox({
         onChange={(e) => onChange(e.target.checked)}
         className="w-4 h-4 accent-violet-500"
       />
-      <span className="text-sm text-zinc-400">{label}</span>
+      <span className="text-sm text-muted-foreground">{label}</span>
     </label>
   );
 }
@@ -421,6 +451,8 @@ export default function CoverImage() {
   const [showPostSubtitle, setShowPostSubtitle] = useState(true);
   const [showPostIcons, setShowPostIcons] = useState(false);
   const [postTitleMono, setPostTitleMono] = useState(true);
+
+  const [pattern, setPattern] = useState<Pattern>("grid");
 
   // Single hue slider drives a harmonised palette.
   const [hue, setHue] = useState(DEFAULT_HUE);
@@ -546,24 +578,59 @@ export default function CoverImage() {
       ctx.fillStyle = bg;
       ctx.fillRect(0, 0, width, height);
 
-      // Grid pattern
-      ctx.save();
-      ctx.globalAlpha = 0.3;
-      ctx.strokeStyle = hexToRgba(gridColor, 0.4);
-      ctx.lineWidth = 1;
-      for (let x = 40; x < width; x += 40) {
-        ctx.beginPath();
-        ctx.moveTo(x + 0.5, 0);
-        ctx.lineTo(x + 0.5, height);
-        ctx.stroke();
+      // Background pattern (grid / dots / diagonal / none)
+      if (pattern !== "none") {
+        ctx.save();
+        ctx.globalAlpha = 0.3;
+        const patternColor = hexToRgba(gridColor, 0.4);
+        ctx.strokeStyle = patternColor;
+        ctx.fillStyle = patternColor;
+        ctx.lineWidth = 1;
+        if (pattern === "grid") {
+          for (let x = 40; x < width; x += 40) {
+            ctx.beginPath();
+            ctx.moveTo(x + 0.5, 0);
+            ctx.lineTo(x + 0.5, height);
+            ctx.stroke();
+          }
+          for (let y = 40; y < height; y += 40) {
+            ctx.beginPath();
+            ctx.moveTo(0, y + 0.5);
+            ctx.lineTo(width, y + 0.5);
+            ctx.stroke();
+          }
+        } else if (pattern === "dots") {
+          for (let x = 20; x < width; x += 40) {
+            for (let y = 20; y < height; y += 40) {
+              ctx.beginPath();
+              ctx.arc(x, y, 1.5, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          }
+        } else if (pattern === "diagonal") {
+          // Lines at 45°; spacing chosen so perpendicular distance
+          // between lines matches the CSS repeating-linear-gradient at 40px.
+          const spacing = 40 * Math.SQRT2;
+          for (let xi = -height; xi < width + spacing; xi += spacing) {
+            ctx.beginPath();
+            ctx.moveTo(xi, 0);
+            ctx.lineTo(xi + height, height);
+            ctx.stroke();
+          }
+        } else if (pattern === "waves") {
+          // Mirrors the SVG <path d="M 0 10 Q 10 2 20 10 T 40 10"> tile.
+          for (let yBase = 10; yBase < height; yBase += 20) {
+            ctx.beginPath();
+            ctx.moveTo(0, yBase);
+            for (let x = 0; x < width; x += 40) {
+              ctx.quadraticCurveTo(x + 10, yBase - 8, x + 20, yBase);
+              ctx.quadraticCurveTo(x + 30, yBase + 8, x + 40, yBase);
+            }
+            ctx.stroke();
+          }
+        }
+        ctx.restore();
       }
-      for (let y = 40; y < height; y += 40) {
-        ctx.beginPath();
-        ctx.moveTo(0, y + 0.5);
-        ctx.lineTo(width, y + 0.5);
-        ctx.stroke();
-      }
-      ctx.restore();
 
       // Orbs
       ctx.save();
@@ -691,7 +758,7 @@ export default function CoverImage() {
       <Head>
         <title>Asset Generator - Nano Collective</title>
       </Head>
-      <div className="min-h-screen bg-zinc-950 text-zinc-100 flex">
+      <div className="min-h-screen bg-background text-foreground flex">
         {/* Main area */}
         <div
           className={`flex-1 min-w-0 flex flex-col transition-[margin] duration-200 ${
@@ -699,15 +766,15 @@ export default function CoverImage() {
           }`}
         >
           {/* Top bar */}
-          <div className="sticky top-0 z-20 flex items-center justify-between gap-3 px-4 py-3 bg-zinc-950/80 backdrop-blur border-b border-zinc-900">
-            <div className="inline-flex rounded-md border border-zinc-800 p-0.5 bg-zinc-900/50">
+          <div className="sticky top-0 z-20 flex items-center justify-between gap-3 px-4 py-3 bg-background/80 backdrop-blur border-b border-border">
+            <div className="inline-flex rounded-md border border-border p-0.5 bg-muted/50">
               <button
                 type="button"
                 onClick={() => setMode("cover")}
                 className={`px-3 py-1.5 text-sm rounded ${
                   mode === "cover"
-                    ? "bg-zinc-800 text-zinc-100"
-                    : "text-zinc-400 hover:text-zinc-200"
+                    ? "bg-muted text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 Cover
@@ -717,8 +784,8 @@ export default function CoverImage() {
                 onClick={() => setMode("post")}
                 className={`px-3 py-1.5 text-sm rounded ${
                   mode === "post"
-                    ? "bg-zinc-800 text-zinc-100"
-                    : "text-zinc-400 hover:text-zinc-200"
+                    ? "bg-muted text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 Post
@@ -737,7 +804,7 @@ export default function CoverImage() {
                 <button
                   type="button"
                   onClick={() => setZoom(1)}
-                  className="text-xs text-zinc-400 hover:text-zinc-100 tabular-nums w-12 text-center"
+                  className="text-xs text-muted-foreground hover:text-foreground tabular-nums w-12 text-center"
                   title="Reset zoom"
                 >
                   {Math.round(scale * 100)}%
@@ -788,6 +855,7 @@ export default function CoverImage() {
                     sidePadding={sidePadding}
                     contentGap={contentGap}
                     verticalCenter={verticalCenter}
+                    pattern={pattern}
                     colors={colors}
                     items={items}
                     iconsContainerRef={iconsContainerRef}
@@ -795,7 +863,7 @@ export default function CoverImage() {
                 </div>
               </div>
             </div>
-            <p className="mt-6 text-xs text-zinc-500 text-center">
+            <p className="mt-6 text-xs text-muted-foreground text-center">
               Preview is scaled to fit; download produces a {width}×{height} PNG
               rendered directly to canvas.
             </p>
@@ -804,12 +872,12 @@ export default function CoverImage() {
 
         {/* Sidebar */}
         <aside
-          className={`fixed top-0 right-0 h-full w-[360px] bg-zinc-900 border-l border-zinc-800 shadow-xl z-30 transition-transform duration-200 ${
+          className={`fixed top-0 right-0 h-full w-[360px] bg-card border-l border-border shadow-xl z-30 transition-transform duration-200 ${
             sidebarOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800">
-            <h2 className="text-sm font-semibold text-zinc-100">Controls</h2>
+          <div className="flex items-center justify-between px-4 py-3 border-b border-border">
+            <h2 className="text-sm font-semibold text-foreground">Controls</h2>
             <Button
               variant="ghost"
               size="icon"
@@ -910,21 +978,38 @@ export default function CoverImage() {
                 }}
                 aria-label="Theme hue"
               />
-              <div className="flex items-center justify-between text-xs text-zinc-500">
+              <div className="flex items-center justify-between text-xs text-muted-foreground">
                 <span>Hue {hue}°</span>
                 <span className="flex items-center gap-1.5">
                   <span
-                    className="w-5 h-5 rounded border border-zinc-800"
+                    className="w-5 h-5 rounded border border-border"
                     style={{ background: primaryColor }}
                     title={primaryColor}
                   />
                   <span
-                    className="w-5 h-5 rounded border border-zinc-800"
+                    className="w-5 h-5 rounded border border-border"
                     style={{ background: secondaryColor }}
                     title={secondaryColor}
                   />
                 </span>
               </div>
+              <Field label="Pattern">
+                <Select
+                  value={pattern}
+                  onValueChange={(v) => setPattern(v as Pattern)}
+                >
+                  <SelectTrigger className="w-32">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="grid">Grid</SelectItem>
+                    <SelectItem value="dots">Dots</SelectItem>
+                    <SelectItem value="diagonal">Diagonal</SelectItem>
+                    <SelectItem value="waves">Waves</SelectItem>
+                    <SelectItem value="none">None</SelectItem>
+                  </SelectContent>
+                </Select>
+              </Field>
             </Section>
 
             {mode === "cover" ? (

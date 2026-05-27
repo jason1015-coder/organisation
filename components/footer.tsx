@@ -34,6 +34,12 @@ export default function Footer() {
                 Docs
               </a>
               <Link
+                href="/assets"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Assets
+              </Link>
+              <Link
                 href="/sponsor"
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
