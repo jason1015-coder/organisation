@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
 import Footer from "@/components/footer";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CONTRIBUTORS, type Contributor } from "@/lib/contributors";
@@ -97,32 +98,42 @@ export default function ContributorsPage() {
       </Head>
 
       <div className="min-h-screen bg-background">
-        {/* Main Content */}
-        <main className="container mx-auto px-4 py-16">
-          {/* Page Header */}
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <h1 className="text-4xl md:text-5xl font-bold">Contributors</h1>
-            <p className="text-lg text-muted-foreground">
-              Meet the amazing people who contribute to the Nano Collective.
-              Everyone is welcome to join our open-source community!
-            </p>
-            <div className="flex flex-col lg:flex-row gap-4 justify-center pt-4">
-              <Button asChild variant="default">
-                <a
-                  href="https://github.com/nano-collective"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaGithub className="mr-2 size-4" />
-                  View on GitHub
-                </a>
-              </Button>
-              <Button asChild variant="outline">
-                <Link href="#how-to-contribute">How to Contribute</Link>
-              </Button>
+        {/* Hero */}
+        <section className="border-b border-border/40 pt-20 pb-16">
+          <div className="container mx-auto px-4">
+            <div className="space-y-6 max-w-4xl">
+              <Badge variant="secondary" className="text-sm px-4 py-1.5">
+                Contributors
+              </Badge>
+              <h1 className="text-4xl sm:text-6xl font-bold tracking-tight">
+                Meet our Contributors
+              </h1>
+              <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
+                The people behind the Nano Collective. Everyone is welcome to
+                join our open-source community and help build privacy-first AI
+                tools.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                <Button size="lg" asChild>
+                  <a
+                    href="https://github.com/nano-collective"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaGithub className="mr-2 h-4 w-4" />
+                    View on GitHub
+                  </a>
+                </Button>
+                <Button size="lg" variant="outline" asChild>
+                  <Link href="#how-to-contribute">How to Contribute</Link>
+                </Button>
+              </div>
             </div>
           </div>
+        </section>
 
+        {/* Main Content */}
+        <main className="container mx-auto px-4 py-16">
           {/* Contributors Grid */}
           {CONTRIBUTORS.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-20">
@@ -192,7 +203,7 @@ export default function ContributorsPage() {
                 <div className="pt-4">
                   <Button asChild variant="default" className="w-full">
                     <a
-                      href="https://github.com/nano-collective/website/blob/main/CONTRIBUTING.md"
+                      href="https://docs.nanocollective.org/collective/projects/contributing"
                       target="_blank"
                       rel="noopener noreferrer"
                     >

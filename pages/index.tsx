@@ -2,6 +2,7 @@ import type { GetStaticProps } from "next";
 import Head from "next/head";
 import Footer from "@/components/footer";
 import {
+  BuildingNextSection,
   FeaturedPackagesSection,
   FeaturesSection,
   GetInvolvedSection,
@@ -74,6 +75,7 @@ export default function Home({
         <HeroSection orgStats={orgStats} />
         <MissionSection />
         <FeaturesSection />
+        <BuildingNextSection />
         <NanocoderSection nanocoderVersion={nanocoderVersion} />
         <NanotuneSection />
         <FeaturedPackagesSection />

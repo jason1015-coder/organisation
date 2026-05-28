@@ -45,6 +45,12 @@ export default function Footer() {
               >
                 Sponsor
               </Link>
+              <a
+                href="mailto:hello@nanocollective.org"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Contact
+              </a>
             </nav>
             <div className="flex gap-6">
               <a

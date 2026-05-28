@@ -1,4 +1,4 @@
-import { Bitcoin, Heart, MessageCircle, Wallet } from "lucide-react";
+import { Bitcoin, Heart, Mail, MessageCircle, Wallet } from "lucide-react";
 import type { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -398,16 +398,37 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                     the standard tiers. Designed case by case. Terms are agreed
                     and published before the relationship begins.
                   </p>
-                  <Button asChild variant="default">
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    To see exactly what your support reaches and how
+                    contributors and project proposers access it, see{" "}
                     <a
-                      href="https://discord.gg/ktPDV6rekE"
+                      href="https://docs.nanocollective.org/collective/organisation/contributor-resources"
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="text-primary hover:underline"
                     >
-                      <FaDiscord className="mr-2 h-4 w-4" />
-                      Open a conversation
+                      Contributor Resources
                     </a>
-                  </Button>
+                    .
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <Button asChild variant="default">
+                      <a
+                        href="https://discord.gg/ktPDV6rekE"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <FaDiscord className="mr-2 h-4 w-4" />
+                        Open a conversation
+                      </a>
+                    </Button>
+                    <Button asChild variant="outline">
+                      <a href="mailto:hello@nanocollective.org">
+                        <Mail className="mr-2 h-4 w-4" />
+                        Email us
+                      </a>
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
 
@@ -692,6 +713,12 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                   >
                     <FaDiscord className="mr-2 h-5 w-5" />
                     Discord
+                  </a>
+                </Button>
+                <Button size="lg" variant="outline" asChild>
+                  <a href="mailto:hello@nanocollective.org">
+                    <Mail className="mr-2 h-5 w-5" />
+                    Email us
                   </a>
                 </Button>
               </div>

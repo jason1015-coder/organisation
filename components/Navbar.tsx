@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
-  { href: "/", label: "Home" },
+  { href: "/pipeline", label: "Build" },
   { href: "/blog", label: "Blog" },
   { href: "https://docs.nanocollective.org", label: "Docs", external: true },
   { href: "/contributors", label: "Contributors" },

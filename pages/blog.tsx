@@ -66,17 +66,26 @@ export default function Blog({ posts, categories }: BlogProps) {
       </Head>
 
       <div className="min-h-screen bg-background">
+        {/* Hero */}
+        <section className="border-b border-border/40 pt-20 pb-16">
+          <div className="container mx-auto px-4">
+            <div className="space-y-6 max-w-4xl">
+              <Badge variant="secondary" className="text-sm px-4 py-1.5">
+                Blog
+              </Badge>
+              <h1 className="text-4xl sm:text-6xl font-bold tracking-tight">
+                Updates & discussions
+              </h1>
+              <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
+                Latest announcements, project updates, and community discussions
+                from the Nano Collective.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Main Content */}
         <main className="container mx-auto px-4 py-16">
-          {/* Page Header */}
-          <div className="text-center mb-16 space-y-4">
-            <h1 className="text-4xl md:text-5xl font-bold">Blog</h1>
-            <p className="text-lg text-muted-foreground">
-              Updates, discussions, and announcements from the Nano Collective
-              community
-            </p>
-          </div>
-
           {/* Category Filter */}
           <div className="mb-12">
             <Select
