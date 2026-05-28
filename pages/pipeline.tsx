@@ -76,10 +76,7 @@ export default function Pipeline({ whitepapers }: PipelineProps) {
           property="og:description"
           content="Whitepapers and projects in flight under the Nano Collective. From idea to shipped v0.1, in the open."
         />
-        <meta
-          property="og:url"
-          content="https://nanocollective.org/pipeline"
-        />
+        <meta property="og:url" content="https://nanocollective.org/pipeline" />
         <meta property="og:image" content="/og-image.png" />
       </Head>
 
@@ -95,10 +92,10 @@ export default function Pipeline({ whitepapers }: PipelineProps) {
                 What's in flight
               </h1>
               <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
-                Every project that ships under the Nano Collective starts with
-                a whitepaper, gets argued in public for at least 30 days, and
-                only then becomes code. This page shows where every active
-                whitepaper sits, in real time.
+                Every project that ships under the Nano Collective starts with a
+                whitepaper, gets argued in public for at least 30 days, and only
+                then becomes code. This page shows where every active whitepaper
+                sits, in real time.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
                 <Button size="lg" asChild className="group">
@@ -204,10 +201,10 @@ export default function Pipeline({ whitepapers }: PipelineProps) {
                 </h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   Anyone can propose. No application form, no contribution
-                  history required. If your idea fits the collective's shape
-                  (AI tooling that respects privacy, runs locally, is open
-                  source, or is an open variant of something proprietary), the
-                  process is built for you.
+                  history required. If your idea fits the collective's shape (AI
+                  tooling that respects privacy, runs locally, is open source,
+                  or is an open variant of something proprietary), the process
+                  is built for you.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 pt-2 w-full">
                   <Button size="lg" asChild className="group">
