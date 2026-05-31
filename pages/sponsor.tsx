@@ -30,7 +30,7 @@ const projects = [
   {
     name: "Nanocoder",
     url: "https://github.com/Nano-Collective/nanocoder",
-    description: "Local-first CLI coding agent with multi-provider AI support",
+    description: "CLI coding agent with multi-provider AI support",
   },
   {
     name: "Nanotune",
