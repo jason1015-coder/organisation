@@ -1,4 +1,11 @@
-import { Bitcoin, Heart, Mail, MessageCircle, Wallet } from "lucide-react";
+import {
+  Bitcoin,
+  Gift,
+  Heart,
+  Mail,
+  MessageCircle,
+  Wallet,
+} from "lucide-react";
 import type { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -332,9 +339,10 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                 <h2 className="text-3xl sm:text-4xl font-bold">Tiers</h2>
                 <p className="text-lg text-muted-foreground leading-relaxed max-w-4xl">
                   A small, deliberately simple program. Same rule across every
-                  tier: more dollars = more surfaces. No exclusivity, no slot
-                  caps, no influence over the roadmap. Sponsors fund the work;
-                  the Collective directs it.
+                  tier: more support = more surfaces, whether that support is
+                  cash or in-kind resources valued at their fair equivalent. No
+                  exclusivity, no slot caps, no influence over the roadmap.
+                  Sponsors fund the work; the Collective directs it.
                 </p>
               </div>
 
@@ -410,6 +418,49 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                       Contributor Resources
                     </a>
                     .
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <Button asChild variant="default">
+                      <a
+                        href="https://discord.gg/ktPDV6rekE"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <FaDiscord className="mr-2 h-4 w-4" />
+                        Open a conversation
+                      </a>
+                    </Button>
+                    <Button asChild variant="outline">
+                      <a href="mailto:hello@nanocollective.org">
+                        <Mail className="mr-2 h-4 w-4" />
+                        Email us
+                      </a>
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Non-cash sponsorship */}
+              <Card className="bg-background">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-2xl">
+                    <Gift className="h-5 w-5 text-primary" />
+                    Sponsor with resources, not just cash
+                  </CardTitle>
+                  <CardDescription>In-kind support is welcome.</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-muted-foreground leading-relaxed">
+                    Sponsorship does not have to be money. We welcome non-cash
+                    support such as cloud and API credits, compute, software
+                    licenses, hardware, and other resources that help our
+                    contributors build. There is no Open Collective sign-up for
+                    in-kind support, since no money changes hands.
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Reach out and we will work out together what your
+                    contribution gets you in return, recognised on the same
+                    basis as the tiers above.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-2">
                     <Button asChild variant="default">
