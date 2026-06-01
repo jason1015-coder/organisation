@@ -10,7 +10,7 @@ export function SupportedBySection() {
             <h2 className="text-3xl sm:text-4xl font-bold">Supported by</h2>
             <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
               Sponsorship funds the people building open, privacy-respecting AI
-              tools — and keeps every line of it free at the point of use. The
+              tools, and keeps every line of it free at the point of use. The
               first organisations in at each tier set the tone for the rest.
             </p>
           </div>

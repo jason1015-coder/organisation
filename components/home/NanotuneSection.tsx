@@ -54,7 +54,7 @@ export function NanotuneSection() {
                         No YAML configs or complex flags. Just an interactive
                         CLI that guides you through LoRA fine-tuning on your own
                         data. Add training examples, validate data, and train
-                        with live progress display—all locally and privately.
+                        with live progress display, all locally and privately.
                       </CardDescription>
                     </div>
                   </div>

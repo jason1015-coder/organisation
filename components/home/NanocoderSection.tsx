@@ -86,7 +86,7 @@ export function NanocoderSection({ nanocoderVersion }: NanocoderSectionProps) {
                       </CardTitle>
                       <CardDescription>
                         Anthropic, Google, OpenAI, ChatGPT/Codex, GitHub
-                        Copilot, OpenRouter, Mistral, Z.ai, MiniMax, Kimi — plus
+                        Copilot, OpenRouter, Mistral, Z.ai, MiniMax, Kimi, plus
                         local runners like Ollama, LM Studio, llama.cpp, and
                         MLX.
                       </CardDescription>
@@ -106,7 +106,7 @@ export function NanocoderSection({ nanocoderVersion }: NanocoderSectionProps) {
                       <CardDescription>
                         Built-in file operations and command execution,
                         markdown-defined custom tools, and Model Context
-                        Protocol (MCP) servers — all in one unified registry the
+                        Protocol (MCP) servers, all in one unified registry the
                         model can call.
                       </CardDescription>
                     </div>

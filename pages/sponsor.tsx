@@ -95,7 +95,7 @@ const tiers = [
       "Logo on the README of every Nano Collective project",
       "Logo on the nanocollective.org homepage and the docs site footer",
       "One dedicated welcome post on the Nano Collective blog when sponsorship begins",
-      "Quarterly sponsor update — what shipped, where the fund went, what's next",
+      "Quarterly sponsor update: what shipped, where the fund went, what's next",
     ],
     cta: {
       label: "Open a conversation",
@@ -242,7 +242,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
 
               <p className="text-sm text-muted-foreground pt-2 max-w-4xl">
                 Individual sponsors are listed automatically via Open Collective
-                as they join. Bespoke partnership spots are open —{" "}
+                as they join. Bespoke partnership spots are open:{" "}
                 <a
                   href="https://discord.gg/ktPDV6rekE"
                   target="_blank"
@@ -266,7 +266,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed max-w-4xl">
                 AI is becoming the most personal piece of infrastructure most
-                people use — the place they think out loud, work through
+                people use: the place they think out loud, work through
                 problems, and hand off real parts of their workflow. The systems
                 people are coming to depend on are largely owned by a small
                 number of companies whose incentives are not aligned with the
@@ -401,7 +401,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                 <CardContent className="space-y-4">
                   <p className="text-muted-foreground leading-relaxed">
                     For organisations interested in a larger or named
-                    arrangement — publicly named partnership, joint content, a
+                    arrangement: publicly named partnership, joint content, a
                     direct relationship with the core team, or anything outside
                     the standard tiers. Designed case by case. Terms are agreed
                     and published before the relationship begins.
@@ -511,7 +511,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                   <li className="flex gap-2">
                     <span className="text-primary mt-0.5">·</span>
                     <span>
-                      No exclusivity at any tier — sponsors at the same tier are
+                      No exclusivity at any tier. Sponsors at the same tier are
                       listed alphabetically
                     </span>
                   </li>
@@ -519,7 +519,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                 <p className="text-sm text-muted-foreground pt-2 max-w-4xl">
                   Annual prepayments at any tier receive a 10% discount.
                   Invoice-based contributions are supported via Open Source
-                  Collective — contact us to set this up.
+                  Collective. Contact us to set this up.
                 </p>
               </div>
             </div>
@@ -544,7 +544,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                   <CardContent className="flex flex-col gap-4">
                     <p className="text-muted-foreground leading-relaxed">
                       Any amount, one time, into the community fund. No perks
-                      attached, no need to reach out — donate directly on Open
+                      attached, no need to reach out. Donate directly on Open
                       Collective, or send Bitcoin to the Nano Collective wallet.
                     </p>
                     <ul className="space-y-2 text-sm text-muted-foreground flex-1">
@@ -555,7 +555,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                       <li className="flex items-start gap-2">
                         <Bitcoin className="h-4 w-4 mt-0.5 shrink-0" />
                         <span>
-                          Bitcoin — wallet address available on{" "}
+                          Bitcoin: wallet address available on{" "}
                           <a
                             href="https://discord.gg/ktPDV6rekE"
                             target="_blank"
@@ -624,7 +624,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                 The Nano Collective reserves the right to decline any
                 sponsorship. We will decline if a prospective sponsor's stated
                 mission, product, or public conduct conflicts materially with
-                what the Collective is building — privacy-respecting,
+                what the Collective is building: privacy-respecting,
                 local-first, open AI tooling. Declining is not a moral
                 judgement; it is a recognition that some associations would
                 undermine the work for everyone else who participates. Decisions
@@ -695,8 +695,8 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                   <span>
                     <strong className="text-foreground">
                       Recurring sponsorship at any tier
-                    </strong>{" "}
-                    — sign up via{" "}
+                    </strong>
+                    : sign up via{" "}
                     <a
                       href="https://opencollective.com/nano-collective"
                       target="_blank"
@@ -722,8 +722,8 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                   <span>
                     <strong className="text-foreground">
                       Bespoke partnership
-                    </strong>{" "}
-                    — open a conversation on{" "}
+                    </strong>
+                    : open a conversation on{" "}
                     <a
                       href="https://discord.gg/ktPDV6rekE"
                       target="_blank"
@@ -740,8 +740,8 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                   <span>
                     <strong className="text-foreground">
                       Designated donation
-                    </strong>{" "}
-                    — reach out before sending. We scope and agree the work
+                    </strong>
+                    : reach out before sending. We scope and agree the work
                     together first.
                   </span>
                 </li>
