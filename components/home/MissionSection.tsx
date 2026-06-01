@@ -25,10 +25,10 @@ export function MissionSection() {
           <p className="text-lg text-muted-foreground leading-relaxed max-w-4xl mx-auto">
             Nano Collective is also a home for the people doing the building. We
             give contributors the resources, structure, and latitude to build AI
-            in the open: shared conventions and tooling, a community to carry the
-            work once it ships, and a clear path from idea to shipped project
-            that anyone can walk. If you want to build AI that belongs to the
-            people who use it, we want this to be the place you do it.
+            in the open: shared conventions and tooling, a community to carry
+            the work once it ships, and a clear path from idea to shipped
+            project that anyone can walk. If you want to build AI that belongs
+            to the people who use it, we want this to be the place you do it.
           </p>
         </div>
       </div>
