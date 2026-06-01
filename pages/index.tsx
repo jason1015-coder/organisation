@@ -74,8 +74,8 @@ export default function Home({
       <div className="min-h-screen bg-background font-sans">
         <HeroSection orgStats={orgStats} />
         <MissionSection />
-        <BuildingNextSection />
         <FeaturesSection />
+        <BuildingNextSection />
         <NanocoderSection nanocoderVersion={nanocoderVersion} />
         <NanotuneSection />
         <FeaturedPackagesSection />
