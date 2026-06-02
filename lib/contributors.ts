@@ -59,16 +59,11 @@ export const CONTRIBUTORS: Contributor[] = [
     bio: "I write about sovereignty, decentralisation, and the revolt against cloud-controlled intelligence.",
   },
   {
-    name: "Alexandru Spînu",
-    photo: "alexandru-spinu.jpg",
-    website: "https://alexspinu.eu/",
-    bio: "Software Engineer, leveraging 12 years of full-stack experience for the web & developer tooling. Passionate about AI/ML",
-  },
-  {
-    name: "Deniz Okcu",
-    photo: "deniz.png",
-    github: "DenizOkcu",
-    bio: "Deniz is working on mobile and browser games. In his free time he enjoys building AI-powered productivity tools.",
+    name: "Sk Akram",
+    photo: "sk-akram.jpg",
+    github: "akramcodez",
+    website: "https://www.akramcodez.tech/",
+    bio: "19 y/o Software Developer ッ",
   },
   {
     name: "Lottie Oxford",
@@ -80,6 +75,18 @@ export const CONTRIBUTORS: Contributor[] = [
     photo: "brijesh-k-r.png",
     github: "Avtrkrb",
     bio: "Co-founder & Technology Head at Kashylitics, passionate about building production-grade AI systems and developer tooling.",
+  },
+  {
+    name: "Alexandru Spînu",
+    photo: "alexandru-spinu.jpg",
+    website: "https://alexspinu.eu/",
+    bio: "Software Engineer, leveraging 12 years of full-stack experience for the web & developer tooling. Passionate about AI/ML",
+  },
+  {
+    name: "Deniz Okcu",
+    photo: "deniz.png",
+    github: "DenizOkcu",
+    bio: "Deniz is working on mobile and browser games. In his free time he enjoys building AI-powered productivity tools.",
   },
   {
     name: "Caleb Grenko",
@@ -99,13 +106,6 @@ export const CONTRIBUTORS: Contributor[] = [
     photo: "ragini-pandey.jpg",
     github: "ragini-pandey",
     website: "https://ragini-pandey.github.io/",
-  },
-  {
-    name: "Sk Akram",
-    photo: "sk-akram.jpeg",
-    github: "akramcodez",
-    website: "https://www.akramcodez.tech/",
-    bio: "19 y/o Software Developer ッ",
   },
   {
     name: "cleyesode",
