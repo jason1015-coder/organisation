@@ -30,8 +30,24 @@ function ContributorCard({ contributor }: { contributor: Contributor }) {
     .slice(0, 2);
 
   return (
-    <Card className="group hover:shadow-lg transition-all duration-200 h-full">
+    <Card className="group relative hover:shadow-lg transition-all duration-200 h-full">
       <CardContent className="flex flex-col items-center text-center p-6 h-full gap-4">
+        {/* Core team indicator (top-left, small rectangle with hover tooltip) */}
+        {contributor.coreTeam && (
+          <div className="absolute top-2 left-2 group/core">
+            <span
+              className="block h-2 w-8 rounded-sm bg-emerald-500"
+              title="Core Team"
+            />
+            <span
+              role="tooltip"
+              className="pointer-events-none absolute left-1/2 top-full mt-1.5 -translate-x-1/2 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-xs text-background opacity-0 transition-opacity duration-150 group-hover/core:opacity-100"
+            >
+              Core Team
+            </span>
+          </div>
+        )}
+
         {/* Avatar */}
         <Avatar className="size-24 border-2 border-border group-hover:border-primary transition-colors">
           <AvatarImage

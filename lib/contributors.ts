@@ -23,6 +23,9 @@ export interface Contributor {
 
   /** Brief description of your contributions (optional) */
   bio?: string;
+
+  /** Set to true if you're a member of the core team. Displays an emerald "Core Team" badge. */
+  coreTeam?: boolean;
 }
 
 /**
@@ -45,18 +48,21 @@ export const CONTRIBUTORS: Contributor[] = [
     photo: "will-lamerton.jpg",
     github: "will-lamerton",
     bio: "Founder of the Nano Collective, building open-source AI tools for everyone.",
+    coreTeam: true,
   },
   {
     name: "Matthew Spence",
     photo: "matthew-spence.jpg",
     github: "mrspence",
     bio: "Founder of the Nano Collective, building open-source AI tools for everyone.",
+    coreTeam: true,
   },
   {
     name: "Ben Parry",
     photo: "ben-parry.jpeg",
     website: "https://substack.com/@followbenparry",
     bio: "I write about sovereignty, decentralisation, and the revolt against cloud-controlled intelligence.",
+    coreTeam: true,
   },
   {
     name: "Sk Akram",
@@ -64,11 +70,13 @@ export const CONTRIBUTORS: Contributor[] = [
     github: "akramcodez",
     website: "https://www.akramcodez.tech/",
     bio: "19 y/o Software Developer ッ",
+    coreTeam: true,
   },
   {
     name: "Lottie Oxford",
     photo: "lottie-oxford.JPEG",
     bio: "Helps with the community behind the Nano Collective. Passionate about building in open source and AI.",
+    coreTeam: true,
   },
   {
     name: "Brijesh K R",
