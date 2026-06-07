@@ -26,6 +26,14 @@ export interface Contributor {
 
   /** Set to true if you're a member of the core team. Displays an emerald "Core Team" badge. */
   coreTeam?: boolean;
+
+  /**
+   * Areas you focus on, shown as small tags on your card. These describe what you
+   * help with, not a job title or rank: the Nano Collective has no formal hierarchy.
+   * Mainly used by the core team so people know who to approach about what. Keep
+   * them short and functional, e.g. ["Engineering", "Community", "Writing"].
+   */
+  focus?: string[];
 }
 
 /**
@@ -49,13 +57,15 @@ export const CONTRIBUTORS: Contributor[] = [
     github: "will-lamerton",
     bio: "Founder of the Nano Collective, building open-source AI tools for everyone.",
     coreTeam: true,
+    focus: ["Engineering", "Direction"],
   },
   {
     name: "Matthew Spence",
     photo: "matthew-spence.jpg",
     github: "mrspence",
-    bio: "Founder of the Nano Collective, building open-source AI tools for everyone.",
+    bio: "First core team member of the Nano Collective, building open-source AI tools for everyone.",
     coreTeam: true,
+    focus: ["Engineering"],
   },
   {
     name: "Ben Parry",
@@ -63,6 +73,7 @@ export const CONTRIBUTORS: Contributor[] = [
     website: "https://substack.com/@followbenparry",
     bio: "I write about sovereignty, decentralisation, and the revolt against cloud-controlled intelligence.",
     coreTeam: true,
+    focus: ["Community", "Advocacy"],
   },
   {
     name: "Sk Akram",
@@ -71,12 +82,14 @@ export const CONTRIBUTORS: Contributor[] = [
     website: "https://www.akramcodez.tech/",
     bio: "19 y/o Software Developer ッ",
     coreTeam: true,
+    focus: ["Engineering"],
   },
   {
     name: "Lottie Oxford",
     photo: "lottie-oxford.JPEG",
     bio: "Helps with the community behind the Nano Collective. Passionate about building in open source and AI.",
     coreTeam: true,
+    focus: ["Community"],
   },
   {
     name: "Brijesh K R",

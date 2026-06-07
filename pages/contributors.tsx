@@ -68,6 +68,17 @@ function ContributorCard({ contributor }: { contributor: Contributor }) {
           )}
         </div>
 
+        {/* Focus areas (what they help with, not a title) */}
+        {contributor.focus && contributor.focus.length > 0 && (
+          <div className="flex flex-wrap justify-center gap-1.5">
+            {contributor.focus.map((area) => (
+              <Badge key={area} variant="secondary" className="font-normal">
+                {area}
+              </Badge>
+            ))}
+          </div>
+        )}
+
         {/* Links */}
         <div className="flex gap-2 w-full">
           {contributor.github && (
