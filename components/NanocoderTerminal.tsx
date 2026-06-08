@@ -258,72 +258,24 @@ export default function NanocoderTerminal({
             </div>
           </div>
 
-          {/* Status Section */}
+          {/* Status Line */}
           <div
-            className="inline-block px-2 py-0 mb-2 text-xs"
-            style={{
-              backgroundColor: colors.info,
-              color: colors.base,
-            }}
+            className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-6 pt-3 text-xs"
+            style={{ borderColor: `${colors.secondary}33` }}
           >
-            Status
-          </div>
-          <div
-            className="rounded-md p-4 pt-5 mb-6 relative text-xs"
-            style={{
-              borderColor: colors.info,
-              borderWidth: "1px",
-              borderStyle: "solid",
-            }}
-          >
-            <div className="space-y-1">
-              <div>
-                <span style={{ color: colors.info, fontWeight: "bold" }}>
-                  CWD:
-                </span>{" "}
-                <span style={{ color: colors.info }}>
-                  /nano-collective/nanocoder
-                </span>
-              </div>
-              <div>
-                <span style={{ color: colors.info, fontWeight: "bold" }}>
-                  Config:
-                </span>{" "}
-                <span style={{ color: colors.info }}>/agents.config.json</span>
-              </div>
-              <div>
-                <span style={{ color: colors.success, fontWeight: "bold" }}>
-                  Provider:
-                </span>{" "}
-                <span style={{ color: colors.success }}>Ollama, </span>
-                <span style={{ color: colors.success, fontWeight: "bold" }}>
-                  Model:
-                </span>{" "}
-                <span style={{ color: colors.success }}>
-                  devstral-small-2:24b
-                </span>
-              </div>
-              <div>
-                <span style={{ color: colors.primary, fontWeight: "bold" }}>
-                  Theme:
-                </span>{" "}
-                <span style={{ color: colors.primary }}>
-                  {currentTheme.displayName}
-                </span>
-              </div>
-              <div className="italic" style={{ color: colors.secondary }}>
-                ↳ Using AGENTS.md. Project initialized
-              </div>
-              <div className="italic" style={{ color: colors.secondary }}>
-                ✓ Preferences loaded
-              </div>
-              <div className="italic" style={{ color: colors.secondary }}>
-                ✓ 4 custom commands loaded
-              </div>
-              <div className="italic" style={{ color: colors.secondary }}>
-                ✓ LSP: 1/1 connected
-              </div>
-            </div>
+            <span style={{ color: colors.info, fontWeight: "bold" }}>
+              Ollama
+            </span>
+            <span style={{ color: colors.secondary }}>·</span>
+            <span style={{ color: colors.tool }}>gemma4:12b</span>
+            <span style={{ color: colors.secondary }}>·</span>
+            <span style={{ color: colors.secondary }}>
+              ~/Library/Preferences/nanocoder/agents.config.json
+            </span>
+            <span style={{ color: colors.secondary }}>·</span>
+            <span style={{ color: colors.error }}>
+              ⎇ main <span style={{ color: colors.secondary }}>(default)</span>
+            </span>
           </div>
 
           {/* Prompt Section */}
@@ -352,7 +304,7 @@ export default function NanocoderTerminal({
             style={{ color: colors.secondary }}
           >
             <span>▶</span> normal mode on{" "}
-            <span className="opacity-60">(Shift+Tab to cycle)</span>
+            <span className="opacity-60">· ctx: ~1%</span>
           </div>
         </div>
       </div>
