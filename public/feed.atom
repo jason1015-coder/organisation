@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://nanocollective.org</id>
     <title>Nano Collective</title>
-    <updated>2026-05-25T13:28:41.322Z</updated>
+    <updated>2026-06-10T20:11:50.317Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <author>
         <name>Nano Collective</name>
@@ -14,6 +14,254 @@
     <logo>https://nanocollective.org/logo.png</logo>
     <icon>https://nanocollective.org/favicon.ico</icon>
     <rights>All rights reserved 2026, Nano Collective</rights>
+    <entry>
+        <title type="html"><![CDATA[Nanocoder v1.27.0 - Skills, a daemon, and custom tools]]></title>
+        <id>https://nanocollective.org/blog/nanocoder-v1270-skills-a-daemon-and-custom-tools-49</id>
+        <link href="https://nanocollective.org/blog/nanocoder-v1270-skills-a-daemon-and-custom-tools-49"/>
+        <updated>2026-06-02T15:21:24.000Z</updated>
+        <summary type="html"><![CDATA[Nanocoder v1.27.0 is out. This release is the biggest extension surface the project has shipped: a unified extension primitive called Skills, a per-project background daemon for event-triggered runs, and a markdown-defined custom tools layer. Also: two OOM fixes, a startup config lint, and a reworked OpenRouter model picker.
+
+Built by the [Nano Collective](https://nanocollective.org) - a community collective building AI tooling not for profit, but for the community.
+
+## Skills: a unified ext]]></summary>
+        <content type="html"><![CDATA[Nanocoder v1.27.0 is out. This release is the biggest extension surface the project has shipped: a unified extension primitive called Skills, a per-project background daemon for event-triggered runs, and a markdown-defined custom tools layer. Also: two OOM fixes, a startup config lint, and a reworked OpenRouter model picker.
+
+Built by the [Nano Collective](https://nanocollective.org) - a community collective building AI tooling not for profit, but for the community.
+
+## Skills: a unified extension primitive
+
+Nanocoder has had custom commands, subagents, and tools as separate extension types. v1.27.0 replaces that with **Skills**: a single surface that brings all three under one ergonomic model.
+
+A skill member lives in `.nanocoder/commands|agents|tools/` as a `.md` file - fully backwards-compatible with how those directories already work. The new behaviour is the **bundle** form: a directory under `.nanocoder/skills/<name>/` with a `skill.yaml` manifest and optional `commands/`, `agents/`, `tools/` subdirectories. Bundles ship and version together as a unit. A bundle's subagent automatically gets its sibling tools, scoped tools are hidden from the global tool list, and bundle commands auto-namespace (`commands/status.md` in bundle `git` invokes as `/git:status`).
+
+New `/skills` slash command lists everything loaded. Bundled members fan out into the existing `CustomCommandLoader`, `SubagentLoader`, and `ToolManager.registry` - downstream consumers keep using their familiar registries.
+
+## A per-project daemon for event-triggered skill runs
+
+Skill members can now declare `subscribe:` blocks in their frontmatter (or a bundle manifest) that wake them on `file.changed` and `schedule.cron` events. The daemon handles dispatch.
+
+Start it with `nanocoder daemon start` (stop, status, and logs are also available). It runs as a long-lived background process with a lockfile, Unix-socket IPC, and ready-to-use installers for launchd (macOS) and systemd user units (Linux). The interactive TUI never starts event sources - file watching and cron only run when you opt in via the daemon.
+
+Triggered runs execute in a new internal **headless** mode (no `ask_user`, no foreground confirmations). Per-subscription `confirm: true` opts into `plan` mode instead. The daemon backpressure-caps per-subscription concurrency and trailing-debounces `file.changed` by 500 ms so chatty save loops do not pile up.
+
+## The legacy scheduler is gone
+
+The old `source/schedule/` module (runner, storage, index, types) has been removed. Schedules are now expressed as `schedule.cron` subscriptions on a skill member. The old `useSchedulerMode` hook, `scheduler-view` component, and `.nanocoder/schedules.json` / `.nanocoder/schedules/*.md` storage layout are gone. The `/schedule` command has been trimmed and refocused.
+
+## Custom Tools: markdown-defined, model-callable tools
+
+Custom Tools sit between custom commands (prompt injection only) and full MCP servers (external process, full protocol). Drop a `.md` into `.nanocoder/tools/` (project) or `~/.config/nanocoder/tools/` (personal), declare parameters in YAML frontmatter with JSON Schema-style types, and write a shell command body using template placeholders. All substitutions are shell-quoted to prevent injection.
+
+Here is the full shape of a Custom Tool definition:
+
+```markdown
+---
+name: git_review
+description: "Run git diff and collect changed files for review"
+parameters:
+  - name: since
+    type: string
+    required: true
+    description: "Show changes more recent than this ref"
+approval: never
+read_only: true
+---
+git diff --name-only &#123;&#123;since&#125;&#125;..HEAD
+```
+
+Includes `approval` (`always`/`never`) and `read_only` flags that participate in mode policy: plan mode requires `approval=never && read_only=true`, scheduler/headless requires `approval=never`. New `/tools create <name>` scaffolds a template and asks the model to help fill it in. Project tools shadow personal ones by name, and they register into the same `ToolManager` registry as built-ins and MCP tools.
+
+## LLM-based context compaction
+
+The default `/compact` strategy is now LLM-based. The active model writes a structured markdown summary of the compressible segment (Context / Decisions / Files modified / Tools used / Open questions) using a dedicated summariser prompt, replacing the older messages with one synthetic summary. Recent messages are kept verbatim. Higher fidelity than mechanical truncation at the cost of one extra round-trip.
+
+New `strategy` field in `autoCompact` config (`llm` default, `mechanical` legacy), new CLI flags (`--llm`, `--mechanical`, `--strategy <name>`), and automatic fallback to mechanical compression on LLM failure (network error, empty response, summary larger than original).
+
+## OpenRouter request configuration
+
+A new `openrouter` block on the provider config forwards OpenRouter-specific request body fields on every request: provider routing rules, reasoning, plugins, models fallback list, `service_tier`, `route`, `user`, and so on. Always-on transport and routing concerns, not gated by `/tune`. Provider is detected by name (case-insensitive). `tune.modelParameters.reasoningEffort` populates `openrouter.reasoning.effort` when unset; explicit values on the provider config always win.
+
+## Config lint at startup
+
+Startup now surfaces common misconfigurations as warnings before they cause silent failures: an `openrouter` block on a provider that is not OpenRouter, unknown fields, type mismatches. Includes a full test suite.
+
+## OpenRouter model selection reworked
+
+The provider wizard's model selection list has been replaced with a paginated, searchable `ModelSelectionList` (12 visible items, page navigation, multi-select with running counter, select-all, error state). Browsing OpenRouter's hundreds of models is now usable from the wizard.
+
+## Unified Session Service
+
+A new Session Service consolidates the various ad-hoc keying strategies scattered across commands, handlers, and tool result display. Touched 50 files, removing duplicated key-derivation logic and shrinking `useAppState` by ~38 lines.
+
+## Nanocoder Battlemap
+
+A new long-form competitive comparison doc covers Nanocoder against Claude Code, OpenAI Codex CLI, Gemini CLI, Aider, OpenCode, Crush, and Pi across twelve axes: license, pricing, local-model support, MCP, extensibility, tool-calling, subagents, surface, plain mode, stars, contributors, and telemetry. Honest where Nanocoder leads, honest where it does not.
+
+## Fixes
+
+- **Streaming OOM on long responses.** `StreamingMessage` was calling `wrapWithTrimmedContinuations()` on the entire growing assistant message on every ~150 ms flush. A ~37k-token response would overwhelm the GC and crash the 4 GB Node heap. Now slices to a bounded tail before wrapping so per-render work is constant. Thanks to @abhishekDeshmukh74.
+
+- **Performance entry buffer OOM in long sessions.** React 19's `react-reconciler` (dev build) and Node's built-in fetch (undici) both write to the global `performance` buffer, which nanocoder was never draining. Over long subagent-heavy sessions the buffer accumulated millions of entries until V8 thrashed in mark-compact GC. Fix installs an unref'd 30s interval that clears marks and measures in the Ink render path. Thanks to @ragini-pandey.
+
+- Auto-compact now respects the per-provider `contextWindow` override instead of computing the threshold against the model's default context window.
+
+- Errors from AI SDK providers now surface meaningful messages (status codes, body excerpts, nested fields) instead of `[object Object]`.
+
+- Removed dead MCP server discovery hosts from the wizard templates (`remote.mcpservers.org` etc.). Companion guard in `mcp-client` prevents the wizard from surfacing entries it cannot reach.
+
+- Markdown parser regressions fixed: indented fenced code blocks, fenced blocks inside blockquotes, and indented list continuations all extract correctly now. Indented-code extraction removed from the shared parser - only fenced blocks split out for copyable rendering.
+
+- Code blocks are now copyable without surrounding ASCII box borders that previously got copied into the clipboard. Thanks to @aravindinduri.
+
+- System prompt tightened to reduce over-eager task list creation on small jobs and to avoid markdown tables in model output (they render poorly in the terminal).
+
+- Nix packaging updated for pnpm 11 via `pkgs.pnpm_11`. Drops version-override scaffolding and postInstall hacks. Re-enables the `update-nix.yml` workflow.
+
+Full changelog at [https://github.com/Nano-Collective/nanocoder/blob/main/CHANGELOG.md](https://github.com/Nano-Collective/nanocoder).]]></content>
+        <author>
+            <name>will-lamerton</name>
+        </author>
+        <category label="Nanocoder"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[get-md v1.5.0: Pluggable LLMs, batch crawling, and RAG helpers]]></title>
+        <id>https://nanocollective.org/blog/get-md-v150-pluggable-llms-batch-crawling-and-rag-helpers-47</id>
+        <link href="https://nanocollective.org/blog/get-md-v150-pluggable-llms-batch-crawling-and-rag-helpers-47"/>
+        <updated>2026-05-26T20:42:56.000Z</updated>
+        <summary type="html"><![CDATA[
+get-md v1.5.0 is out. This is the biggest release since v1.0, with five new capabilities stacked on top of a full surface audit that fixed a dozen small issues. Here's what changed.
+
+Built by the [Nano Collective](https://nanocollective.org), a community collective building AI tooling not for profit, but for the community.
+
+## Pluggable LLM backend
+
+v1.5.0 makes the LLM backend pluggable instead of hard-wired to local `ReaderLM-v2`. It now routes through whichever provider you configure,]]></summary>
+        <content type="html"><![CDATA[
+get-md v1.5.0 is out. This is the biggest release since v1.0, with five new capabilities stacked on top of a full surface audit that fixed a dozen small issues. Here's what changed.
+
+Built by the [Nano Collective](https://nanocollective.org), a community collective building AI tooling not for profit, but for the community.
+
+## Pluggable LLM backend
+
+v1.5.0 makes the LLM backend pluggable instead of hard-wired to local `ReaderLM-v2`. It now routes through whichever provider you configure, using the same `sdkProvider` shape as [Nanotune](https://github.com/Nano-Collective/nanotune) and [Nanocoder](https://github.com/Nano-Collective/nanocoder), so one config covers the whole Nano Collective stack.
+
+Supported providers: `openai-compatible` (Ollama, OpenRouter, Together, Groq, LM Studio, OpenAI, vLLM), `anthropic`, `google`, and `local-llama`. Peer dependencies are optional. Install only the provider you actually use. Missing peer deps surface a clear "install this" error instead of `ERR_MODULE_NOT_FOUND`.
+
+Config files now support `${ENV_VAR}` and `${VAR:-default}` substitution, so `apiKey` values stay out of committed files. CLI flags `--llm-provider`, `--llm-base-url`, `--llm-model`, and `--llm-api-key` handle everything. Run `--show-config` to inspect your current setup; API keys are redacted.
+
+Default behaviour is unchanged: existing setups with `useLLM: true` and no explicit provider continue to use `local-llama` as before.
+
+## Batch mode
+
+Two new API functions handle bulk URL conversion:
+
+```typescript
+// Yields per-URL results as they complete
+const batch = convertBatch(urls, { concurrency: 5 });
+for await (const result of batch) {
+  console.log(result.markdown);
+}
+
+// Convenience: buffers everything into an array
+const all = await convertBatchAll(urls, options);
+```
+
+CLI batch mode reads a file of URLs (one per line, `#` comments and blanks stripped), writes one `.md` per URL to an output directory, and produces a JSON manifest summary alongside. Concurrency, error handling, file naming patterns, and JSONL output are all configurable from the CLI.
+
+## Sitemap crawling
+
+`parseSitemap` fetches and parses a sitemap URL, recursively follows `<sitemapindex>` entries, and returns a flat list of all discovered URLs. `convertSitemap` composes that with the batch converter for a complete crawl-and-convert pipeline.
+
+CLI usage:
+
+```bash
+getmd --sitemap https://example.com/sitemap.xml \
+  --include "**/blog/**" \
+  --exclude "**/drafts/**" \
+  --max-depth 3 \
+  --max-urls 10000
+```
+
+Glob filtering applies with `*` matching no slashes and `**` matching any characters. Default max depth is 3; default max URL count is 10000.
+
+## RAG ingestion helpers
+
+Two new exports make `get-md` composable as a RAG ingestion building block:
+
+`chunkMarkdown(md, { maxTokens, overlap?, includeHeadingPath? })` splits markdown at heading boundaries. Each chunk carries the full heading path from root to its parent heading, prepended as an introductory line on continuation chunks. Overlap controls how many chunks carry a trailing overlap window from the previous chunk.
+
+`estimateTokens(text)` provides a chars/4 heuristic for quick context-window budgeting. It is also surfaced automatically on `ConversionStats.estimatedTokens` for every single-URL conversion, so you get token estimates without any extra calls.
+
+Both are available as standalone exports and are documented in the new API utilities guide.
+
+## Image localisation
+
+`convertToMarkdown` now accepts a `downloadImages: '<dir>'` option. It downloads referenced images in parallel, rewrites their `src` in the markdown to point at the local copies, and handles per-image failures gracefully. A single failed image prints a warning but never aborts the conversion. URL deduplication means a shared image referenced across multiple pages is downloaded once.
+
+The CLI mirrors this with `--download-images <dir>`. When the positional input is a URL, the CLI now sets that URL as the implicit `baseUrl` so relative image refs (`/images/logo.svg`) resolve correctly without needing `--base-url`.
+
+The HTML cleaner preserves lazy-load attributes (`data-src`, `data-original`, `data-lazy-src`, `srcset`) and resolves them against the base URL, which means Wikipedia, Medium, Substack, and most modern blog platforms produce complete image references instead of 1x1 placeholders.
+
+## HTTP cache and retry
+
+Transient failure handling is now built in. The converter retries on network errors, 5xx responses, and 429 rate-limit responses. Exponential backoff with up to 25% jitter is applied. On 429, it reads the `Retry-After` header and respects it (handles both the seconds form and HTTP-date).
+
+An opt-in file-system cache (`~/.get-md/cache` or a custom path) skips the network entirely on cache hits. TTL is configurable per-call. Cache failures fall back to a live fetch rather than throwing, so the cache is always non-blocking.
+
+CLI flags: `--retries`, `--retry-delay`, `--cache`, `--cache-dir`, `--cache-max-age <seconds>`.
+
+## Safer fetches
+
+A `maxBytes` option (default 10MB) caps what the fetcher will accept. If `Content-Length` declares more, the fetch is aborted before downloading. If a server omits or lies about the header, the stream is aborted mid-flight before unbounded buffering can occur. Combined with the retry and cache layers, the fetch path is now hardened against hostile or misbehaving sources.
+
+## Image and output path fixes
+
+Two longstanding rough edges are smoothed. Nested output paths like `--output ./nested/file.md` now auto-create the parent directory instead of crashing. And the model description copy that previously said "986MB" (the old legacy model) is corrected to "1.12GB" everywhere.
+
+## Documentation
+
+New API reference pages: `docs/api/batch.md`, `docs/api/sitemap.md`, and `docs/api/utilities.md`. The API index (`docs/api/index.md`) is restructured with every public export linked. The Conversion API page now uses "Conversion API" as its section label while keeping the same URL slug so existing deep links stay valid.
+
+New guides: `docs/guides/remote-llm.md`, `docs/guides/batch.md`, and `docs/guides/sitemap.md`. Manual smoke-test crib sheets live in the repo root: `SMOKE_TESTS.md`, `CRAWL_SITEMAP.md`, `TEST_IMAGES.md`.
+
+## Tests
+
+528 tests (up from 405 at 1.4.1). New coverage for retry on 5xx/429/network errors, HTTP cache hit/miss/TTL, image localisation with relative refs and baseUrl, protocol-relative URLs, sitemap parsing (flat and nested), batch concurrency, chunking at heading boundaries, env-vars in config, and JSON output in both single and JSONL modes.
+
+## What was fixed
+
+- `--version` now reads from `package.json` at runtime instead of printing a hardcoded value.
+- `llmMaxTokens` default lowered to 8192. The documented 512000 was always capped at 8192 internally. The fix is accuracy rather than behaviour.
+- Stale `dist/parsers/json-parser.*` removed. `ajv` dependency dropped (unused in `src/`).
+- Custom-rule state leak fixed: `MarkdownParser` now constructs a fresh `TurndownService` per `convert()` call.
+- `Required<MarkdownOptions>` cast replaced with a proper `NormalizedMarkdownOptions` type, closing a type hole.
+- `-o ./nested/file.md` now creates parent directories.
+
+## Upgrading
+
+Upgrade from npm:
+
+```bash
+npm install @nanocollective/get-md@latest
+```
+
+Or with pnpm:
+
+```bash
+pnpm add @nanocollective/get-md@latest
+```
+
+Node.js 22 or later is required. If you use the LLM path, check the new [Remote LLM Providers guide](docs/guides/remote-llm.md) if you want to switch away from the local model.
+
+If you hit any issues or want to discuss the new features, open an issue or find us on [Discord](https://discord.gg/ktPDV6rekE).
+
+Repo: https://github.com/Nano-Collective/get-md
+]]></content>
+        <author>
+            <name>will-lamerton</name>
+        </author>
+        <category label="Packages"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Nanocoder v1.26.0 is out. Here is what changed and why it matters.]]></title>
         <id>https://nanocollective.org/blog/nanocoder-v1260-is-out-here-is-what-changed-and-why-it-matters-43</id>
