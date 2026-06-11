@@ -110,6 +110,13 @@ export const CONTRIBUTORS: Contributor[] = [
     bio: "Deniz is working on mobile and browser games. In his free time he enjoys building AI-powered productivity tools.",
   },
   {
+    name: "Dhirender Choudhary",
+    photo: "dhirender-choudhary.png",
+    github: "Dhirenderchoudhary",
+    website: "https://dhirenderchoudhary.com/",
+    bio: "Building scalable backends & cloud systems ⚙️ Node.js • APIs • DevOps • Open Source",
+  },
+  {
     name: "Caleb Grenko",
     photo: "grenko_caleb.jpg",
     github: "grenkoca",
