@@ -1,7 +1,16 @@
 import Link from "next/link";
+import { SponsorLogo } from "@/components/SponsorLogo";
 import { Button } from "@/components/ui/button";
+import { allSponsors } from "@/lib/sponsors";
 
 export function SupportedBySection() {
+  // Show real sponsors first, then fill the remaining slots (3 total) with
+  // open "Your brand here" placeholders linking to the sponsor page.
+  const placeholders = ["a", "b", "c"].slice(
+    0,
+    Math.max(0, 3 - allSponsors.length),
+  );
+
   return (
     <section className="py-20 border-t border-border/40">
       <div className="container mx-auto px-4">
@@ -16,9 +25,17 @@ export function SupportedBySection() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto pt-2">
-            {[0, 1, 2].map((i) => (
+            {allSponsors.map((sponsor) => (
+              <SponsorLogo
+                key={sponsor.name}
+                sponsor={sponsor}
+                className="h-28 px-6"
+                imgClassName="max-h-12"
+              />
+            ))}
+            {placeholders.map((slot) => (
               <Link
-                key={i}
+                key={slot}
                 href="/sponsor"
                 className="group flex h-28 items-center justify-center rounded-xl border-2 border-dashed border-border/60 bg-background/50 transition-all hover:border-primary/40 hover:bg-accent/30"
               >

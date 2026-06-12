@@ -11,6 +11,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { FaDiscord, FaGithub } from "react-icons/fa";
 import Footer from "@/components/footer";
+import { SponsorLogo } from "@/components/SponsorLogo";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,6 +22,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { fetchTotalDownloads } from "@/lib/npm-stats";
+import { builderSponsors, supporterSponsors } from "@/lib/sponsors";
 
 interface SponsorPageProps {
   totalDownloads: number;
@@ -182,9 +184,9 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                   Current sponsors
                 </h2>
                 <p className="text-lg text-muted-foreground leading-relaxed max-w-4xl">
-                  The sponsorship program is newly launched. Every spot below is
-                  open. The first organisations in at each tier set the tone for
-                  the rest.
+                  The sponsorship program is newly launched. Most spots below
+                  are still open. The first organisations in at each tier set
+                  the tone for the rest.
                 </p>
               </div>
 
@@ -198,19 +200,29 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                   </span>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  {[0, 1, 2].map((i) => (
-                    <a
-                      key={i}
-                      href="https://discord.gg/ktPDV6rekE"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group flex h-32 items-center justify-center rounded-xl border-2 border-dashed border-border/60 bg-background/50 transition-all hover:border-primary/40 hover:bg-accent/30"
-                    >
-                      <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">
-                        Your brand here
-                      </span>
-                    </a>
+                  {builderSponsors.map((sponsor) => (
+                    <SponsorLogo
+                      key={sponsor.name}
+                      sponsor={sponsor}
+                      className="h-32 px-8"
+                      imgClassName="max-h-16"
+                    />
                   ))}
+                  {["b1", "b2", "b3"]
+                    .slice(0, Math.max(0, 3 - builderSponsors.length))
+                    .map((slot) => (
+                      <a
+                        key={slot}
+                        href="https://discord.gg/ktPDV6rekE"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex h-32 items-center justify-center rounded-xl border-2 border-dashed border-border/60 bg-background/50 transition-all hover:border-primary/40 hover:bg-accent/30"
+                      >
+                        <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">
+                          Your brand here
+                        </span>
+                      </a>
+                    ))}
                 </div>
               </div>
 
@@ -224,19 +236,29 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                   </span>
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                  {[0, 1, 2, 3].map((i) => (
-                    <a
-                      key={i}
-                      href="https://opencollective.com/nano-collective"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group flex h-24 items-center justify-center rounded-xl border-2 border-dashed border-border/60 bg-background/50 transition-all hover:border-primary/40 hover:bg-accent/30"
-                    >
-                      <span className="text-xs font-medium text-muted-foreground group-hover:text-foreground transition-colors">
-                        Your brand here
-                      </span>
-                    </a>
+                  {supporterSponsors.map((sponsor) => (
+                    <SponsorLogo
+                      key={sponsor.name}
+                      sponsor={sponsor}
+                      className="h-24 px-5"
+                      imgClassName="max-h-12"
+                    />
                   ))}
+                  {["s1", "s2", "s3", "s4"]
+                    .slice(0, Math.max(0, 4 - supporterSponsors.length))
+                    .map((slot) => (
+                      <a
+                        key={slot}
+                        href="https://opencollective.com/nano-collective"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex h-24 items-center justify-center rounded-xl border-2 border-dashed border-border/60 bg-background/50 transition-all hover:border-primary/40 hover:bg-accent/30"
+                      >
+                        <span className="text-xs font-medium text-muted-foreground group-hover:text-foreground transition-colors">
+                          Your brand here
+                        </span>
+                      </a>
+                    ))}
                 </div>
               </div>
 
