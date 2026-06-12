@@ -168,4 +168,10 @@ export const CONTRIBUTORS: Contributor[] = [
     website: "https://omeey.vercel.app/",
     bio: "Full Stack Developer",
   },
+  {
+    name: "Rakshith N",
+    photo: "rakshithn.jpg",
+    github: "rakshith1928",
+    bio: "Learning, building, and contributing.",
+  }
 ];
