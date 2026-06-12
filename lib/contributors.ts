@@ -173,5 +173,5 @@ export const CONTRIBUTORS: Contributor[] = [
     photo: "rakshithn.jpg",
     github: "rakshith1928",
     bio: "Learning, building, and contributing.",
-  }
+  },
 ];
