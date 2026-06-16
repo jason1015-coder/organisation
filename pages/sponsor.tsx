@@ -21,11 +21,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { fetchTotalVisits } from "@/lib/cloudflare-stats";
 import { fetchTotalDownloads } from "@/lib/npm-stats";
 import { builderSponsors, supporterSponsors } from "@/lib/sponsors";
 
 interface SponsorPageProps {
   totalDownloads: number;
+  monthlyVisitors: number;
 }
 
 const projects = [
@@ -106,9 +108,14 @@ const tiers = [
   },
 ];
 
-export default function Sponsor({ totalDownloads }: SponsorPageProps) {
+export default function Sponsor({
+  totalDownloads,
+  monthlyVisitors,
+}: SponsorPageProps) {
   const downloadsLabel =
     totalDownloads > 0 ? totalDownloads.toLocaleString() : null;
+  const visitorsLabel =
+    monthlyVisitors > 0 ? monthlyVisitors.toLocaleString() : null;
 
   return (
     <>
@@ -322,7 +329,18 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                       to date across them
                     </>
                   ) : null}
-                  . Live download counts, release history, and growth statistics
+                  .
+                  {visitorsLabel ? (
+                    <>
+                      {" "}
+                      Our sites draw{" "}
+                      <strong className="text-foreground">
+                        {visitorsLabel} monthly visitors
+                      </strong>{" "}
+                      across nanocollective.org and our docs.
+                    </>
+                  ) : null}{" "}
+                  Live download counts, release history, and growth statistics
                   are published at{" "}
                   <Link href="/growth" className="text-primary hover:underline">
                     nanocollective.org/growth
@@ -806,11 +824,15 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
 }
 
 export const getStaticProps: GetStaticProps<SponsorPageProps> = async () => {
-  const totalDownloads = await fetchTotalDownloads();
+  const [totalDownloads, monthlyVisitors] = await Promise.all([
+    fetchTotalDownloads(),
+    fetchTotalVisits(),
+  ]);
 
   return {
     props: {
       totalDownloads,
+      monthlyVisitors,
     },
   };
 };

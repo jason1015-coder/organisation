@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useMemo, useState } from "react";
 import { GrowthChart } from "@/components/GrowthChart";
 import { GrowthMetrics } from "@/components/GrowthMetrics";
+import { TrafficSection } from "@/components/TrafficSection";
 import {
   Select,
   SelectContent,
@@ -10,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { fetchTraffic, type SiteTraffic } from "@/lib/cloudflare-stats";
 
 interface DownloadData {
   date: string;
@@ -33,10 +35,15 @@ interface PackageData {
 
 interface GrowthPageProps {
   packages: PackageData[];
+  traffic: SiteTraffic[];
   lastUpdated: string;
 }
 
-export default function Growth({ packages, lastUpdated }: GrowthPageProps) {
+export default function Growth({
+  packages,
+  traffic,
+  lastUpdated,
+}: GrowthPageProps) {
   const [selectedPackage, setSelectedPackage] = useState<string>("__all__");
   const [timePeriod, setTimePeriod] = useState<string>("last-30-days");
 
@@ -309,6 +316,9 @@ export default function Growth({ packages, lastUpdated }: GrowthPageProps) {
               releases={filteredReleases}
             />
           </div>
+
+          {/* Website Traffic */}
+          <TrafficSection traffic={traffic} />
         </div>
       </div>
     </>
@@ -408,36 +418,37 @@ export const getStaticProps: GetStaticProps<GrowthPageProps> = async () => {
         0,
       );
 
-      // Fetch GitHub releases
+      // Fetch GitHub releases. Non-fatal: if this fails, the package still
+      // renders its download data, just without release markers.
+      const ghToken = process.env.GH_TOKEN || process.env.GITHUB_TOKEN;
+      let releases: Release[] = [];
+
       const githubResponse = await fetch(
         `https://api.github.com/repos/${config.githubRepo}/releases`,
         {
-          headers: process.env.GH_TOKEN
-            ? { Authorization: `token ${process.env.GH_TOKEN}` }
-            : {},
+          headers: ghToken ? { Authorization: `token ${ghToken}` } : {},
         },
       );
 
-      if (!githubResponse.ok) {
+      if (githubResponse.ok) {
+        const githubData = (await githubResponse.json()) as Array<{
+          tag_name: string;
+          published_at: string;
+          name: string | null;
+        }>;
+
+        releases = githubData
+          .map((release) => ({
+            tag: `${config.displayName} ${release.tag_name}`,
+            date: release.published_at.split("T")[0],
+            name: `${config.displayName} ${release.tag_name}`,
+          }))
+          .reverse(); // Oldest first
+      } else {
         console.error(
-          `GitHub API error for ${config.githubRepo}: ${githubResponse.status}`,
+          `GitHub API error for ${config.githubRepo}: ${githubResponse.status} (releases skipped)`,
         );
-        continue;
       }
-
-      const githubData = (await githubResponse.json()) as Array<{
-        tag_name: string;
-        published_at: string;
-        name: string | null;
-      }>;
-
-      const releases: Release[] = githubData
-        .map((release) => ({
-          tag: `${config.displayName} ${release.tag_name}`,
-          date: release.published_at.split("T")[0],
-          name: `${config.displayName} ${release.tag_name}`,
-        }))
-        .reverse(); // Oldest first
 
       packages.push({
         packageName: config.packageName,
@@ -452,9 +463,12 @@ export const getStaticProps: GetStaticProps<GrowthPageProps> = async () => {
     }
   }
 
+  const traffic = await fetchTraffic();
+
   return {
     props: {
       packages,
+      traffic,
       lastUpdated: new Date().toISOString(),
     },
     revalidate: false, // Static export, no ISR
