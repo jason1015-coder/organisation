@@ -158,7 +158,7 @@ export default function AsciiWebsiteBackgroundGenerated() {
           }}
         >
           {(() => {
-            const text = FRAMES[currentFrame];
+            const text = FRAMES[currentFrame].replace(/\s+$/, '');
             const threshold = APPEARANCE.textEffectThreshold;
 
             if (!text || effect === "none" || threshold <= 0 || !CHARS) {

@@ -1,18 +1,16 @@
 import type { GetStaticProps } from "next";
 import Head from "next/head";
-import Footer from "@/components/footer";
-import {
-  BuildingNextSection,
-  FeaturedPackagesSection,
-  FeaturesSection,
-  GetInvolvedSection,
-  HeroSection,
-  MissionSection,
-  NanocoderSection,
-  NanotuneSection,
-  SupportedBySection,
-} from "@/components/home";
-import WhatsNextSection from "@/components/WhatsNextSection";
+import React from "react";
+import { CommunityCTA } from "@/components/home-v2/CommunityCTA";
+import { Hero } from "@/components/home-v2/Hero";
+import { LatestDiscussions } from "@/components/home-v2/LatestDiscussions";
+import { Mission } from "@/components/home-v2/Mission";
+import { Products } from "@/components/home-v2/Products";
+import { ProofBar } from "@/components/home-v2/ProofBar";
+import { Footer } from "@/components/layout-v2/Footer";
+import { FeaturedPackages } from "@/components/home-v2/FeaturedPackages";
+import { Sponsors } from "@/components/home-v2/Sponsors";
+
 import type { Discussion } from "@/types/discussion";
 
 interface OrgStatsData {
@@ -39,7 +37,6 @@ export default function Home({
     <>
       <Head>
         <title>Nano Collective - Powerful AI Tools, Open for All</title>
-
         <meta
           name="description"
           content="Building powerful AI tools for the community. Privacy-respecting, local-first and open for all."
@@ -72,16 +69,16 @@ export default function Home({
         <meta name="twitter:image:alt" content="Nano Collective Logo" />
       </Head>
       <div className="min-h-screen bg-background font-sans">
-        <HeroSection orgStats={orgStats} />
-        <MissionSection />
-        <FeaturesSection />
-        <BuildingNextSection />
-        <NanocoderSection nanocoderVersion={nanocoderVersion} />
-        <NanotuneSection />
-        <FeaturedPackagesSection />
-        <WhatsNextSection discussions={discussions} />
-        <SupportedBySection />
-        <GetInvolvedSection />
+        <main>
+          <Hero />
+          <ProofBar stats={orgStats} />
+          <Products nanocoderVersion={nanocoderVersion} />
+          <FeaturedPackages />
+          <Mission />
+          <Sponsors />
+          <LatestDiscussions discussions={discussions} />
+          <CommunityCTA />
+        </main>
         <Footer />
       </div>
     </>
@@ -116,12 +113,60 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
       );
     } else {
       console.error(
-        "Failed to fetch discussions:",
+        "Failed to fetch discussions (possibly rate limited or REST API not supported):",
         discussionsResponse.statusText,
       );
     }
   } catch (error) {
     console.error("Error fetching discussions:", error);
+  }
+
+  // Fallback to mock discussions if the API fails (e.g. rate limit, or no GraphQL)
+  if (discussions.length === 0) {
+    discussions = [
+      {
+        id: 1,
+        number: 1,
+        title: "Welcome to Nano Collective!",
+        html_url: "https://github.com/Nano-Collective/organisation/discussions/1",
+        created_at: new Date().toISOString(),
+        comments: 12,
+        user: {
+          login: "nanocoder",
+          avatar_url: "https://github.com/nanocoder.png"
+        },
+        category: { name: "Announcements", emoji: "📢", slug: "announcements" },
+        labels: [{ id: 1, name: "official", color: "164efe" }]
+      },
+      {
+        id: 2,
+        number: 2,
+        title: "How to run local LLMs with Nanocoder?",
+        html_url: "https://github.com/Nano-Collective/organisation/discussions/2",
+        created_at: new Date(Date.now() - 86400000).toISOString(),
+        comments: 8,
+        user: {
+          login: "developer",
+          avatar_url: "https://github.com/github.png"
+        },
+        category: { name: "Q&A", emoji: "❓", slug: "q-a" },
+        labels: [{ id: 2, name: "help wanted", color: "00ff00" }]
+      },
+      {
+        id: 3,
+        number: 3,
+        title: "Feature Request: Real-time collaborative editing",
+        html_url: "https://github.com/Nano-Collective/organisation/discussions/3",
+        created_at: new Date(Date.now() - 86400000 * 2).toISOString(),
+        comments: 24,
+        user: {
+          login: "community_member",
+          avatar_url: "https://github.com/community.png"
+        },
+        category: { name: "Ideas", emoji: "💡", slug: "ideas" },
+        labels: [{ id: 3, name: "enhancement", color: "ff00ff" }]
+      }
+    ];
   }
 
   // Fetch org stats

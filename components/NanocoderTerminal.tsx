@@ -223,9 +223,9 @@ export default function NanocoderTerminal({
         </div>
 
         {/* Terminal Content */}
-        <div className="p-6 font-mono text-sm overflow-x-auto">
-          {/* cfonts-style ASCII Header (tiny font) */}
-          <div className="mb-12 text-sm leading-tight font-bold select-none">
+        <div className="p-4 sm:p-6 font-mono text-[10px] sm:text-sm overflow-x-auto w-full">
+          {/* cfonts-style ASCII Header */}
+          <div className="mb-8 sm:mb-12 text-[10px] sm:text-sm leading-none sm:leading-tight font-bold select-none whitespace-pre">
             <div
               className="bg-clip-text text-transparent"
               style={{
@@ -242,7 +242,7 @@ export default function NanocoderTerminal({
 
           {/* Tips Section with Welcome Banner */}
           <div
-            className="inline-block px-2 py-0 mb-2 text-xs"
+            className="inline-block px-2 py-1 mb-2 font-bold"
             style={{
               backgroundColor: colors.primary,
               color: colors.base,
@@ -251,7 +251,7 @@ export default function NanocoderTerminal({
             ✱ Welcome to Nanocoder {version} ✱
           </div>
           <div
-            className="rounded-md p-4 pt-5 mb-6 relative text-xs"
+            className="rounded-md p-3 sm:p-4 pt-4 sm:pt-5 mb-4 sm:mb-6 relative"
             style={{
               borderColor: colors.primary,
               borderWidth: "1px",
@@ -281,7 +281,7 @@ export default function NanocoderTerminal({
 
           {/* Status Line */}
           <div
-            className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-6 pt-3 text-xs"
+            className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-4 sm:mb-6 pt-2 sm:pt-3"
             style={{ borderColor: `${colors.secondary}33` }}
           >
             <span style={{ color: colors.info, fontWeight: "bold" }}>
@@ -301,13 +301,13 @@ export default function NanocoderTerminal({
 
           {/* Prompt Section */}
           <div
-            className="mb-2 text-xs"
+            className="mb-2"
             style={{ color: colors.primary, fontWeight: "bold" }}
           >
             What would you like me to help with?
           </div>
           <div
-            className="space-y-1 text-xs p-3"
+            className="space-y-1 p-2 sm:p-3"
             style={{
               backgroundColor: colors.base,
               borderLeft: `2px solid ${colors.primary}`,
@@ -321,7 +321,7 @@ export default function NanocoderTerminal({
             </div>
           </div>
           <div
-            className="flex items-center gap-2 mt-3 text-xs"
+            className="flex items-center gap-2 mt-2 sm:mt-3"
             style={{ color: colors.secondary }}
           >
             <span>▶</span> normal mode on{" "}

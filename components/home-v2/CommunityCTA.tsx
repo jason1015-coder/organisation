@@ -2,15 +2,15 @@ import React from "react";
 
 export function CommunityCTA() {
   return (
-    <section className="py-32 px-6 bg-[#0000EE] text-white">
+    <section className="py-20 md:py-32 px-4 md:px-6 bg-[#0000EE] text-white">
       <div className="container mx-auto max-w-3xl text-center">
-        <div className="font-mono text-sm font-bold uppercase tracking-widest mb-6 opacity-80">
+        <div className="font-mono text-xs md:text-sm font-bold uppercase tracking-widest mb-6 opacity-80">
           [ Join the Collective ]
         </div>
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-8">
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 md:mb-8">
           Build with us.
         </h2>
-        <p className="text-lg md:text-xl opacity-90 mb-12 leading-relaxed max-w-2xl mx-auto">
+        <p className="text-sm sm:text-lg md:text-xl opacity-90 mb-12 leading-relaxed max-w-2xl mx-auto">
           Join contributors building open-source AI tools for developers. Help
           shape the future of local-first artificial intelligence.
         </p>

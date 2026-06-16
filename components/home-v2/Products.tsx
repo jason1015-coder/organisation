@@ -9,28 +9,28 @@ interface ProductsProps {
 
 export function Products({ nanocoderVersion }: ProductsProps) {
   return (
-    <section id="products" className="py-24 px-6 container mx-auto">
-      <div className="mb-16 border-b border-black pb-8">
-        <h2 className="text-4xl font-bold tracking-tight text-black mb-4">
+    <section id="products" className="py-12 md:py-24 px-4 md:px-6 container mx-auto">
+      <div className="mb-8 sm:mb-16 border-b border-black pb-4 sm:pb-8">
+        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-black mb-4">
           Featured Projects
         </h2>
-        <p className="text-lg text-black/70 font-mono">
+        <p className="text-sm sm:text-lg text-black/70 font-mono">
           Open-source tools built by the community.
         </p>
       </div>
 
-      <div className="flex flex-col gap-16">
+      <div className="flex flex-col gap-8 sm:gap-16">
         {/* Nanocoder Card */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-0 items-stretch bg-white border border-black group relative">
-          <div className="space-y-8 p-8 lg:p-12 lg:pr-16 lg:border-r border-black flex flex-col justify-center">
-            <div className="space-y-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-12 lg:gap-0 items-stretch bg-white border border-black group relative">
+          <div className="space-y-4 sm:space-y-8 p-8 lg:p-12 lg:pr-16 lg:border-r border-black flex flex-col justify-center">
+            <div className="space-y-2 sm:space-y-4">
               <div className="inline-flex items-center gap-3 mb-2">
-                <span className="font-mono text-sm font-bold text-[#0000EE]">
+                <span className="font-mono text-xs sm:text-sm font-bold text-[#0000EE]">
                   [ 01 ]
                 </span>
-                <h3 className="text-3xl font-bold tracking-tight">Nanocoder</h3>
+                <h3 className="text-2xl md:text-3xl font-bold tracking-tight">Nanocoder</h3>
               </div>
-              <p className="text-lg text-black/70 leading-relaxed">
+              <p className="text-sm sm:text-lg text-black/70 leading-relaxed">
                 An open-source, local-first coding agent. Automate your
                 workflows without sending your proprietary code to the cloud.
               </p>
@@ -65,35 +65,24 @@ export function Products({ nanocoderVersion }: ProductsProps) {
             </div>
           </div>
 
-          <div className="p-8 lg:p-12 bg-[#FAFAFA] flex items-center justify-center relative overflow-hidden">
-            <div className="w-full relative z-10">
+          <div className="bg-[#FAFAFA] p-4 md:p-8 flex items-center justify-center overflow-hidden">
+            <div className="w-full max-w-full">
               <NanocoderTerminal version={nanocoderVersion} themeMode="light" variant="brutalist" />
             </div>
           </div>
         </div>
 
         {/* Nanotune Card */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-0 items-stretch bg-white border border-black group relative">
-          <div className="p-8 lg:p-12 bg-[#FAFAFA] flex items-center justify-center relative overflow-hidden lg:order-last lg:border-l border-black">
-            <div className="w-full relative z-10 border border-black bg-white">
-              {/* biome-ignore lint/performance/noImgElement: GIF animation needs native img */}
-              <img
-                src="/nanotune/example.gif"
-                alt="Nanotune CLI demonstration"
-                className="w-full h-auto object-contain invert hue-rotate-180 contrast-[1.1] brightness-[1.1]"
-              />
-            </div>
-          </div>
-
-          <div className="space-y-8 p-8 lg:p-12 flex flex-col justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-12 lg:gap-0 items-stretch bg-white border border-black group relative">
+          <div className="space-y-4 sm:space-y-8 p-8 lg:p-12 flex flex-col justify-center">
             <div className="space-y-4">
               <div className="inline-flex items-center gap-3 mb-2">
-                <span className="font-mono text-sm font-bold text-[#0000EE]">
+                <span className="font-mono text-xs sm:text-sm font-bold text-[#0000EE]">
                   [ 02 ]
                 </span>
-                <h3 className="text-3xl font-bold tracking-tight">Nanotune</h3>
+                <h3 className="text-2xl md:text-3xl font-bold tracking-tight">Nanotune</h3>
               </div>
-              <p className="text-lg text-black/70 leading-relaxed">
+              <p className="text-sm sm:text-lg text-black/70 leading-relaxed">
                 Fine-tune LLMs locally on your own hardware. Optimize weights
                 for your specific workflows effortlessly.
               </p>
@@ -121,6 +110,16 @@ export function Products({ nanocoderVersion }: ProductsProps) {
               >
                 Explore Nanotune
               </Link>
+            </div>
+          </div>
+          <div className="bg-[#FAFAFA] p-4 md:p-8 flex items-center justify-center overflow-hidden lg:order-last lg:border-l border-black">
+            <div className="w-full relative z-10 border border-black bg-white">
+              {/* biome-ignore lint/performance/noImgElement: GIF animation needs native img */}
+              <img
+                src="/nanotune/example.gif"
+                alt="Nanotune CLI demonstration"
+                className="w-full h-auto object-contain invert hue-rotate-180 contrast-[1.1] brightness-[1.1]"
+              />
             </div>
           </div>
         </div>

@@ -27,14 +27,14 @@ export function ProofBar({ stats }: ProofBarProps) {
   return (
     <section className="border-y-2 border-black bg-white">
       <div className="container mx-auto px-6 py-6">
-        <div className="flex flex-wrap justify-between items-center gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-2 md:flex md:flex-wrap md:justify-between items-start md:items-center gap-y-8 gap-x-4 max-w-5xl mx-auto">
           {metrics.map((metric, i) => (
             <React.Fragment key={metric.label}>
-              <div className="flex flex-col items-start gap-1">
-                <span className="font-mono text-xl md:text-2xl font-bold tracking-tight text-black">
+              <div className="flex flex-col items-center sm:items-start gap-1">
+                <span className="font-mono text-xl md:text-3xl font-bold tracking-tight text-black">
                   {metric.value}
                 </span>
-                <span className="text-xs font-mono text-black/60 uppercase tracking-widest font-semibold">
+                <span className="text-[10px] sm:text-xs font-mono text-black/60 uppercase tracking-widest font-semibold">
                   {metric.label}
                 </span>
               </div>

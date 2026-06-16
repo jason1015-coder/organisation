@@ -11,8 +11,8 @@ export function LatestDiscussions({ discussions }: LatestDiscussionsProps) {
   const recentDiscussions = discussions.slice(0, 5);
 
   return (
-    <section className="py-24 px-6 container mx-auto max-w-4xl bg-white">
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4 border-b border-black pb-4">
+    <section className="py-12 md:py-24 px-4 md:px-6 container mx-auto max-w-4xl bg-white">
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 sm:mb-12 gap-4 border-b border-black pb-4">
         <div>
           <h2 className="text-3xl font-bold tracking-tight text-black mb-2">
             Latest Updates
@@ -39,7 +39,7 @@ export function LatestDiscussions({ discussions }: LatestDiscussionsProps) {
             className={`group flex flex-col md:flex-row md:items-center justify-between py-6 transition-colors ${index !== recentDiscussions.length - 1 ? "border-b border-black/20" : ""}`}
           >
             <div className="space-y-1 mb-2 md:mb-0 pr-4">
-              <h3 className="font-bold text-lg text-black group-hover:text-[#0000EE] transition-colors leading-tight">
+              <h3 className="font-bold text-md sm:text-lg text-black group-hover:text-[#0000EE] transition-colors leading-tight">
                 {discussion.title}
               </h3>
               <div className="flex items-center gap-3 text-xs text-black/60 font-mono mt-2">
@@ -52,7 +52,7 @@ export function LatestDiscussions({ discussions }: LatestDiscussionsProps) {
             </div>
 
             <time
-              className="text-sm text-black/60 font-mono shrink-0 uppercase tracking-widest"
+              className="text-xs sm:text-sm text-black/60 font-mono shrink-0 uppercase tracking-widest"
               dateTime={discussion.created_at}
             >
               {new Date(discussion.created_at).toLocaleDateString("en-US", {
