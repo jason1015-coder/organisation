@@ -6,9 +6,11 @@ import { defaultTheme, type Theme, type ThemePreset, themes } from "@/types/ui";
 interface NanocoderTerminalProps {
   onThemeChange?: (theme: Theme) => void;
   version?: string;
+  themeMode?: "dark" | "light" | "mixed";
+  variant?: "default" | "brutalist";
 }
 
-const themeKeys: ThemePreset[] = [
+const darkThemeKeys: ThemePreset[] = [
   "tokyo-night",
   "synthwave-84",
   "forest-night",
@@ -16,10 +18,25 @@ const themeKeys: ThemePreset[] = [
   "deep-sea",
 ];
 
+const lightThemeKeys: ThemePreset[] = [
+  "github-light",
+  "catppuccin-latte",
+  "solarized-light",
+  "rose-pine-dawn",
+  "one-light",
+];
+
 export default function NanocoderTerminal({
   onThemeChange,
   version = "1.0.0",
+  themeMode = "dark",
+  variant = "default",
 }: NanocoderTerminalProps) {
+  const activeThemeKeys = useMemo(() => {
+    if (themeMode === "light") return lightThemeKeys;
+    if (themeMode === "mixed") return [...darkThemeKeys, ...lightThemeKeys];
+    return darkThemeKeys;
+  }, [themeMode]);
   const commands = useMemo(
     () => [
       "Build a RESTful API with authentication",
@@ -106,7 +123,7 @@ export default function NanocoderTerminal({
   );
 
   const [currentThemeIndex, setCurrentThemeIndex] = useState(0);
-  const [currentTheme, setCurrentTheme] = useState(themes[defaultTheme]);
+  const [currentTheme, setCurrentTheme] = useState(themes[activeThemeKeys[0]]);
   const [currentCommandIndex, setCurrentCommandIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
   const [isTyping, setIsTyping] = useState(true);
@@ -124,18 +141,18 @@ export default function NanocoderTerminal({
     if (!isMounted) return;
 
     const interval = setInterval(() => {
-      setCurrentThemeIndex((prev) => (prev + 1) % themeKeys.length);
+      setCurrentThemeIndex((prev) => (prev + 1) % activeThemeKeys.length);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [isMounted]);
+  }, [isMounted, activeThemeKeys.length]);
 
   // Update current theme when index changes
   useEffect(() => {
-    const newTheme = themes[themeKeys[currentThemeIndex]];
+    const newTheme = themes[activeThemeKeys[currentThemeIndex]];
     setCurrentTheme(newTheme);
     onThemeChange?.(newTheme);
-  }, [currentThemeIndex, onThemeChange]);
+  }, [currentThemeIndex, onThemeChange, activeThemeKeys]);
 
   useEffect(() => {
     // Only run typing animation after client-side mount
@@ -177,14 +194,18 @@ export default function NanocoderTerminal({
     ? `linear-gradient(to right, ${colors.gradientColors.join(", ")})`
     : `linear-gradient(to right, ${colors.primary}, ${colors.tool})`;
 
+  const isBrutalist = variant === "brutalist";
+
   return (
     <div className="transition-all duration-700 ease-in-out">
       <div
-        className="rounded-lg overflow-hidden shadow-2xl border"
+        className={`overflow-hidden border ${
+          isBrutalist ? "rounded-none shadow-none" : "rounded-lg shadow-2xl"
+        }`}
         style={{
           backgroundColor:
             currentTheme.themeType === "light" ? "#ffffff" : "#000000",
-          borderColor: `${colors.tool}4d`, // 30% opacity
+          borderColor: isBrutalist ? "#000000" : `${colors.tool}4d`, // 30% opacity
         }}
       >
         {/* Terminal Window Controls */}
@@ -193,12 +214,12 @@ export default function NanocoderTerminal({
           style={{
             backgroundColor:
               currentTheme.themeType === "light" ? "#ffffff" : "#000000",
-            borderColor: `${colors.tool}33`, // 20% opacity
+            borderColor: isBrutalist ? "#000000" : `${colors.tool}33`, // 20% opacity
           }}
         >
-          <div className="w-3 h-3 rounded-full bg-red-500" />
-          <div className="w-3 h-3 rounded-full bg-yellow-500" />
-          <div className="w-3 h-3 rounded-full bg-green-500" />
+          <div className={`w-3 h-3 bg-red-500 ${isBrutalist ? "rounded-none" : "rounded-full"}`} />
+          <div className={`w-3 h-3 bg-yellow-500 ${isBrutalist ? "rounded-none" : "rounded-full"}`} />
+          <div className={`w-3 h-3 bg-green-500 ${isBrutalist ? "rounded-none" : "rounded-full"}`} />
         </div>
 
         {/* Terminal Content */}

@@ -89,8 +89,9 @@ export default function WhatsNextSection({
                       <div className="flex items-center gap-3 text-xs text-muted-foreground whitespace-nowrap mt-0.5">
                         <span>
                           {new Date(discussion.created_at).toLocaleDateString(
-                            undefined,
+                            "en-US",
                             {
+                              timeZone: "UTC",
                               month: "short",
                               day: "numeric",
                             },

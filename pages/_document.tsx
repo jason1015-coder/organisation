@@ -3,17 +3,17 @@ import { Head, Html, Main, NextScript } from "next/document";
 const themeScript = `
   (function() {
     const theme = localStorage.getItem('theme');
-    if (theme === 'light') {
-      document.documentElement.classList.remove('dark');
-    } else {
+    if (theme === 'dark') {
       document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
     }
   })();
 `;
 
 export default function Document() {
   return (
-    <Html lang="en" className="dark">
+    <Html lang="en" className="scroll-smooth">
       <Head>
         {/* OpenGraph */}
         <meta property="og:site_name" content="Nano Collective" />
@@ -32,7 +32,7 @@ export default function Document() {
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Lora:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap"
           rel="stylesheet"
           crossOrigin="anonymous"
         />
