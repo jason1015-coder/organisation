@@ -127,17 +127,17 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
               <div className="font-mono text-xs font-bold uppercase tracking-widest mb-6 text-muted-foreground">
                 [ Sponsorship ]
               </div>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-8">
+              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 sm:mb-8 break-words">
                 Sponsor the Nano Collective.
               </h1>
-              <div className="max-w-3xl mx-auto space-y-6">
-                <p className="text-lg md:text-xl text-foreground/70 leading-relaxed">
+              <div className="max-w-3xl mx-auto space-y-4 sm:space-y-6 px-2 sm:px-0">
+                <p className="text-xs sm:text-lg md:text-xl text-foreground/70 leading-relaxed">
                   The Nano Collective is a community-led group of developers,
                   designers, and maintainers building open-source AI tools for the
                   people who use them. We build not for profit, but for the
                   community.
                 </p>
-                <p className="text-lg text-foreground/70 leading-relaxed">
+                <p className="text-xs sm:text-lg text-foreground/70 leading-relaxed">
                   Sponsorship funds the people doing the work. The Collective is
                   fiscally hosted by{" "}
                   <a
@@ -173,10 +173,10 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-5xl mx-auto space-y-12">
               <div className="space-y-4 text-center">
-                <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
                   Current sponsors
                 </h2>
-                <p className="text-lg text-foreground/70 leading-relaxed max-w-3xl mx-auto">
+                <p className="text-xs sm:text-lg text-foreground/70 leading-relaxed max-w-3xl mx-auto">
                   The sponsorship program is newly launched. Most spots below
                   are still open. The first organisations in at each tier set
                   the tone for the rest.
@@ -282,10 +282,10 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
         <section className="border-b border-foreground/10 py-16">
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-5xl mx-auto space-y-6 text-center">
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
                 Why this matters
               </h2>
-              <p className="text-lg text-foreground/70 leading-relaxed max-w-3xl mx-auto">
+              <p className="text-xs sm:text-lg text-foreground/70 leading-relaxed max-w-3xl mx-auto">
                 AI is becoming the most personal piece of infrastructure most
                 people use: the place they think out loud, work through
                 problems, and hand off real parts of their workflow. The systems
@@ -293,7 +293,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                 number of companies whose incentives are not aligned with the
                 people using them.
               </p>
-              <p className="text-lg text-foreground/70 leading-relaxed max-w-3xl mx-auto">
+              <p className="text-xs sm:text-lg text-foreground/70 leading-relaxed max-w-3xl mx-auto">
                 The Nano Collective exists because the alternative needs to be
                 built deliberately, in the open, by people who care about
                 getting it right. Sponsorship is how that work gets funded.
@@ -307,10 +307,10 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-5xl mx-auto space-y-10">
               <div className="space-y-4 text-center">
-                <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
                   What the Collective ships today
                 </h2>
-                <p className="text-lg text-foreground/70 leading-relaxed max-w-3xl mx-auto">
+                <p className="text-xs sm:text-lg text-foreground/70 leading-relaxed max-w-3xl mx-auto">
                   The Collective ships four open-source projects
                   {downloadsLabel ? (
                     <>
@@ -344,7 +344,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                         <FaGithub className="h-5 w-5 text-muted-foreground group-hover:text-foreground transition-colors" />
                         <h3 className="font-bold text-xl tracking-tight">{project.name}</h3>
                       </div>
-                      <p className="text-foreground/70">
+                      <p className="text-xs sm:text-lg text-foreground/70">
                         {project.description}
                       </p>
                     </div>
@@ -360,8 +360,8 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-5xl mx-auto space-y-12">
               <div className="space-y-4 text-center">
-                <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Tiers</h2>
-                <p className="text-lg text-foreground/70 leading-relaxed max-w-3xl mx-auto">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">Tiers</h2>
+                <p className="text-xs sm:text-lg text-foreground/70 leading-relaxed max-w-3xl mx-auto">
                   A small, deliberately simple program. Same rule across every
                   tier: more support = more surfaces, whether that support is
                   cash or in-kind resources valued at their fair equivalent. No
@@ -384,14 +384,14 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                           <span className="text-xl font-bold">
                             {tier.price}
                           </span>{" "}
-                          <span className="text-sm text-muted-foreground">{tier.cadence}</span>
+                          <span className="text-xs sm:text-sm text-muted-foreground">{tier.cadence}</span>
                         </div>
                       </div>
                       <div className="p-6 flex flex-col gap-6 flex-1">
-                        <p className="text-sm text-foreground/80 leading-relaxed">
+                        <p className="text-xs sm:text-sm text-foreground/80 leading-relaxed">
                           {tier.audience}
                         </p>
-                        <div className="space-y-3 text-sm flex-1">
+                        <div className="space-y-3 text-xs sm:text-sm flex-1">
                           {tier.perks.map((perk) => (
                             <div
                               key={perk}
@@ -424,18 +424,18 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                     <h3 className="text-2xl font-bold tracking-tight mb-2">
                       Bespoke partnerships
                     </h3>
-                    <p className="font-mono text-sm text-muted-foreground mb-6 uppercase tracking-widest">
+                    <p className="font-mono text-xs sm:text-sm text-muted-foreground mb-6 uppercase tracking-widest">
                       [ By arrangement ]
                     </p>
                     <div className="space-y-6">
-                      <p className="text-foreground/80 leading-relaxed">
+                      <p className="text-xs sm:text-lg text-foreground/80 leading-relaxed">
                         For organisations interested in a larger or named
                         arrangement: publicly named partnership, joint content, a
                         direct relationship with the core team, or anything outside
                         the standard tiers. Designed case by case. Terms are agreed
                         and published before the relationship begins.
                       </p>
-                      <p className="text-sm text-foreground/60 leading-relaxed">
+                      <p className="text-xs sm:text-lg text-foreground/60 leading-relaxed">
                         To see exactly what your support reaches and how
                         contributors and project proposers access it, see{" "}
                         <a
@@ -474,22 +474,22 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                 <div className="relative group bg-background border border-foreground/20 p-8 hover:-translate-y-1 hover:shadow-lg dark:hover:shadow-[0_4px_20px_rgb(0,0,0,0.5)] transition-all overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 dark:opacity-100 pointer-events-none" />
                   <div className="relative z-10">
-                    <h3 className="flex items-center gap-3 text-2xl font-bold tracking-tight mb-2">
+                    <h3 className="text-xl sm:text-2xl flex items-center gap-3 font-bold tracking-tight mb-2">
                       <Gift className="h-6 w-6 text-[#0000EE] dark:text-[#A1A1AA]" />
                       Resources, not cash
                     </h3>
-                    <p className="font-mono text-sm text-muted-foreground mb-6 uppercase tracking-widest">
+                    <p className="font-mono text-xs text-muted-foreground mb-6 uppercase tracking-widest">
                       [ In-kind support ]
                     </p>
                     <div className="space-y-6">
-                      <p className="text-foreground/80 leading-relaxed">
+                      <p className="text-xs sm:text-lg text-foreground/80 leading-relaxed">
                         Sponsorship does not have to be money. We welcome non-cash
                         support such as cloud and API credits, compute, software
                         licenses, hardware, and other resources that help our
                         contributors build. There is no Open Collective sign-up for
                         in-kind support, since no money changes hands.
                       </p>
-                      <p className="text-foreground/80 leading-relaxed">
+                      <p className="text-xs sm:text-sm text-foreground/80 leading-relaxed">
                         Reach out and we will work out together what your
                         contribution gets you in return, recognised on the same
                         basis as the tiers above.
@@ -519,10 +519,10 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
 
               {/* What's not included */}
               <div className="space-y-6 pt-8 text-center max-w-4xl mx-auto">
-                <h3 className="text-xl font-bold tracking-tight">
+                <h3 className="text-xl sm:text-xl font-bold tracking-tight">
                   What sponsorship does not include
                 </h3>
-                <div className="inline-block text-left">
+                <div className="inline-block text-xs sm:text-lg text-left">
                   <div className="space-y-4 text-foreground/80 leading-relaxed max-w-2xl">
                     <div className="flex gap-3">
                       <span className="text-foreground font-bold mt-0.5">·</span>
@@ -552,7 +552,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                     </div>
                   </div>
                 </div>
-                <p className="font-mono text-sm text-foreground/60 pt-4 max-w-2xl mx-auto text-center">
+                <p className="font-mono text-xs m:text-sm text-foreground/60 pt-4 max-w-2xl mx-auto text-center">
                   Annual prepayments at any tier receive a 10% discount.
                   Invoice-based contributions are supported via Open Source
                   Collective. Contact us to set this up.
@@ -566,19 +566,19 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
         <section className="border-b border-foreground/10 py-16">
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-5xl mx-auto space-y-8">
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-center">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-center">
                 One-off contributions
               </h2>
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="relative group overflow-hidden flex flex-col bg-background border border-foreground/20 p-8 hover:-translate-y-1 hover:shadow-lg dark:hover:shadow-[0_4px_20px_rgb(0,0,0,0.5)] transition-all">
                   <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 dark:opacity-100 pointer-events-none" />
                   <div className="relative z-10 flex flex-col h-full">
-                    <h3 className="flex items-center gap-3 text-2xl font-bold tracking-tight mb-6">
+                    <h3 className="flex items-center gap-3 text-xl sm:text-2xl font-bold tracking-tight mb-6">
                       <Heart className="h-6 w-6 text-[#0000EE] dark:text-[#A1A1AA]" />
                       General donation
                     </h3>
                     <div className="flex flex-col gap-6 flex-1">
-                      <p className="text-foreground/80 leading-relaxed">
+                      <p className="text-xs sm:text-lg text-foreground/80 leading-relaxed">
                         Any amount, one time, into the community fund. No perks
                         attached, no need to reach out. Donate directly on Open
                         Collective, or send Bitcoin to the Nano Collective wallet.
@@ -618,19 +618,19 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                 <div className="relative group overflow-hidden flex flex-col bg-background border border-foreground/20 p-8 hover:-translate-y-1 hover:shadow-lg dark:hover:shadow-[0_4px_20px_rgb(0,0,0,0.5)] transition-all">
                   <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 dark:opacity-100 pointer-events-none" />
                   <div className="relative z-10 flex flex-col h-full">
-                    <h3 className="flex items-center gap-3 text-2xl font-bold tracking-tight mb-6">
+                    <h3 className="flex items-center gap-3 text-xl sm:text-2xl font-bold tracking-tight mb-6">
                       <MessageCircle className="h-6 w-6 text-[#0000EE] dark:text-[#A1A1AA]" />
                       Designated donation
                     </h3>
                     <div className="flex flex-col gap-6 flex-1">
-                      <p className="text-foreground/80 leading-relaxed">
+                      <p className="text-xs sm:text-lg text-foreground/80 leading-relaxed">
                         A specific piece of work, scoped and agreed with the core
                         team before the donation is accepted. Nothing is
                         open-ended. Nothing is retrospective. You know what the
                         work is and how it will be delivered before the donation
                         is made. Delivery is reported publicly.
                       </p>
-                      <p className="font-mono text-sm text-foreground/50 italic flex-1 border-l-2 border-foreground/20 pl-4">
+                      <p className="font-mono text-xs sm:text-sm text-foreground/50 italic flex-1 border-l-2 border-foreground/20 pl-4">
                         The program is new; there are no completed examples to
                         cite yet. The first delivered designated donation will be
                         the first listed here.
@@ -655,8 +655,8 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
         <section className="border-b border-foreground/10 py-16">
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-5xl mx-auto space-y-6 text-center">
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Who we accept</h2>
-              <p className="text-lg text-foreground/70 leading-relaxed max-w-3xl mx-auto">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">Who we accept</h2>
+              <p className="text-xs sm:text-lg text-foreground/70 leading-relaxed max-w-3xl mx-auto">
                 The Nano Collective reserves the right to decline any
                 sponsorship. We will decline if a prospective sponsor's stated
                 mission, product, or public conduct conflicts materially with
@@ -674,10 +674,10 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
         <section className="border-b border-foreground/10 py-16">
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-5xl mx-auto space-y-6 text-center">
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
                 How sponsorship is handled
               </h2>
-              <p className="text-lg text-foreground/70 leading-relaxed max-w-3xl mx-auto">
+              <p className="text-xs sm:text-lg text-foreground/70 leading-relaxed max-w-3xl mx-auto">
                 The Nano Collective is fiscally hosted by{" "}
                 <a
                   href="https://opencollective.com/nano-collective"
@@ -692,7 +692,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                 the published Nano Collective wallet address are verifiable
                 on-chain.
               </p>
-              <p className="text-lg text-foreground/70 leading-relaxed max-w-3xl mx-auto">
+              <p className="text-xs sm:text-lg text-foreground/70 leading-relaxed max-w-3xl mx-auto">
                 For exactly how funds reach contributors, see the{" "}
                 <a
                   href="https://docs.nanocollective.org/collective/organisation/economics-charter"
@@ -722,11 +722,11 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
         <section className="py-16">
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-4xl mx-auto space-y-8 text-center">
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
                 Start a conversation
               </h2>
               <div className="inline-block text-left">
-                <div className="space-y-6 text-lg text-foreground/70 leading-relaxed max-w-3xl">
+                <div className="space-y-6 text-xs sm:text-lg text-foreground/70 leading-relaxed max-w-3xl">
                   <div className="flex gap-4">
                     <span className="text-foreground font-bold mt-1">·</span>
                     <span>

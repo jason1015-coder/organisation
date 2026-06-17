@@ -59,11 +59,11 @@ export default function Blog({ posts, categories }: BlogProps) {
               Blog
             </div>
             
-            <h1 className="text-4xl sm:text-5xl lg:text-[4rem] leading-[1.05] font-bold tracking-tight text-foreground break-words">
+            <h1 className="text-3xl sm:text-5xl lg:text-[4rem] leading-[1.05] font-bold tracking-tight text-foreground break-words">
               Updates & discussions
             </h1>
             
-            <p className="text-sm sm:text-lg sm:text-xl text-foreground/70 leading-relaxed max-w-[800px]">
+            <p className="text-xs sm:text-lg lg:text-xl text-foreground/70 leading-relaxed max-w-[800px]">
               Latest announcements, project updates, and community discussions
               from the Nano Collective.
             </p>
@@ -71,9 +71,9 @@ export default function Blog({ posts, categories }: BlogProps) {
         </section>
 
         {/* Main Content */}
-        <main className="flex-1 container mx-auto px-4 md:px-6 py-12 md:py-24">
+        <main className="flex-1 container mx-auto px-4 md:px-6 py-8 sm:py-12 md:py-24">
           {/* Category Filter */}
-          <div className="mb-12 sm:mb-16 border-b border-foreground/20 pb-4 sm:pb-8">
+          <div className="mb-8 sm:mb-16 border-b border-foreground/20 pb-4 sm:pb-8">
             <div className="flex flex-wrap gap-2">
               {allCategories.map((category) => (
                 <button
@@ -92,16 +92,16 @@ export default function Blog({ posts, categories }: BlogProps) {
           </div>
 
           {/* Blog Posts */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
             {filteredPosts.length > 0 ? (
               filteredPosts.map((post) => (
                 <Link
                   key={post.id}
                   href={`/blog/${generateBlogSlug(post.title, post.number)}`}
-                  className="block group flex flex-col h-full bg-background border border-foreground/20 relative overflow-hidden transition-all hover:bg-muted hover:shadow-lg dark:hover:shadow-[0_4px_20px_rgb(0,0,0,0.5)] hover:-translate-y-1 p-6 sm:p-8"
+                  className="block group flex flex-col h-full bg-background border border-foreground/20 relative overflow-hidden transition-all hover:bg-muted hover:shadow-lg dark:hover:shadow-[0_4px_20px_rgb(0,0,0,0.5)] hover:-translate-y-1 p-5 sm:p-8"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 dark:opacity-100 pointer-events-none" />
-                  <div className="relative z-10 space-y-6 h-full flex flex-col">
+                  <div className="relative z-10 space-y-4 sm:space-y-6 h-full flex flex-col">
                     <div className="space-y-4 flex-1">
                       <div className="flex flex-wrap gap-2 mb-4">
                         {post.labels && post.labels.map((label) => (
@@ -119,7 +119,7 @@ export default function Blog({ posts, categories }: BlogProps) {
                         ))}
                       </div>
                       
-                      <h2 className="text-2xl md:text-3xl font-bold tracking-tight line-clamp-3">
+                      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight line-clamp-3">
                         {post.title}
                       </h2>
                     </div>

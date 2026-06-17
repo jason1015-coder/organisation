@@ -42,7 +42,7 @@ function ContributorCard({ contributor }: { contributor: Contributor }) {
         </h3>
         
         {contributor.bio && (
-          <p className="text-sm text-foreground/70 leading-relaxed mb-6 flex-1">
+          <p className="text-xs sm:text-sm text-foreground/70 leading-relaxed mb-6 flex-1">
             {contributor.bio}
           </p>
         )}
@@ -110,10 +110,10 @@ export default function ContributorsPage() {
               <div className="font-mono text-xs font-bold uppercase tracking-widest mb-6 text-muted-foreground">
                 [ Community ]
               </div>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-8">
+              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 sm:mb-8 break-words">
                 Meet our contributors.
               </h1>
-              <p className="text-lg md:text-xl text-foreground/70 max-w-2xl mx-auto mb-12 leading-relaxed">
+              <p className="text-xs sm:text-lg md:text-xl text-foreground/70 max-w-2xl mx-auto mb-8 sm:mb-12 leading-relaxed px-2 sm:px-0">
                 The engineers, designers, and hackers behind Nano Collective. We
                 are an open-source collective building privacy-first AI tools.
               </p>
@@ -161,12 +161,12 @@ export default function ContributorsPage() {
             )}
 
             {/* How to Contribute Section */}
-            <section id="how-to-contribute" className="max-w-3xl mx-auto space-y-8 scroll-m-24 mb-32">
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-center">
+            <section id="how-to-contribute" className="max-w-3xl mx-auto space-y-6 sm:space-y-8 scroll-m-24 mb-32 px-2 sm:px-0">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-center">
                 How to Contribute
               </h2>
-              <div className="space-y-6">
-                <p className="text-lg text-foreground/70 leading-relaxed text-center">
+              <div className="space-y-4 sm:space-y-6">
+                <p className="text-xs sm:text-lg text-foreground/70 leading-relaxed text-center">
                   We build tools for the people who use them. If you care about
                   privacy, performance, and keeping AI tools out of walled gardens,
                   you belong here.
@@ -178,7 +178,7 @@ export default function ContributorsPage() {
                     </div>
                     <div>
                       <h3 className="font-bold mb-2 tracking-tight">Check the Bounties</h3>
-                      <p className="text-sm text-foreground/70 leading-relaxed">
+                      <p className="text-xs sm:text-sm text-foreground/70 leading-relaxed">
                         We run a community fund. Significant features and bug fixes
                         often carry bounties. Check our GitHub issues for the{" "}
                         <code className="bg-muted px-2 py-0.5 rounded text-xs">
@@ -194,14 +194,14 @@ export default function ContributorsPage() {
                     </div>
                     <div>
                       <h3 className="font-bold mb-2 tracking-tight">Join the Discord</h3>
-                      <p className="text-sm text-foreground/70 leading-relaxed">
+                      <p className="text-xs sm:text-sm text-foreground/70 leading-relaxed">
                         Say hi in the #contributors channel. We're happy to help you
                         find a good first issue or discuss a feature you want to build.
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4 p-6 border border-foreground/10 bg-muted/10">
-                    <div className="font-mono text-sm font-bold text-[#0000EE] dark:text-[#A1A1AA] pt-1">
+                    <div className="font-mono text-xs sm:text-sm font-bold text-[#0000EE] dark:text-[#A1A1AA] pt-1">
                       03
                     </div>
                     <div>
