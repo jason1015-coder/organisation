@@ -97,7 +97,7 @@ export default function Pipeline({ whitepapers }: PipelineProps) {
                 href={DOCS_PIPELINE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-12 items-center justify-center rounded-none bg-[#0000EE] dark:bg-foreground px-8 text-xs sm:text-sm font-semibold tracking-wide text-white dark:text-background transition-colors hover:bg-[#0000EE]/90 dark:hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring group"
+                className="inline-flex h-12 items-center justify-center rounded-none bg-foreground px-8 text-xs sm:text-sm font-semibold tracking-wide text-background transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring group"
               >
                 Read how the pipeline works
               </a>
