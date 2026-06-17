@@ -46,7 +46,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border/40 bg-background/80 backdrop-blur-md">
-      <div className="container mx-auto flex h-14 items-center justify-between px-4">
+      <div className="container mx-auto flex h-14 items-center justify-between px-4 md:px-6">
         {/* Logo */}
         <Link
           href="/"
@@ -127,7 +127,7 @@ export default function Navbar() {
           mobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0",
         )}
       >
-        <nav className="container mx-auto px-4 py-4 flex flex-col gap-2">
+        <nav className="container mx-auto px-4 md:px-6 py-4 flex flex-col gap-2">
           {navLinks.map((link) =>
             link.external ? (
               <a

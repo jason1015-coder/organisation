@@ -23,8 +23,8 @@ export function Mission() {
   ];
 
   return (
-    <section className="py-12 md:py-24 px-4 md:px-6 bg-white border-y border-black">
-      <div className="container mx-auto max-w-6xl">
+    <section className="py-12 md:py-24 bg-white border-y border-black">
+      <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-16 gap-6 border-b border-black pb-4 sm:pb-8">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-black mb-4">

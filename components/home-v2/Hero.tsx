@@ -4,7 +4,7 @@ import AsciiWebsiteBackgroundGenerated from "@/components/ui/AsciiWebsiteBackgro
 
 export function Hero() {
   return (
-    <section className="pt-12 pb-12 sm:pb-20 px-6 container mx-auto">
+    <section className="pt-12 pb-12 sm:pb-20 px-4 md:px-6 container mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-16 items-center">
         {/* Left side: Typography */}
         <div className="space-y-4 sm:space-y-8 lg:pr-8">
@@ -42,7 +42,7 @@ export function Hero() {
         </div>
 
         <div className="w-full flex justify-center lg:justify-end mt-4 sm:mt-8 lg:mt-0 max-w-full overflow-hidden pt-4 pb-4 pr-4 pl-1">
-          <div className="bg-[#FAFAFA] border-2 border-[#0000EE] shadow-[4px_4px_0px_0px_rgba(0,0,238,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,238,1)] transition-transform hover:-translate-y-1 hover:translate-x-1 hover:shadow-[2px_2px_0px_0px_rgba(0,0,238,1)] sm:hover:shadow-[4px_4px_0px_0px_rgba(0,0,238,1)] max-w-[600px] overflow-hidden w-full">
+          <div className="bg-[#FAFAFA] border-2 border-[#0000EE] shadow-[4px_4px_0px_0px_rgba(0,0,238,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,238,1)] transition-transform hover:-translate-y-1 hover:translate-x-1 hover:shadow-[2px_2px_0px_0px_rgba(0,0,238,1)] sm:hover:shadow-[4px_4px_0px_0px_rgba(0,0,238,1)] max-w-[700px] overflow-hidden w-full">
             <div className="w-full overflow-hidden">
               <AsciiWebsiteBackgroundGenerated />
             </div>
