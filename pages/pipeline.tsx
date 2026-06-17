@@ -81,11 +81,11 @@ export default function Pipeline({ whitepapers }: PipelineProps) {
               Project Pipeline
             </div>
             
-            <h1 className="text-4xl sm:text-5xl lg:text-[4rem] leading-[1.05] font-bold tracking-tight text-foreground break-words">
+            <h1 className="text-3xl sm:text-5xl lg:text-[4rem] leading-[1.05] font-bold tracking-tight text-foreground break-words">
               What's in flight
             </h1>
             
-            <p className="text-sm sm:text-lg sm:text-xl text-foreground/70 leading-relaxed max-w-[800px]">
+            <p className="text-xs sm:text-lg lg:text-xl text-foreground/70 leading-relaxed max-w-[800px]">
               Every project that ships under the Nano Collective starts with a
               whitepaper, gets argued in public for at least 30 days, and only
               then becomes code. This page shows where every active whitepaper
@@ -116,22 +116,22 @@ export default function Pipeline({ whitepapers }: PipelineProps) {
 
         {/* Grouped whitepapers */}
         {grouped.map(({ status, items }) => (
-          <section key={status} className="py-12 md:py-24 px-4 md:px-6 container mx-auto">
+          <section key={status} className="py-8 sm:py-12 md:py-24 px-4 md:px-6 container mx-auto">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-16 gap-6 border-b border-foreground/20 pb-4 sm:pb-8">
               <div>
                 <div className="flex items-center gap-4 mb-4">
-                  <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">{status}</h2>
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-foreground">{status}</h2>
                   <span className="font-mono text-xs font-bold bg-[#0000EE]/10 dark:bg-[#A1A1AA]/10 text-[#0000EE] dark:text-[#A1A1AA] px-3 py-1 uppercase tracking-wider">
                     {items.length} {items.length === 1 ? "whitepaper" : "whitepapers"}
                   </span>
                 </div>
-                <p className="text-sm sm:text-lg text-foreground/70 font-mono">
+                <p className="text-xs sm:text-lg text-foreground/70 font-mono">
                   {STATUS_DESCRIPTIONS[status]}
                 </p>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-12 lg:gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 lg:gap-12">
               {items.map((w) => {
                 const remaining =
                   w.status === "In public review" && w.reviewCloses
@@ -143,20 +143,20 @@ export default function Pipeline({ whitepapers }: PipelineProps) {
                     href={docsUrlFor(w.slug)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block group flex flex-col h-full bg-background border border-foreground/20 relative overflow-hidden transition-all hover:bg-muted hover:shadow-lg dark:hover:shadow-[0_4px_20px_rgb(0,0,0,0.5)] hover:-translate-y-1 p-6 sm:p-8"
+                    className="block group flex flex-col h-full bg-background border border-foreground/20 relative overflow-hidden transition-all hover:bg-muted hover:shadow-lg dark:hover:shadow-[0_4px_20px_rgb(0,0,0,0.5)] hover:-translate-y-1 p-5 sm:p-8"
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 dark:opacity-100 pointer-events-none" />
-                    <div className="relative z-10 space-y-4 h-full flex flex-col">
-                      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-                        <h3 className="text-xl md:text-2xl font-bold tracking-tight">
+                    <div className="relative z-10 space-y-3 sm:space-y-4 h-full flex flex-col">
+                      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4">
+                        <h3 className="text-lg sm:text-xl md:text-2xl font-bold tracking-tight">
                           {w.title}
                         </h3>
                       </div>
-                      <p className="text-sm sm:text-base text-foreground/70 leading-relaxed">
+                      <p className="text-xs sm:text-base text-foreground/70 leading-relaxed">
                         {w.description}
                       </p>
                       
-                      <div className="pt-4 mt-auto flex items-center justify-between text-xs font-mono border-t border-foreground/20">
+                      <div className="pt-4 mt-auto flex items-center justify-between text-[9px] sm:text-xs font-mono border-t border-foreground/20">
                         <div className="flex items-center gap-2 pt-4">
                           <span className="font-bold text-[#0000EE] dark:text-[#A1A1AA]">
                             [ proposer ]
@@ -187,7 +187,7 @@ export default function Pipeline({ whitepapers }: PipelineProps) {
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 md:mb-8">
               Want to build something?
             </h2>
-            <p className="text-sm sm:text-lg md:text-xl opacity-90 mb-12 leading-relaxed max-w-2xl mx-auto">
+            <p className="text-xs sm:text-lg md:text-xl opacity-90 mb-12 leading-relaxed max-w-2xl mx-auto">
               Anyone can propose. No application form, no contribution
               history required. If your idea fits the collective's shape (AI
               tooling that respects privacy, runs locally, is open source,

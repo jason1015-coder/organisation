@@ -43,10 +43,10 @@ export default function BlogPost({ post }: BlogPostProps) {
 
       <div className="min-h-screen bg-background font-sans flex flex-col">
         {/* Main Content */}
-        <main className="flex-1 container mx-auto px-4 md:px-6 py-12 max-w-4xl">
+        <main className="flex-1 container mx-auto px-4 md:px-6 py-8 sm:py-12 max-w-4xl">
           
           {/* Back link */}
-          <div className="mb-12">
+          <div className="mb-8 sm:mb-12">
             <Link 
               href="/blog"
               className="inline-flex items-center gap-2 font-mono text-xs font-bold tracking-widest uppercase hover:text-[#0000EE] dark:hover:text-[#A1A1AA] transition-colors"
@@ -56,7 +56,7 @@ export default function BlogPost({ post }: BlogPostProps) {
           </div>
 
           {/* Minimal Header */}
-          <header className="mb-12 space-y-6">
+          <header className="mb-8 sm:mb-12 space-y-4 sm:space-y-6">
             <div className="flex flex-wrap gap-2 font-mono text-xs font-bold tracking-widest uppercase">
               {post.labels.map((label) => (
                 <span
@@ -68,7 +68,7 @@ export default function BlogPost({ post }: BlogPostProps) {
               ))}
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground leading-tight break-words">
               {post.title}
             </h1>
 
