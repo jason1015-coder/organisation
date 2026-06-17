@@ -1,16 +1,8 @@
-import { ArrowRight, Clock, ExternalLink, Lightbulb } from "lucide-react";
+import { Clock, ExternalLink } from "lucide-react";
 import type { GetStaticProps } from "next";
 import Head from "next/head";
 import { FaDiscord } from "react-icons/fa";
-import Footer from "@/components/footer";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Footer } from "@/components/layout-v2/Footer";
 import {
   daysUntil,
   docsUrlFor,
@@ -82,153 +74,144 @@ export default function Pipeline({ whitepapers }: PipelineProps) {
 
       <div className="min-h-screen bg-background font-sans">
         {/* Hero */}
-        <section className="border-b border-border/40 pt-20 pb-16">
-          <div className="container mx-auto px-4">
-            <div className="space-y-6 max-w-4xl">
-              <Badge variant="secondary" className="text-sm px-4 py-1.5">
-                Project Pipeline
-              </Badge>
-              <h1 className="text-4xl sm:text-6xl font-bold tracking-tight">
-                What's in flight
-              </h1>
-              <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
-                Every project that ships under the Nano Collective starts with a
-                whitepaper, gets argued in public for at least 30 days, and only
-                then becomes code. This page shows where every active whitepaper
-                sits, in real time.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                <Button size="lg" asChild className="group">
-                  <a
-                    href={DOCS_PIPELINE_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Read how the pipeline works
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </a>
-                </Button>
-                <Button size="lg" variant="outline" asChild>
-                  <a
-                    href={DOCS_WHITEPAPERS_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <ExternalLink className="mr-2 h-4 w-4" />
-                    Browse whitepapers
-                  </a>
-                </Button>
-              </div>
+        <section className="relative pt-12 pb-12 sm:pb-20 px-4 md:px-6 container mx-auto border-b border-foreground/20">
+          <div className="space-y-4 sm:space-y-8 max-w-4xl">
+            <div className="flex items-center gap-2 text-xs font-semibold font-mono text-muted-foreground uppercase tracking-widest border-b border-foreground/20 pb-2 max-w-[200px]">
+              <span className="text-[#0000EE] dark:text-[#A1A1AA] font-bold">&gt;</span>
+              Project Pipeline
+            </div>
+            
+            <h1 className="text-4xl sm:text-5xl lg:text-[4rem] leading-[1.05] font-bold tracking-tight text-foreground break-words">
+              What's in flight
+            </h1>
+            
+            <p className="text-sm sm:text-lg sm:text-xl text-foreground/70 leading-relaxed max-w-[800px]">
+              Every project that ships under the Nano Collective starts with a
+              whitepaper, gets argued in public for at least 30 days, and only
+              then becomes code. This page shows where every active whitepaper
+              sits, in real time.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-4 pt-4 sm:pt-6">
+              <a
+                href={DOCS_PIPELINE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-12 items-center justify-center rounded-none bg-[#0000EE] dark:bg-foreground px-8 text-xs sm:text-sm font-semibold tracking-wide text-white dark:text-background transition-colors hover:bg-[#0000EE]/90 dark:hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring group"
+              >
+                Read how the pipeline works
+              </a>
+              <a
+                href={DOCS_WHITEPAPERS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-12 items-center justify-center rounded-none border border-foreground/20 bg-background px-8 text-xs sm:text-sm font-semibold tracking-wide text-foreground transition-colors hover:bg-foreground hover:text-background focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+              >
+                <ExternalLink className="mr-2 h-4 w-4" />
+                Browse whitepapers
+              </a>
             </div>
           </div>
         </section>
 
         {/* Grouped whitepapers */}
         {grouped.map(({ status, items }) => (
-          <section key={status} className="border-b border-border/40 py-12">
-            <div className="container mx-auto px-4">
-              <div className="space-y-2 mb-8">
-                <div className="flex items-baseline gap-3 flex-wrap">
-                  <h2 className="text-3xl font-bold">{status}</h2>
-                  <span className="text-sm text-muted-foreground">
-                    {items.length}{" "}
-                    {items.length === 1 ? "whitepaper" : "whitepapers"}
+          <section key={status} className="py-12 md:py-24 px-4 md:px-6 container mx-auto">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-16 gap-6 border-b border-foreground/20 pb-4 sm:pb-8">
+              <div>
+                <div className="flex items-center gap-4 mb-4">
+                  <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">{status}</h2>
+                  <span className="font-mono text-xs font-bold bg-[#0000EE]/10 dark:bg-[#A1A1AA]/10 text-[#0000EE] dark:text-[#A1A1AA] px-3 py-1 uppercase tracking-wider">
+                    {items.length} {items.length === 1 ? "whitepaper" : "whitepapers"}
                   </span>
                 </div>
-                <p className="text-muted-foreground leading-relaxed max-w-3xl">
+                <p className="text-sm sm:text-lg text-foreground/70 font-mono">
                   {STATUS_DESCRIPTIONS[status]}
                 </p>
               </div>
+            </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {items.map((w) => {
-                  const remaining =
-                    w.status === "In public review" && w.reviewCloses
-                      ? daysUntil(w.reviewCloses)
-                      : null;
-                  return (
-                    <a
-                      key={w.slug}
-                      href={docsUrlFor(w.slug)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block group"
-                    >
-                      <Card className="h-full hover:border-primary/40 transition-colors">
-                        <CardHeader className="space-y-3">
-                          <CardTitle className="text-xl group-hover:text-primary transition-colors">
-                            {w.title}
-                          </CardTitle>
-                          <CardDescription className="text-sm leading-relaxed">
-                            {w.description}
-                          </CardDescription>
-                          <div className="flex items-center justify-between text-xs text-muted-foreground pt-1 flex-wrap gap-2">
-                            <span>
-                              Proposed by{" "}
-                              <span className="text-foreground">
-                                {w.proposer}
-                              </span>
-                            </span>
-                            {remaining !== null && remaining > 0 && (
-                              <span className="flex items-center gap-1">
-                                <Clock className="h-3 w-3" />
-                                Closes in {remaining}{" "}
-                                {remaining === 1 ? "day" : "days"}
-                              </span>
-                            )}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-12 lg:gap-12">
+              {items.map((w) => {
+                const remaining =
+                  w.status === "In public review" && w.reviewCloses
+                    ? daysUntil(w.reviewCloses)
+                    : null;
+                return (
+                  <a
+                    key={w.slug}
+                    href={docsUrlFor(w.slug)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block group flex flex-col h-full bg-background border border-foreground/20 relative overflow-hidden transition-all hover:bg-muted hover:shadow-lg dark:hover:shadow-[0_4px_20px_rgb(0,0,0,0.5)] hover:-translate-y-1 p-6 sm:p-8"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 dark:opacity-100 pointer-events-none" />
+                    <div className="relative z-10 space-y-4 h-full flex flex-col">
+                      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+                        <h3 className="text-xl md:text-2xl font-bold tracking-tight">
+                          {w.title}
+                        </h3>
+                      </div>
+                      <p className="text-sm sm:text-base text-foreground/70 leading-relaxed">
+                        {w.description}
+                      </p>
+                      
+                      <div className="pt-4 mt-auto flex items-center justify-between text-xs font-mono border-t border-foreground/20">
+                        <div className="flex items-center gap-2 pt-4">
+                          <span className="font-bold text-[#0000EE] dark:text-[#A1A1AA]">
+                            [ proposer ]
+                          </span>
+                          <span className="text-foreground">{w.proposer}</span>
+                        </div>
+                        {remaining !== null && remaining > 0 && (
+                          <div className="flex items-center gap-1 pt-4 text-foreground/70">
+                            <Clock className="h-3 w-3" />
+                            Closes in {remaining} {remaining === 1 ? "day" : "days"}
                           </div>
-                        </CardHeader>
-                      </Card>
-                    </a>
-                  );
-                })}
-              </div>
+                        )}
+                      </div>
+                    </div>
+                  </a>
+                );
+              })}
             </div>
           </section>
         ))}
 
         {/* Want to build something */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <div className="rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/10 via-background to-background p-8 sm:p-12">
-              <div className="flex flex-col items-start gap-6">
-                <Badge variant="secondary" className="text-sm px-3 py-1">
-                  <Lightbulb className="h-3.5 w-3.5 mr-1.5" />
-                  Propose a project
-                </Badge>
-                <h2 className="text-3xl sm:text-4xl font-bold">
-                  Want to build something?
-                </h2>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  Anyone can propose. No application form, no contribution
-                  history required. If your idea fits the collective's shape (AI
-                  tooling that respects privacy, runs locally, is open source,
-                  or is an open variant of something proprietary), the process
-                  is built for you.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-3 pt-2 w-full">
-                  <Button size="lg" asChild className="group">
-                    <a
-                      href={DOCS_PIPELINE_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Read the pipeline
-                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </a>
-                  </Button>
-                  <Button size="lg" variant="outline" asChild>
-                    <a
-                      href="https://discord.gg/ktPDV6rekE"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FaDiscord className="mr-2 h-4 w-4" />
-                      Start in Discord
-                    </a>
-                  </Button>
-                </div>
-              </div>
+        <section className="py-20 md:py-32 px-4 md:px-6 bg-[#0000EE] text-white">
+          <div className="container mx-auto max-w-3xl text-center">
+            <div className="font-mono text-xs md:text-sm font-bold uppercase tracking-widest mb-6 opacity-80">
+              [ Get Involved ]
+            </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 md:mb-8">
+              Want to build something?
+            </h2>
+            <p className="text-sm sm:text-lg md:text-xl opacity-90 mb-12 leading-relaxed max-w-2xl mx-auto">
+              Anyone can propose. No application form, no contribution
+              history required. If your idea fits the collective's shape (AI
+              tooling that respects privacy, runs locally, is open source,
+              or is an open variant of something proprietary), the process
+              is built for you.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <a
+                href={DOCS_PIPELINE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-14 items-center justify-center rounded-none bg-white px-10 text-sm font-bold tracking-wide text-[#0000EE] transition-colors hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0000EE] group"
+              >
+                Read the pipeline
+              </a>
+              <a
+                href="https://discord.gg/ktPDV6rekE"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-14 items-center justify-center rounded-none border-2 border-white bg-transparent px-10 text-sm font-bold tracking-wide text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0000EE]"
+              >
+                <FaDiscord className="mr-2 h-4 w-4" />
+                Start in Discord
+              </a>
             </div>
           </div>
         </section>

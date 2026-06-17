@@ -39,8 +39,6 @@ export function Terminal({
       return;
     }
 
-    let timeoutId: NodeJS.Timeout;
-
     const processNextLine = async () => {
       if (visibleLines >= lines.length) return;
 
@@ -64,7 +62,7 @@ export function Terminal({
       }
     };
 
-    timeoutId = setTimeout(processNextLine, 0);
+    const timeoutId = setTimeout(processNextLine, 0);
 
     return () => clearTimeout(timeoutId);
   }, [visibleLines, animate, lines]);
@@ -72,7 +70,7 @@ export function Terminal({
   return (
     <div
       className={cn(
-        "w-full overflow-hidden bg-[#FAFAFA] border-2 border-[#0000EE] font-mono text-[13px] md:text-sm leading-relaxed text-black shadow-sm",
+        "w-full overflow-hidden bg-muted border-2 border-[#0000EE] dark:border-[#A1A1AA] font-mono text-[13px] md:text-sm leading-relaxed text-foreground shadow-sm",
         className,
       )}
     >
@@ -97,14 +95,14 @@ export function Terminal({
             )}
           >
             {line.isCommand && (
-              <span className="text-black font-bold shrink-0 select-none">
+              <span className="text-foreground font-bold shrink-0 select-none">
                 &gt;
               </span>
             )}
             <span
               className={cn(
                 "break-all",
-                line.color || (line.isCommand ? "text-black" : "text-black/90"),
+                line.color || (line.isCommand ? "text-foreground" : "text-foreground/90"),
               )}
             >
               {line.text}
@@ -115,10 +113,10 @@ export function Terminal({
         {/* Currently typing line */}
         {visibleLines < lines.length && lines[visibleLines].isCommand && (
           <div className="mb-4 last:mb-0 flex items-start gap-2">
-            <span className="text-black font-bold shrink-0 select-none">
+            <span className="text-foreground font-bold shrink-0 select-none">
               &gt;
             </span>
-            <span className="text-black">
+            <span className="text-foreground">
               {currentLineText}
               <span className="inline-block w-2.5 h-[1em] ml-1 bg-black animate-pulse align-middle" />
             </span>
@@ -127,12 +125,12 @@ export function Terminal({
 
         {/* Blinking block cursor when finished */}
         {visibleLines >= lines.length && (
-          <div className="flex items-start gap-2 mt-6 border-l-4 border-[#0000EE] pl-3 py-1 bg-white">
-            <span className="text-black font-bold shrink-0 select-none">
+          <div className="flex items-start gap-2 mt-6 border-l-4 border-[#0000EE] pl-3 py-1 bg-background">
+            <span className="text-foreground font-bold shrink-0 select-none">
               &gt;
             </span>
             <span className="inline-block w-2.5 h-[1em] bg-black animate-pulse align-middle" />
-            <span className="text-black/50 ml-2">
+            <span className="text-foreground/50 ml-2">
               commands, ! bash, ↑/↓ history
             </span>
           </div>

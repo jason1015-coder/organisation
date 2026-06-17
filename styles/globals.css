@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -61,10 +62,10 @@
   --secondary: #005a9c;
   --secondary-foreground: #ffffff;
 
-  --muted: #27272a;
+  --muted: #121214;
   --muted-foreground: #a1a1aa;
 
-  --accent: #27272a;
+  --accent: #121214;
   --accent-foreground: #fafafa;
 
   --destructive: #7f1d1d;
