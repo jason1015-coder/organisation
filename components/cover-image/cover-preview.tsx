@@ -127,7 +127,7 @@ export function CoverPreview(props: PreviewProps) {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-white transition-colors"
+                    className="hover:text-background transition-colors"
                     style={{ color: item.color }}
                   >
                     <Icon size={item.size} />

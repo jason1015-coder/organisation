@@ -205,7 +205,7 @@ export default function NanocoderTerminal({
         style={{
           backgroundColor:
             currentTheme.themeType === "light" ? "#ffffff" : "#000000",
-          borderColor: isBrutalist ? "#000000" : `${colors.tool}4d`, // 30% opacity
+          borderColor: isBrutalist ? (themeMode === "dark" ? "rgba(255,255,255,0.2)" : "#000000") : `${colors.tool}4d`, // 30% opacity
         }}
       >
         {/* Terminal Window Controls */}
@@ -214,7 +214,7 @@ export default function NanocoderTerminal({
           style={{
             backgroundColor:
               currentTheme.themeType === "light" ? "#ffffff" : "#000000",
-            borderColor: isBrutalist ? "#000000" : `${colors.tool}33`, // 20% opacity
+            borderColor: isBrutalist ? (themeMode === "dark" ? "rgba(255,255,255,0.2)" : "#000000") : `${colors.tool}33`, // 20% opacity
           }}
         >
           <div className={`w-3 h-3 bg-red-500 ${isBrutalist ? "rounded-none" : "rounded-full"}`} />
