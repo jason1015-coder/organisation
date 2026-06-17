@@ -143,7 +143,7 @@ export default function BlogPost({ post }: BlogPostProps) {
                   href={post.url} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 font-mono text-sm font-bold uppercase tracking-widest px-6 py-3 bg-foreground text-background hover:bg-[#0000EE] dark:hover:bg-white dark:hover:text-black transition-colors shrink-0"
+                  className="inline-flex items-center gap-2 font-mono text-sm font-bold uppercase tracking-widest px-6 py-3 bg-foreground text-background hover:opacity-90 transition-colors shrink-0"
                 >
                   <span>View on GitHub</span>
                   <ExternalLink className="h-4 w-4" />

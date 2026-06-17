@@ -2,24 +2,8 @@ import { ExternalLink } from "lucide-react";
 import Head from "next/head";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
-import Footer from "@/components/footer";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Footer } from "@/components/layout-v2/Footer";
 import { CONTRIBUTORS, type Contributor } from "@/lib/contributors";
-
-/**
- * Contributors Page
- *
- * This page displays all contributors to the Nano Collective project.
- * Contributors are pulled from the CONTRIBUTORS array in @/lib/contributors.ts
- *
- * To add yourself as a contributor:
- * 1. Add your photo to /public/contributors/
- * 2. Add your entry to CONTRIBUTORS array in @/lib/contributors.ts
- * 3. Submit a pull request!
- */
 
 function ContributorCard({ contributor }: { contributor: Contributor }) {
   const initials = contributor.name
@@ -30,86 +14,80 @@ function ContributorCard({ contributor }: { contributor: Contributor }) {
     .slice(0, 2);
 
   return (
-    <Card className="group relative hover:shadow-lg transition-all duration-200 h-full">
-      <CardContent className="flex flex-col items-center text-center p-6 h-full gap-4">
-        {/* Core team indicator (top-left, small rectangle with hover tooltip) */}
-        {contributor.coreTeam && (
-          <div className="absolute top-2 left-2 group/core">
-            <span
-              className="block h-2 w-8 rounded-sm bg-emerald-500"
-              title="Core Team"
-            />
-            <span
-              role="tooltip"
-              className="pointer-events-none absolute left-1/2 top-full mt-1.5 -translate-x-1/2 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-xs text-background opacity-0 transition-opacity duration-150 group-hover/core:opacity-100"
-            >
-              Core Team
-            </span>
+    <div className="group flex flex-col h-full bg-background border border-foreground/20 transition-all hover:-translate-y-1 hover:shadow-lg dark:hover:shadow-[0_4px_20px_rgb(0,0,0,0.5)] p-6 sm:p-8 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 dark:opacity-100 pointer-events-none" />
+      
+      <div className="relative z-10 flex flex-col h-full">
+        <div className="flex justify-between items-start mb-6">
+          <div className="w-16 h-16 shrink-0 bg-muted flex items-center justify-center overflow-hidden border border-foreground/10">
+            {contributor.photo ? (
+              <img
+                src={`/contributors/${contributor.photo}`}
+                alt={contributor.name}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <span className="text-xl font-bold opacity-30">{initials}</span>
+            )}
           </div>
-        )}
-
-        {/* Avatar */}
-        <Avatar className="size-24 border-2 border-border group-hover:border-primary transition-colors">
-          <AvatarImage
-            src={`/contributors/${contributor.photo}`}
-            alt={contributor.name}
-            className="object-cover"
-          />
-          <AvatarFallback className="text-2xl font-semibold">
-            {initials}
-          </AvatarFallback>
-        </Avatar>
-
-        {/* Name */}
-        <div className="space-y-1 flex-1">
-          <h3 className="font-semibold text-lg">{contributor.name}</h3>
-          {contributor.bio && (
-            <p className="text-sm text-muted-foreground">{contributor.bio}</p>
+          {contributor.coreTeam && (
+            <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#0000EE] dark:text-[#A1A1AA] border border-foreground/10 px-2 py-1">
+              Core
+            </span>
           )}
         </div>
 
-        {/* Focus areas (what they help with, not a title) */}
+        <h3 className="text-xl font-bold tracking-tight mb-2">
+          {contributor.name}
+        </h3>
+        
+        {contributor.bio && (
+          <p className="text-sm text-foreground/70 leading-relaxed mb-6 flex-1">
+            {contributor.bio}
+          </p>
+        )}
+
         {contributor.focus && contributor.focus.length > 0 && (
-          <div className="flex flex-wrap justify-center gap-1.5">
+          <div className="flex flex-wrap gap-2 mb-6">
             {contributor.focus.map((area) => (
-              <Badge key={area} variant="secondary" className="font-normal">
-                {area}
-              </Badge>
+              <span
+                key={area}
+                className="text-xs font-mono text-foreground/60 uppercase tracking-wider"
+              >
+                [{area}]
+              </span>
             ))}
           </div>
         )}
 
-        {/* Links */}
-        <div className="flex gap-2 w-full">
+        <div className="flex items-center gap-4 pt-4 border-t border-foreground/10 mt-auto">
           {contributor.github && (
-            <Button asChild variant="outline" size="sm" className="flex-1">
-              <a
-                href={`https://github.com/${contributor.github}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${contributor.name}'s GitHub profile`}
-              >
-                <FaGithub className="size-4 mr-2" />
-                GitHub
-              </a>
-            </Button>
+            <a
+              href={`https://github.com/${contributor.github}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${contributor.name}'s GitHub`}
+              className="text-sm font-mono font-bold uppercase tracking-widest hover:text-[#0000EE] dark:hover:text-[#A1A1AA] transition-colors flex items-center gap-2"
+            >
+              <FaGithub className="h-4 w-4" />
+              GitHub
+            </a>
           )}
           {contributor.website && (
-            <Button asChild variant="outline" size="sm" className="flex-1">
-              <a
-                href={contributor.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${contributor.name}'s website`}
-              >
-                <ExternalLink className="size-4 mr-2" />
-                Website
-              </a>
-            </Button>
+            <a
+              href={contributor.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${contributor.name}'s website`}
+              className="text-sm font-mono font-bold uppercase tracking-widest hover:text-[#0000EE] dark:hover:text-[#A1A1AA] transition-colors flex items-center gap-2"
+            >
+              <ExternalLink className="h-4 w-4" />
+              Web
+            </a>
           )}
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }
 
@@ -124,122 +102,119 @@ export default function ContributorsPage() {
         />
       </Head>
 
-      <div className="min-h-screen bg-background">
-        {/* Hero */}
-        <section className="border-b border-border/40 pt-20 pb-16">
-          <div className="container mx-auto px-4">
-            <div className="space-y-6 max-w-4xl">
-              <Badge variant="secondary" className="text-sm px-4 py-1.5">
-                Contributors
-              </Badge>
-              <h1 className="text-4xl sm:text-6xl font-bold tracking-tight">
-                Meet our Contributors
+      <div className="min-h-screen bg-background flex flex-col font-sans">
+        {/* Minimal Hero */}
+        <section className="py-12 md:py-20 border-b border-foreground/10">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="max-w-5xl mx-auto text-center">
+              <div className="font-mono text-xs font-bold uppercase tracking-widest mb-6 text-muted-foreground">
+                [ Community ]
+              </div>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-8">
+                Meet our contributors.
               </h1>
-              <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
-                The people behind the Nano Collective. Everyone is welcome to
-                join our open-source community and help build privacy-first AI
-                tools.
+              <p className="text-lg md:text-xl text-foreground/70 max-w-2xl mx-auto mb-12 leading-relaxed">
+                The engineers, designers, and hackers behind Nano Collective. We
+                are an open-source collective building privacy-first AI tools.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                <Button size="lg" asChild>
-                  <a
-                    href="https://github.com/nano-collective"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <FaGithub className="mr-2 h-4 w-4" />
-                    View on GitHub
-                  </a>
-                </Button>
-                <Button size="lg" variant="outline" asChild>
-                  <Link href="#how-to-contribute">How to Contribute</Link>
-                </Button>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <a
+                  href="https://github.com/nano-collective"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-12 items-center justify-center bg-foreground text-background px-8 text-sm font-bold tracking-wide hover:opacity-90 transition-colors"
+                >
+                  <FaGithub className="mr-2 h-4 w-4" />
+                  View GitHub
+                </a>
+                <Link
+                  href="#how-to-contribute"
+                  className="inline-flex h-12 items-center justify-center border border-foreground/20 bg-transparent px-8 text-sm font-bold tracking-wide hover:bg-muted transition-colors"
+                >
+                  How to Contribute
+                </Link>
               </div>
             </div>
           </div>
         </section>
 
         {/* Main Content */}
-        <main className="container mx-auto px-4 py-16">
-          {/* Contributors Grid */}
-          {CONTRIBUTORS.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-20">
-              {CONTRIBUTORS.map((contributor) => (
-                <ContributorCard
-                  key={contributor.name}
-                  contributor={contributor}
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-16 mb-20">
-              <p className="text-muted-foreground text-lg">
-                No contributors yet. Be the first to add yourself!
-              </p>
-            </div>
-          )}
+        <main className="flex-1 container mx-auto px-4 md:px-6 py-16 md:py-24">
+          <div className="max-w-7xl mx-auto">
+            {/* Contributors Grid */}
+            {CONTRIBUTORS.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-32">
+                {CONTRIBUTORS.map((contributor) => (
+                  <ContributorCard
+                    key={contributor.name}
+                    contributor={contributor}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="py-32 text-center border border-foreground/10 mb-32 bg-muted/20">
+                <p className="text-lg text-foreground/60 font-mono tracking-tight">
+                  No contributors found yet.
+                </p>
+              </div>
+            )}
 
-          {/* How to Contribute Section */}
-          <div id="how-to-contribute" className="mx-auto">
-            <Card>
-              <CardContent className="p-8 space-y-6 ">
-                <h2 className="text-2xl font-bold">
-                  Contributed? Add yourself!
-                </h2>
-                <div className="space-y-4 text-muted-foreground max-w-2xl">
-                  <div className="space-y-2">
-                    <h3 className="text-foreground font-semibold">
-                      1. Prepare your photo
-                    </h3>
-                    <p>
-                      Add a square photo (recommended: 400x400px) to the{" "}
-                      <code className="text-sm bg-muted px-1.5 py-0.5 rounded">
-                        /public/contributors/
-                      </code>{" "}
-                      directory. Use a clear filename like{" "}
-                      <code className="text-sm bg-muted px-1.5 py-0.5 rounded">
-                        yourname.jpg
-                      </code>
-                    </p>
+            {/* How to Contribute Section */}
+            <section id="how-to-contribute" className="max-w-3xl mx-auto space-y-8 scroll-m-24 mb-32">
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-center">
+                How to Contribute
+              </h2>
+              <div className="space-y-6">
+                <p className="text-lg text-foreground/70 leading-relaxed text-center">
+                  We build tools for the people who use them. If you care about
+                  privacy, performance, and keeping AI tools out of walled gardens,
+                  you belong here.
+                </p>
+                <div className="space-y-4 pt-4">
+                  <div className="flex items-start gap-4 p-6 border border-foreground/10 bg-muted/10">
+                    <div className="font-mono text-sm font-bold text-[#0000EE] dark:text-[#A1A1AA] pt-1">
+                      01
+                    </div>
+                    <div>
+                      <h3 className="font-bold mb-2 tracking-tight">Check the Bounties</h3>
+                      <p className="text-sm text-foreground/70 leading-relaxed">
+                        We run a community fund. Significant features and bug fixes
+                        often carry bounties. Check our GitHub issues for the{" "}
+                        <code className="bg-muted px-2 py-0.5 rounded text-xs">
+                          bounty
+                        </code>{" "}
+                        label.
+                      </p>
+                    </div>
                   </div>
-                  <div className="space-y-2">
-                    <h3 className="text-foreground font-semibold">
-                      2. Add your entry
-                    </h3>
-                    <p>
-                      Open{" "}
-                      <code className="text-sm bg-muted px-1.5 py-0.5 rounded">
-                        /lib/contributors.ts
-                      </code>{" "}
-                      and add your details to the CONTRIBUTORS array following
-                      the existing format. Include your name, photo filename,
-                      GitHub username, and optionally your website and bio.
-                    </p>
+                  <div className="flex items-start gap-4 p-6 border border-foreground/10 bg-muted/10">
+                    <div className="font-mono text-sm font-bold text-[#0000EE] dark:text-[#A1A1AA] pt-1">
+                      02
+                    </div>
+                    <div>
+                      <h3 className="font-bold mb-2 tracking-tight">Join the Discord</h3>
+                      <p className="text-sm text-foreground/70 leading-relaxed">
+                        Say hi in the #contributors channel. We're happy to help you
+                        find a good first issue or discuss a feature you want to build.
+                      </p>
+                    </div>
                   </div>
-                  <div className="space-y-2">
-                    <h3 className="text-foreground font-semibold">
-                      3. Submit a pull request
-                    </h3>
-                    <p>
-                      Fork the repository, commit your changes, and submit a
-                      pull request. We'll review and merge it as soon as
-                      possible!
-                    </p>
+                  <div className="flex items-start gap-4 p-6 border border-foreground/10 bg-muted/10">
+                    <div className="font-mono text-sm font-bold text-[#0000EE] dark:text-[#A1A1AA] pt-1">
+                      03
+                    </div>
+                    <div>
+                      <h3 className="font-bold mb-2 tracking-tight">Open a PR</h3>
+                      <p className="text-sm text-foreground/70 leading-relaxed">
+                        Once your first PR is merged, you'll be added to this page
+                        and receive your contributor invite.
+                      </p>
+                    </div>
                   </div>
                 </div>
-                <div className="pt-4">
-                  <Button asChild variant="default" className="w-full">
-                    <a
-                      href="https://docs.nanocollective.org/collective/projects/contributing"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Read Full Contributing Guide
-                    </a>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+              </div>
+            </section>
           </div>
         </main>
 
