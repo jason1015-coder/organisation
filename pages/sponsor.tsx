@@ -144,7 +144,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                     href="https://opencollective.com/nano-collective"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-bold text-[#0000EE] dark:text-[#A1A1AA] hover:underline"
+                    className="font-bold text-foreground underline underline-offset-4 decoration-foreground/30 hover:decoration-foreground transition-colors"
                   >
                     Open Source Collective
                   </a>
@@ -157,7 +157,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                     href="https://docs.nanocollective.org/collective/organisation/economics-charter"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-bold text-[#0000EE] dark:text-[#A1A1AA] hover:underline"
+                    className="font-bold text-foreground underline underline-offset-4 decoration-foreground/30 hover:decoration-foreground transition-colors"
                   >
                     Economics Charter
                   </a>
@@ -268,7 +268,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                   href="https://discord.gg/ktPDV6rekE"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-bold text-[#0000EE] dark:text-[#A1A1AA] hover:underline"
+                  className="font-bold text-foreground underline underline-offset-4 decoration-foreground/30 hover:decoration-foreground transition-colors"
                 >
                   open a conversation
                 </a>
@@ -323,7 +323,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                   ) : null}
                   . Live download counts, release history, and growth statistics
                   are published at{" "}
-                  <Link href="/growth" className="font-bold text-[#0000EE] dark:text-[#A1A1AA] hover:underline">
+                  <Link href="/growth" className="font-bold text-foreground underline underline-offset-4 decoration-foreground/30 hover:decoration-foreground transition-colors">
                     nanocollective.org/growth
                   </Link>
                   .
@@ -442,7 +442,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                           href="https://docs.nanocollective.org/collective/organisation/contributor-resources"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="font-bold text-[#0000EE] dark:text-[#A1A1AA] hover:underline"
+                          className="font-bold text-foreground underline underline-offset-4 decoration-foreground/30 hover:decoration-foreground transition-colors"
                         >
                           Contributor Resources
                         </a>
@@ -522,18 +522,21 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                 <h3 className="text-xl font-bold tracking-tight">
                   What sponsorship does not include
                 </h3>
-                <div className="inline-block text-center">
+                <div className="inline-block text-left">
                   <div className="space-y-4 text-foreground/80 leading-relaxed max-w-2xl">
-                    <div className="flex gap-3 text-center">
+                    <div className="flex gap-3">
+                      <span className="text-foreground font-bold mt-0.5">·</span>
                       <span>No early access to unshipped products</span>
                     </div>
                     <div className="flex gap-3">
+                      <span className="text-foreground font-bold mt-0.5">·</span>
                       <span>
                         No influence over the roadmap, prioritisation, or which
                         contributors get bounties
                       </span>
                     </div>
                     <div className="flex gap-3">
+                      <span className="text-foreground font-bold mt-0.5">·</span>
                       <span>
                         No routing of recurring sponsorship dollars to a specific
                         project's payouts. To direct funds to specific work, use a
@@ -541,6 +544,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                       </span>
                     </div>
                     <div className="flex gap-3">
+                      <span className="text-foreground font-bold mt-0.5">·</span>
                       <span>
                         No exclusivity at any tier. Sponsors at the same tier are
                         listed alphabetically
@@ -592,7 +596,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                               href="https://discord.gg/ktPDV6rekE"
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="font-bold text-[#0000EE] dark:text-[#A1A1AA] hover:underline"
+                              className="font-bold text-foreground underline underline-offset-4 decoration-foreground/30 hover:decoration-foreground transition-colors"
                             >
                               Discord
                             </a>
@@ -679,7 +683,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                   href="https://opencollective.com/nano-collective"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-bold text-[#0000EE] dark:text-[#A1A1AA] hover:underline"
+                  className="font-bold text-foreground underline underline-offset-4 decoration-foreground/30 hover:decoration-foreground transition-colors"
                 >
                   Open Source Collective
                 </a>
@@ -694,7 +698,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                   href="https://docs.nanocollective.org/collective/organisation/economics-charter"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-bold text-[#0000EE] dark:text-[#A1A1AA] hover:underline"
+                  className="font-bold text-foreground underline underline-offset-4 decoration-foreground/30 hover:decoration-foreground transition-colors"
                 >
                   Economics Charter
                 </a>
@@ -704,7 +708,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                   href="https://docs.nanocollective.org/collective/organisation/support"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-bold text-[#0000EE] dark:text-[#A1A1AA] hover:underline"
+                  className="font-bold text-foreground underline underline-offset-4 decoration-foreground/30 hover:decoration-foreground transition-colors"
                 >
                   Support the Collective
                 </a>
@@ -734,7 +738,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                         href="https://opencollective.com/nano-collective"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-bold text-foreground hover:underline"
+                        className="font-bold text-foreground underline underline-offset-4 decoration-foreground/30 hover:decoration-foreground transition-colors"
                       >
                         Open Collective
                       </a>
@@ -743,7 +747,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                         href="https://discord.gg/ktPDV6rekE"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-bold text-foreground hover:underline"
+                        className="font-bold text-foreground underline underline-offset-4 decoration-foreground/30 hover:decoration-foreground transition-colors"
                       >
                         Discord
                       </a>{" "}
@@ -761,7 +765,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                         href="https://discord.gg/ktPDV6rekE"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-bold text-foreground hover:underline"
+                        className="font-bold text-foreground underline underline-offset-4 decoration-foreground/30 hover:decoration-foreground transition-colors"
                       >
                         Discord
                       </a>{" "}
