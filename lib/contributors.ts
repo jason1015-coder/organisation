@@ -117,6 +117,12 @@ export const CONTRIBUTORS: Contributor[] = [
     bio: "Building scalable backends & cloud systems ⚙️ Node.js • APIs • DevOps • Open Source",
   },
   {
+    name: "EntropyParadigm",
+    photo: "entropyparadigm.png",
+    github: "EntropyParadigm",
+    bio: "Contributing to Nanocoder and open-source AI developer tooling.",
+  },
+  {
     name: "Caleb Grenko",
     photo: "grenko_caleb.jpg",
     github: "grenkoca",
