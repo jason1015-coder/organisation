@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Footer } from "@/components/layout-v2/Footer";
 import { extractNumberFromSlug, generateBlogSlug } from "@/lib/slugify";
 import type { BlogPostDetails } from "@/types/blog";
+import { SectionReveal } from "@/components/ui/motion";
 
 interface BlogPostProps {
   post: BlogPostDetails;
@@ -43,115 +44,117 @@ export default function BlogPost({ post }: BlogPostProps) {
 
       <div className="min-h-screen bg-background font-sans flex flex-col">
         {/* Main Content */}
-        <main className="flex-1 container mx-auto px-4 md:px-6 py-8 sm:py-12 max-w-4xl">
-          
-          {/* Back link */}
-          <div className="mb-8 sm:mb-12">
-            <Link 
-              href="/blog"
-              className="inline-flex items-center gap-2 font-mono text-xs font-bold tracking-widest uppercase hover:text-[#0000EE] dark:hover:text-[#A1A1AA] transition-colors"
-            >
-              &lt; Back to Blogs
-            </Link>
-          </div>
-
-          {/* Minimal Header */}
-          <header className="mb-8 sm:mb-12 space-y-4 sm:space-y-6">
-            <div className="flex flex-wrap gap-2 font-mono text-xs font-bold tracking-widest uppercase">
-              {post.labels.map((label) => (
-                <span
-                  key={label.id}
-                  style={{ color: `#${label.color}` }}
-                >
-                  [{label.name}]
-                </span>
-              ))}
+        <SectionReveal>
+          <main className="flex-1 container mx-auto px-4 md:px-6 py-8 sm:py-12 max-w-4xl">
+            
+            {/* Back link */}
+            <div className="mb-8 sm:mb-12">
+              <Link 
+                href="/blog"
+                className="inline-flex items-center gap-2 font-mono text-xs font-bold tracking-widest uppercase hover:text-[#0000EE] dark:hover:text-[#A1A1AA] transition-colors"
+              >
+                &lt; Back to Blogs
+              </Link>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground leading-tight break-words">
-              {post.title}
-            </h1>
-
-            <div className="flex flex-wrap items-center gap-4 text-sm font-mono text-muted-foreground border-y border-foreground/10 py-4">
-              <div className="flex items-center gap-1.5">
-                <Calendar className="h-4 w-4" />
-                <time dateTime={post.createdAt}>{formattedDate}</time>
+            {/* Minimal Header */}
+            <header className="mb-8 sm:mb-12 space-y-4 sm:space-y-6">
+              <div className="flex flex-wrap gap-2 font-mono text-xs font-bold tracking-widest uppercase">
+                {post.labels.map((label) => (
+                  <span
+                    key={label.id}
+                    style={{ color: `#${label.color}` }}
+                  >
+                    [{label.name}]
+                  </span>
+                ))}
               </div>
-              
-              <div className="hidden sm:block opacity-50">|</div>
 
-              <a
-                href={`https://github.com/${post.author.login}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 hover:text-foreground transition-colors"
-              >
-                <img
-                  src={post.author.avatarUrl}
-                  alt={post.author.login}
-                  className="h-5 w-5 rounded-sm"
-                />
-                <span>@{post.author.login}</span>
-              </a>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground leading-tight break-words">
+                {post.title}
+              </h1>
 
-              <div className="hidden sm:block opacity-50">|</div>
-
-              <a
-                href={post.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 hover:text-[#0000EE] dark:hover:text-[#A1A1AA] transition-colors"
-              >
-                <MessageCircle className="h-4 w-4" />
-                <span>{post.commentCount} comments</span>
-              </a>
-            </div>
-          </header>
-
-          <div className="space-y-16">
-            {/* Clean Article Content */}
-            <article
-              className="prose prose-neutral dark:prose-invert max-w-none md:prose-lg leading-relaxed
-              prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-foreground
-              prose-h2:mt-12 prose-h2:mb-6 prose-h2:border-b prose-h2:border-foreground/10 prose-h2:pb-4
-              prose-h3:mt-8 prose-h3:mb-4
-              prose-p:text-foreground/80 prose-p:mb-6
-              prose-a:text-[#0000EE] dark:prose-a:text-[#A1A1AA] prose-a:font-semibold prose-a:no-underline hover:prose-a:underline
-              prose-blockquote:border-l-4 prose-blockquote:border-[#0000EE] dark:prose-blockquote:border-[#A1A1AA] prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-foreground/70
-              prose-code:font-mono prose-code:bg-muted/50 prose-code:px-1.5 prose-code:py-0.5 prose-code:text-sm prose-code:text-foreground prose-code:before:content-none prose-code:after:content-none
-              prose-pre:rounded-none prose-pre:bg-muted/30 prose-pre:border prose-pre:border-foreground/20 prose-pre:p-6
-              prose-img:rounded-none prose-img:border prose-img:border-foreground/20 prose-img:my-10
-              prose-ul:my-6 prose-li:my-2 prose-li:marker:text-foreground/40
-              prose-strong:font-bold prose-strong:text-foreground
-              prose-table:border-collapse prose-table:w-full prose-table:my-8
-              prose-th:border-b-2 prose-th:border-foreground prose-th:text-left prose-th:p-3
-              prose-td:border-b prose-td:border-foreground/10 prose-td:p-3"
-              dangerouslySetInnerHTML={{ __html: post.bodyHTML }}
-            />
-
-            {/* Minimal CTA */}
-            <div className="border-t border-foreground/10 pt-12">
-              <div className="bg-muted/30 border border-foreground/20 p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-                <div className="space-y-2">
-                  <h3 className="text-xl font-bold tracking-tight">Join the discussion</h3>
-                  <p className="text-sm text-muted-foreground max-w-md">
-                    Have thoughts on this post? Head over to our GitHub discussions to share your feedback.
-                  </p>
+              <div className="flex flex-wrap items-center gap-4 text-sm font-mono text-muted-foreground border-y border-foreground/10 py-4">
+                <div className="flex items-center gap-1.5">
+                  <Calendar className="h-4 w-4" />
+                  <time dateTime={post.createdAt}>{formattedDate}</time>
                 </div>
                 
-                <a 
-                  href={post.url} 
-                  target="_blank" 
+                <div className="hidden sm:block opacity-50">|</div>
+
+                <a
+                  href={`https://github.com/${post.author.login}`}
+                  target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 font-mono text-sm font-bold uppercase tracking-widest px-6 py-3 bg-foreground text-background hover:opacity-90 transition-colors shrink-0"
+                  className="flex items-center gap-2 hover:text-foreground transition-colors"
                 >
-                  <span>View on GitHub</span>
-                  <ExternalLink className="h-4 w-4" />
+                  <img
+                    src={post.author.avatarUrl}
+                    alt={post.author.login}
+                    className="h-5 w-5 rounded-sm"
+                  />
+                  <span>@{post.author.login}</span>
+                </a>
+
+                <div className="hidden sm:block opacity-50">|</div>
+
+                <a
+                  href={post.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 hover:text-[#0000EE] dark:hover:text-[#A1A1AA] transition-colors"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  <span>{post.commentCount} comments</span>
                 </a>
               </div>
+            </header>
+
+            <div className="space-y-16">
+              {/* Clean Article Content */}
+              <article
+                className="prose prose-neutral dark:prose-invert max-w-none md:prose-lg leading-relaxed
+                prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-foreground
+                prose-h2:mt-12 prose-h2:mb-6 prose-h2:border-b prose-h2:border-foreground/10 prose-h2:pb-4
+                prose-h3:mt-8 prose-h3:mb-4
+                prose-p:text-foreground/80 prose-p:mb-6
+                prose-a:text-[#0000EE] dark:prose-a:text-[#A1A1AA] prose-a:font-semibold prose-a:no-underline hover:prose-a:underline
+                prose-blockquote:border-l-4 prose-blockquote:border-[#0000EE] dark:prose-blockquote:border-[#A1A1AA] prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-foreground/70
+                prose-code:font-mono prose-code:bg-muted/50 prose-code:px-1.5 prose-code:py-0.5 prose-code:text-sm prose-code:text-foreground prose-code:before:content-none prose-code:after:content-none
+                prose-pre:rounded-none prose-pre:bg-muted/30 prose-pre:border prose-pre:border-foreground/20 prose-pre:p-6
+                prose-img:rounded-none prose-img:border prose-img:border-foreground/20 prose-img:my-10
+                prose-ul:my-6 prose-li:my-2 prose-li:marker:text-foreground/40
+                prose-strong:font-bold prose-strong:text-foreground
+                prose-table:border-collapse prose-table:w-full prose-table:my-8
+                prose-th:border-b-2 prose-th:border-foreground prose-th:text-left prose-th:p-3
+                prose-td:border-b prose-td:border-foreground/10 prose-td:p-3"
+                dangerouslySetInnerHTML={{ __html: post.bodyHTML }}
+              />
+
+              {/* Minimal CTA */}
+              <div className="border-t border-foreground/10 pt-12">
+                <div className="bg-muted/30 border border-foreground/20 p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+                  <div className="space-y-2">
+                    <h3 className="text-xl font-bold tracking-tight">Join the discussion</h3>
+                    <p className="text-sm text-muted-foreground max-w-md">
+                      Have thoughts on this post? Head over to our GitHub discussions to share your feedback.
+                    </p>
+                  </div>
+                  
+                  <a 
+                    href={post.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 font-mono text-sm font-bold uppercase tracking-widest px-6 py-3 bg-foreground text-background hover:opacity-90 transition-colors shrink-0"
+                  >
+                    <span>View on GitHub</span>
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
+                </div>
+              </div>
             </div>
-          </div>
-        </main>
+          </main>
+        </SectionReveal>
         <Footer />
       </div>
     </>
