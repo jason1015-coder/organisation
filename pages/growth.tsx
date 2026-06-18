@@ -3,13 +3,7 @@ import Head from "next/head";
 import { useMemo, useState } from "react";
 import { GrowthChart } from "@/components/GrowthChart";
 import { GrowthMetrics } from "@/components/GrowthMetrics";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Footer } from "@/components/layout-v2/Footer";
 
 interface DownloadData {
   date: string;
@@ -198,97 +192,93 @@ export default function Growth({ packages, lastUpdated }: GrowthPageProps) {
         />
       </Head>
 
-      <div className="min-h-screen bg-background">
-        <div className="container mx-auto px-4 py-16">
-          {/* Header */}
-          <div className="mb-12">
-            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-              <div className="flex-1">
-                <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                  Package Growth Tracker
-                </h1>
-                <p className="text-lg text-muted-foreground">
-                  Monitoring NPM downloads and release impact for{" "}
-                  <a
-                    href={`https://github.com/${currentPackageData.githubRepo}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline"
-                  >
-                    {currentPackageData.displayName}
-                  </a>
-                </p>
-                <p className="text-sm text-muted-foreground mt-2">
-                  <strong>Last updated: </strong>
-                  {new Date(lastUpdated).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </p>
+      <div className="min-h-screen bg-background font-sans flex flex-col">
+        {/* Hero */}
+        <section className="relative pt-12 pb-12 sm:pb-20 px-4 md:px-6 container mx-auto border-b border-foreground/20">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+            <div className="space-y-4 sm:space-y-8 max-w-4xl flex-1">
+              <div className="flex items-center gap-2 text-xs font-semibold font-mono text-muted-foreground uppercase tracking-widest border-b border-foreground/20 pb-2 max-w-[200px]">
+                <span className="text-[#0000EE] dark:text-[#A1A1AA] font-bold">&gt;</span>
+                Metrics
+              </div>
+              
+              <h1 className="text-3xl sm:text-5xl lg:text-[4rem] leading-[1.05] font-bold tracking-tight text-foreground break-words">
+                Growth Tracker
+              </h1>
+              
+              <p className="text-xs sm:text-lg lg:text-xl text-foreground/70 leading-relaxed max-w-[800px]">
+                Tracking NPM downloads for{" "}
+                <a
+                  href={`https://github.com/${currentPackageData.githubRepo}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#0000EE] dark:text-[#A1A1AA] hover:underline font-semibold"
+                >
+                  {currentPackageData.displayName}
+                </a>
+              </p>
+              
+              <p className="text-xs sm:text-sm text-foreground/50">
+                Last updated:{" "}
+                {new Date(lastUpdated).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </p>
+            </div>
+
+            {/* Package and Time Period Selectors */}
+            <div className="flex flex-col sm:flex-row gap-4 lg:w-auto mt-8 lg:mt-0 pb-2">
+              {/* Package Selector */}
+              <div className="flex flex-col gap-2">
+                <label
+                  htmlFor="package-select"
+                  className="text-xs font-semibold uppercase tracking-widest text-foreground/70"
+                >
+                  Package
+                </label>
+                <select
+                  id="package-select"
+                  value={selectedPackage}
+                  onChange={(e) => setSelectedPackage(e.target.value)}
+                  className="border border-foreground/20 bg-background text-foreground text-sm px-4 py-2 min-w-[200px] lg:w-[250px] appearance-none cursor-pointer focus:outline-none focus:ring-1 focus:ring-foreground hover:bg-muted transition-colors"
+                >
+                  <option value="__all__">All Packages</option>
+                  {packages.map((pkg) => (
+                    <option key={pkg.packageName} value={pkg.packageName}>
+                      {pkg.displayName}
+                    </option>
+                  ))}
+                </select>
               </div>
 
-              {/* Package and Time Period Selectors */}
-              <div className="flex flex-col gap-4 mt-2">
-                {/* Package Selector */}
-                <div className="flex flex-col gap-2">
-                  <label
-                    htmlFor="package-select"
-                    className="text-sm font-medium text-muted-foreground"
-                  >
-                    Package
-                  </label>
-                  <Select
-                    value={selectedPackage}
-                    onValueChange={setSelectedPackage}
-                  >
-                    <SelectTrigger
-                      id="package-select"
-                      className="w-full lg:w-[250px]"
-                    >
-                      <SelectValue placeholder="Select package" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="__all__">All Packages</SelectItem>
-                      {packages.map((pkg) => (
-                        <SelectItem
-                          key={pkg.packageName}
-                          value={pkg.packageName}
-                        >
-                          {pkg.displayName}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                {/* Time Period Selector */}
-                <div className="flex flex-col gap-2">
-                  <label
-                    htmlFor="time-period-select"
-                    className="text-sm font-medium text-muted-foreground"
-                  >
-                    Time Period
-                  </label>
-                  <Select value={timePeriod} onValueChange={setTimePeriod}>
-                    <SelectTrigger
-                      id="time-period-select"
-                      className="w-full lg:w-[250px]"
-                    >
-                      <SelectValue placeholder="Select period" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="last-30-days">Last 30 Days</SelectItem>
-                      <SelectItem value="last-60-days">Last 60 Days</SelectItem>
-                      <SelectItem value="last-90-days">Last 90 Days</SelectItem>
-                      <SelectItem value="all-time">All Time</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+              {/* Time Period Selector */}
+              <div className="flex flex-col gap-2">
+                <label
+                  htmlFor="time-period-select"
+                  className="text-xs font-semibold uppercase tracking-widest text-foreground/70"
+                >
+                  Time Period
+                </label>
+                <select
+                  id="time-period-select"
+                  value={timePeriod}
+                  onChange={(e) => setTimePeriod(e.target.value)}
+                  className="border border-foreground/20 bg-background text-foreground text-sm px-4 py-2 min-w-[200px] lg:w-[250px] appearance-none cursor-pointer focus:outline-none focus:ring-1 focus:ring-foreground hover:bg-muted transition-colors"
+                >
+                  <option value="last-30-days">Last 30 Days</option>
+                  <option value="last-60-days">Last 60 Days</option>
+                  <option value="last-90-days">Last 90 Days</option>
+                  <option value="all-time">All Time</option>
+                </select>
               </div>
             </div>
           </div>
+        </section>
 
+        {/* Main Content */}
+        <main className="flex-1 container mx-auto px-4 md:px-6 py-8 sm:py-12 md:py-24">
           {/* Key Metrics */}
           <GrowthMetrics
             totalDownloads={periodTotalDownloads}
@@ -300,7 +290,10 @@ export default function Growth({ packages, lastUpdated }: GrowthPageProps) {
           />
 
           {/* Chart */}
-          <div className="mt-12">
+          <div className="mt-12 border border-foreground/20 p-4 sm:p-8 bg-background">
+            <h2 className="text-xl font-bold tracking-tight mb-8">
+              Download Trajectory
+            </h2>
             <GrowthChart
               downloadData={filteredData}
               sevenDayAvg={sevenDayAvg}
@@ -309,7 +302,9 @@ export default function Growth({ packages, lastUpdated }: GrowthPageProps) {
               releases={filteredReleases}
             />
           </div>
-        </div>
+        </main>
+        
+        <Footer />
       </div>
     </>
   );

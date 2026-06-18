@@ -112,11 +112,11 @@ export function CoverImageSidebar({
 }) {
   return (
     <aside
-      className={`fixed top-0 right-0 h-full w-[360px] bg-card border-l border-border shadow-xl z-30 transition-transform duration-200 ${
+      className={`fixed top-0 right-0 h-full w-[360px] bg-background border-l border-foreground/20 shadow-xl z-30 transition-transform duration-200 ${
         open ? "translate-x-0" : "translate-x-full"
       }`}
     >
-      <div className="flex items-center justify-between px-4 py-3 border-b border-border">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-foreground/20">
         <h2 className="text-sm font-semibold text-foreground">Controls</h2>
         <Button
           variant="ghost"
@@ -293,12 +293,12 @@ function ColorThemeSection({ state }: { state: SidebarState }) {
         <span>Hue {state.hue}°</span>
         <span className="flex items-center gap-1.5">
           <span
-            className="w-5 h-5 rounded border border-border"
+            className="w-5 h-5 rounded-none border border-foreground/20"
             style={{ background: state.primaryColor }}
             title={state.primaryColor}
           />
           <span
-            className="w-5 h-5 rounded border border-border"
+            className="w-5 h-5 rounded-none border border-foreground/20"
             style={{ background: state.secondaryColor }}
             title={state.secondaryColor}
           />

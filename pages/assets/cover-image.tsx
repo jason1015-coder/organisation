@@ -256,7 +256,7 @@ export default function CoverImage() {
           }`}
         >
           {/* Top bar */}
-          <div className="sticky top-0 z-20 flex items-center justify-between gap-3 px-4 py-3 bg-background/80 backdrop-blur border-b border-border">
+          <div className="sticky top-0 z-20 flex items-center justify-between gap-3 px-4 py-3 bg-background/80 backdrop-blur border-b border-foreground/20">
             <ModeToggle mode={mode} onChange={setMode} />
             <div className="flex items-center gap-2">
               <ZoomControls
@@ -265,19 +265,24 @@ export default function CoverImage() {
                 onZoomOut={() => setZoom((z) => Math.max(0.05, z / 1.25))}
                 onResetZoom={() => setZoom(1)}
               />
-              <Button onClick={handleDownload} disabled={isDownloading}>
+              <button
+                type="button"
+                className="text-sm font-semibold px-4 py-2 border border-foreground/20 bg-foreground text-background hover:bg-background hover:text-foreground transition-colors disabled:opacity-50"
+                onClick={handleDownload}
+                disabled={isDownloading}
+              >
                 {isDownloading
                   ? "Rendering…"
                   : `Download ${width}×${height} PNG`}
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
+              </button>
+              <button
+                type="button"
+                className="p-2 border border-foreground/20 bg-background hover:bg-muted transition-colors flex items-center justify-center"
                 onClick={() => setSidebarOpen((v) => !v)}
                 aria-label="Toggle controls"
               >
-                <Settings className="w-4 h-4" />
-              </Button>
+                <Settings className="w-4 h-4 text-foreground/70" />
+              </button>
             </div>
           </div>
 
@@ -336,16 +341,16 @@ function ModeToggle({
   onChange: (m: Mode) => void;
 }) {
   return (
-    <div className="inline-flex rounded-md border border-border p-0.5 bg-muted/50">
+    <div className="inline-flex rounded-none border border-foreground/20 p-0.5 bg-muted/30">
       {(["cover", "post"] as const).map((m) => (
         <button
           key={m}
           type="button"
           onClick={() => onChange(m)}
-          className={`px-3 py-1.5 text-sm rounded ${
+          className={`px-3 py-1.5 text-sm font-semibold uppercase tracking-widest rounded-none ${
             mode === m
-              ? "bg-muted text-foreground"
-              : "text-muted-foreground hover:text-foreground"
+              ? "bg-foreground text-background"
+              : "text-foreground/70 hover:text-foreground"
           }`}
         >
           {m === "cover" ? "Cover" : "Post"}
