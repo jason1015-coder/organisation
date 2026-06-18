@@ -1,8 +1,19 @@
-import { ArrowRight, Github, Image, Palette, LayoutTemplate } from "lucide-react";
+import {
+  ArrowRight,
+  Github,
+  Image,
+  LayoutTemplate,
+  Palette,
+} from "lucide-react";
 import Head from "next/head";
 import Link from "next/link";
 import { Footer } from "@/components/layout-v2/Footer";
-import { SectionReveal, StaggerContainer, StaggerItem, CardHover } from "@/components/ui/motion";
+import {
+  CardHover,
+  SectionReveal,
+  StaggerContainer,
+  StaggerItem,
+} from "@/components/ui/motion";
 
 const assets = [
   {
@@ -55,14 +66,16 @@ export default function Assets() {
           <section className="relative pt-12 pb-12 sm:pb-20 px-4 md:px-6 container mx-auto border-b border-foreground/20">
             <div className="space-y-4 sm:space-y-8 max-w-4xl">
               <div className="flex items-center gap-2 text-xs font-semibold font-mono text-muted-foreground uppercase tracking-widest border-b border-foreground/20 pb-2 max-w-[200px]">
-                <span className="text-[#0000EE] dark:text-[#A1A1AA] font-bold">&gt;</span>
+                <span className="text-[#0000EE] dark:text-[#A1A1AA] font-bold">
+                  &gt;
+                </span>
                 Media
               </div>
-              
+
               <h1 className="text-3xl sm:text-5xl lg:text-[4rem] leading-[1.05] font-bold tracking-tight text-foreground break-words">
                 Brand Assets
               </h1>
-              
+
               <p className="text-xs sm:text-lg lg:text-xl text-foreground/70 leading-relaxed max-w-[800px]">
                 Downloads, screenshots, and animations for your projects.
               </p>
@@ -79,9 +92,7 @@ export default function Assets() {
                 <StaggerItem key={asset.href}>
                   <CardHover
                     className={`flex flex-col border border-foreground/20 bg-background transition-colors h-full ${
-                      asset.comingSoon
-                        ? "opacity-60"
-                        : "hover:bg-muted"
+                      asset.comingSoon ? "opacity-60" : "hover:bg-muted"
                     }`}
                   >
                     <div className="p-6 md:p-8 flex-1">
@@ -95,7 +106,7 @@ export default function Assets() {
                           </span>
                         )}
                       </div>
-                      
+
                       <h3 className="text-xl sm:text-2xl font-bold mb-3 tracking-tight">
                         {asset.title}
                       </h3>
@@ -106,7 +117,11 @@ export default function Assets() {
 
                     <div className="p-6 pt-0 mt-auto border-t border-foreground/10">
                       {asset.comingSoon ? (
-                        <button disabled className="mt-4 w-full text-sm font-semibold py-3 border border-foreground/20 text-foreground/50 bg-muted/30 flex items-center justify-center cursor-not-allowed">
+                        <button
+                          type="button"
+                          disabled
+                          className="mt-4 w-full text-sm font-semibold py-3 border border-foreground/20 text-foreground/50 bg-muted/30 flex items-center justify-center cursor-not-allowed"
+                        >
                           Pending
                         </button>
                       ) : (
@@ -126,7 +141,9 @@ export default function Assets() {
 
             {/* Usage Guidelines */}
             <div className="border border-foreground/20 bg-muted/5 p-6 sm:p-8">
-              <h2 className="text-xl font-bold tracking-tight mb-4">Usage Guidelines</h2>
+              <h2 className="text-xl font-bold tracking-tight mb-4">
+                Usage Guidelines
+              </h2>
               <p className="text-sm sm:text-base text-foreground/70 leading-relaxed max-w-3xl">
                 Our assets are available under the{" "}
                 <a
@@ -144,7 +161,7 @@ export default function Assets() {
             </div>
           </main>
         </SectionReveal>
-        
+
         <Footer />
       </div>
     </>

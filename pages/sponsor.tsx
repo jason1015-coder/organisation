@@ -12,14 +12,14 @@ import Link from "next/link";
 import { FaDiscord, FaGithub } from "react-icons/fa";
 import { Footer } from "@/components/layout-v2/Footer";
 import { SponsorLogo } from "@/components/SponsorLogo";
-import { fetchTotalDownloads } from "@/lib/npm-stats";
-import { builderSponsors, supporterSponsors } from "@/lib/sponsors";
 import {
+  CardHover,
   SectionReveal,
   StaggerContainer,
   StaggerItem,
-  CardHover
 } from "@/components/ui/motion";
+import { fetchTotalDownloads } from "@/lib/npm-stats";
+import { builderSponsors, supporterSponsors } from "@/lib/sponsors";
 
 interface SponsorPageProps {
   totalDownloads: number;
@@ -144,13 +144,13 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                 <StaggerItem className="max-w-3xl mx-auto space-y-4 sm:space-y-6 px-2 sm:px-0">
                   <p className="text-xs sm:text-lg md:text-xl text-foreground/70 leading-relaxed">
                     The Nano Collective is a community-led group of developers,
-                    designers, and maintainers building open-source AI tools for the
-                    people who use them. We build not for profit, but for the
-                    community.
+                    designers, and maintainers building open-source AI tools for
+                    the people who use them. We build not for profit, but for
+                    the community.
                   </p>
                   <p className="text-xs sm:text-lg text-foreground/70 leading-relaxed">
-                    Sponsorship funds the people doing the work. The Collective is
-                    fiscally hosted by{" "}
+                    Sponsorship funds the people doing the work. The Collective
+                    is fiscally hosted by{" "}
                     <a
                       href="https://opencollective.com/nano-collective"
                       target="_blank"
@@ -208,7 +208,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                   <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {builderSponsors.map((sponsor) => (
                       <StaggerItem key={sponsor.name}>
-                        <CardHover className="overflow-hidden border border-foreground/20 transition-all h-full">
+                        <CardHover className="relative overflow-hidden border border-foreground/20 transition-all h-full">
                           <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 dark:opacity-100 pointer-events-none" />
                           <SponsorLogo
                             sponsor={sponsor}
@@ -250,7 +250,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                   <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-6">
                     {supporterSponsors.map((sponsor) => (
                       <StaggerItem key={sponsor.name}>
-                        <CardHover className="overflow-hidden border border-foreground/20 transition-all h-full">
+                        <CardHover className="relative overflow-hidden border border-foreground/20 transition-all h-full">
                           <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 dark:opacity-100 pointer-events-none" />
                           <SponsorLogo
                             sponsor={sponsor}
@@ -281,8 +281,8 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                 </div>
 
                 <p className="text-sm font-mono text-foreground/60 max-w-3xl mx-auto text-center">
-                  Individual sponsors are listed automatically via Open Collective
-                  as they join. Bespoke partnership spots are open:{" "}
+                  Individual sponsors are listed automatically via Open
+                  Collective as they join. Bespoke partnership spots are open:{" "}
                   <a
                     href="https://discord.gg/ktPDV6rekE"
                     target="_blank"
@@ -309,10 +309,10 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                 <p className="text-xs sm:text-lg text-foreground/70 leading-relaxed max-w-3xl mx-auto">
                   AI is becoming the most personal piece of infrastructure most
                   people use: the place they think out loud, work through
-                  problems, and hand off real parts of their workflow. The systems
-                  people are coming to depend on are largely owned by a small
-                  number of companies whose incentives are not aligned with the
-                  people using them.
+                  problems, and hand off real parts of their workflow. The
+                  systems people are coming to depend on are largely owned by a
+                  small number of companies whose incentives are not aligned
+                  with the people using them.
                 </p>
                 <p className="text-xs sm:text-lg text-foreground/70 leading-relaxed max-w-3xl mx-auto">
                   The Nano Collective exists because the alternative needs to be
@@ -344,9 +344,12 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                         to date across them
                       </>
                     ) : null}
-                    . Live download counts, release history, and growth statistics
-                    are published at{" "}
-                    <Link href="/growth" className="font-bold text-foreground underline underline-offset-4 decoration-foreground/30 hover:decoration-foreground transition-colors">
+                    . Live download counts, release history, and growth
+                    statistics are published at{" "}
+                    <Link
+                      href="/growth"
+                      className="font-bold text-foreground underline underline-offset-4 decoration-foreground/30 hover:decoration-foreground transition-colors"
+                    >
                       nanocollective.org/growth
                     </Link>
                     .
@@ -360,7 +363,9 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                         <div className="relative z-10">
                           <div className="flex items-center gap-3 mb-3">
                             <FaGithub className="h-5 w-5 text-muted-foreground group-hover:text-foreground transition-colors" />
-                            <h3 className="font-bold text-xl tracking-tight">{project.name}</h3>
+                            <h3 className="font-bold text-xl tracking-tight">
+                              {project.name}
+                            </h3>
                           </div>
                           <p className="text-xs sm:text-lg text-foreground/70">
                             {project.description}
@@ -381,12 +386,14 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
             <div className="container mx-auto px-4 md:px-6">
               <StaggerContainer className="max-w-5xl mx-auto space-y-12">
                 <StaggerItem className="space-y-4 text-center">
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">Tiers</h2>
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
+                    Tiers
+                  </h2>
                   <p className="text-xs sm:text-lg text-foreground/70 leading-relaxed max-w-3xl mx-auto">
                     A small, deliberately simple program. Same rule across every
                     tier: more support = more surfaces, whether that support is
-                    cash or in-kind resources valued at their fair equivalent. No
-                    exclusivity, no slot caps, no influence over the roadmap.
+                    cash or in-kind resources valued at their fair equivalent.
+                    No exclusivity, no slot caps, no influence over the roadmap.
                     Sponsors fund the work; the Collective directs it.
                   </p>
                 </StaggerItem>
@@ -394,16 +401,23 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                 <StaggerItem>
                   <div className="grid lg:grid-cols-3 gap-8">
                     {tiers.map((tier) => (
-                      <CardHover key={tier.name} className="flex flex-col h-full bg-background border border-foreground/20 transition-all overflow-hidden relative">
+                      <CardHover
+                        key={tier.name}
+                        className="flex flex-col h-full bg-background border border-foreground/20 transition-all overflow-hidden relative"
+                      >
                         <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 dark:opacity-100 pointer-events-none" />
                         <div className="relative z-10 flex flex-col h-full">
                           <div className="p-6 border-b border-foreground/10 bg-muted/30">
-                            <h3 className="text-2xl font-bold tracking-tight mb-2">{tier.name}</h3>
+                            <h3 className="text-2xl font-bold tracking-tight mb-2">
+                              {tier.name}
+                            </h3>
                             <div className="font-mono">
                               <span className="text-xl font-bold">
                                 {tier.price}
                               </span>{" "}
-                              <span className="text-xs sm:text-sm text-muted-foreground">{tier.cadence}</span>
+                              <span className="text-xs sm:text-sm text-muted-foreground">
+                                {tier.cadence}
+                              </span>
                             </div>
                           </div>
                           <div className="p-6 flex flex-col gap-6 flex-1">
@@ -416,7 +430,9 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                                   key={perk}
                                   className="flex gap-3 text-foreground/70 leading-relaxed"
                                 >
-                                  <span className="text-foreground font-bold mt-0.5">·</span>
+                                  <span className="text-foreground font-bold mt-0.5">
+                                    ·
+                                  </span>
                                   <span>{perk}</span>
                                 </div>
                               ))}
@@ -451,10 +467,11 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                         <div className="space-y-6">
                           <p className="text-xs sm:text-lg text-foreground/80 leading-relaxed">
                             For organisations interested in a larger or named
-                            arrangement: publicly named partnership, joint content, a
-                            direct relationship with the core team, or anything outside
-                            the standard tiers. Designed case by case. Terms are agreed
-                            and published before the relationship begins.
+                            arrangement: publicly named partnership, joint
+                            content, a direct relationship with the core team,
+                            or anything outside the standard tiers. Designed
+                            case by case. Terms are agreed and published before
+                            the relationship begins.
                           </p>
                           <p className="text-xs sm:text-lg text-foreground/60 leading-relaxed">
                             To see exactly what your support reaches and how
@@ -504,16 +521,17 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                         </p>
                         <div className="space-y-6">
                           <p className="text-xs sm:text-lg text-foreground/80 leading-relaxed">
-                            Sponsorship does not have to be money. We welcome non-cash
-                            support such as cloud and API credits, compute, software
-                            licenses, hardware, and other resources that help our
-                            contributors build. There is no Open Collective sign-up for
-                            in-kind support, since no money changes hands.
+                            Sponsorship does not have to be money. We welcome
+                            non-cash support such as cloud and API credits,
+                            compute, software licenses, hardware, and other
+                            resources that help our contributors build. There is
+                            no Open Collective sign-up for in-kind support,
+                            since no money changes hands.
                           </p>
                           <p className="text-xs sm:text-sm text-foreground/80 leading-relaxed">
                             Reach out and we will work out together what your
-                            contribution gets you in return, recognised on the same
-                            basis as the tiers above.
+                            contribution gets you in return, recognised on the
+                            same basis as the tiers above.
                           </p>
                           <div className="flex flex-col sm:flex-row gap-4 pt-4 border-t border-foreground/10">
                             <a
@@ -548,29 +566,37 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                     <div className="inline-block text-xs sm:text-lg text-left">
                       <div className="space-y-4 text-foreground/80 leading-relaxed max-w-2xl">
                         <div className="flex gap-3">
-                          <span className="text-foreground font-bold mt-0.5">·</span>
+                          <span className="text-foreground font-bold mt-0.5">
+                            ·
+                          </span>
                           <span>No early access to unshipped products</span>
                         </div>
                         <div className="flex gap-3">
-                          <span className="text-foreground font-bold mt-0.5">·</span>
+                          <span className="text-foreground font-bold mt-0.5">
+                            ·
+                          </span>
                           <span>
-                            No influence over the roadmap, prioritisation, or which
-                            contributors get bounties
+                            No influence over the roadmap, prioritisation, or
+                            which contributors get bounties
                           </span>
                         </div>
                         <div className="flex gap-3">
-                          <span className="text-foreground font-bold mt-0.5">·</span>
+                          <span className="text-foreground font-bold mt-0.5">
+                            ·
+                          </span>
                           <span>
-                            No routing of recurring sponsorship dollars to a specific
-                            project's payouts. To direct funds to specific work, use a
-                            designated donation
+                            No routing of recurring sponsorship dollars to a
+                            specific project's payouts. To direct funds to
+                            specific work, use a designated donation
                           </span>
                         </div>
                         <div className="flex gap-3">
-                          <span className="text-foreground font-bold mt-0.5">·</span>
+                          <span className="text-foreground font-bold mt-0.5">
+                            ·
+                          </span>
                           <span>
-                            No exclusivity at any tier. Sponsors at the same tier are
-                            listed alphabetically
+                            No exclusivity at any tier. Sponsors at the same
+                            tier are listed alphabetically
                           </span>
                         </div>
                       </div>
@@ -608,9 +634,10 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                         </h3>
                         <div className="flex flex-col gap-6 flex-1">
                           <p className="text-xs sm:text-lg text-foreground/80 leading-relaxed">
-                            Any amount, one time, into the community fund. No perks
-                            attached, no need to reach out. Donate directly on Open
-                            Collective, or send Bitcoin to the Nano Collective wallet.
+                            Any amount, one time, into the community fund. No
+                            perks attached, no need to reach out. Donate
+                            directly on Open Collective, or send Bitcoin to the
+                            Nano Collective wallet.
                           </p>
                           <div className="space-y-4 font-mono text-sm text-foreground/70 flex-1">
                             <div className="flex items-start gap-3">
@@ -655,16 +682,16 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                         </h3>
                         <div className="flex flex-col gap-6 flex-1">
                           <p className="text-xs sm:text-lg text-foreground/80 leading-relaxed">
-                            A specific piece of work, scoped and agreed with the core
-                            team before the donation is accepted. Nothing is
-                            open-ended. Nothing is retrospective. You know what the
-                            work is and how it will be delivered before the donation
-                            is made. Delivery is reported publicly.
+                            A specific piece of work, scoped and agreed with the
+                            core team before the donation is accepted. Nothing
+                            is open-ended. Nothing is retrospective. You know
+                            what the work is and how it will be delivered before
+                            the donation is made. Delivery is reported publicly.
                           </p>
                           <p className="font-mono text-xs sm:text-sm text-foreground/50 italic flex-1 border-l-2 border-foreground/20 pl-4">
-                            The program is new; there are no completed examples to
-                            cite yet. The first delivered designated donation will be
-                            the first listed here.
+                            The program is new; there are no completed examples
+                            to cite yet. The first delivered designated donation
+                            will be the first listed here.
                           </p>
                           <a
                             href="https://discord.gg/ktPDV6rekE"
@@ -689,7 +716,9 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
           <section className="border-b border-foreground/10 py-16">
             <div className="container mx-auto px-4 md:px-6">
               <div className="max-w-5xl mx-auto space-y-6 text-center">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">Who we accept</h2>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
+                  Who we accept
+                </h2>
                 <p className="text-xs sm:text-lg text-foreground/70 leading-relaxed max-w-3xl mx-auto">
                   The Nano Collective reserves the right to decline any
                   sponsorship. We will decline if a prospective sponsor's stated
@@ -697,8 +726,8 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                   what the Collective is building: privacy-respecting,
                   local-first, open AI tooling. Declining is not a moral
                   judgement; it is a recognition that some associations would
-                  undermine the work for everyone else who participates. Decisions
-                  are made by the core team and are not appealable.
+                  undermine the work for everyone else who participates.
+                  Decisions are made by the core team and are not appealable.
                 </p>
               </div>
             </div>
@@ -724,8 +753,8 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                     Open Source Collective
                   </a>
                   . All incoming and outgoing fiat payments are visible on the
-                  public Open Collective ledger in real time. Bitcoin donations to
-                  the published Nano Collective wallet address are verifiable
+                  public Open Collective ledger in real time. Bitcoin donations
+                  to the published Nano Collective wallet address are verifiable
                   on-chain.
                 </p>
                 <p className="text-xs sm:text-lg text-foreground/70 leading-relaxed max-w-3xl mx-auto">
@@ -738,8 +767,8 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                   >
                     Economics Charter
                   </a>
-                  . For sponsorship operations, including logo specifications and
-                  the onboarding process, see{" "}
+                  . For sponsorship operations, including logo specifications
+                  and the onboarding process, see{" "}
                   <a
                     href="https://docs.nanocollective.org/collective/organisation/support"
                     target="_blank"
@@ -782,7 +811,8 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                         >
                           Open Collective
                         </a>
-                        . For Builder or bespoke arrangements, message us first via{" "}
+                        . For Builder or bespoke arrangements, message us first
+                        via{" "}
                         <a
                           href="https://discord.gg/ktPDV6rekE"
                           target="_blank"

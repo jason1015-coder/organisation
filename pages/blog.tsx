@@ -4,9 +4,14 @@ import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
 import { Footer } from "@/components/layout-v2/Footer";
+import {
+  CardHover,
+  SectionReveal,
+  StaggerContainer,
+  StaggerItem,
+} from "@/components/ui/motion";
 import { generateBlogSlug } from "@/lib/slugify";
 import type { BlogPost } from "@/types/blog";
-import { SectionReveal, StaggerContainer, StaggerItem, CardHover } from "@/components/ui/motion";
 
 interface CategoryInfo {
   name: string;
@@ -57,14 +62,16 @@ export default function Blog({ posts, categories }: BlogProps) {
           <section className="relative pt-12 pb-12 sm:pb-20 px-4 md:px-6 container mx-auto border-b border-foreground/20">
             <div className="space-y-4 sm:space-y-8 max-w-4xl">
               <div className="flex items-center gap-2 text-xs font-semibold font-mono text-muted-foreground uppercase tracking-widest border-b border-foreground/20 pb-2 max-w-[200px]">
-                <span className="text-[#0000EE] dark:text-[#A1A1AA] font-bold">&gt;</span>
+                <span className="text-[#0000EE] dark:text-[#A1A1AA] font-bold">
+                  &gt;
+                </span>
                 Blog
               </div>
-              
+
               <h1 className="text-3xl sm:text-5xl lg:text-[4rem] leading-[1.05] font-bold tracking-tight text-foreground break-words">
                 Updates & discussions
               </h1>
-              
+
               <p className="text-xs sm:text-lg lg:text-xl text-foreground/70 leading-relaxed max-w-[800px]">
                 Latest announcements, project updates, and community discussions
                 from the Nano Collective.
@@ -81,6 +88,7 @@ export default function Blog({ posts, categories }: BlogProps) {
               <div className="flex flex-wrap gap-2">
                 {allCategories.map((category) => (
                   <button
+                    type="button"
                     key={category.slug}
                     onClick={() => setSelectedCategory(category.slug)}
                     className={`px-4 py-2 text-xs sm:text-sm font-mono font-bold tracking-widest uppercase transition-colors rounded-none border ${
@@ -109,7 +117,7 @@ export default function Blog({ posts, categories }: BlogProps) {
                         <div className="relative z-10 space-y-4 sm:space-y-6 h-full flex flex-col">
                           <div className="space-y-4 flex-1">
                             <div className="flex flex-wrap gap-2 mb-4">
-                              {post.labels && post.labels.map((label) => (
+                              {post.labels?.map((label) => (
                                 <span
                                   key={label.id}
                                   className="font-mono text-xs font-bold px-2 py-1 uppercase tracking-wider bg-background border"
@@ -123,7 +131,7 @@ export default function Blog({ posts, categories }: BlogProps) {
                                 </span>
                               ))}
                             </div>
-                            
+
                             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight line-clamp-3 group-hover:text-[#0000EE] dark:group-hover:text-[#A1A1AA] transition-colors">
                               {post.title}
                             </h2>
@@ -133,19 +141,25 @@ export default function Blog({ posts, categories }: BlogProps) {
                             <div className="flex items-center gap-1.5">
                               <Calendar className="h-4 w-4" />
                               <time dateTime={post.createdAt}>
-                                {new Date(post.createdAt).toLocaleDateString("en-US", {
-                                  year: "numeric",
-                                  month: "long",
-                                  day: "numeric",
-                                  timeZone: "UTC",
-                                })}
+                                {new Date(post.createdAt).toLocaleDateString(
+                                  "en-US",
+                                  {
+                                    year: "numeric",
+                                    month: "long",
+                                    day: "numeric",
+                                    timeZone: "UTC",
+                                  },
+                                )}
                               </time>
                             </div>
                             {post.commentCount > 0 && (
                               <div className="flex items-center gap-1.5 text-[#0000EE] dark:text-[#A1A1AA] font-bold">
                                 <MessageCircle className="h-4 w-4" />
                                 <span>
-                                  {post.commentCount} {post.commentCount === 1 ? "comment" : "comments"}
+                                  {post.commentCount}{" "}
+                                  {post.commentCount === 1
+                                    ? "comment"
+                                    : "comments"}
                                 </span>
                               </div>
                             )}
@@ -193,42 +207,61 @@ export const getStaticProps: GetStaticProps<BlogProps> = async () => {
         id: "1",
         number: 101,
         title: "Introducing Nano Collective: A new era of privacy-first AI",
-        created_at: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
-        updated_at: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+        created_at: new Date(
+          Date.now() - 7 * 24 * 60 * 60 * 1000,
+        ).toISOString(),
+        updated_at: new Date(
+          Date.now() - 7 * 24 * 60 * 60 * 1000,
+        ).toISOString(),
         comments: 12,
         category: { name: "Announcements", emoji: "📢", slug: "announcements" },
-        labels: [{ id: "l1", name: "launch", color: "0000EE" }]
+        labels: [{ id: "l1", name: "launch", color: "0000EE" }],
       },
       {
         id: "2",
         number: 102,
         title: "How to build local-first RAG pipelines with NanoTuner",
-        created_at: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(),
-        updated_at: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(),
+        created_at: new Date(
+          Date.now() - 14 * 24 * 60 * 60 * 1000,
+        ).toISOString(),
+        updated_at: new Date(
+          Date.now() - 14 * 24 * 60 * 60 * 1000,
+        ).toISOString(),
         comments: 5,
         category: { name: "Tutorials", emoji: "📚", slug: "tutorials" },
-        labels: [{ id: "l2", name: "guide", color: "A1A1AA" }, { id: "l3", name: "rag", color: "10B981" }]
+        labels: [
+          { id: "l2", name: "guide", color: "A1A1AA" },
+          { id: "l3", name: "rag", color: "10B981" },
+        ],
       },
       {
         id: "3",
         number: 103,
         title: "Community Update: October 2026",
-        created_at: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
-        updated_at: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
+        created_at: new Date(
+          Date.now() - 30 * 24 * 60 * 60 * 1000,
+        ).toISOString(),
+        updated_at: new Date(
+          Date.now() - 30 * 24 * 60 * 60 * 1000,
+        ).toISOString(),
         comments: 24,
         category: { name: "Community", emoji: "👋", slug: "community" },
-        labels: [{ id: "l4", name: "update", color: "F59E0B" }]
+        labels: [{ id: "l4", name: "update", color: "F59E0B" }],
       },
       {
         id: "4",
         number: 104,
         title: "The future of distributed model training",
-        created_at: new Date(Date.now() - 45 * 24 * 60 * 60 * 1000).toISOString(),
-        updated_at: new Date(Date.now() - 45 * 24 * 60 * 60 * 1000).toISOString(),
+        created_at: new Date(
+          Date.now() - 45 * 24 * 60 * 60 * 1000,
+        ).toISOString(),
+        updated_at: new Date(
+          Date.now() - 45 * 24 * 60 * 60 * 1000,
+        ).toISOString(),
         comments: 8,
         category: { name: "Research", emoji: "🔬", slug: "research" },
-        labels: [{ id: "l5", name: "paper", color: "8B5CF6" }]
-      }
+        labels: [{ id: "l5", name: "paper", color: "8B5CF6" }],
+      },
     ];
 
     let discussions = fallbackDiscussions;
@@ -240,7 +273,11 @@ export const getStaticProps: GetStaticProps<BlogProps> = async () => {
           discussions = data;
         }
       } else {
-        console.error("Failed to fetch discussions:", response.statusText, "- using fallback data");
+        console.error(
+          "Failed to fetch discussions:",
+          response.statusText,
+          "- using fallback data",
+        );
       }
     } catch (e) {
       console.error("Error parsing discussions:", e, "- using fallback data");

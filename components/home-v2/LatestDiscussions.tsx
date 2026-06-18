@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React from "react";
 import type { Discussion } from "@/types/discussion";
 
 interface LatestDiscussionsProps {
@@ -36,7 +35,7 @@ export function LatestDiscussions({ discussions }: LatestDiscussionsProps) {
             href={discussion.html_url}
             target="_blank"
             rel="noopener noreferrer"
-            className={`group flex flex-col md:flex-row md:items-center justify-between py-6 transition-colors ${index !== recentDiscussions.length - 1 ? "border-b border-foreground/20/20" : ""}`}
+            className={`group flex flex-col md:flex-row md:items-center justify-between py-6 transition-colors ${index !== recentDiscussions.length - 1 ? "border-b border-foreground/20" : ""}`}
           >
             <div className="space-y-1 mb-2 md:mb-0 pr-4">
               <h3 className="font-bold text-md sm:text-lg text-foreground group-hover:text-[#0000EE] dark:group-hover:text-[#A1A1AA] transition-colors leading-tight">
@@ -65,7 +64,7 @@ export function LatestDiscussions({ discussions }: LatestDiscussionsProps) {
           </a>
         ))}
         {recentDiscussions.length === 0 && (
-          <div className="py-12 text-center text-foreground/60 font-mono text-sm border-b border-foreground/20/20">
+          <div className="py-12 text-center text-foreground/60 font-mono text-sm border-b border-foreground/20">
             No recent discussions found.
           </div>
         )}

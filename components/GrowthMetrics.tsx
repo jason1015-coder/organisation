@@ -22,7 +22,7 @@ export function GrowthMetrics({
 }: GrowthMetricsProps) {
   const TrendIcon =
     trend === "up" ? ArrowUp : trend === "down" ? ArrowDown : Minus;
-  
+
   const trendColor =
     trend === "up"
       ? "text-green-600 dark:text-green-400"
@@ -35,48 +35,48 @@ export function GrowthMetrics({
       {/* Total Downloads */}
       <div className="border border-foreground/20 bg-background p-6">
         <div className="flex flex-row items-center justify-between space-y-0 mb-4 pb-2 border-b border-foreground/10">
-          <h3 className="text-sm font-semibold tracking-tight">Total Downloads</h3>
+          <h3 className="text-sm font-semibold tracking-tight">
+            Total Downloads
+          </h3>
           <Download className="h-4 w-4 text-muted-foreground" />
         </div>
         <div>
           <div className="text-3xl font-bold tracking-tight mb-1">
             {totalDownloads.toLocaleString()}
           </div>
-          <p className="text-xs text-muted-foreground">
-            For selected period
-          </p>
+          <p className="text-xs text-muted-foreground">For selected period</p>
         </div>
       </div>
 
       {/* 7-Day Average */}
       <div className="border border-foreground/20 bg-background p-6">
         <div className="flex flex-row items-center justify-between space-y-0 mb-4 pb-2 border-b border-foreground/10">
-          <h3 className="text-sm font-semibold tracking-tight">7-Day Average</h3>
+          <h3 className="text-sm font-semibold tracking-tight">
+            7-Day Average
+          </h3>
           <Calendar className="h-4 w-4 text-muted-foreground" />
         </div>
         <div>
           <div className="text-3xl font-bold tracking-tight mb-1">
             {currentSevenDay.toLocaleString()}
           </div>
-          <p className="text-xs text-muted-foreground">
-            Downloads per day
-          </p>
+          <p className="text-xs text-muted-foreground">Downloads per day</p>
         </div>
       </div>
 
       {/* 30-Day Average */}
       <div className="border border-foreground/20 bg-background p-6">
         <div className="flex flex-row items-center justify-between space-y-0 mb-4 pb-2 border-b border-foreground/10">
-          <h3 className="text-sm font-semibold tracking-tight">30-Day Average</h3>
+          <h3 className="text-sm font-semibold tracking-tight">
+            30-Day Average
+          </h3>
           <TrendingUp className="h-4 w-4 text-muted-foreground" />
         </div>
         <div>
           <div className="text-3xl font-bold tracking-tight mb-1">
             {currentThirtyDay.toLocaleString()}
           </div>
-          <p className="text-xs text-muted-foreground">
-            Downloads per day
-          </p>
+          <p className="text-xs text-muted-foreground">Downloads per day</p>
         </div>
       </div>
 
@@ -87,7 +87,9 @@ export function GrowthMetrics({
           <TrendIcon className={`h-4 w-4 ${trendColor}`} />
         </div>
         <div>
-          <div className={`text-3xl font-bold tracking-tight mb-1 ${trendColor}`}>
+          <div
+            className={`text-3xl font-bold tracking-tight mb-1 ${trendColor}`}
+          >
             {trend === "up"
               ? "Growing"
               : trend === "down"

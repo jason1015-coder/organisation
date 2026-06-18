@@ -1,15 +1,14 @@
 import type { GetStaticProps } from "next";
 import Head from "next/head";
-import React from "react";
 import { CommunityCTA } from "@/components/home-v2/CommunityCTA";
+import { FeaturedPackages } from "@/components/home-v2/FeaturedPackages";
 import { Hero } from "@/components/home-v2/Hero";
 import { LatestDiscussions } from "@/components/home-v2/LatestDiscussions";
 import { Mission } from "@/components/home-v2/Mission";
 import { Products } from "@/components/home-v2/Products";
 import { ProofBar } from "@/components/home-v2/ProofBar";
-import { Footer } from "@/components/layout-v2/Footer";
-import { FeaturedPackages } from "@/components/home-v2/FeaturedPackages";
 import { Sponsors } from "@/components/home-v2/Sponsors";
+import { Footer } from "@/components/layout-v2/Footer";
 import { SectionReveal } from "@/components/ui/motion";
 
 import type { Discussion } from "@/types/discussion";
@@ -71,14 +70,30 @@ export default function Home({
       </Head>
       <div className="min-h-screen bg-background font-sans">
         <main>
-          <SectionReveal><Hero /></SectionReveal>
-          <SectionReveal><ProofBar stats={orgStats} /></SectionReveal>
-          <SectionReveal><Products nanocoderVersion={nanocoderVersion} /></SectionReveal>
-          <SectionReveal><FeaturedPackages /></SectionReveal>
-          <SectionReveal><Mission /></SectionReveal>
-          <SectionReveal><Sponsors /></SectionReveal>
-          <SectionReveal><LatestDiscussions discussions={discussions} /></SectionReveal>
-          <SectionReveal><CommunityCTA /></SectionReveal>
+          <SectionReveal>
+            <Hero />
+          </SectionReveal>
+          <SectionReveal>
+            <ProofBar stats={orgStats} />
+          </SectionReveal>
+          <SectionReveal>
+            <Products nanocoderVersion={nanocoderVersion} />
+          </SectionReveal>
+          <SectionReveal>
+            <FeaturedPackages />
+          </SectionReveal>
+          <SectionReveal>
+            <Mission />
+          </SectionReveal>
+          <SectionReveal>
+            <Sponsors />
+          </SectionReveal>
+          <SectionReveal>
+            <LatestDiscussions discussions={discussions} />
+          </SectionReveal>
+          <SectionReveal>
+            <CommunityCTA />
+          </SectionReveal>
         </main>
         <Footer />
       </div>
@@ -129,44 +144,47 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
         id: 1,
         number: 1,
         title: "Welcome to Nano Collective!",
-        html_url: "https://github.com/Nano-Collective/organisation/discussions/1",
+        html_url:
+          "https://github.com/Nano-Collective/organisation/discussions/1",
         created_at: new Date().toISOString(),
         comments: 12,
         user: {
           login: "nanocoder",
-          avatar_url: "https://github.com/nanocoder.png"
+          avatar_url: "https://github.com/nanocoder.png",
         },
         category: { name: "Announcements", emoji: "📢", slug: "announcements" },
-        labels: [{ id: 1, name: "official", color: "164efe" }]
+        labels: [{ id: 1, name: "official", color: "164efe" }],
       },
       {
         id: 2,
         number: 2,
         title: "How to run local LLMs with Nanocoder?",
-        html_url: "https://github.com/Nano-Collective/organisation/discussions/2",
+        html_url:
+          "https://github.com/Nano-Collective/organisation/discussions/2",
         created_at: new Date(Date.now() - 86400000).toISOString(),
         comments: 8,
         user: {
           login: "developer",
-          avatar_url: "https://github.com/github.png"
+          avatar_url: "https://github.com/github.png",
         },
         category: { name: "Q&A", emoji: "❓", slug: "q-a" },
-        labels: [{ id: 2, name: "help wanted", color: "00ff00" }]
+        labels: [{ id: 2, name: "help wanted", color: "00ff00" }],
       },
       {
         id: 3,
         number: 3,
         title: "Feature Request: Real-time collaborative editing",
-        html_url: "https://github.com/Nano-Collective/organisation/discussions/3",
+        html_url:
+          "https://github.com/Nano-Collective/organisation/discussions/3",
         created_at: new Date(Date.now() - 86400000 * 2).toISOString(),
         comments: 24,
         user: {
           login: "community_member",
-          avatar_url: "https://github.com/community.png"
+          avatar_url: "https://github.com/community.png",
         },
         category: { name: "Ideas", emoji: "💡", slug: "ideas" },
-        labels: [{ id: 3, name: "enhancement", color: "ff00ff" }]
-      }
+        labels: [{ id: 3, name: "enhancement", color: "ff00ff" }],
+      },
     ];
   }
 

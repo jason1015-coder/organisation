@@ -1,5 +1,3 @@
-import React from "react";
-
 export function CommunityCTA() {
   return (
     <section className="py-20 md:py-32 px-4 md:px-6 bg-[#0000EE] text-white">

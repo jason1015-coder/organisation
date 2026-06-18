@@ -1,5 +1,4 @@
 import {
-  ArrowRight,
   Check,
   Code,
   Copy,
@@ -14,20 +13,20 @@ import {
 import type { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
-import { FaDiscord, FaGithub } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { FaGithub } from "react-icons/fa";
 import { Footer } from "@/components/layout-v2/Footer";
 import NanocoderTerminal from "@/components/NanocoderTerminal";
 import { SponsorLogo } from "@/components/SponsorLogo";
-import { allSponsors } from "@/lib/sponsors";
 import {
+  CardHover,
+  FadeIn,
   SectionReveal,
   StaggerContainer,
   StaggerItem,
   SubtleButtonLink,
-  CardHover,
-  FadeIn
 } from "@/components/ui/motion";
+import { allSponsors } from "@/lib/sponsors";
 
 interface NanocoderStats {
   stars: number;
@@ -50,8 +49,16 @@ const CopyButton = ({ text }: { text: string }) => {
     setTimeout(() => setCopied(false), 2000);
   };
   return (
-    <button onClick={handleCopy} className="p-2 shrink-0 hover:bg-foreground/10 transition-colors border-l border-foreground/10 flex items-center justify-center group">
-      {copied ? <Check className="w-4 h-4 text-[#0000EE] dark:text-[#A1A1AA]" /> : <Copy className="w-4 h-4 text-foreground/50 group-hover:text-[#0000EE] dark:group-hover:text-[#A1A1AA] transition-colors" />}
+    <button
+      type="button"
+      onClick={handleCopy}
+      className="p-2 shrink-0 hover:bg-foreground/10 transition-colors border-l border-foreground/10 flex items-center justify-center group"
+    >
+      {copied ? (
+        <Check className="w-4 h-4 text-[#0000EE] dark:text-[#A1A1AA]" />
+      ) : (
+        <Copy className="w-4 h-4 text-foreground/50 group-hover:text-[#0000EE] dark:group-hover:text-[#A1A1AA] transition-colors" />
+      )}
     </button>
   );
 };
@@ -64,12 +71,12 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
     const updateTheme = () => {
       setThemeMode(html.classList.contains("dark") ? "dark" : "light");
     };
-    
+
     updateTheme();
-    
+
     const observer = new MutationObserver(updateTheme);
     observer.observe(html, { attributes: true, attributeFilter: ["class"] });
-    
+
     return () => observer.disconnect();
   }, []);
 
@@ -87,7 +94,10 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
           content="An open coding agent for your terminal, built by a community collective rather than a company."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://nanocollective.org/nanocoder" />
+        <meta
+          property="og:url"
+          content="https://nanocollective.org/nanocoder"
+        />
         <meta property="og:image" content="/og-image.png" />
       </Head>
 
@@ -99,20 +109,24 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
             <div className="space-y-4 sm:space-y-8 lg:pr-8">
               <StaggerItem>
                 <div className="flex items-center gap-2 text-xs font-semibold font-mono text-muted-foreground uppercase tracking-widest border-b border-foreground/20 pb-2 max-w-[250px]">
-                  <span className="text-[#0000EE] dark:text-[#A1A1AA] font-bold">&gt;</span>
+                  <span className="text-[#0000EE] dark:text-[#A1A1AA] font-bold">
+                    &gt;
+                  </span>
                   OPEN SOURCE CODING AGENT
                 </div>
               </StaggerItem>
-              
+
               <StaggerItem>
                 <h1 className="text-4xl sm:text-5xl lg:text-[4rem] leading-[1.05] font-bold tracking-tight text-foreground break-words">
                   Nanocoder
                 </h1>
               </StaggerItem>
-              
+
               <StaggerItem>
                 <p className="text-sm sm:text-lg sm:text-xl text-foreground/70 max-w-[540px] leading-relaxed">
-                  An open coding agent for your terminal, built by a community collective rather than a company. Bring your own model, keep your code on your machine, and owe nothing to anyone.
+                  An open coding agent for your terminal, built by a community
+                  collective rather than a company. Bring your own model, keep
+                  your code on your machine, and owe nothing to anyone.
                 </p>
               </StaggerItem>
 
@@ -138,7 +152,7 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
                 </div>
               </StaggerItem>
             </div>
-            
+
             <StaggerItem className="w-full flex justify-center lg:justify-end mt-4 sm:mt-8 lg:mt-0 max-w-full overflow-hidden pt-4 pb-4">
               <FadeIn className="w-full max-w-[700px] border-1 border-[#0000EE] dark:border-[#A1A1AA] bg-muted relative">
                 <NanocoderTerminal variant="brutalist" themeMode={themeMode} />
@@ -152,7 +166,6 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
           <section className="border-y-2 border-foreground/20 bg-background">
             <div className="container mx-auto px-6 py-6">
               <StaggerContainer className="grid grid-cols-2 md:flex md:flex-wrap md:justify-between items-start md:items-center gap-y-8 gap-x-4 max-w-5xl mx-auto">
-                
                 <StaggerItem className="flex flex-col items-center sm:items-start gap-1">
                   <span className="font-mono text-xl md:text-3xl font-bold tracking-tight text-foreground">
                     {stats.stars.toLocaleString()}
@@ -162,7 +175,7 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
                   </span>
                 </StaggerItem>
                 <div className="hidden md:block w-px h-12 bg-black/40 dark:bg-white/40" />
-                
+
                 <StaggerItem className="flex flex-col items-center sm:items-start gap-1">
                   <span className="font-mono text-xl md:text-3xl font-bold tracking-tight text-foreground">
                     {stats.contributors.toLocaleString()}
@@ -172,7 +185,7 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
                   </span>
                 </StaggerItem>
                 <div className="hidden md:block w-px h-12 bg-black/40 dark:bg-white/40" />
-                
+
                 <StaggerItem className="flex flex-col items-center sm:items-start gap-1">
                   <span className="font-mono text-xl md:text-3xl font-bold tracking-tight text-foreground">
                     {stats.forks.toLocaleString()}
@@ -182,7 +195,7 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
                   </span>
                 </StaggerItem>
                 <div className="hidden md:block w-px h-12 bg-black/40 dark:bg-white/40" />
-                
+
                 <StaggerItem className="flex flex-col items-center sm:items-start gap-1">
                   <span className="font-mono text-xl md:text-3xl font-bold tracking-tight text-foreground">
                     {stats.releases.toLocaleString()}
@@ -192,7 +205,7 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
                   </span>
                 </StaggerItem>
                 <div className="hidden md:block w-px h-12 bg-black/40 dark:bg-white/40" />
-                
+
                 <StaggerItem className="flex flex-col items-center sm:items-start gap-1">
                   <span className="font-mono text-xl md:text-3xl font-bold tracking-tight text-foreground">
                     {stats.discordMembers.toLocaleString()}
@@ -201,7 +214,6 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
                     Discord Members
                   </span>
                 </StaggerItem>
-
               </StaggerContainer>
             </div>
           </section>
@@ -218,10 +230,17 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
                   </h2>
                   <div className="space-y-6 text-md sm:text-xl md:text-2xl text-foreground/70 leading-relaxed font-medium">
                     <p>
-                      Nanocoder is a community-built, multi-provider coding agent that runs entirely in your terminal. It connects to Ollama for local execution, or OpenRouter, Anthropic, and Google for cloud inference.
+                      Nanocoder is a community-built, multi-provider coding
+                      agent that runs entirely in your terminal. It connects to
+                      Ollama for local execution, or OpenRouter, Anthropic,
+                      OpenAI, and Google for cloud inference.
                     </p>
                     <p>
-                      Built by the Nano Collective rather than a company, it enforces a strict privacy-first model: your codebase never leaves your machine unless you explicitly send it to an API of your choice. No tracking, no forced telemetry, no vendor lock-in.
+                      Built by the Nano Collective rather than a company, it
+                      enforces a strict privacy-first model: your codebase never
+                      leaves your machine unless you explicitly send it to an
+                      API of your choice. No tracking, no forced telemetry, no
+                      vendor lock-in.
                     </p>
                   </div>
                 </div>
@@ -237,20 +256,26 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
                   <div className="mb-12 sm:mb-16 text-center md:text-left">
                     <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight">
                       Premium capabilities.
-                      <br/>
-                      <span className="text-foreground/50 md:ml-3">Zero paid tiers.</span>
+                      <br />
+                      <span className="text-foreground/50 md:ml-3">
+                        Zero paid tiers.
+                      </span>
                     </h2>
                   </div>
-                  
+
                   <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-foreground/20 border border-foreground/20">
                     <StaggerItem>
                       <CardHover className="bg-background p-8 space-y-4 hover:bg-muted transition-colors h-full">
                         <div className="w-10 h-10 border border-foreground/20 flex items-center justify-center bg-muted/30">
                           <Cpu className="w-5 h-5" />
                         </div>
-                        <h3 className="text-lg font-bold tracking-tight">Local First</h3>
+                        <h3 className="text-lg font-bold tracking-tight">
+                          Local First
+                        </h3>
                         <p className="text-sm text-foreground/70 leading-relaxed">
-                          Runs entirely on your machine. Connect to local Ollama models for completely offline, zero-cost agentic coding.
+                          Runs entirely on your machine. Connect to local Ollama
+                          models for completely offline, zero-cost agentic
+                          coding.
                         </p>
                       </CardHover>
                     </StaggerItem>
@@ -260,9 +285,13 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
                         <div className="w-10 h-10 border border-foreground/20 flex items-center justify-center bg-muted/30">
                           <Globe className="w-5 h-5" />
                         </div>
-                        <h3 className="text-lg font-bold tracking-tight">Multi Provider</h3>
+                        <h3 className="text-lg font-bold tracking-tight">
+                          Multi Provider
+                        </h3>
                         <p className="text-sm text-foreground/70 leading-relaxed">
-                          Seamlessly switch between OpenRouter, Anthropic, OpenAI, and Google. You choose the intelligence engine.
+                          Seamlessly switch between OpenRouter, Anthropic,
+                          OpenAI, and Google. You choose the intelligence
+                          engine.
                         </p>
                       </CardHover>
                     </StaggerItem>
@@ -272,9 +301,12 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
                         <div className="w-10 h-10 border border-foreground/20 flex items-center justify-center bg-muted/30">
                           <Zap className="w-5 h-5" />
                         </div>
-                        <h3 className="text-lg font-bold tracking-tight">Skills System</h3>
+                        <h3 className="text-lg font-bold tracking-tight">
+                          Skills System
+                        </h3>
                         <p className="text-sm text-foreground/70 leading-relaxed">
-                          Extend behavior through custom skills. Teach Nanocoder your codebase's exact conventions and workflows.
+                          Extend behavior through custom skills. Teach Nanocoder
+                          your codebase's exact conventions and workflows.
                         </p>
                       </CardHover>
                     </StaggerItem>
@@ -284,9 +316,12 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
                         <div className="w-10 h-10 border border-foreground/20 flex items-center justify-center bg-muted/30">
                           <Settings className="w-5 h-5" />
                         </div>
-                        <h3 className="text-lg font-bold tracking-tight">Custom Tools</h3>
+                        <h3 className="text-lg font-bold tracking-tight">
+                          Custom Tools
+                        </h3>
                         <p className="text-sm text-foreground/70 leading-relaxed">
-                          Create and integrate your own Bash or Python tools directly into the agent's toolbelt.
+                          Create and integrate your own Bash or Python tools
+                          directly into the agent's toolbelt.
                         </p>
                       </CardHover>
                     </StaggerItem>
@@ -296,9 +331,12 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
                         <div className="w-10 h-10 border border-foreground/20 flex items-center justify-center bg-muted/30">
                           <Server className="w-5 h-5" />
                         </div>
-                        <h3 className="text-lg font-bold tracking-tight">Multiple Modes</h3>
+                        <h3 className="text-lg font-bold tracking-tight">
+                          Multiple Modes
+                        </h3>
                         <p className="text-sm text-foreground/70 leading-relaxed">
-                          Boot directly into Normal, Plan, Auto-Accept, or YOLO mode depending on your trust level for the task.
+                          Boot directly into Normal, Plan, Auto-Accept, or YOLO
+                          mode depending on your trust level for the task.
                         </p>
                       </CardHover>
                     </StaggerItem>
@@ -308,9 +346,12 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
                         <div className="w-10 h-10 border border-foreground/20 flex items-center justify-center bg-muted/30">
                           <Code className="w-5 h-5" />
                         </div>
-                        <h3 className="text-lg font-bold tracking-tight">Open Source</h3>
+                        <h3 className="text-lg font-bold tracking-tight">
+                          Open Source
+                        </h3>
                         <p className="text-sm text-foreground/70 leading-relaxed">
-                          Built in public by contributors. The codebase is yours to read, audit, and improve.
+                          Built in public by contributors. The codebase is yours
+                          to read, audit, and improve.
                         </p>
                       </CardHover>
                     </StaggerItem>
@@ -320,9 +361,12 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
                         <div className="w-10 h-10 border border-foreground/20 flex items-center justify-center bg-muted/30">
                           <Shield className="w-5 h-5" />
                         </div>
-                        <h3 className="text-lg font-bold tracking-tight">Privacy First</h3>
+                        <h3 className="text-lg font-bold tracking-tight">
+                          Privacy First
+                        </h3>
                         <p className="text-sm text-foreground/70 leading-relaxed">
-                          No forced telemetry. No silent data collection. Complete control over what leaves your network.
+                          No forced telemetry. No silent data collection.
+                          Complete control over what leaves your network.
                         </p>
                       </CardHover>
                     </StaggerItem>
@@ -332,9 +376,12 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
                         <div className="w-10 h-10 border border-foreground/20 flex items-center justify-center bg-muted/30">
                           <Terminal className="w-5 h-5" />
                         </div>
-                        <h3 className="text-lg font-bold tracking-tight">Terminal Native</h3>
+                        <h3 className="text-lg font-bold tracking-tight">
+                          Terminal Native
+                        </h3>
                         <p className="text-sm text-foreground/70 leading-relaxed">
-                          Designed explicitly for terminal workflows. Fits seamlessly into your existing developer environment.
+                          Designed explicitly for terminal workflows. Fits
+                          seamlessly into your existing developer environment.
                         </p>
                       </CardHover>
                     </StaggerItem>
@@ -354,7 +401,8 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
                       Realistic workflows.
                     </h2>
                     <p className="text-md text-foreground/70 mt-4 max-w-2xl mx-auto">
-                      Nanocoder handles architecture, refactoring, and feature building natively in your terminal.
+                      Nanocoder handles architecture, refactoring, and feature
+                      building natively in your terminal.
                     </p>
                   </div>
 
@@ -366,13 +414,31 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
                         Refactor
                       </div>
                       <div className="p-6 font-mono text-sm leading-relaxed overflow-x-auto bg-background dark:bg-[#111] text-foreground dark:text-zinc-300 flex-1">
-                        <div className="text-[#0000EE] dark:text-pink-400 mb-4 font-bold dark:font-normal">$ nanocoder run "refactor database module"</div>
-                        <div className="text-foreground/90 dark:text-blue-400 mb-2">● Analyzing src/db/index.ts...</div>
-                        <div className="text-foreground/50 dark:text-zinc-500 mb-2">  Found 12 raw SQL queries.</div>
-                        <div className="text-foreground/90 dark:text-blue-400 mb-2">● Converting to Prisma ORM syntax...</div>
-                        <div className="text-foreground/50 dark:text-zinc-500 mb-2">  Modified src/db/users.ts</div>
-                        <div className="text-foreground/50 dark:text-zinc-500 mb-4">  Modified src/db/posts.ts</div>
-                        <div className="text-green-600 dark:text-green-400 flex items-center gap-2"><Check className="w-4 h-4" /> Refactor completed successfully.</div>
+                        <div className="text-[#0000EE] dark:text-pink-400 mb-4 font-bold dark:font-normal">
+                          $ nanocoder run "refactor database module"
+                        </div>
+                        <div className="text-foreground/90 dark:text-blue-400 mb-2">
+                          ● Analyzing src/db/index.ts...
+                        </div>
+                        <div className="text-foreground/50 dark:text-zinc-500 mb-2">
+                          {" "}
+                          Found 12 raw SQL queries.
+                        </div>
+                        <div className="text-foreground/90 dark:text-blue-400 mb-2">
+                          ● Converting to Prisma ORM syntax...
+                        </div>
+                        <div className="text-foreground/50 dark:text-zinc-500 mb-2">
+                          {" "}
+                          Modified src/db/users.ts
+                        </div>
+                        <div className="text-foreground/50 dark:text-zinc-500 mb-4">
+                          {" "}
+                          Modified src/db/posts.ts
+                        </div>
+                        <div className="text-green-600 dark:text-green-400 flex items-center gap-2">
+                          <Check className="w-4 h-4" /> Refactor completed
+                          successfully.
+                        </div>
                       </div>
                     </div>
 
@@ -383,15 +449,25 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
                         Audit
                       </div>
                       <div className="p-6 font-mono text-sm leading-relaxed overflow-x-auto bg-background dark:bg-[#111] text-foreground dark:text-zinc-300 flex-1">
-                        <div className="text-[#0000EE] dark:text-pink-400 mb-4 font-bold dark:font-normal">$ nanocoder --mode plan run "audit auth module"</div>
-                        <div className="text-foreground/90 dark:text-blue-400 mb-2">● Generating implementation plan...</div>
+                        <div className="text-[#0000EE] dark:text-pink-400 mb-4 font-bold dark:font-normal">
+                          $ nanocoder --mode plan run "audit auth module"
+                        </div>
+                        <div className="text-foreground/90 dark:text-blue-400 mb-2">
+                          ● Generating implementation plan...
+                        </div>
                         <div className="text-foreground/80 dark:text-zinc-300 mb-4 border-l-2 border-foreground/20 dark:border-zinc-700 pl-4 py-2 bg-muted/50 dark:bg-zinc-900/50">
-                          1. Check JWT expiration logic<br/>
-                          2. Verify password hashing rounds<br/>
+                          1. Check JWT expiration logic
+                          <br />
+                          2. Verify password hashing rounds
+                          <br />
                           3. Audit rate limiting on /login
                         </div>
-                        <div className="text-amber-600 dark:text-yellow-400 mb-4 flex items-center gap-2">⚠ Found missing rate limiter on /login</div>
-                        <div className="text-foreground/50 dark:text-zinc-500 flex items-center gap-2">Waiting for user approval to proceed...</div>
+                        <div className="text-amber-600 dark:text-yellow-400 mb-4 flex items-center gap-2">
+                          ⚠ Found missing rate limiter on /login
+                        </div>
+                        <div className="text-foreground/50 dark:text-zinc-500 flex items-center gap-2">
+                          Waiting for user approval to proceed...
+                        </div>
                       </div>
                     </div>
 
@@ -402,14 +478,34 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
                         Build
                       </div>
                       <div className="p-6 font-mono text-sm leading-relaxed overflow-x-auto bg-background dark:bg-[#111] text-foreground dark:text-zinc-300 flex-1">
-                        <div className="text-[#0000EE] dark:text-pink-400 mb-4 font-bold dark:font-normal">$ nanocoder run "create settings page"</div>
-                        <div className="text-foreground/90 dark:text-blue-400 mb-2">● Creating route handlers...</div>
-                        <div className="text-foreground/50 dark:text-zinc-500 mb-2">  Created app/settings/page.tsx</div>
-                        <div className="text-foreground/90 dark:text-blue-400 mb-2">● Building UI components...</div>
-                        <div className="text-foreground/50 dark:text-zinc-500 mb-2">  Created components/SettingsForm.tsx</div>
-                        <div className="text-foreground/90 dark:text-blue-400 mb-2">● Generating tests...</div>
-                        <div className="text-foreground/50 dark:text-zinc-500 mb-4">  Created __tests__/Settings.test.tsx</div>
-                        <div className="text-green-600 dark:text-green-400 flex items-center gap-2"><Check className="w-4 h-4" /> Feature built and tests passed.</div>
+                        <div className="text-[#0000EE] dark:text-pink-400 mb-4 font-bold dark:font-normal">
+                          $ nanocoder run "create settings page"
+                        </div>
+                        <div className="text-foreground/90 dark:text-blue-400 mb-2">
+                          ● Creating route handlers...
+                        </div>
+                        <div className="text-foreground/50 dark:text-zinc-500 mb-2">
+                          {" "}
+                          Created app/settings/page.tsx
+                        </div>
+                        <div className="text-foreground/90 dark:text-blue-400 mb-2">
+                          ● Building UI components...
+                        </div>
+                        <div className="text-foreground/50 dark:text-zinc-500 mb-2">
+                          {" "}
+                          Created components/SettingsForm.tsx
+                        </div>
+                        <div className="text-foreground/90 dark:text-blue-400 mb-2">
+                          ● Generating tests...
+                        </div>
+                        <div className="text-foreground/50 dark:text-zinc-500 mb-4">
+                          {" "}
+                          Created __tests__/Settings.test.tsx
+                        </div>
+                        <div className="text-green-600 dark:text-green-400 flex items-center gap-2">
+                          <Check className="w-4 h-4" /> Feature built and tests
+                          passed.
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -428,36 +524,48 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
                       Install in seconds.
                     </h2>
                     <p className="text-md text-foreground/70">
-                      Zero complex setup. Available on your favorite package manager.
+                      Zero complex setup. Available on your favorite package
+                      manager.
                     </p>
                   </div>
 
                   <div className="space-y-6">
                     <div className="flex flex-col sm:flex-row items-center gap-4 border border-foreground/20 bg-background p-4 sm:p-6 shadow-sm">
-                      <div className="w-24 font-bold text-foreground/50 uppercase tracking-widest text-sm text-left w-full sm:w-auto mb-2 sm:mb-0">NPM</div>
+                      <div className="w-24 font-bold text-foreground/50 uppercase tracking-widest text-sm text-left w-full sm:w-auto mb-2 sm:mb-0">
+                        NPM
+                      </div>
                       <div className="flex-1 font-mono text-sm bg-muted/30 border border-foreground/10 w-full flex items-center justify-between">
-                        <div className="px-4 py-3 overflow-x-auto whitespace-pre">npm install -g @nanocollective/nanocoder</div>
+                        <div className="px-4 py-3 overflow-x-auto whitespace-pre">
+                          npm install -g @nanocollective/nanocoder
+                        </div>
                         <CopyButton text="npm install -g @nanocollective/nanocoder" />
                       </div>
                     </div>
 
                     <div className="flex flex-col sm:flex-row items-center gap-4 border border-foreground/20 bg-background p-4 sm:p-6 shadow-sm">
-                      <div className="w-24 font-bold text-foreground/50 uppercase tracking-widest text-sm text-left w-full sm:w-auto mb-2 sm:mb-0">Homebrew</div>
+                      <div className="w-24 font-bold text-foreground/50 uppercase tracking-widest text-sm text-left w-full sm:w-auto mb-2 sm:mb-0">
+                        Homebrew
+                      </div>
                       <div className="flex-1 font-mono text-sm bg-muted/30 border border-foreground/10 w-full flex items-center justify-between">
-                        <div className="px-4 py-3 overflow-x-auto whitespace-pre">brew install nanocoder</div>
+                        <div className="px-4 py-3 overflow-x-auto whitespace-pre">
+                          brew install nanocoder
+                        </div>
                         <CopyButton text="brew install nanocoder" />
                       </div>
                     </div>
 
                     <div className="flex flex-col sm:flex-row items-center gap-4 border border-foreground/20 bg-background p-4 sm:p-6 shadow-sm">
-                      <div className="w-24 font-bold text-foreground/50 uppercase tracking-widest text-sm text-left w-full sm:w-auto mb-2 sm:mb-0">Nix Flakes</div>
+                      <div className="w-24 font-bold text-foreground/50 uppercase tracking-widest text-sm text-left w-full sm:w-auto mb-2 sm:mb-0">
+                        Nix Flakes
+                      </div>
                       <div className="flex-1 font-mono text-sm bg-muted/30 border border-foreground/10 w-full flex items-center justify-between">
-                        <div className="px-4 py-3 overflow-x-auto whitespace-pre">nix run github:Nano-Collective/nanocoder</div>
+                        <div className="px-4 py-3 overflow-x-auto whitespace-pre">
+                          nix run github:Nano-Collective/nanocoder
+                        </div>
                         <CopyButton text="nix run github:Nano-Collective/nanocoder" />
                       </div>
                     </div>
                   </div>
-
                 </div>
               </div>
             </section>
@@ -482,9 +590,12 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
                           <div className="w-12 h-12 border border-foreground/20 flex items-center justify-center bg-muted/30 text-foreground transition-colors">
                             <Code className="w-6 h-6" />
                           </div>
-                          <h3 className="font-bold text-2xl tracking-tight mt-2">100% Open Source</h3>
+                          <h3 className="font-bold text-2xl tracking-tight mt-2">
+                            100% Open Source
+                          </h3>
                           <p className="text-foreground/70 font-mono text-sm leading-relaxed">
-                            Read the code. Audit the code. Improve the code. It belongs to the community, not a corporation.
+                            Read the code. Audit the code. Improve the code. It
+                            belongs to the community, not a corporation.
                           </p>
                         </div>
                       </CardHover>
@@ -497,9 +608,13 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
                           <div className="w-12 h-12 border border-foreground/20 flex items-center justify-center bg-muted/30 text-foreground transition-colors">
                             <Cpu className="w-6 h-6" />
                           </div>
-                          <h3 className="font-bold text-2xl tracking-tight mt-2">Local Architecture</h3>
+                          <h3 className="font-bold text-2xl tracking-tight mt-2">
+                            Local Architecture
+                          </h3>
                           <p className="text-foreground/70 font-mono text-sm leading-relaxed">
-                            Designed from the ground up to run inference locally, ensuring maximum privacy and zero latency costs.
+                            Designed from the ground up to run inference
+                            locally, ensuring maximum privacy and zero latency
+                            costs.
                           </p>
                         </div>
                       </CardHover>
@@ -512,9 +627,12 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
                           <div className="w-12 h-12 border border-foreground/20 flex items-center justify-center bg-muted/30 text-foreground transition-colors">
                             <Globe className="w-6 h-6" />
                           </div>
-                          <h3 className="font-bold text-2xl tracking-tight mt-2">Bring Your Own Model</h3>
+                          <h3 className="font-bold text-2xl tracking-tight mt-2">
+                            Bring Your Own Model
+                          </h3>
                           <p className="text-foreground/70 font-mono text-sm leading-relaxed">
-                            Plug in any compatible local model, or route through the APIs you already pay for.
+                            Plug in any compatible local model, or route through
+                            the APIs you already pay for.
                           </p>
                         </div>
                       </CardHover>
@@ -527,9 +645,13 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
                           <div className="w-12 h-12 border border-foreground/20 flex items-center justify-center bg-muted/30 text-foreground transition-colors">
                             <Shield className="w-6 h-6" />
                           </div>
-                          <h3 className="font-bold text-2xl tracking-tight mt-2">Zero Vendor Lock-In</h3>
+                          <h3 className="font-bold text-2xl tracking-tight mt-2">
+                            Zero Vendor Lock-In
+                          </h3>
                           <p className="text-foreground/70 font-mono text-sm leading-relaxed">
-                            If you don't like Nanocoder, you can uninstall it. Your project history and Git tree remain completely untouched.
+                            If you don't like Nanocoder, you can uninstall it.
+                            Your project history and Git tree remain completely
+                            untouched.
                           </p>
                         </div>
                       </CardHover>
@@ -542,9 +664,12 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
                           <div className="w-12 h-12 border border-foreground/20 flex items-center justify-center bg-muted/30 text-foreground transition-colors">
                             <Zap className="w-6 h-6" />
                           </div>
-                          <h3 className="font-bold text-2xl tracking-tight mt-2">Community Driven</h3>
+                          <h3 className="font-bold text-2xl tracking-tight mt-2">
+                            Community Driven
+                          </h3>
                           <p className="text-foreground/70 font-mono text-sm leading-relaxed">
-                            Features are built based on what developers actually need, not what looks good in a marketing pitch.
+                            Features are built based on what developers actually
+                            need, not what looks good in a marketing pitch.
                           </p>
                         </div>
                       </CardHover>
@@ -557,9 +682,12 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
                           <div className="w-12 h-12 border border-foreground/20 flex items-center justify-center bg-muted/30 text-foreground transition-colors">
                             <Settings className="w-6 h-6" />
                           </div>
-                          <h3 className="font-bold text-2xl tracking-tight mt-2">Highly Extensible</h3>
+                          <h3 className="font-bold text-2xl tracking-tight mt-2">
+                            Highly Extensible
+                          </h3>
                           <p className="text-foreground/70 font-mono text-sm leading-relaxed">
-                            A robust plugin ecosystem means you can tailor the agent perfectly to your unique tech stack.
+                            A robust plugin ecosystem means you can tailor the
+                            agent perfectly to your unique tech stack.
                           </p>
                         </div>
                       </CardHover>
@@ -580,8 +708,9 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
                       Supported by
                     </h2>
                     <p className="text-sm sm:text-lg text-foreground/70 font-mono max-w-2xl leading-relaxed">
-                      Sponsorship funds the people building open, privacy-respecting AI
-                      tools, and keeps every line of it free at the point of use.
+                      Sponsorship funds the people building open,
+                      privacy-respecting AI tools, and keeps every line of it
+                      free at the point of use.
                     </p>
                   </div>
                   <SubtleButtonLink
@@ -602,18 +731,20 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
                       />
                     </StaggerItem>
                   ))}
-                  {["a", "b"].slice(0, Math.max(0, 2 - allSponsors.length)).map((slot) => (
-                    <StaggerItem key={slot}>
-                      <Link
-                        href="/sponsor"
-                        className="bg-transparent border border-dashed border-foreground/20/30 h-24 sm:h-32 flex items-center justify-center group hover:border-foreground/20 transition-colors"
-                      >
-                        <span className="font-mono text-sm font-bold text-foreground/40 group-hover:text-foreground transition-colors">
-                          [ Your brand here ]
-                        </span>
-                      </Link>
-                    </StaggerItem>
-                  ))}
+                  {["a", "b"]
+                    .slice(0, Math.max(0, 2 - allSponsors.length))
+                    .map((slot) => (
+                      <StaggerItem key={slot}>
+                        <Link
+                          href="/sponsor"
+                          className="bg-transparent border border-dashed border-foreground/30 h-24 sm:h-32 flex items-center justify-center group hover:border-foreground/20 transition-colors"
+                        >
+                          <span className="font-mono text-sm font-bold text-foreground/40 group-hover:text-foreground transition-colors">
+                            [ Your brand here ]
+                          </span>
+                        </Link>
+                      </StaggerItem>
+                    ))}
                 </StaggerContainer>
               </div>
             </section>
@@ -651,9 +782,8 @@ export default function NanocoderPage({ stats }: NanocoderPageProps) {
               </div>
             </section>
           </SectionReveal>
-
         </main>
-        
+
         <Footer />
       </div>
     </>
@@ -681,7 +811,10 @@ export const getStaticProps: GetStaticProps<NanocoderPageProps> = async () => {
 
   try {
     // Repo stats
-    const repoRes = await fetch("https://api.github.com/repos/Nano-Collective/nanocoder", { headers });
+    const repoRes = await fetch(
+      "https://api.github.com/repos/Nano-Collective/nanocoder",
+      { headers },
+    );
     if (repoRes.ok) {
       const repoData = await repoRes.json();
       stats.stars = repoData.stargazers_count || stats.stars;
@@ -689,7 +822,10 @@ export const getStaticProps: GetStaticProps<NanocoderPageProps> = async () => {
     }
 
     // Releases count
-    const releasesRes = await fetch("https://api.github.com/repos/Nano-Collective/nanocoder/releases?per_page=100", { headers });
+    const releasesRes = await fetch(
+      "https://api.github.com/repos/Nano-Collective/nanocoder/releases?per_page=100",
+      { headers },
+    );
     if (releasesRes.ok) {
       const releasesData = await releasesRes.json();
       if (Array.isArray(releasesData) && releasesData.length > 0) {
@@ -698,7 +834,10 @@ export const getStaticProps: GetStaticProps<NanocoderPageProps> = async () => {
     }
 
     // Contributors count
-    const contributorsRes = await fetch("https://api.github.com/repos/Nano-Collective/nanocoder/contributors?per_page=100", { headers });
+    const contributorsRes = await fetch(
+      "https://api.github.com/repos/Nano-Collective/nanocoder/contributors?per_page=100",
+      { headers },
+    );
     if (contributorsRes.ok) {
       const contributorsData = await contributorsRes.json();
       if (Array.isArray(contributorsData) && contributorsData.length > 0) {
@@ -707,7 +846,9 @@ export const getStaticProps: GetStaticProps<NanocoderPageProps> = async () => {
     }
 
     // Discord members
-    const discordRes = await fetch("https://discord.com/api/invites/ktPDV6rekE?with_counts=true");
+    const discordRes = await fetch(
+      "https://discord.com/api/invites/ktPDV6rekE?with_counts=true",
+    );
     if (discordRes.ok) {
       const data = await discordRes.json();
       if (data.approximate_member_count) {

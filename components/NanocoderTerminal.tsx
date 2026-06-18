@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { defaultTheme, type Theme, type ThemePreset, themes } from "@/types/ui";
+import { type Theme, type ThemePreset, themes } from "@/types/ui";
 
 interface NanocoderTerminalProps {
   onThemeChange?: (theme: Theme) => void;
@@ -128,24 +128,28 @@ export default function NanocoderTerminal({
   const [displayedText, setDisplayedText] = useState("");
   const [isTyping, setIsTyping] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   // Randomize command index only on client after hydration
   useEffect(() => {
     setIsMounted(true);
+    setPrefersReducedMotion(
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false,
+    );
     const randomIndex = Math.floor(Math.random() * commands.length);
     setCurrentCommandIndex(randomIndex);
   }, [commands.length]);
 
   // Cycle through themes slowly to reduce flashing
   useEffect(() => {
-    if (!isMounted) return;
+    if (!isMounted || prefersReducedMotion) return;
 
     const interval = setInterval(() => {
       setCurrentThemeIndex((prev) => (prev + 1) % activeThemeKeys.length);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [isMounted, activeThemeKeys.length]);
+  }, [isMounted, prefersReducedMotion, activeThemeKeys.length]);
 
   // Update current theme when index changes
   useEffect(() => {
@@ -159,6 +163,12 @@ export default function NanocoderTerminal({
     if (!isMounted) return;
 
     const currentCommand = commands[currentCommandIndex];
+
+    // Respect reduced-motion: show the command fully typed, no animation.
+    if (prefersReducedMotion) {
+      if (displayedText !== currentCommand) setDisplayedText(currentCommand);
+      return;
+    }
 
     if (isTyping) {
       if (displayedText.length < currentCommand.length) {
@@ -187,7 +197,14 @@ export default function NanocoderTerminal({
         setIsTyping(true);
       }
     }
-  }, [displayedText, isTyping, currentCommandIndex, commands, isMounted]);
+  }, [
+    displayedText,
+    isTyping,
+    currentCommandIndex,
+    commands,
+    isMounted,
+    prefersReducedMotion,
+  ]);
 
   const colors = currentTheme.colors;
   const themeGradient = colors.gradientColors
@@ -205,7 +222,11 @@ export default function NanocoderTerminal({
         style={{
           backgroundColor:
             currentTheme.themeType === "light" ? "#ffffff" : "#000000",
-          borderColor: isBrutalist ? (themeMode === "dark" ? "rgba(255,255,255,0.2)" : "#000000") : `${colors.tool}4d`, // 30% opacity
+          borderColor: isBrutalist
+            ? themeMode === "dark"
+              ? "rgba(255,255,255,0.2)"
+              : "#000000"
+            : `${colors.tool}4d`, // 30% opacity
         }}
       >
         {/* Terminal Window Controls */}
@@ -214,12 +235,22 @@ export default function NanocoderTerminal({
           style={{
             backgroundColor:
               currentTheme.themeType === "light" ? "#ffffff" : "#000000",
-            borderColor: isBrutalist ? (themeMode === "dark" ? "rgba(255,255,255,0.2)" : "#000000") : `${colors.tool}33`, // 20% opacity
+            borderColor: isBrutalist
+              ? themeMode === "dark"
+                ? "rgba(255,255,255,0.2)"
+                : "#000000"
+              : `${colors.tool}33`, // 20% opacity
           }}
         >
-          <div className={`w-3 h-3 bg-red-500 ${isBrutalist ? "rounded-none" : "rounded-full"}`} />
-          <div className={`w-3 h-3 bg-yellow-500 ${isBrutalist ? "rounded-none" : "rounded-full"}`} />
-          <div className={`w-3 h-3 bg-green-500 ${isBrutalist ? "rounded-none" : "rounded-full"}`} />
+          <div
+            className={`w-3 h-3 bg-red-500 ${isBrutalist ? "rounded-none" : "rounded-full"}`}
+          />
+          <div
+            className={`w-3 h-3 bg-yellow-500 ${isBrutalist ? "rounded-none" : "rounded-full"}`}
+          />
+          <div
+            className={`w-3 h-3 bg-green-500 ${isBrutalist ? "rounded-none" : "rounded-full"}`}
+          />
         </div>
 
         {/* Terminal Content */}

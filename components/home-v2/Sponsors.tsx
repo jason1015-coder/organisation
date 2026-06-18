@@ -1,13 +1,9 @@
 import Link from "next/link";
-import React from "react";
 import { SponsorLogo } from "@/components/SponsorLogo";
 import { allSponsors } from "@/lib/sponsors";
 
 export function Sponsors() {
-  const placeholders = ["a", "b"].slice(
-    0,
-    Math.max(0, 2 - allSponsors.length),
-  );
+  const placeholders = ["a", "b"].slice(0, Math.max(0, 2 - allSponsors.length));
 
   return (
     <section className="py-12 md:py-24 px-4 md:px-6 container mx-auto">
@@ -42,7 +38,7 @@ export function Sponsors() {
           <Link
             key={slot}
             href="/sponsor"
-            className="bg-transparent border border-dashed border-foreground/20/30 h-24 sm:h-32 flex items-center justify-center group hover:border-foreground/20 transition-colors"
+            className="bg-transparent border border-dashed border-foreground/30 h-24 sm:h-32 flex items-center justify-center group hover:border-foreground/20 transition-colors"
           >
             <span className="font-mono text-sm font-bold text-foreground/40 group-hover:text-foreground transition-colors">
               [ Your brand here ]

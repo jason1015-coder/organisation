@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { Terminal } from "@/components/ui/Terminal";
+import { useEffect, useState } from "react";
 import NanocoderTerminal from "@/components/NanocoderTerminal";
 
 interface ProductsProps {
@@ -17,17 +16,20 @@ export function Products({ nanocoderVersion }: ProductsProps) {
     const updateTheme = () => {
       setThemeMode(html.classList.contains("dark") ? "dark" : "light");
     };
-    
+
     updateTheme();
-    
+
     const observer = new MutationObserver(updateTheme);
     observer.observe(html, { attributes: true, attributeFilter: ["class"] });
-    
+
     return () => observer.disconnect();
   }, []);
 
   return (
-    <section id="products" className="py-12 md:py-24 px-4 md:px-6 container mx-auto">
+    <section
+      id="products"
+      className="py-12 md:py-24 px-4 md:px-6 container mx-auto"
+    >
       <div className="mb-8 sm:mb-16 border-b border-foreground/20 pb-4 sm:pb-8">
         <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-4">
           Featured Projects
@@ -47,7 +49,9 @@ export function Products({ nanocoderVersion }: ProductsProps) {
                 <span className="font-mono text-xs sm:text-sm font-bold text-[#0000EE] dark:text-[#A1A1AA]">
                   [ 01 ]
                 </span>
-                <h3 className="text-2xl md:text-3xl font-bold tracking-tight">Nanocoder</h3>
+                <h3 className="text-2xl md:text-3xl font-bold tracking-tight">
+                  Nanocoder
+                </h3>
               </div>
               <p className="text-sm sm:text-lg text-foreground/70 leading-relaxed">
                 An open-source, local-first coding agent. Automate your
@@ -57,19 +61,33 @@ export function Products({ nanocoderVersion }: ProductsProps) {
 
             <ul className="space-y-3 py-4 font-mono text-sm">
               <li className="flex items-start gap-3">
-                <span className="text-[#0000EE] dark:text-[#A1A1AA] font-bold">&gt;</span>
-                <span className="text-foreground">Local-first architecture</span>
+                <span className="text-[#0000EE] dark:text-[#A1A1AA] font-bold">
+                  &gt;
+                </span>
+                <span className="text-foreground">
+                  Local-first architecture
+                </span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-[#0000EE] dark:text-[#A1A1AA] font-bold">&gt;</span>
-                <span className="text-foreground">Multi-provider model support</span>
+                <span className="text-[#0000EE] dark:text-[#A1A1AA] font-bold">
+                  &gt;
+                </span>
+                <span className="text-foreground">
+                  Multi-provider model support
+                </span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-[#0000EE] dark:text-[#A1A1AA] font-bold">&gt;</span>
-                <span className="text-foreground">Extensible skills system</span>
+                <span className="text-[#0000EE] dark:text-[#A1A1AA] font-bold">
+                  &gt;
+                </span>
+                <span className="text-foreground">
+                  Extensible skills system
+                </span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-[#0000EE] dark:text-[#A1A1AA] font-bold">&gt;</span>
+                <span className="text-[#0000EE] dark:text-[#A1A1AA] font-bold">
+                  &gt;
+                </span>
                 <span className="text-foreground">Workflow automation</span>
               </li>
             </ul>
@@ -86,7 +104,11 @@ export function Products({ nanocoderVersion }: ProductsProps) {
 
           <div className="bg-muted p-4 md:p-8 flex items-center justify-center overflow-hidden">
             <div className="w-full max-w-full">
-              <NanocoderTerminal version={nanocoderVersion} themeMode={themeMode} variant="brutalist" />
+              <NanocoderTerminal
+                version={nanocoderVersion}
+                themeMode={themeMode}
+                variant="brutalist"
+              />
             </div>
           </div>
         </div>
@@ -100,7 +122,9 @@ export function Products({ nanocoderVersion }: ProductsProps) {
                 <span className="font-mono text-xs sm:text-sm font-bold text-[#0000EE] dark:text-[#A1A1AA]">
                   [ 02 ]
                 </span>
-                <h3 className="text-2xl md:text-3xl font-bold tracking-tight">Nanotune</h3>
+                <h3 className="text-2xl md:text-3xl font-bold tracking-tight">
+                  Nanotune
+                </h3>
               </div>
               <p className="text-sm sm:text-lg text-foreground/70 leading-relaxed">
                 Fine-tune LLMs locally on your own hardware. Optimize weights
@@ -110,16 +134,24 @@ export function Products({ nanocoderVersion }: ProductsProps) {
 
             <ul className="space-y-3 py-4 font-mono text-sm">
               <li className="flex items-start gap-3">
-                <span className="text-[#0000EE] dark:text-[#A1A1AA] font-bold">&gt;</span>
+                <span className="text-[#0000EE] dark:text-[#A1A1AA] font-bold">
+                  &gt;
+                </span>
                 <span className="text-foreground">LoRA & QLoRA training</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-[#0000EE] dark:text-[#A1A1AA] font-bold">&gt;</span>
+                <span className="text-[#0000EE] dark:text-[#A1A1AA] font-bold">
+                  &gt;
+                </span>
                 <span className="text-foreground">Automated benchmarking</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-[#0000EE] dark:text-[#A1A1AA] font-bold">&gt;</span>
-                <span className="text-foreground">GGUF/Ollama export support</span>
+                <span className="text-[#0000EE] dark:text-[#A1A1AA] font-bold">
+                  &gt;
+                </span>
+                <span className="text-foreground">
+                  GGUF/Ollama export support
+                </span>
               </li>
             </ul>
 

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React from "react";
 import AsciiWebsiteBackgroundGenerated from "@/components/ui/AsciiWebsiteBackgroundGenerated";
 
 export function Hero() {
@@ -11,7 +10,9 @@ export function Hero() {
         {/* Left side: Typography */}
         <div className="space-y-4 sm:space-y-8 lg:pr-8">
           <div className="flex items-center gap-2 text-xs font-semibold font-mono text-muted-foreground uppercase tracking-widest border-b border-foreground/20 pb-2 max-w-[200px]">
-            <span className="text-[#0000EE] dark:text-[#A1A1AA] font-bold">&gt;</span>
+            <span className="text-[#0000EE] dark:text-[#A1A1AA] font-bold">
+              &gt;
+            </span>
             Open Source AI Tools
           </div>
 

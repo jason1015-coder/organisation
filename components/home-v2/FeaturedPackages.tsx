@@ -1,6 +1,3 @@
-import Link from "next/link";
-import React from "react";
-
 export function FeaturedPackages() {
   return (
     <section className="py-12 md:py-24 px-4 md:px-6 container mx-auto">
@@ -23,7 +20,9 @@ export function FeaturedPackages() {
                 <span className="font-mono text-xs sm:text-sm font-bold text-[#0000EE] dark:text-[#A1A1AA]">
                   [ pkg ]
                 </span>
-                <h3 className="text-2xl md:text-3xl font-bold tracking-tight">get-md</h3>
+                <h3 className="text-2xl md:text-3xl font-bold tracking-tight">
+                  get-md
+                </h3>
               </div>
               <span className="hidden sm:block font-mono text-xs font-bold bg-[#0000EE]/10 dark:bg-[#A1A1AA]/10 text-[#0000EE] dark:text-[#A1A1AA] px-3 py-1 uppercase tracking-wider">
                 TypeScript
@@ -41,7 +40,9 @@ export function FeaturedPackages() {
                 rel="noopener noreferrer"
                 className="inline-flex h-12 items-center justify-center border border-foreground/20 bg-transparent px-8 text-sm font-semibold tracking-wide text-foreground transition-colors hover:bg-foreground hover:text-background focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-black"
               >
-                <span className="mr-3 font-bold text-[#0000EE] dark:text-[#A1A1AA] group-hover:text-background transition-colors">&gt;</span> 
+                <span className="mr-3 font-bold text-[#0000EE] dark:text-[#A1A1AA] group-hover:text-background transition-colors">
+                  &gt;
+                </span>
                 View on GitHub
               </a>
             </div>
@@ -57,7 +58,9 @@ export function FeaturedPackages() {
                 <span className="font-mono text-xs sm:text-sm font-bold text-[#0000EE] dark:text-[#A1A1AA]">
                   [ pkg ]
                 </span>
-                <h3 className="text-2xl md:text-3xl font-bold tracking-tight">json-up</h3>
+                <h3 className="text-2xl md:text-3xl font-bold tracking-tight">
+                  json-up
+                </h3>
               </div>
               <span className="hidden sm:block font-mono text-xs font-bold bg-[#0000EE]/10 dark:bg-[#A1A1AA]/10 text-[#0000EE] dark:text-[#A1A1AA] px-3 py-1 uppercase tracking-wider">
                 TypeScript
@@ -75,7 +78,9 @@ export function FeaturedPackages() {
                 rel="noopener noreferrer"
                 className="inline-flex h-12 items-center justify-center border border-foreground/20 bg-transparent px-8 text-sm font-semibold tracking-wide text-foreground transition-colors hover:bg-foreground hover:text-background focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-black"
               >
-                <span className="mr-3 font-bold text-[#0000EE] dark:text-[#A1A1AA] group-hover:text-background transition-colors">&gt;</span> 
+                <span className="mr-3 font-bold text-[#0000EE] dark:text-[#A1A1AA] group-hover:text-background transition-colors">
+                  &gt;
+                </span>
                 View on GitHub
               </a>
             </div>

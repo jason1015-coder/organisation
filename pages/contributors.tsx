@@ -3,8 +3,13 @@ import Head from "next/head";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
 import { Footer } from "@/components/layout-v2/Footer";
+import {
+  CardHover,
+  SectionReveal,
+  StaggerContainer,
+  StaggerItem,
+} from "@/components/ui/motion";
 import { CONTRIBUTORS, type Contributor } from "@/lib/contributors";
-import { SectionReveal, StaggerContainer, StaggerItem, CardHover } from "@/components/ui/motion";
 
 function ContributorCard({ contributor }: { contributor: Contributor }) {
   const initials = contributor.name
@@ -17,11 +22,12 @@ function ContributorCard({ contributor }: { contributor: Contributor }) {
   return (
     <CardHover className="flex flex-col h-full bg-background border border-foreground/20 transition-all p-6 sm:p-8 relative overflow-hidden group">
       <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 dark:opacity-100 pointer-events-none" />
-      
+
       <div className="relative z-10 flex flex-col h-full">
         <div className="flex justify-between items-start mb-6">
           <div className="w-16 h-16 shrink-0 bg-muted flex items-center justify-center overflow-hidden border border-foreground/10">
             {contributor.photo ? (
+              // biome-ignore lint/performance/noImgElement: static export uses unoptimized images
               <img
                 src={`/contributors/${contributor.photo}`}
                 alt={contributor.name}
@@ -41,7 +47,7 @@ function ContributorCard({ contributor }: { contributor: Contributor }) {
         <h3 className="text-xl font-bold tracking-tight mb-2 group-hover:text-[#0000EE] dark:group-hover:text-[#A1A1AA] transition-colors">
           {contributor.name}
         </h3>
-        
+
         {contributor.bio && (
           <p className="text-xs sm:text-sm text-foreground/70 leading-relaxed mb-6 flex-1">
             {contributor.bio}
@@ -116,8 +122,9 @@ export default function ContributorsPage() {
                   Meet our contributors.
                 </h1>
                 <p className="text-xs sm:text-lg md:text-xl text-foreground/70 max-w-2xl mx-auto mb-8 sm:mb-12 leading-relaxed px-2 sm:px-0">
-                  The engineers, designers, and hackers behind Nano Collective. We
-                  are an open-source collective building privacy-first AI tools.
+                  The engineers, designers, and hackers behind Nano Collective.
+                  We are an open-source collective building privacy-first AI
+                  tools.
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -164,15 +171,18 @@ export default function ContributorsPage() {
               )}
 
               {/* How to Contribute Section */}
-              <section id="how-to-contribute" className="max-w-3xl mx-auto space-y-6 sm:space-y-8 scroll-m-24 mb-32 px-2 sm:px-0">
+              <section
+                id="how-to-contribute"
+                className="max-w-3xl mx-auto space-y-6 sm:space-y-8 scroll-m-24 mb-32 px-2 sm:px-0"
+              >
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-center">
                   How to Contribute
                 </h2>
                 <div className="space-y-4 sm:space-y-6">
                   <p className="text-xs sm:text-lg text-foreground/70 leading-relaxed text-center">
-                    We build tools for the people who use them. If you care about
-                    privacy, performance, and keeping AI tools out of walled gardens,
-                    you belong here.
+                    We build tools for the people who use them. If you care
+                    about privacy, performance, and keeping AI tools out of
+                    walled gardens, you belong here.
                   </p>
                   <StaggerContainer className="space-y-4 pt-4">
                     <StaggerItem className="flex items-start gap-4 p-6 border border-foreground/10 bg-muted/10">
@@ -180,10 +190,13 @@ export default function ContributorsPage() {
                         01
                       </div>
                       <div>
-                        <h3 className="font-bold mb-2 tracking-tight">Check the Bounties</h3>
+                        <h3 className="font-bold mb-2 tracking-tight">
+                          Check the Bounties
+                        </h3>
                         <p className="text-xs sm:text-sm text-foreground/70 leading-relaxed">
-                          We run a community fund. Significant features and bug fixes
-                          often carry bounties. Check our GitHub issues for the{" "}
+                          We run a community fund. Significant features and bug
+                          fixes often carry bounties. Check our GitHub issues
+                          for the{" "}
                           <code className="bg-muted px-2 py-0.5 rounded text-xs">
                             bounty
                           </code>{" "}
@@ -196,10 +209,13 @@ export default function ContributorsPage() {
                         02
                       </div>
                       <div>
-                        <h3 className="font-bold mb-2 tracking-tight">Join the Discord</h3>
+                        <h3 className="font-bold mb-2 tracking-tight">
+                          Join the Discord
+                        </h3>
                         <p className="text-xs sm:text-sm text-foreground/70 leading-relaxed">
-                          Say hi in the #contributors channel. We're happy to help you
-                          find a good first issue or discuss a feature you want to build.
+                          Say hi in the #contributors channel. We're happy to
+                          help you find a good first issue or discuss a feature
+                          you want to build.
                         </p>
                       </div>
                     </StaggerItem>
@@ -208,10 +224,12 @@ export default function ContributorsPage() {
                         03
                       </div>
                       <div>
-                        <h3 className="font-bold mb-2 tracking-tight">Open a PR</h3>
+                        <h3 className="font-bold mb-2 tracking-tight">
+                          Open a PR
+                        </h3>
                         <p className="text-sm text-foreground/70 leading-relaxed">
-                          Once your first PR is merged, you'll be added to this page
-                          and receive your contributor invite.
+                          Once your first PR is merged, you'll be added to this
+                          page and receive your contributor invite.
                         </p>
                       </div>
                     </StaggerItem>

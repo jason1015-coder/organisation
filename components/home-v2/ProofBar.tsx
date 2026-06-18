@@ -12,7 +12,7 @@ interface ProofBarProps {
 export function ProofBar({ stats }: ProofBarProps) {
   const formatNumber = (num: number) => {
     if (num >= 1000) {
-      return (num / 1000).toFixed(1) + "k";
+      return `${(num / 1000).toFixed(1)}k`;
     }
     return num.toString();
   };

@@ -1,5 +1,3 @@
-import React from "react";
-
 export function Mission() {
   const pillars = [
     {
@@ -41,7 +39,10 @@ export function Mission() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12 lg:gap-16">
           {pillars.map((pillar) => (
-            <div key={pillar.id} className="flex flex-col items-start gap-2 sm:gap-4">
+            <div
+              key={pillar.id}
+              className="flex flex-col items-start gap-2 sm:gap-4"
+            >
               <div className="text-md sm:text-2xl font-mono font-bold text-[#0000EE] dark:text-[#A1A1AA] mb-2 border-b border-[#0000EE] dark:border-[#A1A1AA] pb-2 inline-block">
                 [{pillar.id}]
               </div>
