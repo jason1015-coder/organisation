@@ -4,6 +4,12 @@ import { useMemo, useState } from "react";
 import { GrowthChart } from "@/components/GrowthChart";
 import { GrowthMetrics } from "@/components/GrowthMetrics";
 import { Footer } from "@/components/layout-v2/Footer";
+import {
+  SectionReveal,
+  StaggerContainer,
+  StaggerItem,
+  FadeIn
+} from "@/components/ui/motion";
 
 interface DownloadData {
   date: string;
@@ -194,42 +200,51 @@ export default function Growth({ packages, lastUpdated }: GrowthPageProps) {
 
       <div className="min-h-screen bg-background font-sans flex flex-col">
         {/* Hero */}
-        <section className="relative pt-12 pb-12 sm:pb-20 px-4 md:px-6 container mx-auto border-b border-foreground/20">
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
-            <div className="space-y-4 sm:space-y-8 max-w-4xl flex-1">
-              <div className="flex items-center gap-2 text-xs font-semibold font-mono text-muted-foreground uppercase tracking-widest border-b border-foreground/20 pb-2 max-w-[200px]">
-                <span className="text-[#0000EE] dark:text-[#A1A1AA] font-bold">&gt;</span>
-                Metrics
+        <SectionReveal>
+          <section className="relative pt-12 pb-12 sm:pb-20 px-4 md:px-6 container mx-auto border-b border-foreground/20">
+            <StaggerContainer className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+              <div className="space-y-4 sm:space-y-8 max-w-4xl flex-1">
+                <StaggerItem>
+                  <div className="flex items-center gap-2 text-xs font-semibold font-mono text-muted-foreground uppercase tracking-widest border-b border-foreground/20 pb-2 max-w-[200px]">
+                    <span className="text-[#0000EE] dark:text-[#A1A1AA] font-bold">&gt;</span>
+                    Metrics
+                  </div>
+                </StaggerItem>
+                
+                <StaggerItem>
+                  <h1 className="text-3xl sm:text-5xl lg:text-[4rem] leading-[1.05] font-bold tracking-tight text-foreground break-words">
+                    Growth Tracker
+                  </h1>
+                </StaggerItem>
+                
+                <StaggerItem>
+                  <p className="text-xs sm:text-lg lg:text-xl text-foreground/70 leading-relaxed max-w-[800px]">
+                    Tracking NPM downloads for{" "}
+                    <a
+                      href={`https://github.com/${currentPackageData.githubRepo}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#0000EE] dark:text-[#A1A1AA] hover:underline font-semibold"
+                    >
+                      {currentPackageData.displayName}
+                    </a>
+                  </p>
+                </StaggerItem>
+                
+                <StaggerItem>
+                  <p className="text-xs sm:text-sm text-foreground/50">
+                    Last updated:{" "}
+                    {new Date(lastUpdated).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </p>
+                </StaggerItem>
               </div>
-              
-              <h1 className="text-3xl sm:text-5xl lg:text-[4rem] leading-[1.05] font-bold tracking-tight text-foreground break-words">
-                Growth Tracker
-              </h1>
-              
-              <p className="text-xs sm:text-lg lg:text-xl text-foreground/70 leading-relaxed max-w-[800px]">
-                Tracking NPM downloads for{" "}
-                <a
-                  href={`https://github.com/${currentPackageData.githubRepo}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#0000EE] dark:text-[#A1A1AA] hover:underline font-semibold"
-                >
-                  {currentPackageData.displayName}
-                </a>
-              </p>
-              
-              <p className="text-xs sm:text-sm text-foreground/50">
-                Last updated:{" "}
-                {new Date(lastUpdated).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </p>
-            </div>
 
-            {/* Package and Time Period Selectors */}
-            <div className="flex flex-col sm:flex-row gap-4 lg:w-auto mt-8 lg:mt-0 pb-2">
+              {/* Package and Time Period Selectors */}
+              <StaggerItem className="flex flex-col sm:flex-row gap-4 lg:w-auto mt-8 lg:mt-0 pb-2">
               {/* Package Selector */}
               <div className="flex flex-col gap-2">
                 <label
@@ -273,35 +288,42 @@ export default function Growth({ packages, lastUpdated }: GrowthPageProps) {
                   <option value="all-time">All Time</option>
                 </select>
               </div>
-            </div>
-          </div>
-        </section>
+              </StaggerItem>
+            </StaggerContainer>
+          </section>
+        </SectionReveal>
 
         {/* Main Content */}
         <main className="flex-1 container mx-auto px-4 md:px-6 py-8 sm:py-12 md:py-24">
-          {/* Key Metrics */}
-          <GrowthMetrics
-            totalDownloads={periodTotalDownloads}
-            currentSevenDay={sevenDayAvg[sevenDayAvg.length - 1]?.average || 0}
-            currentThirtyDay={
-              thirtyDayAvg[thirtyDayAvg.length - 1]?.average || 0
-            }
-            trend={currentTrend}
-          />
+          <StaggerContainer>
+            {/* Key Metrics */}
+            <StaggerItem>
+              <GrowthMetrics
+                totalDownloads={periodTotalDownloads}
+                currentSevenDay={sevenDayAvg[sevenDayAvg.length - 1]?.average || 0}
+                currentThirtyDay={
+                  thirtyDayAvg[thirtyDayAvg.length - 1]?.average || 0
+                }
+                trend={currentTrend}
+              />
+            </StaggerItem>
 
-          {/* Chart */}
-          <div className="mt-12 border border-foreground/20 p-4 sm:p-8 bg-background">
-            <h2 className="text-xl font-bold tracking-tight mb-8">
-              Download Trajectory
-            </h2>
-            <GrowthChart
-              downloadData={filteredData}
-              sevenDayAvg={sevenDayAvg}
-              thirtyDayAvg={thirtyDayAvg}
-              cumulativeData={cumulativeData}
-              releases={filteredReleases}
-            />
-          </div>
+            {/* Chart */}
+            <StaggerItem>
+              <div className="mt-12 border border-foreground/20 p-4 sm:p-8 bg-background">
+                <h2 className="text-xl font-bold tracking-tight mb-8">
+                  Download Trajectory
+                </h2>
+                <GrowthChart
+                  downloadData={filteredData}
+                  sevenDayAvg={sevenDayAvg}
+                  thirtyDayAvg={thirtyDayAvg}
+                  cumulativeData={cumulativeData}
+                  releases={filteredReleases}
+                />
+              </div>
+            </StaggerItem>
+          </StaggerContainer>
         </main>
         
         <Footer />
