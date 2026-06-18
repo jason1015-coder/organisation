@@ -10,6 +10,7 @@ import { ProofBar } from "@/components/home-v2/ProofBar";
 import { Footer } from "@/components/layout-v2/Footer";
 import { FeaturedPackages } from "@/components/home-v2/FeaturedPackages";
 import { Sponsors } from "@/components/home-v2/Sponsors";
+import { SectionReveal } from "@/components/ui/motion";
 
 import type { Discussion } from "@/types/discussion";
 
@@ -70,14 +71,14 @@ export default function Home({
       </Head>
       <div className="min-h-screen bg-background font-sans">
         <main>
-          <Hero />
-          <ProofBar stats={orgStats} />
-          <Products nanocoderVersion={nanocoderVersion} />
-          <FeaturedPackages />
-          <Mission />
-          <Sponsors />
-          <LatestDiscussions discussions={discussions} />
-          <CommunityCTA />
+          <SectionReveal><Hero /></SectionReveal>
+          <SectionReveal><ProofBar stats={orgStats} /></SectionReveal>
+          <SectionReveal><Products nanocoderVersion={nanocoderVersion} /></SectionReveal>
+          <SectionReveal><FeaturedPackages /></SectionReveal>
+          <SectionReveal><Mission /></SectionReveal>
+          <SectionReveal><Sponsors /></SectionReveal>
+          <SectionReveal><LatestDiscussions discussions={discussions} /></SectionReveal>
+          <SectionReveal><CommunityCTA /></SectionReveal>
         </main>
         <Footer />
       </div>
