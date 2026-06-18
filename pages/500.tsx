@@ -30,7 +30,7 @@ export default function Custom500() {
                 href="/"
                 className="inline-flex items-center justify-center px-8 py-4 sm:px-12 sm:py-6 bg-foreground text-background font-mono font-bold uppercase tracking-widest text-sm sm:text-lg border-2 border-foreground hover:bg-[#0000EE] dark:hover:bg-white dark:hover:text-black transition-colors"
               >
-                &gt; RETRY_CONNECTION
+                &gt; RETURN_HOME
               </Link>
             </div>
           </div>

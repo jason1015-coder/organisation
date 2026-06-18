@@ -68,7 +68,7 @@ export default function AsciiWebsiteBackgroundGenerated({
       return;
     }
 
-    let animationId: number;
+    let animationId = 0;
     let lastTime = 0;
     const frameDuration = 1000 / FPS;
 
@@ -84,8 +84,37 @@ export default function AsciiWebsiteBackgroundGenerated({
       animationId = requestAnimationFrame(animate);
     };
 
-    animationId = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animationId);
+    const start = () => {
+      if (!animationId) {
+        lastTime = 0;
+        animationId = requestAnimationFrame(animate);
+      }
+    };
+    const stop = () => {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = 0;
+      }
+    };
+
+    // Pause the loop while the background is scrolled out of view so it isn't
+    // re-rendering the large frame off-screen.
+    const container = containerRef.current;
+    let observer: IntersectionObserver | undefined;
+    if (container && typeof IntersectionObserver !== "undefined") {
+      observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) start();
+        else stop();
+      });
+      observer.observe(container);
+    } else {
+      start();
+    }
+
+    return () => {
+      stop();
+      observer?.disconnect();
+    };
   }, []);
 
   useEffect(() => {

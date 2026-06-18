@@ -38,7 +38,7 @@ export function FeaturedPackages() {
                 href="https://github.com/Nano-Collective/get-md"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-12 items-center justify-center border border-foreground/20 bg-transparent px-8 text-sm font-semibold tracking-wide text-foreground transition-colors hover:bg-foreground hover:text-background focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-black"
+                className="inline-flex h-12 items-center justify-center border border-foreground/20 bg-transparent px-8 text-sm font-semibold tracking-wide text-foreground transition-colors hover:bg-foreground hover:text-background focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
               >
                 <span className="mr-3 font-bold text-[#0000EE] dark:text-[#A1A1AA] group-hover:text-background transition-colors">
                   &gt;
@@ -76,7 +76,7 @@ export function FeaturedPackages() {
                 href="https://github.com/Nano-Collective/json-up"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-12 items-center justify-center border border-foreground/20 bg-transparent px-8 text-sm font-semibold tracking-wide text-foreground transition-colors hover:bg-foreground hover:text-background focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-black"
+                className="inline-flex h-12 items-center justify-center border border-foreground/20 bg-transparent px-8 text-sm font-semibold tracking-wide text-foreground transition-colors hover:bg-foreground hover:text-background focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
               >
                 <span className="mr-3 font-bold text-[#0000EE] dark:text-[#A1A1AA] group-hover:text-background transition-colors">
                   &gt;
