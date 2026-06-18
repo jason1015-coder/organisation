@@ -6,7 +6,6 @@ import {
   Minus,
   TrendingUp,
 } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface GrowthMetricsProps {
   totalDownloads: number;
@@ -23,84 +22,85 @@ export function GrowthMetrics({
 }: GrowthMetricsProps) {
   const TrendIcon =
     trend === "up" ? ArrowUp : trend === "down" ? ArrowDown : Minus;
+  
   const trendColor =
     trend === "up"
-      ? "text-green-500"
+      ? "text-green-600 dark:text-green-400"
       : trend === "down"
-        ? "text-destructive"
-        : "text-muted-foreground";
+        ? "text-red-600 dark:text-red-400"
+        : "text-foreground";
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
       {/* Total Downloads */}
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Total Downloads</CardTitle>
+      <div className="border border-foreground/20 bg-background p-6">
+        <div className="flex flex-row items-center justify-between space-y-0 mb-4 pb-2 border-b border-foreground/10">
+          <h3 className="text-sm font-semibold tracking-tight">Total Downloads</h3>
           <Download className="h-4 w-4 text-muted-foreground" />
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold">
+        </div>
+        <div>
+          <div className="text-3xl font-bold tracking-tight mb-1">
             {totalDownloads.toLocaleString()}
           </div>
-          <p className="text-xs text-muted-foreground mt-1">
-            Total for selected period
+          <p className="text-xs text-muted-foreground">
+            For selected period
           </p>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* 7-Day Average */}
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">7-Day Average</CardTitle>
+      <div className="border border-foreground/20 bg-background p-6">
+        <div className="flex flex-row items-center justify-between space-y-0 mb-4 pb-2 border-b border-foreground/10">
+          <h3 className="text-sm font-semibold tracking-tight">7-Day Average</h3>
           <Calendar className="h-4 w-4 text-muted-foreground" />
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold">
+        </div>
+        <div>
+          <div className="text-3xl font-bold tracking-tight mb-1">
             {currentSevenDay.toLocaleString()}
           </div>
-          <p className="text-xs text-muted-foreground mt-1">
+          <p className="text-xs text-muted-foreground">
             Downloads per day
           </p>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* 30-Day Average */}
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">30-Day Average</CardTitle>
+      <div className="border border-foreground/20 bg-background p-6">
+        <div className="flex flex-row items-center justify-between space-y-0 mb-4 pb-2 border-b border-foreground/10">
+          <h3 className="text-sm font-semibold tracking-tight">30-Day Average</h3>
           <TrendingUp className="h-4 w-4 text-muted-foreground" />
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold">
+        </div>
+        <div>
+          <div className="text-3xl font-bold tracking-tight mb-1">
             {currentThirtyDay.toLocaleString()}
           </div>
-          <p className="text-xs text-muted-foreground mt-1">
+          <p className="text-xs text-muted-foreground">
             Downloads per day
           </p>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Trend */}
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Weekly Trend</CardTitle>
+      <div className="border border-foreground/20 bg-background p-6">
+        <div className="flex flex-row items-center justify-between space-y-0 mb-4 pb-2 border-b border-foreground/10">
+          <h3 className="text-sm font-semibold tracking-tight">Weekly Trend</h3>
           <TrendIcon className={`h-4 w-4 ${trendColor}`} />
-        </CardHeader>
-        <CardContent>
-          <div className={`text-2xl font-bold ${trendColor}`}>
+        </div>
+        <div>
+          <div className={`text-3xl font-bold tracking-tight mb-1 ${trendColor}`}>
             {trend === "up"
               ? "Growing"
               : trend === "down"
                 ? "Declining"
                 : "Stable"}
           </div>
-          <p className="text-xs text-muted-foreground mt-1">
-            {trend === "up" && "7-day avg is increasing"}
-            {trend === "down" && "7-day avg is decreasing"}
+          <p className="text-xs text-muted-foreground">
+            {trend === "up" && "7-day avg increasing"}
+            {trend === "down" && "7-day avg decreasing"}
             {trend === "neutral" && "Minimal change"}
           </p>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }
