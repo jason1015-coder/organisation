@@ -429,8 +429,10 @@ export const getStaticProps: GetStaticProps<GrowthPageProps> = async () => {
       const githubResponse = await fetch(
         `https://api.github.com/repos/${config.githubRepo}/releases`,
         {
-          headers: process.env.GH_TOKEN
-            ? { Authorization: `token ${process.env.GH_TOKEN}` }
+          headers: process.env.GH_TOKEN || process.env.GITHUB_TOKEN
+            ? {
+                Authorization: `token ${process.env.GH_TOKEN || process.env.GITHUB_TOKEN}`,
+              }
             : {},
         },
       );

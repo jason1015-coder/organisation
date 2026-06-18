@@ -659,11 +659,11 @@ export const getStaticProps: GetStaticProps<NanotunePageProps> = async () => {
   }
 
   const stats: NanotuneStats = {
-    stars: 1250,
-    contributors: 42,
-    forks: 85,
-    releases: 14,
-    discordMembers: 1500,
+    stars: 0,
+    contributors: 0,
+    forks: 0,
+    releases: 0,
+    discordMembers: 0,
     error: null,
   };
 
