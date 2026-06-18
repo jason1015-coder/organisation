@@ -79,26 +79,6 @@ StaggerItem.displayName = "StaggerItem";
 // ----------------------------------------------------------------------
 // Subtle Hover & Interactions
 // ----------------------------------------------------------------------
-export const SubtleButton = forwardRef<
-  HTMLButtonElement,
-  HTMLMotionProps<"button">
->(({ children, ...props }, ref) => {
-  const shouldReduceMotion = useReducedMotion();
-
-  return (
-    <motion.button
-      ref={ref}
-      whileHover={shouldReduceMotion ? undefined : { scale: 1.02 }}
-      whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
-      transition={{ duration: 0.15 }}
-      {...props}
-    >
-      {children}
-    </motion.button>
-  );
-});
-SubtleButton.displayName = "SubtleButton";
-
 export const SubtleButtonLink = forwardRef<
   HTMLAnchorElement,
   HTMLMotionProps<"a">
@@ -136,25 +116,6 @@ export const CardHover = forwardRef<HTMLDivElement, HTMLMotionProps<"div">>(
   },
 );
 CardHover.displayName = "CardHover";
-
-export const UpdateItemHover = forwardRef<
-  HTMLDivElement,
-  HTMLMotionProps<"div">
->(({ children, ...props }, ref) => {
-  const shouldReduceMotion = useReducedMotion();
-
-  return (
-    <motion.div
-      ref={ref}
-      whileHover={shouldReduceMotion ? undefined : { x: 4 }}
-      transition={{ duration: 0.15 }}
-      {...props}
-    >
-      {children}
-    </motion.div>
-  );
-});
-UpdateItemHover.displayName = "UpdateItemHover";
 
 // ----------------------------------------------------------------------
 // Generic FadeIn (e.g. ASCII preview)
