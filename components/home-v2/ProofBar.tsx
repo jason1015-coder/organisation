@@ -39,7 +39,7 @@ export function ProofBar({ stats }: ProofBarProps) {
                 </span>
               </div>
               {i < metrics.length - 1 && (
-                <div className="hidden md:block w-px h-12 bg-black/40" />
+                <div className="hidden md:block w-px h-12 bg-foreground/20" />
               )}
             </React.Fragment>
           ))}

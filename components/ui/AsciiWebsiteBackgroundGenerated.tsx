@@ -32,7 +32,11 @@ const APPEARANCE = {
 const CHARS =
   " .'`^,:;Il!i><~+_-?][}{1)(|/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
 
-export default function AsciiWebsiteBackgroundGenerated() {
+export default function AsciiWebsiteBackgroundGenerated({
+  fill = false,
+}: {
+  fill?: boolean;
+}) {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -91,17 +95,39 @@ export default function AsciiWebsiteBackgroundGenerated() {
       if (!container || !content) return;
 
       const availableWidth = container.clientWidth;
+      const availableHeight = container.clientHeight;
       const naturalWidth = content.scrollWidth;
       const naturalHeight = content.scrollHeight;
 
-      if (
+      // Width-based fit scale (never upscales) — the natural, uncropped size.
+      const fitScale =
+        availableWidth > 0 && naturalWidth > availableWidth
+          ? availableWidth / naturalWidth
+          : 1;
+
+      if (fill) {
+        // Cover the container: scale so the art fills both axes, cropping the
+        // overflow. Falls back to the width-fit scale until height is known.
+        const coverScale =
+          naturalWidth > 0 && naturalHeight > 0
+            ? Math.max(
+                availableWidth / naturalWidth,
+                availableHeight / naturalHeight,
+                fitScale,
+              )
+            : fitScale;
+        setScale(coverScale);
+        // Baseline height so an auto-height parent (mobile) never collapses.
+        setScaledHeight(
+          naturalHeight > 0 ? naturalHeight * fitScale : undefined,
+        );
+      } else if (
         availableWidth > 0 &&
         naturalWidth > 0 &&
         naturalWidth > availableWidth
       ) {
-        const newScale = availableWidth / naturalWidth;
-        setScale(newScale);
-        setScaledHeight(naturalHeight * newScale);
+        setScale(fitScale);
+        setScaledHeight(naturalHeight * fitScale);
       } else {
         setScale(1);
         setScaledHeight(naturalHeight > 0 ? naturalHeight : undefined);
@@ -112,7 +138,7 @@ export default function AsciiWebsiteBackgroundGenerated() {
     const observer = new ResizeObserver(measure);
     if (containerRef.current) observer.observe(containerRef.current);
     return () => observer.disconnect();
-  }, []);
+  }, [fill]);
 
   const effect = APPEARANCE.textEffect;
   const needsStyles = effect !== "none";
@@ -131,7 +157,10 @@ export default function AsciiWebsiteBackgroundGenerated() {
         overflow: "hidden",
         position: "relative",
         width: "100%",
-        height: scaledHeight ? `${scaledHeight}px` : "auto",
+        // In fill mode take the parent's height (cropping to cover), but keep a
+        // minimum so an auto-height parent still shows the full art.
+        height: fill ? "100%" : scaledHeight ? `${scaledHeight}px` : "auto",
+        minHeight: fill && scaledHeight ? `${scaledHeight}px` : undefined,
       }}
     >
       {needsStyles && (
@@ -151,7 +180,17 @@ export default function AsciiWebsiteBackgroundGenerated() {
       )}
 
       <div
-        style={{ transform: `scale(${scale})`, transformOrigin: "left top" }}
+        style={
+          fill
+            ? {
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: `translate(-50%, -50%) scale(${scale})`,
+                transformOrigin: "center center",
+              }
+            : { transform: `scale(${scale})`, transformOrigin: "left top" }
+        }
       >
         {APPEARANCE.showFrameCounter && (
           <div style={{ opacity: 0.5, fontSize: "10px", marginBottom: "8px" }}>
