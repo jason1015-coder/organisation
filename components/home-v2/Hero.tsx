@@ -43,7 +43,7 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="w-full flex justify-center lg:justify-end mt-4 sm:mt-8 lg:mt-0 max-w-full overflow-hidden pt-4 pb-4 pr-4 pl-1">
+        <div className="w-full flex justify-center lg:justify-end mt-4 sm:mt-8 lg:mt-0 max-w-full overflow-hidden pt-4 pb-4 sm:pr-4 sm:pl-1">
           <div className="bg-muted border-2 border-[#0000EE] dark:border-[#A1A1AA] shadow-[4px_4px_0px_0px_rgba(0,0,238,1)] dark:shadow-[4px_4px_0px_0px_#A1A1AA] sm:shadow-[8px_8px_0px_0px_rgba(0,0,238,1)] dark:sm:shadow-[8px_8px_0px_0px_#A1A1AA] transition-transform hover:-translate-y-1 hover:translate-x-1 hover:shadow-[2px_2px_0px_0px_rgba(0,0,238,1)] dark:hover:shadow-[2px_2px_0px_0px_#A1A1AA] sm:hover:shadow-[4px_4px_0px_0px_rgba(0,0,238,1)] dark:sm:hover:shadow-[4px_4px_0px_0px_#A1A1AA] max-w-[700px] overflow-hidden w-full">
             <div className="w-full overflow-hidden">
               <AsciiWebsiteBackgroundGenerated />
