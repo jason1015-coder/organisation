@@ -132,7 +132,7 @@ export default function ContributorsPage() {
                     href="https://github.com/nano-collective"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex h-12 items-center justify-center bg-foreground text-background px-8 text-sm font-bold tracking-wide hover:opacity-90 transition-colors"
+                    className="inline-flex h-12 items-center justify-center bg-[#0000EE] dark:bg-foreground text-white dark:text-background px-8 text-sm font-bold tracking-wide hover:opacity-90 transition-colors"
                   >
                     <FaGithub className="mr-2 h-4 w-4" />
                     View GitHub

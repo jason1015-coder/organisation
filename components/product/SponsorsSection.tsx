@@ -27,7 +27,7 @@ export function SponsorsSection({ exclude = [] }: { exclude?: string[] }) {
             </div>
             <Link
               href="/sponsor"
-              className="inline-flex h-12 items-center justify-center rounded-none bg-foreground px-8 text-sm font-semibold tracking-wide text-background transition-colors hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-foreground shrink-0"
+              className="inline-flex h-12 items-center justify-center rounded-none bg-[#0000EE] dark:bg-foreground px-8 text-sm font-semibold tracking-wide text-white dark:text-background transition-colors hover:bg-[#0000EE]/90 dark:hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-foreground shrink-0"
             >
               Become a sponsor
             </Link>

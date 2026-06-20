@@ -127,7 +127,7 @@ export default function Assets() {
                       ) : (
                         <Link
                           href={asset.href}
-                          className="mt-4 w-full text-sm font-semibold py-3 border border-foreground/20 bg-background hover:bg-foreground hover:text-background transition-colors flex items-center justify-center group"
+                          className="mt-4 w-full text-sm font-semibold py-3 border border-foreground/20 bg-background hover:border-foreground hover:bg-muted transition-colors flex items-center justify-center group"
                         >
                           View Assets
                           <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />

@@ -96,7 +96,7 @@ export function Products({ nanocoderVersion }: ProductsProps) {
             <div>
               <Link
                 href="/nanocoder"
-                className="inline-flex h-12 items-center justify-center rounded-none bg-foreground px-8 text-sm font-semibold tracking-wide text-background transition-colors hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                className="inline-flex h-12 items-center justify-center rounded-none bg-[#0000EE] dark:bg-foreground px-8 text-sm font-semibold tracking-wide text-white dark:text-background transition-colors hover:bg-[#0000EE]/90 dark:hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
               >
                 Explore Nanocoder
               </Link>
@@ -159,7 +159,7 @@ export function Products({ nanocoderVersion }: ProductsProps) {
             <div>
               <Link
                 href="/nanotune"
-                className="inline-flex h-12 items-center justify-center rounded-none bg-foreground px-8 text-sm font-semibold tracking-wide text-background transition-colors hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                className="inline-flex h-12 items-center justify-center rounded-none bg-[#0000EE] dark:bg-foreground px-8 text-sm font-semibold tracking-wide text-white dark:text-background transition-colors hover:bg-[#0000EE]/90 dark:hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
               >
                 Explore Nanotune
               </Link>

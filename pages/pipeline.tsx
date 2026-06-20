@@ -106,7 +106,7 @@ export default function Pipeline({ whitepapers }: PipelineProps) {
                   href={DOCS_PIPELINE_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-12 items-center justify-center rounded-none bg-foreground px-8 text-xs sm:text-sm font-semibold tracking-wide text-background transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring group"
+                  className="inline-flex h-12 items-center justify-center rounded-none bg-[#0000EE] dark:bg-foreground px-8 text-xs sm:text-sm font-semibold tracking-wide text-white dark:text-background transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring group"
                 >
                   Read how the pipeline works
                 </a>
@@ -114,7 +114,7 @@ export default function Pipeline({ whitepapers }: PipelineProps) {
                   href={DOCS_WHITEPAPERS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-12 items-center justify-center rounded-none border border-foreground/20 bg-background px-8 text-xs sm:text-sm font-semibold tracking-wide text-foreground transition-colors hover:bg-foreground hover:text-background focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                  className="inline-flex h-12 items-center justify-center rounded-none border border-foreground/20 bg-background px-8 text-xs sm:text-sm font-semibold tracking-wide text-foreground transition-colors hover:border-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
                 >
                   <ExternalLink className="mr-2 h-4 w-4" />
                   Browse whitepapers

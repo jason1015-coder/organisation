@@ -38,9 +38,9 @@ export function FeaturedPackages() {
             <div>
               <Link
                 href="/get-md"
-                className="inline-flex h-12 items-center justify-center border border-foreground/20 bg-transparent px-8 text-sm font-semibold tracking-wide text-foreground transition-colors hover:bg-foreground hover:text-background focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                className="inline-flex h-12 items-center justify-center border border-foreground/20 bg-transparent px-8 text-sm font-semibold tracking-wide text-foreground transition-colors hover:border-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
               >
-                <span className="mr-3 font-bold text-[#0000EE] dark:text-[#A1A1AA] group-hover:text-background transition-colors">
+                <span className="mr-3 font-bold text-[#0000EE] dark:text-[#A1A1AA] transition-colors">
                   &gt;
                 </span>
                 Learn more
@@ -76,9 +76,9 @@ export function FeaturedPackages() {
                 href="https://github.com/Nano-Collective/json-up"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-12 items-center justify-center border border-foreground/20 bg-transparent px-8 text-sm font-semibold tracking-wide text-foreground transition-colors hover:bg-foreground hover:text-background focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                className="inline-flex h-12 items-center justify-center border border-foreground/20 bg-transparent px-8 text-sm font-semibold tracking-wide text-foreground transition-colors hover:border-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
               >
-                <span className="mr-3 font-bold text-[#0000EE] dark:text-[#A1A1AA] group-hover:text-background transition-colors">
+                <span className="mr-3 font-bold text-[#0000EE] dark:text-[#A1A1AA] transition-colors">
                   &gt;
                 </span>
                 View on GitHub

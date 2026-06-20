@@ -28,7 +28,7 @@ export default function Custom500() {
             <div className="pt-12">
               <Link
                 href="/"
-                className="inline-flex items-center justify-center px-8 py-4 sm:px-12 sm:py-6 bg-foreground text-background font-mono font-bold uppercase tracking-widest text-sm sm:text-lg border-2 border-foreground hover:bg-[#0000EE] dark:hover:bg-white dark:hover:text-black transition-colors"
+                className="inline-flex items-center justify-center px-8 py-4 sm:px-12 sm:py-6 bg-[#0000EE] dark:bg-foreground text-white dark:text-background font-mono font-bold uppercase tracking-widest text-sm sm:text-lg border-2 border-[#0000EE] dark:border-foreground hover:bg-[#0000EE]/90 dark:hover:bg-foreground/90 transition-colors"
               >
                 &gt; RETURN_HOME
               </Link>

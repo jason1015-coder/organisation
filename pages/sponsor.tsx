@@ -130,7 +130,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
         <SectionReveal>
           <section className="py-12 md:py-20 border-b border-foreground/10">
             <div className="container mx-auto px-4 md:px-6">
-              <StaggerContainer className="max-w-5xl mx-auto text-center">
+              <StaggerContainer className="text-center">
                 <StaggerItem>
                   <div className="font-mono text-xs font-bold uppercase tracking-widest mb-6 text-muted-foreground">
                     [ Sponsorship ]
@@ -184,7 +184,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
         <SectionReveal>
           <section className="border-b border-foreground/10 py-16">
             <div className="container mx-auto px-4 md:px-6">
-              <div className="max-w-5xl mx-auto space-y-12">
+              <div className="space-y-12">
                 <div className="space-y-4 text-center">
                   <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
                     Current sponsors
@@ -302,7 +302,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
         <SectionReveal>
           <section className="border-b border-foreground/10 py-16">
             <div className="container mx-auto px-4 md:px-6">
-              <div className="max-w-5xl mx-auto space-y-6 text-center">
+              <div className="space-y-6 text-center">
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
                   Why this matters
                 </h2>
@@ -328,7 +328,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
         <SectionReveal>
           <section className="border-b border-foreground/10 py-16">
             <div className="container mx-auto px-4 md:px-6">
-              <div className="max-w-5xl mx-auto space-y-10">
+              <div className="space-y-10">
                 <div className="space-y-4 text-center">
                   <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
                     What the Collective ships today
@@ -384,7 +384,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
         <SectionReveal>
           <section className="border-b border-foreground/10 py-16">
             <div className="container mx-auto px-4 md:px-6">
-              <StaggerContainer className="max-w-5xl mx-auto space-y-12">
+              <StaggerContainer className="space-y-12">
                 <StaggerItem className="space-y-4 text-center">
                   <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
                     Tiers
@@ -441,7 +441,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                               href={tier.cta.href}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="block w-full text-center bg-foreground text-background py-2.5 text-xs font-bold uppercase tracking-widest hover:opacity-90 transition-colors mt-auto"
+                              className="block w-full text-center bg-[#0000EE] dark:bg-foreground text-white dark:text-background py-2.5 text-xs font-bold uppercase tracking-widest hover:opacity-90 transition-colors mt-auto"
                             >
                               {tier.cta.label}
                             </a>
@@ -491,7 +491,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                               href="https://discord.gg/ktPDV6rekE"
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center justify-center gap-2 bg-foreground text-background px-5 py-2.5 text-xs font-bold uppercase tracking-widest hover:opacity-90 transition-colors"
+                              className="inline-flex items-center justify-center gap-2 bg-[#0000EE] dark:bg-foreground text-white dark:text-background px-5 py-2.5 text-xs font-bold uppercase tracking-widest hover:opacity-90 transition-colors"
                             >
                               <FaDiscord className="h-4 w-4" />
                               Discord
@@ -538,7 +538,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                               href="https://discord.gg/ktPDV6rekE"
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center justify-center gap-2 bg-foreground text-background px-5 py-2.5 text-xs font-bold uppercase tracking-widest hover:opacity-90 transition-colors"
+                              className="inline-flex items-center justify-center gap-2 bg-[#0000EE] dark:bg-foreground text-white dark:text-background px-5 py-2.5 text-xs font-bold uppercase tracking-widest hover:opacity-90 transition-colors"
                             >
                               <FaDiscord className="h-4 w-4" />
                               Discord
@@ -563,43 +563,21 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                     <h3 className="text-xl sm:text-xl font-bold tracking-tight">
                       What sponsorship does not include
                     </h3>
-                    <div className="inline-block text-xs sm:text-lg text-left">
-                      <div className="space-y-4 text-foreground/80 leading-relaxed max-w-2xl">
-                        <div className="flex gap-3">
-                          <span className="text-foreground font-bold mt-0.5">
-                            ·
-                          </span>
-                          <span>No early access to unshipped products</span>
-                        </div>
-                        <div className="flex gap-3">
-                          <span className="text-foreground font-bold mt-0.5">
-                            ·
-                          </span>
-                          <span>
-                            No influence over the roadmap, prioritisation, or
-                            which contributors get bounties
-                          </span>
-                        </div>
-                        <div className="flex gap-3">
-                          <span className="text-foreground font-bold mt-0.5">
-                            ·
-                          </span>
-                          <span>
-                            No routing of recurring sponsorship dollars to a
-                            specific project's payouts. To direct funds to
-                            specific work, use a designated donation
-                          </span>
-                        </div>
-                        <div className="flex gap-3">
-                          <span className="text-foreground font-bold mt-0.5">
-                            ·
-                          </span>
-                          <span>
-                            No exclusivity at any tier. Sponsors at the same
-                            tier are listed alphabetically
-                          </span>
-                        </div>
-                      </div>
+                    <div className="space-y-4 text-xs sm:text-lg text-foreground/80 leading-relaxed max-w-2xl mx-auto">
+                      <p>No early access to unshipped products</p>
+                      <p>
+                        No influence over the roadmap, prioritisation, or which
+                        contributors get bounties
+                      </p>
+                      <p>
+                        No routing of recurring sponsorship dollars to a
+                        specific project's payouts. To direct funds to specific
+                        work, use a designated donation
+                      </p>
+                      <p>
+                        No exclusivity at any tier. Sponsors at the same tier
+                        are listed alphabetically
+                      </p>
                     </div>
                     <p className="font-mono text-xs m:text-sm text-foreground/60 pt-4 max-w-2xl mx-auto text-center">
                       Annual prepayments at any tier receive a 10% discount.
@@ -617,7 +595,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
         <SectionReveal>
           <section className="border-b border-foreground/10 py-16">
             <div className="container mx-auto px-4 md:px-6">
-              <StaggerContainer className="max-w-5xl mx-auto space-y-8">
+              <StaggerContainer className="space-y-8">
                 <StaggerItem>
                   <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-center">
                     One-off contributions
@@ -663,7 +641,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                             href="https://opencollective.com/nano-collective"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="block w-full text-center bg-foreground text-background py-2.5 text-xs font-bold uppercase tracking-widest hover:opacity-90 transition-colors mt-auto"
+                            className="block w-full text-center bg-[#0000EE] dark:bg-foreground text-white dark:text-background py-2.5 text-xs font-bold uppercase tracking-widest hover:opacity-90 transition-colors mt-auto"
                           >
                             Donate on Open Collective
                           </a>
@@ -715,7 +693,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
         <SectionReveal>
           <section className="border-b border-foreground/10 py-16">
             <div className="container mx-auto px-4 md:px-6">
-              <div className="max-w-5xl mx-auto space-y-6 text-center">
+              <div className="space-y-6 text-center">
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
                   Who we accept
                 </h2>
@@ -738,7 +716,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
         <SectionReveal>
           <section className="border-b border-foreground/10 py-16">
             <div className="container mx-auto px-4 md:px-6">
-              <div className="max-w-5xl mx-auto space-y-6 text-center">
+              <div className="space-y-6 text-center">
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
                   How sponsorship is handled
                 </h2>
@@ -788,70 +766,61 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
         <SectionReveal>
           <section className="py-16">
             <div className="container mx-auto px-4 md:px-6">
-              <StaggerContainer className="max-w-4xl mx-auto space-y-8 text-center">
+              <StaggerContainer className="space-y-8 text-center">
                 <StaggerItem>
                   <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
                     Start a conversation
                   </h2>
                 </StaggerItem>
-                <StaggerItem className="inline-block text-left">
-                  <div className="space-y-6 text-xs sm:text-lg text-foreground/70 leading-relaxed max-w-3xl">
-                    <div className="flex gap-4">
-                      <span className="text-foreground font-bold mt-1">·</span>
-                      <span>
-                        <strong className="text-foreground">
-                          Recurring sponsorship at any tier
-                        </strong>
-                        : sign up via{" "}
-                        <a
-                          href="https://opencollective.com/nano-collective"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-bold text-foreground underline underline-offset-4 decoration-foreground/30 hover:decoration-foreground transition-colors"
-                        >
-                          Open Collective
-                        </a>
-                        . For Builder or bespoke arrangements, message us first
-                        via{" "}
-                        <a
-                          href="https://discord.gg/ktPDV6rekE"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-bold text-foreground underline underline-offset-4 decoration-foreground/30 hover:decoration-foreground transition-colors"
-                        >
-                          Discord
-                        </a>{" "}
-                        so we can welcome you properly.
-                      </span>
-                    </div>
-                    <div className="flex gap-4">
-                      <span className="text-foreground font-bold mt-1">·</span>
-                      <span>
-                        <strong className="text-foreground">
-                          Bespoke partnership
-                        </strong>
-                        : open a conversation on{" "}
-                        <a
-                          href="https://discord.gg/ktPDV6rekE"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-bold text-foreground underline underline-offset-4 decoration-foreground/30 hover:decoration-foreground transition-colors"
-                        >
-                          Discord
-                        </a>{" "}
-                        or contact the core team directly.
-                      </span>
-                    </div>
-                    <div className="flex gap-4">
-                      <span className="text-foreground font-bold mt-1">·</span>
-                      <span>
-                        <strong className="text-foreground">
-                          Designated donation
-                        </strong>
-                        : reach out before sending. We scope and agree the work
-                        together first.
-                      </span>
-                    </div>
+                <StaggerItem>
+                  <div className="space-y-6 text-xs sm:text-lg text-foreground/70 leading-relaxed max-w-3xl mx-auto">
+                    <p>
+                      <strong className="text-foreground">
+                        Recurring sponsorship at any tier
+                      </strong>
+                      : sign up via{" "}
+                      <a
+                        href="https://opencollective.com/nano-collective"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-bold text-foreground underline underline-offset-4 decoration-foreground/30 hover:decoration-foreground transition-colors"
+                      >
+                        Open Collective
+                      </a>
+                      . For Builder or bespoke arrangements, message us first
+                      via{" "}
+                      <a
+                        href="https://discord.gg/ktPDV6rekE"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-bold text-foreground underline underline-offset-4 decoration-foreground/30 hover:decoration-foreground transition-colors"
+                      >
+                        Discord
+                      </a>{" "}
+                      so we can welcome you properly.
+                    </p>
+                    <p>
+                      <strong className="text-foreground">
+                        Bespoke partnership
+                      </strong>
+                      : open a conversation on{" "}
+                      <a
+                        href="https://discord.gg/ktPDV6rekE"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-bold text-foreground underline underline-offset-4 decoration-foreground/30 hover:decoration-foreground transition-colors"
+                      >
+                        Discord
+                      </a>{" "}
+                      or contact the core team directly.
+                    </p>
+                    <p>
+                      <strong className="text-foreground">
+                        Designated donation
+                      </strong>
+                      : reach out before sending. We scope and agree the work
+                      together first.
+                    </p>
                   </div>
                 </StaggerItem>
                 <StaggerItem className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-foreground/10 justify-center">
@@ -859,7 +828,7 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                     href="https://opencollective.com/nano-collective"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center bg-foreground text-background px-8 py-3 text-xs font-bold uppercase tracking-widest hover:opacity-90 transition-colors"
+                    className="inline-flex items-center justify-center bg-[#0000EE] dark:bg-foreground text-white dark:text-background px-8 py-3 text-xs font-bold uppercase tracking-widest hover:opacity-90 transition-colors"
                   >
                     Open Collective
                   </a>
