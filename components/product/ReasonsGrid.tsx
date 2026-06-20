@@ -23,7 +23,7 @@ export function ReasonsGrid({
     <SectionReveal>
       <section className="py-16 sm:py-24 border-b border-foreground/20">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-6xl mx-auto">
+          <div>
             <div className="mb-12 sm:mb-16">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-center md:text-left">
                 Why developers choose {product}

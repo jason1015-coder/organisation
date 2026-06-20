@@ -14,7 +14,7 @@ export function SponsorsSection({ exclude = [] }: { exclude?: string[] }) {
   return (
     <SectionReveal>
       <section className="py-12 md:py-24 px-4 md:px-6 container mx-auto border-b border-foreground/20">
-        <div className="max-w-6xl mx-auto">
+        <div>
           <div className="mb-8 sm:mb-16 border-b border-foreground/20 pb-8 flex flex-col lg:flex-row lg:items-end justify-between gap-6 md:gap-8">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-4">
@@ -38,7 +38,7 @@ export function SponsorsSection({ exclude = [] }: { exclude?: string[] }) {
               <StaggerItem key={sponsor.name}>
                 <SponsorLogo
                   sponsor={sponsor}
-                  className="rounded-none border-foreground/20 hover:border-foreground/20 bg-background hover:bg-muted h-24 sm:h-32 flex items-center justify-center p-8 transition-colors group"
+                  className="w-full rounded-none border-foreground/20 hover:border-foreground/20 bg-background hover:bg-muted h-24 sm:h-32 flex items-center justify-center p-8 transition-colors group"
                   imgClassName="max-h-8 sm:max-h-12 object-contain grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all"
                 />
               </StaggerItem>

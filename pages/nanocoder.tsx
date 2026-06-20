@@ -188,7 +188,7 @@ export default function NanocoderPage({ stats }: { stats: ProductStats }) {
                   <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
                     The open alternative.
                   </h2>
-                  <div className="space-y-6 text-md sm:text-xl md:text-2xl text-foreground/70 leading-relaxed font-medium">
+                  <div className="space-y-6 text-sm sm:text-base md:text-lg text-foreground/70 leading-relaxed font-medium">
                     <p>
                       Nanocoder is a community-built, multi-provider coding
                       agent that runs entirely in your terminal. It connects to
@@ -214,7 +214,7 @@ export default function NanocoderPage({ stats }: { stats: ProductStats }) {
           <SectionReveal>
             <section className="py-16 sm:py-24 border-b border-foreground/20">
               <div className="container mx-auto px-4 md:px-6">
-                <div className="max-w-6xl mx-auto">
+                <div>
                   <div className="mb-12 sm:mb-16 text-center">
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
                       Realistic workflows.
@@ -236,27 +236,33 @@ export default function NanocoderPage({ stats }: { stats: ProductStats }) {
                         <div className="text-[#0000EE] dark:text-pink-400 mb-4 font-bold dark:font-normal">
                           $ nanocoder run "refactor database module"
                         </div>
-                        <div className="text-foreground/90 dark:text-blue-400 mb-2">
-                          ● Analyzing src/db/index.ts...
+                        <div className="text-foreground/90 dark:text-blue-400">
+                          ⚒ read_file
                         </div>
-                        <div className="text-foreground/50 dark:text-zinc-500 mb-2">
-                          {" "}
-                          Found 12 raw SQL queries.
+                        <div className="text-foreground/50 dark:text-zinc-500 mb-3">
+                          {"  "}Path: src/db/users.ts
                         </div>
-                        <div className="text-foreground/90 dark:text-blue-400 mb-2">
-                          ● Converting to Prisma ORM syntax...
+                        <div className="text-foreground/90 dark:text-blue-400">
+                          ⚒ string_replace
                         </div>
-                        <div className="text-foreground/50 dark:text-zinc-500 mb-2">
-                          {" "}
-                          Modified src/db/users.ts
+                        <div className="text-red-600 dark:text-red-400">
+                          {"  "}12 - await sql("SELECT * FROM users")
                         </div>
-                        <div className="text-foreground/50 dark:text-zinc-500 mb-4">
-                          {" "}
-                          Modified src/db/posts.ts
+                        <div className="text-green-600 dark:text-green-400 mb-3">
+                          {"  "}12 + await db.user.findMany()
+                        </div>
+                        <div className="text-foreground/90 dark:text-blue-400">
+                          ⚒ execute_bash
+                        </div>
+                        <div className="text-foreground/50 dark:text-zinc-500">
+                          {"  "}Command: npm run typecheck
+                        </div>
+                        <div className="text-green-600 dark:text-green-400 mb-4">
+                          {"  "}● exit 0
                         </div>
                         <div className="text-green-600 dark:text-green-400 flex items-center gap-2">
-                          <Check className="w-4 h-4" /> Refactor completed
-                          successfully.
+                          <Check className="w-4 h-4" /> Refactored 12 queries
+                          across 2 files
                         </div>
                       </div>
                     </div>
@@ -271,21 +277,29 @@ export default function NanocoderPage({ stats }: { stats: ProductStats }) {
                         <div className="text-[#0000EE] dark:text-pink-400 mb-4 font-bold dark:font-normal">
                           $ nanocoder --mode plan run "audit auth module"
                         </div>
-                        <div className="text-foreground/90 dark:text-blue-400 mb-2">
-                          ● Generating implementation plan...
+                        <div className="text-foreground/90 dark:text-blue-400">
+                          ⚒ read_file
+                        </div>
+                        <div className="text-foreground/50 dark:text-zinc-500 mb-3">
+                          {"  "}Path: src/auth/jwt.ts
+                        </div>
+                        <div className="text-foreground/60 dark:text-zinc-400 italic mb-3">
+                          ⚙ Thought
+                          <br />
+                          {"  "}Reviewing token expiry and login throttling.
                         </div>
                         <div className="text-foreground/80 dark:text-zinc-300 mb-4 border-l-2 border-foreground/20 dark:border-zinc-700 pl-4 py-2 bg-muted/50 dark:bg-zinc-900/50">
-                          1. Check JWT expiration logic
+                          1. Verify JWT expiration logic
                           <br />
-                          2. Verify password hashing rounds
+                          2. Check password hashing rounds
                           <br />
                           3. Audit rate limiting on /login
                         </div>
-                        <div className="text-amber-600 dark:text-yellow-400 mb-4 flex items-center gap-2">
-                          ⚠ Found missing rate limiter on /login
+                        <div className="text-amber-600 dark:text-yellow-400 mb-2">
+                          ⚠ No rate limiter on POST /login
                         </div>
-                        <div className="text-foreground/50 dark:text-zinc-500 flex items-center gap-2">
-                          Waiting for user approval to proceed...
+                        <div className="text-foreground/50 dark:text-zinc-500">
+                          Waiting for approval...
                         </div>
                       </div>
                     </div>
@@ -300,30 +314,32 @@ export default function NanocoderPage({ stats }: { stats: ProductStats }) {
                         <div className="text-[#0000EE] dark:text-pink-400 mb-4 font-bold dark:font-normal">
                           $ nanocoder run "create settings page"
                         </div>
-                        <div className="text-foreground/90 dark:text-blue-400 mb-2">
-                          ● Creating route handlers...
+                        <div className="text-foreground/90 dark:text-blue-400">
+                          ⚒ write_file
                         </div>
-                        <div className="text-foreground/50 dark:text-zinc-500 mb-2">
-                          {" "}
-                          Created app/settings/page.tsx
+                        <div className="text-foreground/50 dark:text-zinc-500 mb-3">
+                          {"  "}Path: app/settings/page.tsx
+                          <br />
+                          {"  "}Size: 84 lines, ~1.2k chars
                         </div>
-                        <div className="text-foreground/90 dark:text-blue-400 mb-2">
-                          ● Building UI components...
+                        <div className="text-foreground/90 dark:text-blue-400">
+                          ⚒ write_file
                         </div>
-                        <div className="text-foreground/50 dark:text-zinc-500 mb-2">
-                          {" "}
-                          Created components/SettingsForm.tsx
+                        <div className="text-foreground/50 dark:text-zinc-500 mb-3">
+                          {"  "}Path: components/SettingsForm.tsx
                         </div>
-                        <div className="text-foreground/90 dark:text-blue-400 mb-2">
-                          ● Generating tests...
+                        <div className="text-foreground/90 dark:text-blue-400">
+                          ⚒ execute_bash
                         </div>
-                        <div className="text-foreground/50 dark:text-zinc-500 mb-4">
-                          {" "}
-                          Created __tests__/Settings.test.tsx
+                        <div className="text-foreground/50 dark:text-zinc-500">
+                          {"  "}Command: npm test
+                        </div>
+                        <div className="text-green-600 dark:text-green-400 mb-4">
+                          {"  "}● exit 0
                         </div>
                         <div className="text-green-600 dark:text-green-400 flex items-center gap-2">
-                          <Check className="w-4 h-4" /> Feature built and tests
-                          passed.
+                          <Check className="w-4 h-4" /> Created 2 files · 14
+                          tests passed
                         </div>
                       </div>
                     </div>

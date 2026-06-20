@@ -14,7 +14,6 @@ export function CommunityStats({ stats }: { stats: ProductStats }) {
     { value: stats.stars, label: "GitHub Stars" },
     { value: stats.contributors, label: "Contributors" },
     { value: stats.forks, label: "Forks" },
-    { value: stats.releases, label: "Releases" },
     {
       value: stats.discordMembers + stats.redditSubscribers,
       label: "Community",

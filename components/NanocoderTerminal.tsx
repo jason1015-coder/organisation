@@ -254,7 +254,7 @@ export default function NanocoderTerminal({
         </div>
 
         {/* Terminal Content */}
-        <div className="p-4 sm:p-6 font-mono text-[10px] sm:text-sm overflow-x-auto w-full">
+        <div className="p-4 sm:p-6 font-mono text-[10px] sm:text-xs overflow-x-auto w-full">
           {/* cfonts-style ASCII Header */}
           <div className="mb-8 sm:mb-12 text-[10px] sm:text-sm leading-none sm:leading-tight font-bold select-none whitespace-pre">
             <div

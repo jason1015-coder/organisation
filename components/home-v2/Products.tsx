@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import NanocoderTerminal from "@/components/NanocoderTerminal";
+import NanotuneTerminal from "@/components/NanotuneTerminal";
 
 interface ProductsProps {
   nanocoderVersion: string;
@@ -166,12 +167,7 @@ export function Products({ nanocoderVersion }: ProductsProps) {
           </div>
           <div className="bg-muted p-4 md:p-8 flex items-center justify-center overflow-hidden lg:order-last lg:border-l border-foreground/20">
             <div className="w-full relative z-10 border border-foreground/20 bg-background">
-              {/* biome-ignore lint/performance/noImgElement: GIF animation needs native img */}
-              <img
-                src="/nanotune/example.gif"
-                alt="Nanotune CLI demonstration"
-                className="w-full h-auto object-contain invert hue-rotate-180 contrast-[1.1] brightness-[1.1] dark:invert-0 dark:hue-rotate-0 dark:contrast-100 dark:brightness-100"
-              />
+              <NanotuneTerminal />
             </div>
           </div>
         </div>

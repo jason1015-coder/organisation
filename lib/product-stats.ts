@@ -2,7 +2,6 @@ export interface ProductStats {
   stars: number;
   contributors: number;
   forks: number;
-  releases: number;
   discordMembers: number;
   redditSubscribers: number;
   error: string | null;
@@ -36,7 +35,6 @@ export async function fetchProductStats(
     stars: 0,
     contributors: 0,
     forks: 0,
-    releases: 0,
     discordMembers: 0,
     redditSubscribers: 0,
     error: null,
@@ -50,17 +48,6 @@ export async function fetchProductStats(
       const repoData = await repoRes.json();
       stats.stars = repoData.stargazers_count || stats.stars;
       stats.forks = repoData.forks_count || stats.forks;
-    }
-
-    const releasesRes = await fetch(
-      `https://api.github.com/repos/${repo}/releases?per_page=100`,
-      { headers },
-    );
-    if (releasesRes.ok) {
-      const releasesData = await releasesRes.json();
-      if (Array.isArray(releasesData) && releasesData.length > 0) {
-        stats.releases = releasesData.length;
-      }
     }
 
     const contributorsRes = await fetch(

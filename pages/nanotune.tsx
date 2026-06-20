@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import Head from "next/head";
 import { Footer } from "@/components/layout-v2/Footer";
+import NanotuneTerminal from "@/components/NanotuneTerminal";
 import { type Feature, FeatureGrid } from "@/components/product/FeatureGrid";
 import { FinalCTA } from "@/components/product/FinalCTA";
 import { ProductHero } from "@/components/product/ProductHero";
@@ -146,15 +147,7 @@ export default function NanotunePage() {
           description="A simple, interactive CLI for fine-tuning small language models on Apple Silicon. No YAML configs, no complex flags - just an interactive TUI."
           githubUrl={GITHUB_URL}
           docsUrl={DOCS_URL}
-          demo={
-            // biome-ignore lint/performance/noImgElement: GIF animation needs native img
-            <img
-              src="/nanotune/example.gif"
-              alt="Animation of the Nanotune interactive TUI fine-tuning a model"
-              loading="lazy"
-              className="w-full h-auto block invert hue-rotate-180 contrast-[1.1] brightness-[1.1] dark:invert-0 dark:hue-rotate-0 dark:contrast-100 dark:brightness-100"
-            />
-          }
+          demo={<NanotuneTerminal />}
         />
 
         <div className="border-t-2 border-foreground/20" />
@@ -168,7 +161,7 @@ export default function NanotunePage() {
                   <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
                     Not for profit. For the community.
                   </h2>
-                  <div className="space-y-6 text-md sm:text-xl md:text-2xl text-foreground/70 leading-relaxed font-medium">
+                  <div className="space-y-6 text-sm sm:text-base md:text-lg text-foreground/70 leading-relaxed font-medium">
                     <p>
                       Nanotune is a simple, interactive CLI for fine-tuning
                       small language models on Apple Silicon. No YAML configs,
@@ -193,7 +186,7 @@ export default function NanotunePage() {
           <SectionReveal>
             <section className="py-16 sm:py-24 border-b border-foreground/20">
               <div className="container mx-auto px-4 md:px-6">
-                <div className="max-w-6xl mx-auto">
+                <div>
                   <div className="mb-12 sm:mb-16 text-center">
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
                       Realistic workflows.
@@ -215,22 +208,24 @@ export default function NanotunePage() {
                         <div className="text-[#0000EE] dark:text-pink-400 mb-4 font-bold dark:font-normal">
                           $ nanotune data add
                         </div>
-                        <div className="text-foreground/90 dark:text-blue-400 mb-2">
-                          ● Processing input dataset...
+                        <div className="text-green-600 dark:text-green-400 font-bold mb-3">
+                          Nanotune - Add Training Data
                         </div>
-                        <div className="text-foreground/50 dark:text-zinc-500 mb-2">
-                          {" "}
-                          Found 1,240 instruction pairs.
+                        <div className="text-foreground/90 dark:text-blue-400 mb-3">
+                          Examples: 12{"   "}|{"   "}Building: 1 turn
                         </div>
-                        <div className="text-foreground/90 dark:text-blue-400 mb-2">
-                          ● Formatting to ChatML...
+                        <div className="text-foreground/50 dark:text-zinc-500 mb-1">
+                          User input:
                         </div>
-                        <div className="text-foreground/50 dark:text-zinc-500 mb-4">
-                          {" "}
-                          Split: 90% train / 10% eval
+                        <div className="text-foreground/80 dark:text-zinc-300 mb-3 border-l-2 border-foreground/20 dark:border-zinc-700 pl-4 py-2 bg-muted/50 dark:bg-zinc-900/50">
+                          How do I reverse a list in Python?
                         </div>
-                        <div className="text-green-600 dark:text-green-400 flex items-center gap-2">
-                          <Check className="w-4 h-4" /> Data pipeline complete.
+                        <div className="text-green-600 dark:text-green-400 mb-4 flex items-center gap-2">
+                          <Check className="w-4 h-4" /> Turn added!
+                        </div>
+                        <div className="text-foreground/50 dark:text-zinc-500">
+                          [Enter] Submit{"  "}[Tab] Switch{"  "}[Esc] Save &
+                          exit
                         </div>
                       </div>
                     </div>
@@ -245,21 +240,39 @@ export default function NanotunePage() {
                         <div className="text-[#0000EE] dark:text-pink-400 mb-4 font-bold dark:font-normal">
                           $ nanotune train --model mistral-7b
                         </div>
-                        <div className="text-foreground/90 dark:text-blue-400 mb-2">
-                          ● Initializing MLX backend...
+                        <div className="text-green-600 dark:text-green-400 font-bold mb-3">
+                          Nanotune - Training
                         </div>
-                        <div className="text-foreground/80 dark:text-zinc-300 mb-4 border-l-2 border-foreground/20 dark:border-zinc-700 pl-4 py-2 bg-muted/50 dark:bg-zinc-900/50 font-mono text-xs">
-                          Epoch 1: Loss 1.2054
-                          <br />
-                          Epoch 2: Loss 0.9841
-                          <br />
-                          Epoch 3: Loss 0.8122
+                        <div className="mb-1 whitespace-pre">
+                          <span className="text-foreground/50 dark:text-zinc-500">
+                            Progress:{" "}
+                          </span>
+                          <span className="text-green-600 dark:text-green-400">
+                            ███████████
+                          </span>
+                          <span className="text-zinc-300 dark:text-zinc-700">
+                            ░░░░░
+                          </span>
+                          <span className="text-foreground/50 dark:text-zinc-500">
+                            {" "}
+                            72%
+                          </span>
                         </div>
-                        <div className="text-green-600 dark:text-green-400 mb-4 flex items-center gap-2">
-                          ✔ Training converged successfully
+                        <div className="text-foreground/50 dark:text-zinc-500 mb-3">
+                          Iteration: 108/150
                         </div>
-                        <div className="text-foreground/50 dark:text-zinc-500 flex items-center gap-2">
-                          Model saved to ./adapters/mistral-7b-v1
+                        <div className="text-foreground/80 dark:text-zinc-300 mb-4">
+                          Train Loss:{" "}
+                          <span className="text-green-600 dark:text-green-400">
+                            0.184
+                          </span>{" "}
+                          · Val Loss:{" "}
+                          <span className="text-green-600 dark:text-green-400">
+                            0.206
+                          </span>
+                        </div>
+                        <div className="text-foreground/50 dark:text-zinc-500">
+                          [Ctrl+C] Stop training (checkpoint saved)
                         </div>
                       </div>
                     </div>
@@ -274,22 +287,27 @@ export default function NanotunePage() {
                         <div className="text-[#0000EE] dark:text-pink-400 mb-4 font-bold dark:font-normal">
                           $ nanotune chat
                         </div>
-                        <div className="text-foreground/90 dark:text-blue-400 mb-2">
-                          ● Loading adapter from ./adapters/mistral-7b-v1
+                        <div className="text-green-600 dark:text-green-400 font-bold">
+                          Nanotune - Chat
                         </div>
-                        <div className="text-foreground/50 dark:text-zinc-500 mb-2">
-                          {" "}
-                          Memory usage: 4.2GB / 16.0GB
+                        <div className="text-foreground/50 dark:text-zinc-500 mb-3">
+                          Model: mistral-7b-q4_k_m.gguf • System: system
                         </div>
-                        <div className="text-foreground/90 dark:text-blue-400 mb-2">
-                          ● Launching REPL...
+                        <div className="text-amber-600 dark:text-yellow-400 font-bold">
+                          You:
                         </div>
-                        <div className="text-foreground/50 dark:text-zinc-500 mb-4">
-                          {" "}
-                          Type /help for commands
+                        <div className="text-foreground/80 dark:text-zinc-300 mb-3">
+                          What is a tensor?
                         </div>
-                        <div className="text-green-600 dark:text-green-400 flex items-center gap-2">
-                          <Check className="w-4 h-4" /> Ready for inference.
+                        <div className="text-green-600 dark:text-green-400 font-bold">
+                          Model:
+                        </div>
+                        <div className="text-foreground/80 dark:text-zinc-300 mb-2">
+                          A tensor is a multi-dimensional array that generalizes
+                          scalars, vectors, and matrices...
+                        </div>
+                        <div className="text-foreground/50 dark:text-zinc-500">
+                          TTFT 187ms · 18.3 tok/s · 92 tokens
                         </div>
                       </div>
                     </div>

@@ -151,27 +151,30 @@ export default function GetMdPage({ stats }: { stats: ProductStats }) {
 
       <div className="min-h-screen bg-background font-sans flex flex-col">
         <ProductHero
-          eyebrow="OPEN SOURCE HTML TO MARKDOWN"
+          eyebrow="HTML TO MARKDOWN"
           title="get-md"
           description="A fast, lightweight HTML to Markdown converter optimized for LLM consumption. Pass in HTML or a URL and get clean, structured Markdown back — as a library or from the command line."
           githubUrl={GITHUB_URL}
           docsUrl={DOCS_URL}
           demo={
             <div className="font-mono text-sm leading-relaxed overflow-x-auto bg-background dark:bg-[#111] text-foreground dark:text-zinc-300 p-6">
-              <div className="text-[#0000EE] dark:text-pink-400 mb-4 font-bold dark:font-normal">
-                $ getmd https://example.com
+              <div className="text-[#0000EE] dark:text-pink-400 mb-2 font-bold dark:font-normal">
+                $ getmd https://example.com -o page.md --verbose
               </div>
-              <div className="text-foreground/90 dark:text-blue-400 mb-1">
-                ● Fetching https://example.com...
+              <div className="text-green-600 dark:text-green-400 flex items-center gap-2">
+                <Check className="w-4 h-4" /> Written to page.md
               </div>
-              <div className="text-foreground/50 dark:text-zinc-500 mb-1">
-                {"  "}Extracting main content...
+              <div className="text-foreground/50 dark:text-zinc-500">
+                {"  "}Input: 45320 chars
               </div>
-              <div className="text-foreground/90 dark:text-blue-400 mb-1">
-                ● Converting to Markdown...
+              <div className="text-foreground/50 dark:text-zinc-500">
+                {"  "}Output: 8956 chars
               </div>
-              <div className="text-green-600 dark:text-green-400 mb-4 flex items-center gap-2">
-                <Check className="w-4 h-4" /> Done in 84ms
+              <div className="text-foreground/50 dark:text-zinc-500 mb-4">
+                {"  "}Time: 287ms
+              </div>
+              <div className="text-[#0000EE] dark:text-pink-400 mb-2 font-bold dark:font-normal">
+                $ head page.md
               </div>
               <div className="text-foreground/80 dark:text-zinc-300 border-l-2 border-foreground/20 dark:border-zinc-700 pl-4 py-2 bg-muted/50 dark:bg-zinc-900/50">
                 <span className="text-foreground/50 dark:text-zinc-500">
@@ -179,15 +182,21 @@ export default function GetMdPage({ stats }: { stats: ProductStats }) {
                   <br />
                   title: Example Domain
                   <br />
+                  siteName: IANA
+                  <br />
+                  readingTime: 1
+                  <br />
+                  wordCount: 142
+                  <br />
                   ---
                 </span>
                 <br />
                 <br /># Example Domain
                 <br />
                 <br />
-                This domain is for use in
+                This domain is for use in illustrative
                 <br />
-                illustrative examples...
+                examples in documents...
               </div>
             </div>
           }
@@ -204,7 +213,7 @@ export default function GetMdPage({ stats }: { stats: ProductStats }) {
                   <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
                     Clean Markdown. Built for models.
                   </h2>
-                  <div className="space-y-6 text-md sm:text-xl md:text-2xl text-foreground/70 leading-relaxed font-medium">
+                  <div className="space-y-6 text-sm sm:text-base md:text-lg text-foreground/70 leading-relaxed font-medium">
                     <p>
                       get-md is a fast, lightweight HTML to Markdown converter
                       optimized for LLM consumption. The standard path uses
@@ -229,7 +238,7 @@ export default function GetMdPage({ stats }: { stats: ProductStats }) {
           <SectionReveal>
             <section className="py-16 sm:py-24 border-b border-foreground/20">
               <div className="container mx-auto px-4 md:px-6">
-                <div className="max-w-6xl mx-auto">
+                <div>
                   <div className="mb-12 sm:mb-16 text-center">
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
                       Realistic workflows.
@@ -249,22 +258,19 @@ export default function GetMdPage({ stats }: { stats: ProductStats }) {
                       </div>
                       <div className="p-6 font-mono text-sm leading-relaxed overflow-x-auto bg-background dark:bg-[#111] text-foreground dark:text-zinc-300 flex-1">
                         <div className="text-[#0000EE] dark:text-pink-400 mb-4 font-bold dark:font-normal">
-                          $ getmd https://blog.example.com/post -o post.md
+                          $ getmd https://blog.example.com/post -o post.md -v
                         </div>
-                        <div className="text-foreground/90 dark:text-blue-400 mb-2">
-                          ● Fetching page...
+                        <div className="text-green-600 dark:text-green-400 flex items-center gap-2 mb-1">
+                          <Check className="w-4 h-4" /> Written to post.md
                         </div>
-                        <div className="text-foreground/50 dark:text-zinc-500 mb-2">
-                          {"  "}Extracted 1,820 words
+                        <div className="text-foreground/50 dark:text-zinc-500">
+                          {"  "}Input: 45320 chars
                         </div>
-                        <div className="text-foreground/90 dark:text-blue-400 mb-2">
-                          ● Writing post.md...
+                        <div className="text-foreground/50 dark:text-zinc-500">
+                          {"  "}Output: 8956 chars
                         </div>
-                        <div className="text-foreground/50 dark:text-zinc-500 mb-4">
-                          {"  "}Frontmatter: title, author, readingTime
-                        </div>
-                        <div className="text-green-600 dark:text-green-400 flex items-center gap-2">
-                          <Check className="w-4 h-4" /> Saved post.md in 91ms.
+                        <div className="text-foreground/50 dark:text-zinc-500">
+                          {"  "}Time: 287ms
                         </div>
                       </div>
                     </div>
@@ -276,24 +282,26 @@ export default function GetMdPage({ stats }: { stats: ProductStats }) {
                         Library
                       </div>
                       <div className="p-6 font-mono text-sm leading-relaxed overflow-x-auto bg-background dark:bg-[#111] text-foreground dark:text-zinc-300 flex-1">
-                        <div className="text-foreground/50 dark:text-zinc-500 mb-2">
+                        <div className="text-foreground/50 dark:text-zinc-500 mb-1">
                           {"import { convertToMarkdown }"}
                         </div>
-                        <div className="text-foreground/50 dark:text-zinc-500 mb-4">
+                        <div className="text-foreground/50 dark:text-zinc-500 mb-3">
                           {'  from "@nanocollective/get-md";'}
                         </div>
-                        <div className="text-foreground/90 dark:text-blue-400 mb-2">
-                          const result = await
-                        </div>
-                        <div className="text-foreground/80 dark:text-zinc-300 mb-4 border-l-2 border-foreground/20 dark:border-zinc-700 pl-4 py-2 bg-muted/50 dark:bg-zinc-900/50">
-                          convertToMarkdown(
+                        <div className="text-foreground/80 dark:text-zinc-300 mb-3 border-l-2 border-foreground/20 dark:border-zinc-700 pl-4 py-2 bg-muted/50 dark:bg-zinc-900/50">
+                          const {"{ markdown, metadata }"} =
                           <br />
-                          {'  "https://example.com"'}
+                          {"  "}await convertToMarkdown(
                           <br />
-                          );
+                          {'    "https://example.com"'}
+                          <br />
+                          {"  "});
                         </div>
-                        <div className="text-green-600 dark:text-green-400 flex items-center gap-2">
-                          <Check className="w-4 h-4" /> result.markdown ready.
+                        <div className="text-foreground/90 dark:text-blue-400">
+                          metadata.wordCount
+                        </div>
+                        <div className="text-green-600 dark:text-green-400">
+                          {"=> "}1247
                         </div>
                       </div>
                     </div>
@@ -306,22 +314,25 @@ export default function GetMdPage({ stats }: { stats: ProductStats }) {
                       </div>
                       <div className="p-6 font-mono text-sm leading-relaxed overflow-x-auto bg-background dark:bg-[#111] text-foreground dark:text-zinc-300 flex-1">
                         <div className="text-[#0000EE] dark:text-pink-400 mb-4 font-bold dark:font-normal">
-                          $ getmd --sitemap https://example.com/sitemap.xml
+                          $ getmd --sitemap example.com/sitemap.xml -o ./out
                         </div>
-                        <div className="text-foreground/90 dark:text-blue-400 mb-2">
-                          ● Walking sitemap...
+                        <div className="text-foreground/50 dark:text-zinc-500">
+                          Fetching sitemap...
                         </div>
                         <div className="text-foreground/50 dark:text-zinc-500 mb-2">
-                          {"  "}Found 142 URLs
+                          Found 47 URL(s); starting batch...
                         </div>
-                        <div className="text-foreground/90 dark:text-blue-400 mb-2">
-                          ● Converting (concurrency: 5)...
+                        <div className="text-green-600 dark:text-green-400">
+                          ✓ [1/47] /blog/post-1 → blog-post-1.md
                         </div>
-                        <div className="text-foreground/50 dark:text-zinc-500 mb-4">
-                          {"  "}Wrote 142 files to ./out
+                        <div className="text-green-600 dark:text-green-400">
+                          ✓ [2/47] /blog/post-2 → blog-post-2.md
                         </div>
-                        <div className="text-green-600 dark:text-green-400 flex items-center gap-2">
-                          <Check className="w-4 h-4" /> Batch complete.
+                        <div className="text-red-600 dark:text-red-400 mb-2">
+                          ✗ [3/47] /draft (404 Not Found)
+                        </div>
+                        <div className="text-foreground/80 dark:text-zinc-300">
+                          Batch complete: 46 ok, 1 error, 15.3s
                         </div>
                       </div>
                     </div>
