@@ -144,13 +144,14 @@ function drawBackground(
   height: number,
 ) {
   const mid = colors.bgMid;
+  const edge = colors.bgEdge;
   const pRgba = hexToRgba(primaryColor, 0.4);
   const sRgba = hexToRgba(secondaryColor, 0.3);
   if (bgStyle === "gradient") {
     const bg = ctx.createLinearGradient(0, 0, width, height);
-    bg.addColorStop(0, "#09090b");
+    bg.addColorStop(0, edge);
     bg.addColorStop(0.5, mid);
-    bg.addColorStop(1, "#09090b");
+    bg.addColorStop(1, edge);
     ctx.fillStyle = bg;
     ctx.fillRect(0, 0, width, height);
   } else if (bgStyle === "radial") {
@@ -163,7 +164,7 @@ function drawBackground(
       Math.max(width, height) * 0.75,
     );
     bg.addColorStop(0, mid);
-    bg.addColorStop(1, "#09090b");
+    bg.addColorStop(1, edge);
     ctx.fillStyle = bg;
     ctx.fillRect(0, 0, width, height);
   } else if (bgStyle === "mesh") {
