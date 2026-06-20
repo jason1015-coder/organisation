@@ -9,10 +9,8 @@ import {
   Terminal,
   Zap,
 } from "lucide-react";
-import type { GetStaticProps } from "next";
 import Head from "next/head";
 import { Footer } from "@/components/layout-v2/Footer";
-import { CommunityStats } from "@/components/product/CommunityStats";
 import { type Feature, FeatureGrid } from "@/components/product/FeatureGrid";
 import { FinalCTA } from "@/components/product/FinalCTA";
 import { ProductHero } from "@/components/product/ProductHero";
@@ -23,7 +21,6 @@ import {
 import { type Reason, ReasonsGrid } from "@/components/product/ReasonsGrid";
 import { SponsorsSection } from "@/components/product/SponsorsSection";
 import { SectionReveal } from "@/components/ui/motion";
-import { fetchProductStats, type ProductStats } from "@/lib/product-stats";
 
 const GITHUB_URL = "https://github.com/Nano-Collective/nanotune";
 const DOCS_URL = "https://docs.nanocollective.org/nanotune/getting-started";
@@ -123,7 +120,7 @@ const installCommands: InstallCommand[] = [
   { label: "NPX", command: "npx @nanocollective/nanotune init" },
 ];
 
-export default function NanotunePage({ stats }: { stats: ProductStats }) {
+export default function NanotunePage() {
   return (
     <>
       <Head>
@@ -160,7 +157,7 @@ export default function NanotunePage({ stats }: { stats: ProductStats }) {
           }
         />
 
-        <CommunityStats stats={stats} />
+        <div className="border-t-2 border-foreground/20" />
 
         <main className="flex-1">
           {/* What Is Nanotune */}
@@ -316,10 +313,3 @@ export default function NanotunePage({ stats }: { stats: ProductStats }) {
     </>
   );
 }
-
-export const getStaticProps: GetStaticProps<{
-  stats: ProductStats;
-}> = async () => {
-  const stats = await fetchProductStats("Nano-Collective/nanotune");
-  return { props: { stats } };
-};

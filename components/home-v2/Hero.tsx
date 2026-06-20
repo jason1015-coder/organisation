@@ -16,14 +16,14 @@ export function Hero() {
             Open Source AI Tools
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-[4rem] leading-[1.05] font-bold tracking-tight text-foreground break-words">
-            Developer tools for the local-first AI future
+          <h1 className="text-4xl sm:text-5xl lg:text-[3.75rem] leading-[1.05] font-bold tracking-tight text-foreground break-words">
+            Local-first AI tools, built for the people who use them
           </h1>
 
           <p className="text-sm sm:text-lg lg:text-xl text-foreground/70 max-w-[540px] leading-relaxed">
-            Nano Collective builds privacy-first, local-first AI tools that help
-            developers build, automate, and ship faster without surrendering
-            control.
+            Nano Collective builds privacy-respecting, local-first AI tools that
+            help developers build, automate, and ship faster without
+            surrendering control.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-4 pt-4 sm:pt-6">
@@ -31,7 +31,7 @@ export function Hero() {
               href="#products"
               className="inline-flex h-12 items-center justify-center rounded-none bg-[#0000EE] dark:bg-foreground px-8 text-xs sm:text-sm font-semibold tracking-wide text-white dark:text-background transition-colors hover:bg-[#0000EE]/90 dark:hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
             >
-              Explore Products
+              Explore Projects
             </Link>
             <a
               href="https://github.com/Nano-Collective"

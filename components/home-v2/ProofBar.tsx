@@ -6,6 +6,7 @@ interface ProofBarProps {
     contributors: number;
     pullRequests: number;
     discordMembers: number;
+    redditSubscribers: number;
   };
 }
 
@@ -21,13 +22,16 @@ export function ProofBar({ stats }: ProofBarProps) {
     { label: "Stars", value: formatNumber(stats.stars) },
     { label: "Contributors", value: formatNumber(stats.contributors) },
     { label: "Pull Requests", value: formatNumber(stats.pullRequests) },
-    { label: "Discord", value: formatNumber(stats.discordMembers) },
+    {
+      label: "Community",
+      value: formatNumber(stats.discordMembers + stats.redditSubscribers),
+    },
   ];
 
   return (
     <section className="border-y-2 border-foreground/20 bg-background">
-      <div className="container mx-auto px-6 py-6">
-        <div className="grid grid-cols-2 md:flex md:flex-wrap md:justify-between items-start md:items-center gap-y-8 gap-x-4 max-w-5xl mx-auto">
+      <div className="container mx-auto px-4 md:px-6 py-6">
+        <div className="grid grid-cols-2 md:flex md:flex-wrap md:justify-between items-start md:items-center gap-y-8 gap-x-4">
           {metrics.map((metric, i) => (
             <React.Fragment key={metric.label}>
               <div className="flex flex-col items-center sm:items-start gap-1">

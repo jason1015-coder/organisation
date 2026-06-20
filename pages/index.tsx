@@ -10,6 +10,7 @@ import { ProofBar } from "@/components/home-v2/ProofBar";
 import { Sponsors } from "@/components/home-v2/Sponsors";
 import { Footer } from "@/components/layout-v2/Footer";
 import { SectionReveal } from "@/components/ui/motion";
+import { fetchRedditSubscribers } from "@/lib/product-stats";
 
 import type { Discussion } from "@/types/discussion";
 
@@ -18,6 +19,7 @@ interface OrgStatsData {
   contributors: number;
   pullRequests: number;
   discordMembers: number;
+  redditSubscribers: number;
   lastUpdated: string;
   error: string | null;
 }
@@ -194,6 +196,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
     contributors: 0,
     pullRequests: 0,
     discordMembers: 0,
+    redditSubscribers: 0,
     lastUpdated: new Date().toISOString(),
     error: null,
   };
@@ -210,6 +213,9 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   } catch (error) {
     console.error("Error fetching Discord stats:", error);
   }
+
+  // Fetch Reddit subscriber count (folded into the Community metric)
+  orgStats.redditSubscribers = await fetchRedditSubscribers("nanocoder");
   const uniqueContributors = new Set<string>();
 
   try {

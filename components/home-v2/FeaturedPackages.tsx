@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export function FeaturedPackages() {
   return (
     <section className="py-12 md:py-24 px-4 md:px-6 container mx-auto">
@@ -34,17 +36,15 @@ export function FeaturedPackages() {
               content extraction.
             </p>
             <div>
-              <a
-                href="https://github.com/Nano-Collective/get-md"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/get-md"
                 className="inline-flex h-12 items-center justify-center border border-foreground/20 bg-transparent px-8 text-sm font-semibold tracking-wide text-foreground transition-colors hover:bg-foreground hover:text-background focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
               >
                 <span className="mr-3 font-bold text-[#0000EE] dark:text-[#A1A1AA] group-hover:text-background transition-colors">
                   &gt;
                 </span>
-                View on GitHub
-              </a>
+                Learn more
+              </Link>
             </div>
           </div>
         </div>

@@ -46,17 +46,15 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <a
-                    href="https://github.com/Nano-Collective/get-md"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <Link
+                    href="/get-md"
                     className="hover:text-[#0000EE] dark:hover:text-[#A1A1AA] transition-colors flex items-center gap-2 group"
                   >
                     <span className="text-[#0000EE] dark:text-[#A1A1AA] opacity-0 -ml-4 transition-all group-hover:opacity-100 group-hover:ml-0">
                       &gt;
                     </span>
                     get-md
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a
