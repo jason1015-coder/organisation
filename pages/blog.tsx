@@ -81,104 +81,105 @@ export default function Blog({ posts, categories }: BlogProps) {
         </SectionReveal>
 
         {/* Main Content */}
-        <SectionReveal>
-          <main className="flex-1 container mx-auto px-4 md:px-6 py-8 sm:py-12 md:py-24">
-            {/* Category Filter */}
-            <div className="mb-8 sm:mb-16 border-b border-foreground/20 pb-4 sm:pb-8">
-              <div className="flex flex-wrap gap-2">
-                {allCategories.map((category) => (
-                  <button
-                    type="button"
-                    key={category.slug}
-                    onClick={() => setSelectedCategory(category.slug)}
-                    className={`px-4 py-2 text-xs sm:text-sm font-mono font-bold tracking-widest uppercase transition-colors rounded-none border ${
-                      selectedCategory === category.slug
-                        ? "bg-foreground text-background border-foreground"
-                        : "bg-background text-foreground border-foreground/20 hover:bg-muted"
-                    }`}
-                  >
-                    {category.name}
-                  </button>
-                ))}
-              </div>
+        <main className="flex-1 container mx-auto px-4 md:px-6 py-8 sm:py-12 md:py-24">
+          {/* Category Filter */}
+          <div className="mb-8 sm:mb-16 border-b border-foreground/20 pb-4 sm:pb-8">
+            <div className="flex flex-wrap gap-2">
+              {allCategories.map((category) => (
+                <button
+                  type="button"
+                  key={category.slug}
+                  onClick={() => setSelectedCategory(category.slug)}
+                  className={`px-4 py-2 text-xs sm:text-sm font-mono font-bold tracking-widest uppercase transition-colors rounded-none border ${
+                    selectedCategory === category.slug
+                      ? "bg-foreground text-background border-foreground"
+                      : "bg-background text-foreground border-foreground/20 hover:bg-muted"
+                  }`}
+                >
+                  {category.name}
+                </button>
+              ))}
             </div>
+          </div>
 
-            {/* Blog Posts */}
-            <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
-              {filteredPosts.length > 0 ? (
-                filteredPosts.map((post) => (
-                  <StaggerItem key={post.id}>
-                    <Link
-                      href={`/blog/${generateBlogSlug(post.title, post.number)}`}
-                      className="block h-full group"
-                    >
-                      <CardHover className="flex flex-col h-full bg-background border border-foreground/20 relative overflow-hidden transition-all p-5 sm:p-8">
-                        <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 dark:opacity-100 pointer-events-none" />
-                        <div className="relative z-10 space-y-4 sm:space-y-6 h-full flex flex-col">
-                          <div className="space-y-4 flex-1">
-                            <div className="flex flex-wrap gap-2 mb-4">
-                              {post.labels?.map((label) => (
-                                <span
-                                  key={label.id}
-                                  className="font-mono text-xs font-bold px-2 py-1 uppercase tracking-wider bg-background border"
-                                  style={{
-                                    borderColor: `#${label.color}40`,
-                                    color: `#${label.color}`,
-                                    backgroundColor: `#${label.color}10`,
-                                  }}
-                                >
-                                  [ {label.name} ]
-                                </span>
-                              ))}
-                            </div>
-
-                            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight line-clamp-3 group-hover:text-[#0000EE] dark:group-hover:text-[#A1A1AA] transition-colors">
-                              {post.title}
-                            </h2>
+          {/* Blog Posts */}
+          <StaggerContainer
+            key={selectedCategory}
+            className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8"
+          >
+            {filteredPosts.length > 0 ? (
+              filteredPosts.map((post) => (
+                <StaggerItem key={post.id}>
+                  <Link
+                    href={`/blog/${generateBlogSlug(post.title, post.number)}`}
+                    className="block h-full group"
+                  >
+                    <CardHover className="flex flex-col h-full bg-background border border-foreground/20 relative overflow-hidden transition-all p-5 sm:p-8">
+                      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 dark:opacity-100 pointer-events-none" />
+                      <div className="relative z-10 space-y-4 sm:space-y-6 h-full flex flex-col">
+                        <div className="space-y-4 flex-1">
+                          <div className="flex flex-wrap gap-2 mb-4">
+                            {post.labels?.map((label) => (
+                              <span
+                                key={label.id}
+                                className="font-mono text-xs font-bold px-2 py-1 uppercase tracking-wider bg-background border"
+                                style={{
+                                  borderColor: `#${label.color}40`,
+                                  color: `#${label.color}`,
+                                  backgroundColor: `#${label.color}10`,
+                                }}
+                              >
+                                [ {label.name} ]
+                              </span>
+                            ))}
                           </div>
 
-                          <div className="pt-6 mt-auto flex items-center justify-between text-xs font-mono border-t border-foreground/20 text-foreground/70 flex-wrap gap-4">
-                            <div className="flex items-center gap-1.5">
-                              <Calendar className="h-4 w-4" />
-                              <time dateTime={post.createdAt}>
-                                {new Date(post.createdAt).toLocaleDateString(
-                                  "en-US",
-                                  {
-                                    year: "numeric",
-                                    month: "long",
-                                    day: "numeric",
-                                    timeZone: "UTC",
-                                  },
-                                )}
-                              </time>
-                            </div>
-                            {post.commentCount > 0 && (
-                              <div className="flex items-center gap-1.5 text-[#0000EE] dark:text-[#A1A1AA] font-bold">
-                                <MessageCircle className="h-4 w-4" />
-                                <span>
-                                  {post.commentCount}{" "}
-                                  {post.commentCount === 1
-                                    ? "comment"
-                                    : "comments"}
-                                </span>
-                              </div>
-                            )}
-                          </div>
+                          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight line-clamp-3 group-hover:text-[#0000EE] dark:group-hover:text-[#A1A1AA] transition-colors">
+                            {post.title}
+                          </h2>
                         </div>
-                      </CardHover>
-                    </Link>
-                  </StaggerItem>
-                ))
-              ) : (
-                <div className="col-span-full py-16 text-center border border-foreground/20 bg-muted">
-                  <p className="font-mono text-foreground/70">
-                    No blog posts in this category. Check back soon!
-                  </p>
-                </div>
-              )}
-            </StaggerContainer>
-          </main>
-        </SectionReveal>
+
+                        <div className="pt-6 mt-auto flex items-center justify-between text-xs font-mono border-t border-foreground/20 text-foreground/70 flex-wrap gap-4">
+                          <div className="flex items-center gap-1.5">
+                            <Calendar className="h-4 w-4" />
+                            <time dateTime={post.createdAt}>
+                              {new Date(post.createdAt).toLocaleDateString(
+                                "en-US",
+                                {
+                                  year: "numeric",
+                                  month: "long",
+                                  day: "numeric",
+                                  timeZone: "UTC",
+                                },
+                              )}
+                            </time>
+                          </div>
+                          {post.commentCount > 0 && (
+                            <div className="flex items-center gap-1.5 text-[#0000EE] dark:text-[#A1A1AA] font-bold">
+                              <MessageCircle className="h-4 w-4" />
+                              <span>
+                                {post.commentCount}{" "}
+                                {post.commentCount === 1
+                                  ? "comment"
+                                  : "comments"}
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </CardHover>
+                  </Link>
+                </StaggerItem>
+              ))
+            ) : (
+              <div className="col-span-full py-16 text-center border border-foreground/20 bg-muted">
+                <p className="font-mono text-foreground/70">
+                  No blog posts in this category. Check back soon!
+                </p>
+              </div>
+            )}
+          </StaggerContainer>
+        </main>
         <Footer />
       </div>
     </>
