@@ -19,10 +19,12 @@ import type {
   Mode,
   Pattern,
   Spacing,
+  Theme,
 } from "@/lib/cover-image/types";
 
 export default function CoverImage() {
   const [mode, setMode] = useState<Mode>("post");
+  const [theme, setTheme] = useState<Theme>("dark");
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Per-mode dimensions so switching gives a sensible default.
@@ -71,7 +73,7 @@ export default function CoverImage() {
   const [pattern, setPattern] = useState<Pattern>("grid");
   const [bgStyle, setBgStyle] = useState<BgStyle>("gradient");
   const [hue, setHue] = useState(DEFAULT_HUE);
-  const colors = useMemo(() => paletteFromHue(hue), [hue]);
+  const colors = useMemo(() => paletteFromHue(hue, theme), [hue, theme]);
   const primaryColor = colors.primary;
   const secondaryColor = colors.secondary;
 
@@ -120,6 +122,9 @@ export default function CoverImage() {
         postBadges,
         showPostBadges,
         primaryColor,
+        fg: colors.fg,
+        fgMuted: colors.fgMuted,
+        fgFaint: colors.fgFaint,
         contentScale,
       }),
     [
@@ -142,6 +147,9 @@ export default function CoverImage() {
       postBadges,
       showPostBadges,
       primaryColor,
+      colors.fg,
+      colors.fgMuted,
+      colors.fgFaint,
       contentScale,
     ],
   );
@@ -256,8 +264,11 @@ export default function CoverImage() {
           }`}
         >
           {/* Top bar */}
-          <div className="sticky top-0 z-20 flex items-center justify-between gap-3 px-4 py-3 bg-background/80 backdrop-blur border-b border-border">
-            <ModeToggle mode={mode} onChange={setMode} />
+          <div className="sticky top-0 z-20 flex items-center justify-between gap-3 px-4 py-3 bg-background/80 backdrop-blur border-b border-foreground/20">
+            <div className="flex items-center gap-2">
+              <ModeToggle mode={mode} onChange={setMode} />
+              <ThemeToggle theme={theme} onChange={setTheme} />
+            </div>
             <div className="flex items-center gap-2">
               <ZoomControls
                 scale={scale}
@@ -265,19 +276,24 @@ export default function CoverImage() {
                 onZoomOut={() => setZoom((z) => Math.max(0.05, z / 1.25))}
                 onResetZoom={() => setZoom(1)}
               />
-              <Button onClick={handleDownload} disabled={isDownloading}>
+              <button
+                type="button"
+                className="text-sm font-semibold px-4 py-2 border border-foreground/20 bg-foreground text-background hover:bg-background hover:text-foreground transition-colors disabled:opacity-50"
+                onClick={handleDownload}
+                disabled={isDownloading}
+              >
                 {isDownloading
                   ? "Rendering…"
                   : `Download ${width}×${height} PNG`}
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
+              </button>
+              <button
+                type="button"
+                className="p-2 border border-foreground/20 bg-background hover:bg-muted transition-colors flex items-center justify-center"
                 onClick={() => setSidebarOpen((v) => !v)}
                 aria-label="Toggle controls"
               >
-                <Settings className="w-4 h-4" />
-              </Button>
+                <Settings className="w-4 h-4 text-foreground/70" />
+              </button>
             </div>
           </div>
 
@@ -336,19 +352,46 @@ function ModeToggle({
   onChange: (m: Mode) => void;
 }) {
   return (
-    <div className="inline-flex rounded-md border border-border p-0.5 bg-muted/50">
+    <div className="inline-flex rounded-none border border-foreground/20 p-0.5 bg-muted/30">
       {(["cover", "post"] as const).map((m) => (
         <button
           key={m}
           type="button"
           onClick={() => onChange(m)}
-          className={`px-3 py-1.5 text-sm rounded ${
+          className={`px-3 py-1.5 text-sm font-semibold uppercase tracking-widest rounded-none ${
             mode === m
-              ? "bg-muted text-foreground"
-              : "text-muted-foreground hover:text-foreground"
+              ? "bg-[#0000EE] text-white dark:bg-foreground dark:text-background"
+              : "text-foreground/70 hover:text-foreground"
           }`}
         >
           {m === "cover" ? "Cover" : "Post"}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function ThemeToggle({
+  theme,
+  onChange,
+}: {
+  theme: Theme;
+  onChange: (t: Theme) => void;
+}) {
+  return (
+    <div className="inline-flex rounded-none border border-foreground/20 p-0.5 bg-muted/30">
+      {(["light", "dark"] as const).map((t) => (
+        <button
+          key={t}
+          type="button"
+          onClick={() => onChange(t)}
+          className={`px-3 py-1.5 text-sm font-semibold uppercase tracking-widest rounded-none ${
+            theme === t
+              ? "bg-[#0000EE] text-white dark:bg-foreground dark:text-background"
+              : "text-foreground/70 hover:text-foreground"
+          }`}
+        >
+          {t === "light" ? "Light" : "Dark"}
         </button>
       ))}
     </div>

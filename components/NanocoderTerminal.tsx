@@ -1,14 +1,16 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { defaultTheme, type Theme, type ThemePreset, themes } from "@/types/ui";
+import { type Theme, type ThemePreset, themes } from "@/types/ui";
 
 interface NanocoderTerminalProps {
   onThemeChange?: (theme: Theme) => void;
   version?: string;
+  themeMode?: "dark" | "light" | "mixed";
+  variant?: "default" | "brutalist";
 }
 
-const themeKeys: ThemePreset[] = [
+const darkThemeKeys: ThemePreset[] = [
   "tokyo-night",
   "synthwave-84",
   "forest-night",
@@ -16,10 +18,25 @@ const themeKeys: ThemePreset[] = [
   "deep-sea",
 ];
 
+const lightThemeKeys: ThemePreset[] = [
+  "github-light",
+  "catppuccin-latte",
+  "solarized-light",
+  "rose-pine-dawn",
+  "one-light",
+];
+
 export default function NanocoderTerminal({
   onThemeChange,
   version = "1.0.0",
+  themeMode = "dark",
+  variant = "default",
 }: NanocoderTerminalProps) {
+  const activeThemeKeys = useMemo(() => {
+    if (themeMode === "light") return lightThemeKeys;
+    if (themeMode === "mixed") return [...darkThemeKeys, ...lightThemeKeys];
+    return darkThemeKeys;
+  }, [themeMode]);
   const commands = useMemo(
     () => [
       "Build a RESTful API with authentication",
@@ -106,42 +123,52 @@ export default function NanocoderTerminal({
   );
 
   const [currentThemeIndex, setCurrentThemeIndex] = useState(0);
-  const [currentTheme, setCurrentTheme] = useState(themes[defaultTheme]);
+  const [currentTheme, setCurrentTheme] = useState(themes[activeThemeKeys[0]]);
   const [currentCommandIndex, setCurrentCommandIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
   const [isTyping, setIsTyping] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   // Randomize command index only on client after hydration
   useEffect(() => {
     setIsMounted(true);
+    setPrefersReducedMotion(
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false,
+    );
     const randomIndex = Math.floor(Math.random() * commands.length);
     setCurrentCommandIndex(randomIndex);
   }, [commands.length]);
 
   // Cycle through themes slowly to reduce flashing
   useEffect(() => {
-    if (!isMounted) return;
+    if (!isMounted || prefersReducedMotion) return;
 
     const interval = setInterval(() => {
-      setCurrentThemeIndex((prev) => (prev + 1) % themeKeys.length);
+      setCurrentThemeIndex((prev) => (prev + 1) % activeThemeKeys.length);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [isMounted]);
+  }, [isMounted, prefersReducedMotion, activeThemeKeys.length]);
 
   // Update current theme when index changes
   useEffect(() => {
-    const newTheme = themes[themeKeys[currentThemeIndex]];
+    const newTheme = themes[activeThemeKeys[currentThemeIndex]];
     setCurrentTheme(newTheme);
     onThemeChange?.(newTheme);
-  }, [currentThemeIndex, onThemeChange]);
+  }, [currentThemeIndex, onThemeChange, activeThemeKeys]);
 
   useEffect(() => {
     // Only run typing animation after client-side mount
     if (!isMounted) return;
 
     const currentCommand = commands[currentCommandIndex];
+
+    // Respect reduced-motion: show the command fully typed, no animation.
+    if (prefersReducedMotion) {
+      if (displayedText !== currentCommand) setDisplayedText(currentCommand);
+      return;
+    }
 
     if (isTyping) {
       if (displayedText.length < currentCommand.length) {
@@ -170,21 +197,36 @@ export default function NanocoderTerminal({
         setIsTyping(true);
       }
     }
-  }, [displayedText, isTyping, currentCommandIndex, commands, isMounted]);
+  }, [
+    displayedText,
+    isTyping,
+    currentCommandIndex,
+    commands,
+    isMounted,
+    prefersReducedMotion,
+  ]);
 
   const colors = currentTheme.colors;
   const themeGradient = colors.gradientColors
     ? `linear-gradient(to right, ${colors.gradientColors.join(", ")})`
     : `linear-gradient(to right, ${colors.primary}, ${colors.tool})`;
 
+  const isBrutalist = variant === "brutalist";
+
   return (
     <div className="transition-all duration-700 ease-in-out">
       <div
-        className="rounded-lg overflow-hidden shadow-2xl border"
+        className={`overflow-hidden border ${
+          isBrutalist ? "rounded-none shadow-none" : "rounded-lg shadow-2xl"
+        }`}
         style={{
           backgroundColor:
             currentTheme.themeType === "light" ? "#ffffff" : "#000000",
-          borderColor: `${colors.tool}4d`, // 30% opacity
+          borderColor: isBrutalist
+            ? themeMode === "dark"
+              ? "rgba(255,255,255,0.2)"
+              : "#000000"
+            : `${colors.tool}4d`, // 30% opacity
         }}
       >
         {/* Terminal Window Controls */}
@@ -193,18 +235,28 @@ export default function NanocoderTerminal({
           style={{
             backgroundColor:
               currentTheme.themeType === "light" ? "#ffffff" : "#000000",
-            borderColor: `${colors.tool}33`, // 20% opacity
+            borderColor: isBrutalist
+              ? themeMode === "dark"
+                ? "rgba(255,255,255,0.2)"
+                : "#000000"
+              : `${colors.tool}33`, // 20% opacity
           }}
         >
-          <div className="w-3 h-3 rounded-full bg-red-500" />
-          <div className="w-3 h-3 rounded-full bg-yellow-500" />
-          <div className="w-3 h-3 rounded-full bg-green-500" />
+          <div
+            className={`w-3 h-3 bg-red-500 ${isBrutalist ? "rounded-none" : "rounded-full"}`}
+          />
+          <div
+            className={`w-3 h-3 bg-yellow-500 ${isBrutalist ? "rounded-none" : "rounded-full"}`}
+          />
+          <div
+            className={`w-3 h-3 bg-green-500 ${isBrutalist ? "rounded-none" : "rounded-full"}`}
+          />
         </div>
 
         {/* Terminal Content */}
-        <div className="p-6 font-mono text-sm overflow-x-auto">
-          {/* cfonts-style ASCII Header (tiny font) */}
-          <div className="mb-12 text-sm leading-tight font-bold select-none">
+        <div className="p-4 sm:p-6 font-mono text-[10px] sm:text-xs overflow-x-auto w-full">
+          {/* cfonts-style ASCII Header */}
+          <div className="mb-8 sm:mb-12 text-[10px] sm:text-sm leading-none sm:leading-tight font-bold select-none whitespace-pre">
             <div
               className="bg-clip-text text-transparent"
               style={{
@@ -221,7 +273,7 @@ export default function NanocoderTerminal({
 
           {/* Tips Section with Welcome Banner */}
           <div
-            className="inline-block px-2 py-0 mb-2 text-xs"
+            className="inline-block px-2 py-1 mb-2 font-bold"
             style={{
               backgroundColor: colors.primary,
               color: colors.base,
@@ -230,7 +282,7 @@ export default function NanocoderTerminal({
             ✱ Welcome to Nanocoder {version} ✱
           </div>
           <div
-            className="rounded-md p-4 pt-5 mb-6 relative text-xs"
+            className="rounded-md p-3 sm:p-4 pt-4 sm:pt-5 mb-4 sm:mb-6 relative"
             style={{
               borderColor: colors.primary,
               borderWidth: "1px",
@@ -260,7 +312,7 @@ export default function NanocoderTerminal({
 
           {/* Status Line */}
           <div
-            className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-6 pt-3 text-xs"
+            className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-4 sm:mb-6 pt-2 sm:pt-3"
             style={{ borderColor: `${colors.secondary}33` }}
           >
             <span style={{ color: colors.info, fontWeight: "bold" }}>
@@ -280,13 +332,13 @@ export default function NanocoderTerminal({
 
           {/* Prompt Section */}
           <div
-            className="mb-2 text-xs"
+            className="mb-2"
             style={{ color: colors.primary, fontWeight: "bold" }}
           >
             What would you like me to help with?
           </div>
           <div
-            className="space-y-1 text-xs p-3"
+            className="space-y-1 p-2 sm:p-3"
             style={{
               backgroundColor: colors.base,
               borderLeft: `2px solid ${colors.primary}`,
@@ -300,7 +352,7 @@ export default function NanocoderTerminal({
             </div>
           </div>
           <div
-            className="flex items-center gap-2 mt-3 text-xs"
+            className="flex items-center gap-2 mt-2 sm:mt-3"
             style={{ color: colors.secondary }}
           >
             <span>▶</span> normal mode on{" "}

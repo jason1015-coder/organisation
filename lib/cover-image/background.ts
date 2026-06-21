@@ -8,14 +8,15 @@ import type { BgStyle, Colors } from "./types";
 
 export function getBackgroundStyle(bgStyle: BgStyle, colors: Colors): string {
   const mid = colors.bgMid;
+  const edge = colors.bgEdge;
   const p = hexToRgba(colors.primary, 0.4);
   const s = hexToRgba(colors.secondary, 0.3);
   switch (bgStyle) {
     case "gradient":
-      return `linear-gradient(to bottom right, #09090b 0%, ${mid} 50%, #09090b 100%)`;
+      return `linear-gradient(to bottom right, ${edge} 0%, ${mid} 50%, ${edge} 100%)`;
     case "radial":
-      // Vignette: bright tinted centre, dark edges.
-      return `radial-gradient(ellipse at center, ${mid} 0%, #09090b 75%)`;
+      // Vignette: bright tinted centre, fading to the edge tone.
+      return `radial-gradient(ellipse at center, ${mid} 0%, ${edge} 75%)`;
     case "mesh":
       // Four overlapping colour tints at the corners — looks great with
       // the hue slider because all four tints track the palette.

@@ -11,7 +11,6 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Select,
   SelectContent,
@@ -44,6 +43,10 @@ const PERIODS = [
   { value: "365", label: "Last 12 Months" },
   { value: "all", label: "All Time" },
 ];
+
+// Brand-aligned chart colours: blue accent for visits, muted zinc for views.
+const VISITS_COLOR = "#0000EE";
+const VIEWS_COLOR = "#a1a1aa";
 
 export function TrafficSection({ traffic }: TrafficSectionProps) {
   const [period, setPeriod] = useState<string>("30");
@@ -102,17 +105,13 @@ export function TrafficSection({ traffic }: TrafficSectionProps) {
   }) => {
     if (active && payload && payload.length && label) {
       return (
-        <div className="bg-card border border-border p-4 rounded-lg shadow-lg">
-          <p className="font-semibold mb-2">{formatDate(label)}</p>
+        <div className="bg-background border border-foreground/20 p-4 font-mono text-sm">
+          <p className="font-bold mb-2">{formatDate(label)}</p>
           {payload.map((entry) => {
             if (entry.value === null || entry.value === undefined) return null;
             const name = entry.dataKey === "visits" ? "Visits" : "Page Views";
             return (
-              <p
-                key={entry.dataKey}
-                className="text-sm"
-                style={{ color: entry.color }}
-              >
+              <p key={entry.dataKey} style={{ color: entry.color }}>
                 {name}: {entry.value.toLocaleString()}
               </p>
             );
@@ -123,14 +122,30 @@ export function TrafficSection({ traffic }: TrafficSectionProps) {
     return null;
   };
 
+  const metrics = [
+    { label: "Visits", value: totalVisits, sub: periodLabel, icon: Users },
+    {
+      label: "Page Views",
+      value: totalPageViews,
+      sub: periodLabel,
+      icon: Eye,
+    },
+    {
+      label: "Avg Daily Visits",
+      value: avgDailyVisits,
+      sub: "Visits per day",
+      icon: TrendingUp,
+    },
+  ];
+
   return (
-    <div className="mt-16">
-      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-8">
-        <div className="flex-1">
-          <h2 className="text-3xl md:text-4xl font-bold mb-2">
+    <div className="mt-12">
+      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8 border-b border-foreground/20 pb-4 sm:pb-8">
+        <div>
+          <h2 className="text-xl font-bold tracking-tight mb-2">
             Website Traffic
           </h2>
-          <p className="text-muted-foreground">
+          <p className="text-sm text-foreground/70 font-mono">
             Visits and page views across our sites, via Cloudflare Analytics.
           </p>
         </div>
@@ -138,14 +153,14 @@ export function TrafficSection({ traffic }: TrafficSectionProps) {
         <div className="flex flex-col gap-2">
           <label
             htmlFor="traffic-period-select"
-            className="text-sm font-medium text-muted-foreground"
+            className="text-xs font-semibold uppercase tracking-widest text-foreground/70"
           >
             Time Period
           </label>
           <Select value={period} onValueChange={setPeriod}>
             <SelectTrigger
               id="traffic-period-select"
-              className="w-full lg:w-[250px]"
+              className="w-full lg:w-[250px] rounded-none border-foreground/20"
             >
               <SelectValue placeholder="Select period" />
             </SelectTrigger>
@@ -161,52 +176,28 @@ export function TrafficSection({ traffic }: TrafficSectionProps) {
       </div>
 
       {/* Metric cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Visits</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
-              {totalVisits.toLocaleString()}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-foreground/20 border border-foreground/20">
+        {metrics.map((m) => (
+          <div key={m.label} className="bg-background p-6 space-y-1">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-mono uppercase tracking-widest text-foreground/60 font-semibold">
+                {m.label}
+              </span>
+              <m.icon className="h-4 w-4 text-foreground/50" />
             </div>
-            <p className="text-xs text-muted-foreground mt-1">{periodLabel}</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Page Views</CardTitle>
-            <Eye className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
-              {totalPageViews.toLocaleString()}
+            <div className="font-mono text-2xl md:text-3xl font-bold tracking-tight">
+              {m.value.toLocaleString()}
             </div>
-            <p className="text-xs text-muted-foreground mt-1">{periodLabel}</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Avg Daily Visits
-            </CardTitle>
-            <TrendingUp className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
-              {avgDailyVisits.toLocaleString()}
-            </div>
-            <p className="text-xs text-muted-foreground mt-1">Visits per day</p>
-          </CardContent>
-        </Card>
+            <p className="text-xs text-foreground/50 font-mono">{m.sub}</p>
+          </div>
+        ))}
       </div>
 
       {/* Chart */}
-      <div className="mt-12 bg-card p-6 rounded-lg border">
-        <h3 className="text-2xl font-bold mb-6">Traffic Trends</h3>
+      <div className="mt-8 border border-foreground/20 bg-background p-4 sm:p-8">
+        <h3 className="text-xl font-bold tracking-tight mb-8">
+          Traffic Trends
+        </h3>
         <ResponsiveContainer width="100%" height={400}>
           <LineChart
             data={filtered}
@@ -229,7 +220,7 @@ export function TrafficSection({ traffic }: TrafficSectionProps) {
             <Line
               type="monotone"
               dataKey="pageViews"
-              stroke="oklch(0.6 0.15 250)"
+              stroke={VIEWS_COLOR}
               strokeWidth={1.5}
               dot={false}
               name="Page Views"
@@ -237,25 +228,25 @@ export function TrafficSection({ traffic }: TrafficSectionProps) {
             <Line
               type="monotone"
               dataKey="visits"
-              stroke="oklch(0.7 0.15 340)"
+              stroke={VISITS_COLOR}
               strokeWidth={1.5}
               dot={false}
               name="Visits"
             />
           </LineChart>
         </ResponsiveContainer>
-        <div className="flex flex-wrap justify-center gap-4 pt-5">
-          <span className="flex items-center gap-2 text-sm">
+        <div className="flex flex-wrap justify-center gap-4 pt-5 font-mono text-sm">
+          <span className="flex items-center gap-2">
             <span
               className="inline-block w-5 h-0.5"
-              style={{ backgroundColor: "oklch(0.7 0.15 340)" }}
+              style={{ backgroundColor: VISITS_COLOR }}
             />
             Visits
           </span>
-          <span className="flex items-center gap-2 text-sm">
+          <span className="flex items-center gap-2">
             <span
               className="inline-block w-5 h-0.5"
-              style={{ backgroundColor: "oklch(0.6 0.15 250)" }}
+              style={{ backgroundColor: VIEWS_COLOR }}
             />
             Page Views
           </span>

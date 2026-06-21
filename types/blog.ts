@@ -28,26 +28,3 @@ export interface BlogPostDetails extends BlogPost {
     avatarUrl: string;
   };
 }
-
-export interface BlogComment {
-  id: string;
-  body: string;
-  bodyHTML: string;
-  createdAt: string;
-  author: {
-    login: string;
-    avatarUrl: string;
-  };
-  replies?: BlogCommentReply[];
-}
-
-export interface BlogCommentReply {
-  id: string;
-  body: string;
-  bodyHTML: string;
-  createdAt: string;
-  author: {
-    login: string;
-    avatarUrl: string;
-  };
-}

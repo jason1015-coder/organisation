@@ -94,19 +94,6 @@ export async function fetchWhitepapers(): Promise<Whitepaper[]> {
   }
 }
 
-export function getActiveWhitepapers(all: Whitepaper[]): Whitepaper[] {
-  const active: WhitepaperStatus[] = [
-    "In public review",
-    "Build approved",
-    "Building",
-  ];
-  return all.filter((w) => w.status && active.includes(w.status));
-}
-
-export function getInReviewWhitepapers(all: Whitepaper[]): Whitepaper[] {
-  return all.filter((w) => w.status === "In public review");
-}
-
 export function daysUntil(iso: string): number | null {
   const target = new Date(iso);
   if (Number.isNaN(target.getTime())) return null;

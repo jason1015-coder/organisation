@@ -92,6 +92,9 @@ jobs:
       - name: Run type checking
         run: pnpm run types
 
+      - name: Check for unused files and dependencies
+        run: pnpm run knip
+
       - name: Generate build
         run: pnpm run build
         env:

@@ -9,10 +9,6 @@ import { hexToRgba } from "./color";
 import { FONT_SANS } from "./fonts";
 import type { ContentItem, FontFamily } from "./types";
 
-const ZINC_100 = "#f4f4f5";
-const ZINC_400 = "#a1a1aa";
-const ZINC_500 = "#71717a";
-
 export type BuildItemsInput = {
   mode: "cover" | "post";
   // Cover state
@@ -36,6 +32,10 @@ export type BuildItemsInput = {
   showPostBadges: boolean;
   // Derived
   primaryColor: string;
+  // Theme-aware text colours (from the active palette).
+  fg: string;
+  fgMuted: string;
+  fgFaint: string;
   // Size scaling (post-build, content-scale %)
   contentScale: number;
 };
@@ -50,7 +50,7 @@ export function buildItems(input: BuildItemsInput): ContentItem[] {
         text: input.coverSubtitle,
         size: 18 * cs,
         weight: 500,
-        color: ZINC_500,
+        color: input.fgFaint,
         uppercase: true,
         letterSpacing: 0.025,
         fontFamily: FONT_SANS,
@@ -61,7 +61,7 @@ export function buildItems(input: BuildItemsInput): ContentItem[] {
         kind: "icons",
         size: 56 * cs,
         gap: 32 * cs,
-        color: ZINC_400,
+        color: input.fgMuted,
         marginBottom: 20 * cs,
       });
     }
@@ -71,7 +71,7 @@ export function buildItems(input: BuildItemsInput): ContentItem[] {
         text: input.coverWebsite,
         size: 48 * cs,
         weight: 700,
-        color: ZINC_400,
+        color: input.fg,
         fontFamily: FONT_SANS,
       });
     }
@@ -90,7 +90,7 @@ export function buildItems(input: BuildItemsInput): ContentItem[] {
       text: input.postTitle,
       size: 96 * cs * (input.postTitleSize / 100),
       weight: 700,
-      color: ZINC_100,
+      color: input.fg,
       fontFamily: titleFont,
     });
   }
@@ -100,7 +100,7 @@ export function buildItems(input: BuildItemsInput): ContentItem[] {
       text: input.postSubtitle,
       size: 36 * cs * (input.postSubtitleSize / 100),
       weight: 500,
-      color: ZINC_400,
+      color: input.fgMuted,
       fontFamily: input.postSubtitleFont,
     });
   }
@@ -117,7 +117,7 @@ export function buildItems(input: BuildItemsInput): ContentItem[] {
         gap: 12 * cs,
         padX: 14 * cs,
         padY: 8 * cs,
-        color: ZINC_100,
+        color: input.fg,
         fill: hexToRgba(input.primaryColor, 0.18),
       });
     }
@@ -127,7 +127,7 @@ export function buildItems(input: BuildItemsInput): ContentItem[] {
       kind: "icons",
       size: 56 * cs,
       gap: 32 * cs,
-      color: ZINC_400,
+      color: input.fgMuted,
     });
   }
   return out;

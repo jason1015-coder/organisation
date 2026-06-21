@@ -1,21 +1,16 @@
-// Hue-driven palette generation.
+// Theme + hue driven palette generation.
 //
-// Base palette is derived from the Nano Collective brand colours:
-//   #8b5cf6 (violet), #06b6d4 (cyan), and the dark blue-violet
-//   #1a1a2e background tint. The hue slider rotates all three at once,
-//   preserving their relative distances so the pairing stays harmonised
-//   at any rotation.
+// The default accent is the Nano Collective brand blue (#0000EE, hue 240).
+// The hue slider rotates the accent pair while the chosen theme (light or
+// dark) controls the background and text colours, so the output always
+// matches the site's branding on either a light or dark canvas.
 
-import type { Colors } from "./types";
+import type { Colors, Theme } from "./types";
 
-const PRIMARY_BASE = { h: 258, s: 90, l: 66 };
-const SECONDARY_BASE = { h: 189, s: 94, l: 43 };
-const BG_MID_BASE = { h: 240, s: 33, l: 14 }; // #1a1a2e
-const SECONDARY_HUE_OFFSET =
-  (((SECONDARY_BASE.h - PRIMARY_BASE.h) % 360) + 360) % 360; // 291°
-const BG_MID_HUE_OFFSET =
-  (((BG_MID_BASE.h - PRIMARY_BASE.h) % 360) + 360) % 360; // 342°
-export const DEFAULT_HUE = PRIMARY_BASE.h;
+// Brand blue (#0000EE) sits at hue 240; the secondary trails it by a small
+// offset to stay in the same blue family rather than clashing.
+export const DEFAULT_HUE = 240;
+const SECONDARY_HUE_OFFSET = 18;
 
 function hslToHex(h: number, s: number, l: number): string {
   const sn = s / 100;
@@ -40,13 +35,34 @@ function hslToHex(h: number, s: number, l: number): string {
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 }
 
-export function paletteFromHue(hue: number): Colors {
-  const primary = hslToHex(hue, PRIMARY_BASE.s, PRIMARY_BASE.l);
-  const secondary = hslToHex(
-    hue + SECONDARY_HUE_OFFSET,
-    SECONDARY_BASE.s,
-    SECONDARY_BASE.l,
-  );
-  const bgMid = hslToHex(hue + BG_MID_HUE_OFFSET, BG_MID_BASE.s, BG_MID_BASE.l);
-  return { primary, secondary, grid: primary, bgMid };
+export function paletteFromHue(hue: number, theme: Theme = "dark"): Colors {
+  const isLight = theme === "light";
+  // Accent: vivid brand blue on light, brightened a touch on dark so it
+  // reads against the navy background.
+  const primary = hslToHex(hue, 100, isLight ? 47 : 60);
+  const secondary = hslToHex(hue + SECONDARY_HUE_OFFSET, 90, isLight ? 55 : 68);
+
+  if (isLight) {
+    return {
+      primary,
+      secondary,
+      grid: primary,
+      bgMid: "#f4f4f5",
+      bgEdge: "#ffffff",
+      fg: "#18181b",
+      fgMuted: "#52525b",
+      fgFaint: "#71717a",
+    };
+  }
+
+  return {
+    primary,
+    secondary,
+    grid: primary,
+    bgMid: "#161b2e",
+    bgEdge: "#0a0c14",
+    fg: "#f4f4f5",
+    fgMuted: "#a1a1aa",
+    fgFaint: "#71717a",
+  };
 }

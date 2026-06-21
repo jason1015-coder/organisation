@@ -808,9 +808,3 @@ export const themes: Record<ThemePreset, Theme> = {
     },
   },
 };
-
-export function getThemeColors(themePreset: ThemePreset) {
-  return themes[themePreset].colors;
-}
-
-export const defaultTheme: ThemePreset = "tokyo-night";

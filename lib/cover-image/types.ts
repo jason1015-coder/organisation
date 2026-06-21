@@ -9,6 +9,7 @@
 
 export type Alignment = "left" | "center" | "right";
 export type Mode = "cover" | "post";
+export type Theme = "light" | "dark";
 export type Pattern = "grid" | "dots" | "diagonal" | "waves" | "none";
 export type BgStyle = "gradient" | "radial" | "mesh" | "solid";
 export type FontFamily = "sans" | "mono" | "serif" | "display";
@@ -23,7 +24,14 @@ export type Colors = {
   primary: string;
   secondary: string;
   grid: string;
+  // Background base tint and the edge it fades to.
   bgMid: string;
+  bgEdge: string;
+  // Theme-aware text colours, threaded through to the content items so
+  // the same build renders on a light or dark canvas.
+  fg: string;
+  fgMuted: string;
+  fgFaint: string;
 };
 
 export type TextItem = {
