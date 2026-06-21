@@ -185,6 +185,6 @@ export const CONTRIBUTORS: Contributor[] = [
     photo: "ishant-gupta.jpg",
     github: "itsishant",
     website: "https://www.modakk.tech/",
-    bio: "Software Engineer"
-  }
+    bio: "Software Engineer",
+  },
 ];
