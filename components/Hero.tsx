@@ -17,7 +17,13 @@ export function Hero() {
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-[3.75rem] leading-[1.05] font-bold tracking-tight text-foreground break-words">
-            Local-first AI tools, built for the people who use them
+            Local-first AI tools, built for the{" "}
+            <span
+              className="font-serif font-medium text-[#0000EE] dark:text-[#A1A1AA] text-[1.1em]"
+              style={{ fontFamily: '"Newsreader", Georgia, serif' }}
+            >
+              people who use them
+            </span>
           </h1>
 
           <p className="text-sm sm:text-lg lg:text-xl text-foreground/70 max-w-[540px] leading-relaxed">

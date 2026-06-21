@@ -2,7 +2,7 @@ import { Clock, ExternalLink } from "lucide-react";
 import type { GetStaticProps } from "next";
 import Head from "next/head";
 import { FaDiscord } from "react-icons/fa";
-import { Footer } from "@/components/layout-v2/Footer";
+import { Footer } from "@/components/Footer";
 import {
   CardHover,
   SectionReveal,

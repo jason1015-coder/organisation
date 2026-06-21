@@ -1,14 +1,14 @@
 import type { GetStaticProps } from "next";
 import Head from "next/head";
-import { CommunityCTA } from "@/components/home-v2/CommunityCTA";
-import { FeaturedPackages } from "@/components/home-v2/FeaturedPackages";
-import { Hero } from "@/components/home-v2/Hero";
-import { LatestDiscussions } from "@/components/home-v2/LatestDiscussions";
-import { Mission } from "@/components/home-v2/Mission";
-import { Products } from "@/components/home-v2/Products";
-import { ProofBar } from "@/components/home-v2/ProofBar";
-import { Sponsors } from "@/components/home-v2/Sponsors";
-import { Footer } from "@/components/layout-v2/Footer";
+import { CommunityCTA } from "@/components/CommunityCTA";
+import { FeaturedPackages } from "@/components/FeaturedPackages";
+import { Footer } from "@/components/Footer";
+import { Hero } from "@/components/Hero";
+import { LatestDiscussions } from "@/components/LatestDiscussions";
+import { Mission } from "@/components/Mission";
+import { Products } from "@/components/Products";
+import { ProofBar } from "@/components/ProofBar";
+import { Sponsors } from "@/components/Sponsors";
 import { SectionReveal } from "@/components/ui/motion";
 import { fetchRedditSubscribers } from "@/lib/product-stats";
 

@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Footer } from "@/components/layout-v2/Footer";
+import { Footer } from "@/components/Footer";
 
 export default function PrivacyPolicy() {
   return (

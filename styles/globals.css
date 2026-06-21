@@ -38,6 +38,7 @@
 
   --font-sans: "Inter", sans-serif;
   --font-mono: "Geist Mono", monospace;
+  --font-serif: "Newsreader", Georgia, serif;
 
   --terminal-bg: #0b0f17;
   --terminal-border: #27272a;
@@ -87,6 +88,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
+  --font-serif: var(--font-serif);
   --radius: var(--radius);
   --color-ring: var(--ring);
   --color-input: var(--input);

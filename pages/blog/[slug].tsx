@@ -3,7 +3,7 @@ import { marked } from "marked";
 import type { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import { Footer } from "@/components/layout-v2/Footer";
+import { Footer } from "@/components/Footer";
 import { SectionReveal } from "@/components/ui/motion";
 import { extractNumberFromSlug, generateBlogSlug } from "@/lib/slugify";
 import type { BlogPostDetails } from "@/types/blog";

@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import type { GetStaticProps } from "next";
 import Head from "next/head";
-import { Footer } from "@/components/layout-v2/Footer";
+import { Footer } from "@/components/Footer";
 import { CommunityStats } from "@/components/product/CommunityStats";
 import { type Feature, FeatureGrid } from "@/components/product/FeatureGrid";
 import { FinalCTA } from "@/components/product/FinalCTA";

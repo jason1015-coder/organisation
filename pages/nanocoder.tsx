@@ -12,7 +12,7 @@ import {
 import type { GetStaticProps } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import { Footer } from "@/components/layout-v2/Footer";
+import { Footer } from "@/components/Footer";
 import NanocoderTerminal from "@/components/NanocoderTerminal";
 import { CommunityStats } from "@/components/product/CommunityStats";
 import { type Feature, FeatureGrid } from "@/components/product/FeatureGrid";

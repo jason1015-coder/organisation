@@ -10,7 +10,7 @@ import {
   Zap,
 } from "lucide-react";
 import Head from "next/head";
-import { Footer } from "@/components/layout-v2/Footer";
+import { Footer } from "@/components/Footer";
 import NanotuneTerminal from "@/components/NanotuneTerminal";
 import { type Feature, FeatureGrid } from "@/components/product/FeatureGrid";
 import { FinalCTA } from "@/components/product/FinalCTA";

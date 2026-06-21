@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import { Footer } from "@/components/layout-v2/Footer";
+import { Footer } from "@/components/Footer";
 
 export default function Custom404() {
   return (

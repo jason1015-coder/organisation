@@ -10,7 +10,7 @@ import type { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { FaDiscord, FaGithub } from "react-icons/fa";
-import { Footer } from "@/components/layout-v2/Footer";
+import { Footer } from "@/components/Footer";
 import { SponsorLogo } from "@/components/SponsorLogo";
 import {
   CardHover,

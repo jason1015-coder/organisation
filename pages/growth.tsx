@@ -1,9 +1,9 @@
 import type { GetStaticProps } from "next";
 import Head from "next/head";
 import { useMemo, useState } from "react";
+import { Footer } from "@/components/Footer";
 import { GrowthChart } from "@/components/GrowthChart";
 import { GrowthMetrics } from "@/components/GrowthMetrics";
-import { Footer } from "@/components/layout-v2/Footer";
 import { TrafficSection } from "@/components/TrafficSection";
 import {
   SectionReveal,
