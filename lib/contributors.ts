@@ -180,4 +180,11 @@ export const CONTRIBUTORS: Contributor[] = [
     github: "rakshith1928",
     bio: "Learning, building, and contributing.",
   },
+  {
+    name: "Ishant Gupta",
+    photo: "ishant-gupta.jpg",
+    github: "itsishant",
+    website: "https://www.modakk.tech/",
+    bio: "Software Engineer"
+  }
 ];
