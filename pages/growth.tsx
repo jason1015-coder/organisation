@@ -4,11 +4,13 @@ import { useMemo, useState } from "react";
 import { GrowthChart } from "@/components/GrowthChart";
 import { GrowthMetrics } from "@/components/GrowthMetrics";
 import { Footer } from "@/components/layout-v2/Footer";
+import { TrafficSection } from "@/components/TrafficSection";
 import {
   SectionReveal,
   StaggerContainer,
   StaggerItem,
 } from "@/components/ui/motion";
+import { fetchTraffic, type SiteTraffic } from "@/lib/cloudflare-stats";
 
 interface DownloadData {
   date: string;
@@ -32,10 +34,15 @@ interface PackageData {
 
 interface GrowthPageProps {
   packages: PackageData[];
+  traffic: SiteTraffic[];
   lastUpdated: string;
 }
 
-export default function Growth({ packages, lastUpdated }: GrowthPageProps) {
+export default function Growth({
+  packages,
+  traffic,
+  lastUpdated,
+}: GrowthPageProps) {
   const [selectedPackage, setSelectedPackage] = useState<string>("__all__");
   const [timePeriod, setTimePeriod] = useState<string>("last-30-days");
 
@@ -326,6 +333,11 @@ export default function Growth({ packages, lastUpdated }: GrowthPageProps) {
                 />
               </div>
             </StaggerItem>
+
+            {/* Website Traffic */}
+            <StaggerItem>
+              <TrafficSection traffic={traffic} />
+            </StaggerItem>
           </StaggerContainer>
         </main>
 
@@ -475,9 +487,12 @@ export const getStaticProps: GetStaticProps<GrowthPageProps> = async () => {
     }
   }
 
+  const traffic = await fetchTraffic();
+
   return {
     props: {
       packages,
+      traffic,
       lastUpdated: new Date().toISOString(),
     },
     revalidate: false, // Static export, no ISR

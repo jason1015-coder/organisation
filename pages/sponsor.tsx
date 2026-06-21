@@ -18,11 +18,13 @@ import {
   StaggerContainer,
   StaggerItem,
 } from "@/components/ui/motion";
+import { fetchTotalVisits } from "@/lib/cloudflare-stats";
 import { fetchTotalDownloads } from "@/lib/npm-stats";
 import { builderSponsors, supporterSponsors } from "@/lib/sponsors";
 
 interface SponsorPageProps {
   totalDownloads: number;
+  monthlyVisitors: number;
 }
 
 const projects = [
@@ -103,9 +105,14 @@ const tiers = [
   },
 ];
 
-export default function Sponsor({ totalDownloads }: SponsorPageProps) {
+export default function Sponsor({
+  totalDownloads,
+  monthlyVisitors,
+}: SponsorPageProps) {
   const downloadsLabel =
     totalDownloads > 0 ? totalDownloads.toLocaleString() : null;
+  const visitorsLabel =
+    monthlyVisitors > 0 ? monthlyVisitors.toLocaleString() : null;
 
   return (
     <>
@@ -342,6 +349,16 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
                           {downloadsLabel} total npm downloads
                         </strong>{" "}
                         to date across them
+                      </>
+                    ) : null}
+                    {visitorsLabel ? (
+                      <>
+                        {" "}
+                        and{" "}
+                        <strong className="text-foreground font-mono">
+                          {visitorsLabel} monthly visitors
+                        </strong>{" "}
+                        across our sites
                       </>
                     ) : null}
                     . Live download counts, release history, and growth
@@ -861,11 +878,15 @@ export default function Sponsor({ totalDownloads }: SponsorPageProps) {
 }
 
 export const getStaticProps: GetStaticProps<SponsorPageProps> = async () => {
-  const totalDownloads = await fetchTotalDownloads();
+  const [totalDownloads, monthlyVisitors] = await Promise.all([
+    fetchTotalDownloads(),
+    fetchTotalVisits(),
+  ]);
 
   return {
     props: {
       totalDownloads,
+      monthlyVisitors,
     },
   };
 };
