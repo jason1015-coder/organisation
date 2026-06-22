@@ -168,6 +168,14 @@ export const CONTRIBUTORS: Contributor[] = [
     bio: "just a curious developer",
   },
   {
+    name: "Indigo Karasu",
+    photo: "indigo-karasu.jpg",
+    github: "indigokarasu",
+    website: "https://indigokarasu.com",
+    bio: "Open-source contributor. Built with purpose, maintained with care.",
+    focus: ["Engineering", "AI"],
+  },
+  {
     name: "Om Yewale",
     photo: "om.jpg",
     github: "OMEE-Y",
