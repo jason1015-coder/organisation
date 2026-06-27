@@ -44,8 +44,8 @@ export default function BlogPost({ post }: BlogPostProps) {
 
       <div className="min-h-screen bg-background font-sans flex flex-col">
         {/* Main Content */}
-        <SectionReveal>
-          <main className="flex-1 container mx-auto px-4 md:px-6 py-8 sm:py-12 max-w-4xl">
+        <main className="flex-1 container mx-auto px-4 md:px-6 py-8 sm:py-12 max-w-4xl">
+          <SectionReveal>
             {/* Back link */}
             <div className="mb-8 sm:mb-12">
               <Link
@@ -106,11 +106,12 @@ export default function BlogPost({ post }: BlogPostProps) {
                 </a>
               </div>
             </header>
+          </SectionReveal>
 
-            <div className="space-y-16">
-              {/* Clean Article Content */}
-              <article
-                className="prose prose-neutral dark:prose-invert max-w-none md:prose-lg leading-relaxed
+          <div className="space-y-16">
+            {/* Clean Article Content */}
+            <article
+              className="prose prose-neutral dark:prose-invert max-w-none md:prose-lg leading-relaxed
                 prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-foreground
                 prose-h2:mt-12 prose-h2:mb-6 prose-h2:border-b prose-h2:border-foreground/10 prose-h2:pb-4
                 prose-h3:mt-8 prose-h3:mb-4
@@ -125,36 +126,35 @@ export default function BlogPost({ post }: BlogPostProps) {
                 prose-table:border-collapse prose-table:w-full prose-table:my-8
                 prose-th:border-b-2 prose-th:border-foreground prose-th:text-left prose-th:p-3
                 prose-td:border-b prose-td:border-foreground/10 prose-td:p-3"
-                dangerouslySetInnerHTML={{ __html: post.bodyHTML }}
-              />
+              dangerouslySetInnerHTML={{ __html: post.bodyHTML }}
+            />
 
-              {/* Minimal CTA */}
-              <div className="border-t border-foreground/10 pt-12">
-                <div className="bg-muted/30 border border-foreground/20 p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-                  <div className="space-y-2">
-                    <h3 className="text-xl font-bold tracking-tight">
-                      Join the discussion
-                    </h3>
-                    <p className="text-sm text-muted-foreground max-w-md">
-                      Have thoughts on this post? Head over to our GitHub
-                      discussions to share your feedback.
-                    </p>
-                  </div>
-
-                  <a
-                    href={post.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 font-mono text-sm font-bold uppercase tracking-widest px-6 py-3 bg-[#0000EE] dark:bg-foreground text-white dark:text-background hover:opacity-90 transition-colors shrink-0"
-                  >
-                    <span>View on GitHub</span>
-                    <ExternalLink className="h-4 w-4" />
-                  </a>
+            {/* Minimal CTA */}
+            <div className="border-t border-foreground/10 pt-12">
+              <div className="bg-muted/30 border border-foreground/20 p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+                <div className="space-y-2">
+                  <h3 className="text-xl font-bold tracking-tight">
+                    Join the discussion
+                  </h3>
+                  <p className="text-sm text-muted-foreground max-w-md">
+                    Have thoughts on this post? Head over to our GitHub
+                    discussions to share your feedback.
+                  </p>
                 </div>
+
+                <a
+                  href={post.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 font-mono text-sm font-bold uppercase tracking-widest px-6 py-3 bg-[#0000EE] dark:bg-foreground text-white dark:text-background hover:opacity-90 transition-colors shrink-0"
+                >
+                  <span>View on GitHub</span>
+                  <ExternalLink className="h-4 w-4" />
+                </a>
               </div>
             </div>
-          </main>
-        </SectionReveal>
+          </div>
+        </main>
         <Footer />
       </div>
     </>
