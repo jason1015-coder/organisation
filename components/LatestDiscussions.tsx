@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { generateBlogSlug } from "@/lib/slugify";
 import type { Discussion } from "@/types/discussion";
 
 interface LatestDiscussionsProps {
@@ -30,11 +31,9 @@ export function LatestDiscussions({ discussions }: LatestDiscussionsProps) {
 
       <div className="flex flex-col">
         {recentDiscussions.map((discussion, index) => (
-          <a
+          <Link
             key={discussion.id}
-            href={discussion.html_url}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={`/blog/${generateBlogSlug(discussion.title, discussion.number)}`}
             className={`group flex flex-col md:flex-row md:items-center justify-between py-6 transition-colors ${index !== recentDiscussions.length - 1 ? "border-b border-foreground/20" : ""}`}
           >
             <div className="space-y-1 mb-2 md:mb-0 pr-4">
@@ -61,7 +60,7 @@ export function LatestDiscussions({ discussions }: LatestDiscussionsProps) {
                 year: "numeric",
               })}
             </time>
-          </a>
+          </Link>
         ))}
         {recentDiscussions.length === 0 && (
           <div className="py-12 text-center text-foreground/60 font-mono text-sm border-b border-foreground/20">
