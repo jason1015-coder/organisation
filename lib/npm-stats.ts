@@ -19,6 +19,10 @@ export const NC_PACKAGES: NpmPackageConfig[] = [
     displayName: "get-md",
   },
   {
+    packageName: "@nanocollective/prompt-scrub",
+    displayName: "prompt-scrub",
+  },
+  {
     packageName: "@nanocollective/json-up",
     displayName: "json-up",
   },
