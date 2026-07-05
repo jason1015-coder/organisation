@@ -62,16 +62,30 @@ function normalise(entry: ManifestEntry): Whitepaper {
   // Strip "(working title)" or similar trailing parentheticals for cleaner
   // surfacing on the website. Docs site keeps the working-title suffix.
   const title = entry.title.replace(/\s*\([^)]*\)\s*$/, "");
-  return {
+
+  // Build the object conditionally so we never set optional fields to
+  // `undefined`. Next.js' getStaticProps serialisation rejects `undefined`
+  // values, so any missing manifest field must be omitted from the props
+  // payload entirely (not passed through as undefined).
+  const whitepaper: Whitepaper = {
     slug: entry.slug,
     title,
     description: entry.description,
-    proposer: entry.proposer,
-    proposerGithub: entry.proposer_github,
-    status: entry.status as WhitepaperStatus | undefined,
-    reviewOpens: entry.review_opens,
-    reviewCloses: entry.review_closes,
   };
+  if (entry.proposer !== undefined) whitepaper.proposer = entry.proposer;
+  if (entry.proposer_github !== undefined) {
+    whitepaper.proposerGithub = entry.proposer_github;
+  }
+  if (entry.status !== undefined) {
+    whitepaper.status = entry.status as WhitepaperStatus;
+  }
+  if (entry.review_opens !== undefined) {
+    whitepaper.reviewOpens = entry.review_opens;
+  }
+  if (entry.review_closes !== undefined) {
+    whitepaper.reviewCloses = entry.review_closes;
+  }
+  return whitepaper;
 }
 
 export async function fetchWhitepapers(): Promise<Whitepaper[]> {
