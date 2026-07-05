@@ -160,10 +160,8 @@ export default function GetMdPage({ stats }: { stats: ProductStats }) {
             <div className="font-mono text-sm leading-relaxed overflow-x-auto bg-background dark:bg-[#111] text-foreground dark:text-zinc-300 p-6">
               <div className="text-[#0000EE] dark:text-pink-400 mb-2 font-bold dark:font-normal">
                 $ getmd https://example.com -o page.md --verbose
-                <br />
-                $ getmd handbook.pdf -o handbook.md
-                <br />
-                $ getmd document.docx -o document.md
+                <br />$ getmd handbook.pdf -o handbook.md
+                <br />$ getmd document.docx -o document.md
               </div>
               <div className="text-green-600 dark:text-green-400 flex items-center gap-2">
                 <Check className="w-4 h-4" /> Written to page.md
@@ -219,10 +217,11 @@ export default function GetMdPage({ stats }: { stats: ProductStats }) {
                   </h2>
                   <div className="space-y-6 text-sm sm:text-base md:text-lg text-foreground/70 leading-relaxed font-medium">
                     <p>
-                      get-md is a fast, lightweight HTML, PDF, DOCX, and Markdown to Markdown converter
-                      optimized for LLM consumption. The standard path uses
-                      Turndown and Mozilla Readability to return clean,
-                      structured Markdown in under 100ms.
+                      get-md is a fast, lightweight HTML, PDF, DOCX, and
+                      Markdown to Markdown converter optimized for LLM
+                      consumption. The standard path uses Turndown and Mozilla
+                      Readability to return clean, structured Markdown in under
+                      100ms.
                     </p>
                     <p>
                       Built by the Nano Collective rather than a company, it
