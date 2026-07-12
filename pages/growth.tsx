@@ -369,6 +369,12 @@ export const getStaticProps: GetStaticProps<GrowthPageProps> = async () => {
       oldPackage: null,
     },
     {
+      packageName: "@nanocollective/prompt-scrub",
+      displayName: "prompt-scrub",
+      githubRepo: "Nano-Collective/prompt-scrubber",
+      oldPackage: null,
+    },
+    {
       packageName: "@nanocollective/json-up",
       displayName: "json-up",
       githubRepo: "Nano-Collective/json-up",
